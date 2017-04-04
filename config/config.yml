@@ -1,6 +1,19 @@
 default:
   server:
     port: 3000
-  database:
-    url: 'mongodb://192.168.178.45:27017/cpm'
-    collection: 'user'
+  mongodb:
+    connection: 'mongodb://192.168.178.45:27017/cpm'
+    collection_user: 'user'
+  session:
+    redis_url: '192.168.178.45'
+    redis_port: 6379
+    secret: 'cpmsecret'
+  logging:
+    trace:
+      enabled: true
+      level: 'trace'
+      file: './log/cpm-trace.log'
+    error:
+      enabled: true
+      level: 'error'
+      file: './log/cpm-error.log'
