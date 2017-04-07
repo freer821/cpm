@@ -18,8 +18,10 @@
   },
   "homepage": "https://github.com/freer821/cpm#readme",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.17.1",
     "bunyan": "^1.8.9",
+    "connect-flash": "^0.1.1",
     "connect-redis": "^3.2.0",
     "cookie-parser": "^1.4.3",
     "ejs": "^2.5.6",

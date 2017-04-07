@@ -42,6 +42,28 @@ function initCPMSchema() {
     User = cpmDB.model('user', userSchema, config.mongodb.collection_user);
 }
 
+const findUser = function (user, callback) {
+    User.findOne({'email': user.email}, function (err, user) {
+        if (err) {
+            logger.error('error to find user', err.message);
+            callback(err)
+        } else {
+            callback(undefined, user);
+        }
+    });
+};
+
+const saveUser = function (user) {
+    User.create(user, function (err, user) {
+        if (err) {
+            logger.error('error to save user', err.message);
+        }
+        // saved!
+    })
+};
+
 module.exports = {
-    setup: setup
+    setup: setup,
+    findUser:findUser,
+    saveUser:saveUser
 };
