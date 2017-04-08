@@ -20,7 +20,7 @@ const logger = require('./common/logger');
 const auth = require('./common/authentication');
 
 // services
-const signup = require('./services/signup');
+const signup = require('./services/login');
 
 
 // init Passwort System
@@ -53,6 +53,10 @@ app.use(bodyParser.json())
 // set views folder
 app.set('views', __dirname + '/views');
 app.engine('html', require('ejs').renderFile);
+app.use('/assets', express.static(__dirname + '/views/assets'));
+app.use('/pages', express.static(__dirname + '/views/pages'));
+app.use('/libs', express.static(__dirname + '/views/libs'));
+app.use('/scripts', express.static(__dirname + '/views/libs'));
 
 // set routes
 initRoutes();
@@ -70,11 +74,7 @@ process.on('uncaughtException', function (err) {
 function initRoutes() {
 
     router.get('/',function(req,res){
-        res.render('index.html');
-    });
-
-    router.get('/login',function(req,res){
-        res.render('login.html');
+        res.render('signin.html');
     });
 
     router.post('/login',passport.authenticate('local',{
@@ -83,12 +83,9 @@ function initRoutes() {
         failureFlash : true // allow flash messages
     }));
 
-    router.get('/signup',function(req,res){
-        res.render('signup.html');
-    });
-
     router.post('/signup',signup.handle);
 
+    /**
     router.use(function(req, res, next) {
 
         if (req.isAuthenticated()) {
@@ -96,6 +93,7 @@ function initRoutes() {
         }
         res.redirect('/');
     });
+     */
 
     router.get('/profile',function(req,res){
         res.render('profile.html');
