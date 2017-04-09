@@ -39,6 +39,13 @@ const constructionSchema = new Schema({
                 telekom: Boolean,
                 sonst: Boolean
             },
+            kampfmittell: Boolean,
+            schaetzwert: String,
+            files_path: String,
+            bauleiter_name: String,
+            rot_b: Boolean,
+            comment: String,
+            ursache: String,
             geplanter_baubegin: Date,
             geplanter_bauende: Date,
             kolonnen: String,
