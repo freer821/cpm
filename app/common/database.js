@@ -28,7 +28,7 @@ function connectcpmDB() {
 
     cpmDB = mongoose.createConnection(config.mongodb.connection, options);
     cpmDB.once('open', function() {
-        logger.info('Connected to CPM MongoDB!');
+        logger.trace('Connected to CPM MongoDB!');
     });
 
     cpmDB.on('error', function (err) {

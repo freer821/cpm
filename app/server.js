@@ -78,14 +78,14 @@ function initRoutes() {
     });
 
     router.post('/login',passport.authenticate('local',{
-        successRedirect : '/profile', // redirect to the secure profile section
+        successRedirect : '/dashboard', // redirect to the secure profile section
         failureRedirect : '/', // redirect back to the signup page if there is an error
         failureFlash : true // allow flash messages
     }));
 
     router.post('/signup',signup.handle);
 
-    /**
+
     router.use(function(req, res, next) {
 
         if (req.isAuthenticated()) {
@@ -93,10 +93,10 @@ function initRoutes() {
         }
         res.redirect('/');
     });
-     */
 
-    router.get('/profile',function(req,res){
-        res.render('profile.html');
+
+    router.get('/dashboard',function(req,res){
+        res.render('dashboard.html');
     });
 
 }
