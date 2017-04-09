@@ -74,7 +74,7 @@ process.on('uncaughtException', function (err) {
 function initRoutes() {
 
     router.get('/',function(req,res){
-        res.render('signin.html');
+        res.render('login.html');
     });
 
     router.post('/login',passport.authenticate('local',{
