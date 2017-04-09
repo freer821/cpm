@@ -77,6 +77,10 @@ function initRoutes() {
         res.render('login.html');
     });
 
+    router.get('/setting',function(req,res){
+        res.render('setting.html');
+    });
+
     router.post('/login',passport.authenticate('local',{
         successRedirect : '/dashboard', // redirect to the secure profile section
         failureRedirect : '/', // redirect back to the signup page if there is an error

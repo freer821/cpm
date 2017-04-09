@@ -9,7 +9,13 @@ const userSchema = new Schema({
     passw: String,
     firtname: String,
     secondname: String,
+    shortname: String,
+    position: String,
+    addr: String,
+    company:String,
+    department: String,
     role: {type: String, enum: ['admin', 'user']},
+    icon:  { data: Buffer, contentType: String },
     ts: Date
 },{ versionKey: false });
 
