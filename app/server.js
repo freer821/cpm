@@ -52,7 +52,7 @@ app.use(bodyParser.json())
 
 // set views folder
 app.set('views', __dirname + '/views');
-app.engine('html', require('ejs').renderFile);
+app.engine('html', require('swig').renderFile);
 app.use('/assets', express.static(__dirname + '/views/assets'));
 app.use('/pages', express.static(__dirname + '/views/pages'));
 app.use('/libs', express.static(__dirname + '/views/libs'));
