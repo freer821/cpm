@@ -4,10 +4,9 @@
 
 // standard libs
 const express = require('express');
-const redis = require("redis");
 const passport = require('passport');
 const session = require('express-session');
-const RedisStore = require('connect-redis')(session);
+const MongoStore = require('connect-mongo')(session);
 const bodyParser = require('body-parser'); // get information from html forms
 const cookieParser = require('cookie-parser'); // read cookies (needed for auth)
 const flash = require('connect-flash'); // use connect-flash for flash messages stored in session
@@ -28,15 +27,10 @@ auth.initPassport(passport);
 // set up connection to mongodb
 db.setup();
 
-const redisClient = redis.createClient(config.session.redis_port, config.session.redis_url);
 const app = express();
 
 app.use(session({
-    store: new RedisStore({
-        url: config.session.redis_url,
-        port: config.session.redis_port,
-        client: redisClient
-    }),
+    store: new MongoStore(db.connection),
     secret: config.session.secret,
     resave: false,
     saveUninitialized: false
@@ -48,7 +42,7 @@ app.use(cookieParser());
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 // set views folder
 app.set('views', __dirname + '/views');

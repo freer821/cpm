@@ -64,6 +64,7 @@ const saveUser = function (user) {
 
 module.exports = {
     setup: setup,
+    connection: cpmDB,
     findUser:findUser,
     saveUser:saveUser
 };
