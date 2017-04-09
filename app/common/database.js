@@ -15,7 +15,7 @@ const setup = function (callback) {
     connectcpmDB();
 
     if (typeof callback === 'function') {
-        callback();
+        callback(cpmDB);
     }
 };
 
@@ -64,7 +64,6 @@ const saveUser = function (user) {
 
 module.exports = {
     setup: setup,
-    connection: cpmDB,
     findUser:findUser,
     saveUser:saveUser
 };

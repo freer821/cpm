@@ -24,17 +24,21 @@ const signup = require('./services/login');
 
 // init Passwort System
 auth.initPassport(passport);
-// set up connection to mongodb
-db.setup();
 
 const app = express();
 
-app.use(session({
-    store: new MongoStore(db.connection),
-    secret: config.session.secret,
-    resave: false,
-    saveUninitialized: false
-}));
+// set up connection to mongodb
+db.setup(function (connection) {
+    app.use(session({
+        store: new MongoStore({
+            mongooseConnection:connection
+        }),
+        secret: config.session.secret,
+        resave: false,
+        saveUninitialized: false
+    }));
+});
+
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
