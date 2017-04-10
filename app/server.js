@@ -71,15 +71,14 @@ process.on('uncaughtException', function (err) {
     logger.error('process.uncaughtException', err.message);
 });
 
-
 function initRoutes() {
 
     router.get('/',function(req,res){
-        res.render('dashboard',{title:'main'});
+        res.render('dashboard',{title:'main', name: 'Zhenyu Geng'});
     });
 
-    router.get('/setting',function(req,res){
-        res.render('setting.html');
+    router.get('/profile',function(req,res){
+        res.render('profile',{title:'profile', name: 'Zhenyu Geng'});
     });
 
     router.post('/login',passport.authenticate('local',{
@@ -90,18 +89,12 @@ function initRoutes() {
 
     router.post('/signup',signup.handle);
 
-
     router.use(function(req, res, next) {
 
         if (req.isAuthenticated()) {
             next();
         }
         res.redirect('/');
-    });
-
-
-    router.get('/dashboard',function(req,res){
-        res.render('dashboard.html');
     });
 
 }
