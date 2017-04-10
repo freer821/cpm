@@ -48,9 +48,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
+// set view engine
+app.engine('html', require('swig').renderFile);
+app.set('view engine', 'html');
+
 // set views folder
 app.set('views', __dirname + '/views');
-app.engine('html', require('swig').renderFile);
 app.use('/assets', express.static(__dirname + '/views/assets'));
 app.use('/pages', express.static(__dirname + '/views/pages'));
 app.use('/libs', express.static(__dirname + '/views/libs'));
@@ -72,7 +75,7 @@ process.on('uncaughtException', function (err) {
 function initRoutes() {
 
     router.get('/',function(req,res){
-        res.render('login.html');
+        res.render('dashboard',{title:'main'});
     });
 
     router.get('/setting',function(req,res){
