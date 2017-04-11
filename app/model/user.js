@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
     email: String,
-    passw: String,
+    password: String,
     firtname: String,
     secondname: String,
     shortname: String,

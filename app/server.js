@@ -20,6 +20,7 @@ const auth = require('./common/authentication');
 
 // services
 const signup = require('./services/login');
+const usermanagement = require('./services/usermanagement');
 
 
 // init Passwort System
@@ -92,6 +93,8 @@ function initRoutes() {
     router.get('/setting',function(req,res){
         res.render('setting',{title:'Setting', name: 'Zhenyu Geng'});
     });
+
+    router.post('/adduser',usermanagement.adduser);
 
     router.use(function(req, res, next) {
 
