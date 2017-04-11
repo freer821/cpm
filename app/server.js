@@ -74,20 +74,24 @@ process.on('uncaughtException', function (err) {
 function initRoutes() {
 
     router.get('/',function(req,res){
-        res.render('dashboard',{title:'main', name: 'Zhenyu Geng'});
+        res.render('dashboard',{title:'Main', name: 'Zhenyu Geng'});
     });
 
     router.get('/profile',function(req,res){
-        res.render('profile',{title:'profile', name: 'Zhenyu Geng'});
+        res.render('profile',{title:'Profile', name: 'Zhenyu Geng'});
     });
 
     router.post('/login',passport.authenticate('local',{
-        successRedirect : '/dashboard', // redirect to the secure profile section
+        successRedirect : '/Dashboard', // redirect to the secure profile section
         failureRedirect : '/', // redirect back to the signup page if there is an error
         failureFlash : true // allow flash messages
     }));
 
     router.post('/signup',signup.handle);
+
+    router.get('/setting',function(req,res){
+        res.render('setting',{title:'Setting', name: 'Zhenyu Geng'});
+    });
 
     router.use(function(req, res, next) {
 
