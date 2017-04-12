@@ -58,10 +58,11 @@ app.set('views', __dirname + '/views');
 app.use('/assets', express.static(__dirname + '/views/assets'));
 app.use('/pages', express.static(__dirname + '/views/pages'));
 app.use('/libs', express.static(__dirname + '/views/libs'));
-app.use('/scripts', express.static(__dirname + '/views/libs'));
+app.use('/scripts', express.static(__dirname + '/views/scripts'));
 
 // set routes
 initRoutes();
+
 app.use('/',router);
 
 app.listen(config.server.port,function(){
@@ -90,8 +91,8 @@ function initRoutes() {
 
     router.post('/signup',signup.handle);
 
-    router.get('/setting',function(req,res){
-        res.render('setting',{title:'Setting', name: 'Zhenyu Geng'});
+    router.get('/users',function(req,res){
+        res.render('useroverview',{title:'Overview', name: 'Zhenyu Geng'});
     });
 
     router.post('/adduser',usermanagement.adduser);
