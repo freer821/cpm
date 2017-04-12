@@ -97,8 +97,6 @@ function initRoutes() {
 
     router.post('/adduser',usermanagement.adduser);
 
-
-    /**
     router.use(function(req, res, next) {
 
         if (req.isAuthenticated()) {
@@ -107,5 +105,4 @@ function initRoutes() {
         res.redirect('/');
     });
 
-     */
 }
