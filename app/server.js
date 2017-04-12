@@ -62,7 +62,6 @@ app.use('/scripts', express.static(__dirname + '/views/scripts'));
 
 // set routes
 initRoutes();
-
 app.use('/',router);
 
 app.listen(config.server.port,function(){
@@ -76,8 +75,9 @@ process.on('uncaughtException', function (err) {
 function initRoutes() {
 
     router.get('/',function(req,res){
-        res.render('dashboard',{title:'Main', name: 'Zhenyu Geng'});
+        res.render('dashboard',{title:'Main',name: 'Zhenyu Geng'});
     });
+
 
     router.get('/profile',function(req,res){
         res.render('profile',{title:'Profile', name: 'Zhenyu Geng'});
@@ -97,6 +97,8 @@ function initRoutes() {
 
     router.post('/adduser',usermanagement.adduser);
 
+
+    /**
     router.use(function(req, res, next) {
 
         if (req.isAuthenticated()) {
@@ -105,4 +107,5 @@ function initRoutes() {
         res.redirect('/');
     });
 
+     */
 }
