@@ -5,6 +5,15 @@
 const logger = require('../common/logger');
 const db = require('../common/database');
 
+
+const handle = function (req, res, next) {
+    let request = req.body;
+
+    if (request.action === 'adduser') {
+        res.render('adduser');
+    }
+};
+
 const adduser = function (req, res, next) {
 
     let new_user = req.body;
@@ -24,4 +33,4 @@ const adduser = function (req, res, next) {
 
 };
 
-module.exports.adduser = adduser;
+module.exports.handle = handle;
