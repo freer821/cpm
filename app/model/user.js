@@ -18,6 +18,8 @@ const userSchema = new Schema({
     department: String,
     role: {type: String, enum: ['admin', 'user']},
     icon:  String,
+    tel: String,
+    mobil: String,
     ts: Date
 },{ versionKey: false });
 

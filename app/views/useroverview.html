@@ -7,11 +7,13 @@
     </div>
       <div class="row p-a">
         <div class="col-sm-5">
-          <select class="input-sm form-control w-sm inline v-middle" name="action">
-            <option value="adduser">Add New User</option>
-            <option value="delselected">Delete selected</option>
-          </select>
-          <button class="btn btn-sm white">Apply</button>                
+          <form ui-jp="parsley" id="form" action="/users/add" method="get">
+            <select class="input-sm form-control w-sm inline v-middle" name="action">
+              <option value="adduser">Add New User</option>
+              <option value="delselected">Delete selected</option>
+            </select>
+            <button class="btn btn-sm white">Apply</button> 
+          </form>               
         </div> 
         <div class="col-sm-4">
         </div>

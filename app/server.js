@@ -99,8 +99,8 @@ function initRoutes() {
         res.render('useroverview',{title:'Overview', name: 'Zhenyu Geng'});
     });
 
-    router.get('/user/add',usermanager.handle);
-    router.post('/user/add',usermanager.add);
+    router.get('/users/add',usermanager.handle);
+    router.post('/users/add',usermanager.adduser);
 
 
     router.use(function(req, res, next) {

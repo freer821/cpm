@@ -7,9 +7,7 @@ const db = require('../common/database');
 
 
 const handle = function (req, res, next) {
-    let request = req.body;
-
-    if (request.action === 'adduser') {
+    if (req.query.action === 'adduser') {
         res.render('adduser');
     }
 };
@@ -34,3 +32,4 @@ const adduser = function (req, res, next) {
 };
 
 module.exports.handle = handle;
+module.exports.adduser = adduser;
