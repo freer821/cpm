@@ -26,6 +26,7 @@
     "connect-redis": "^3.2.0",
     "cookie-parser": "^1.4.3",
     "express": "^4.15.2",
+    "express-fileupload": "^0.1.2",
     "express-session": "^1.15.2",
     "moment": "^2.18.1",
     "mongoose": "^4.9.3",

@@ -12,10 +12,12 @@ const userSchema = new Schema({
     shortname: String,
     position: String,
     addr: String,
+    plz: Number,
+    city: String,
     company:String,
     department: String,
     role: {type: String, enum: ['admin', 'user']},
-    icon:  { data: Buffer, contentType: String },
+    icon:  String,
     ts: Date
 },{ versionKey: false });
 

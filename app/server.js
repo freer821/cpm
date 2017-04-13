@@ -11,6 +11,7 @@ const bodyParser = require('body-parser'); // get information from html forms
 const cookieParser = require('cookie-parser'); // read cookies (needed for auth)
 const flash = require('connect-flash'); // use connect-flash for flash messages stored in session
 const router = express.Router();
+const fileUpload = require('express-fileupload');
 
 // our libs
 const config = require('./common/config');
@@ -49,6 +50,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
+// set file upload
+app.use(fileUpload());
 // set view engine
 app.engine('html', require('swig').renderFile);
 app.set('view engine', 'html');
@@ -59,6 +62,7 @@ app.use('/assets', express.static(__dirname + '/views/assets'));
 app.use('/pages', express.static(__dirname + '/views/pages'));
 app.use('/libs', express.static(__dirname + '/views/libs'));
 app.use('/scripts', express.static(__dirname + '/views/scripts'));
+app.use('/upload', express.static(__dirname + '/upload'));
 
 // set routes
 initRoutes();
@@ -95,7 +99,9 @@ function initRoutes() {
         res.render('useroverview',{title:'Overview', name: 'Zhenyu Geng'});
     });
 
-    router.post('/usermanager',usermanager.handle);
+    router.get('/user/add',usermanager.handle);
+    router.post('/user/add',usermanager.add);
+
 
     router.use(function(req, res, next) {
 

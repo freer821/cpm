@@ -9,10 +9,20 @@
       <h3>Add User</h3>
     </div>
     <div class="box-body">
-      <form ui-jp="parsley" id="form">
-        <div class="form-group">
-              <label>Username</label>
-              <input type="text" class="form-control" required>                        
+      <form ui-jp="parsley" id="form" action="/usermanager/add" method="post" encType="multipart/form-data">
+        <div class="row m-b">
+          <div class="col-sm-5">
+            <label>First name</label>
+            <input type="text" class="form-control" required name="firstname">   
+          </div>
+          <div class="col-sm-5">
+            <label>Second Name</label>
+            <input type="text" class="form-control" required name="secondname">   
+          </div>
+          <div class="col-sm-2">
+            <label>Short Name</label>
+            <input type="text" class="form-control" name="shortname">   
+          </div>
         </div>
         <div class="form-group">
           <label>Email</label>
@@ -28,14 +38,52 @@
             <input type="password" class="form-control" data-parsley-equalto="#pwd" required>      
           </div>   
         </div>
-        <div class="form-group">
-          <label>Phone</label>
-          <input type="number" class="form-control" placeholder="XXX XXXX XXX" required>
+        <div class="row m-b">
+          <div class="col-sm-6">
+            <label>Telefon</label>
+            <input type="number" class="form-control" placeholder="XXX XXXX XXX">
+          </div>
+          <div class="col-sm-6">
+            <label>Mobil</label>
+            <input type="number" class="form-control" placeholder="XXX XXXX XXX">
+          </div>   
         </div>
-        <div class="checkbox">
-          <label class="ui-check">
-          <input type="checkbox" name="check" checked required="true"><i></i> I agree to the <a href="#" class="text-info">Terms of Service</a>
-          </label>
+        <div class="row m-b">
+          <div class="col-sm-6">
+            <label>Strasse</label>
+            <input type="text" class="form-control">
+          </div>
+          <div class="col-sm-2">
+            <label>PLZ</label>
+            <input type="number" class="form-control" placeholder="XXXXX">
+          </div>   
+          <div class="col-sm-4">
+            <label>Stadt</label>
+            <input type="text" class="form-control">
+          </div>  
+        </div>
+        <div class="row m-b">
+          <div class="col-sm-6">
+            <label>Department</label>
+            <input type="text" class="form-control">
+          </div>
+          <div class="col-sm-6">
+            <label>Company</label>
+            <input type="text" class="form-control">
+          </div>   
+        </div>
+        <div class="row m-b">
+          <div class="col-sm-6">
+            <label>Role</label>
+            <select required class="form-control" name="role">
+              <option value="user">User</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div>
+          <div class="col-sm-6">
+            <label for="icon">Icon</label>
+            <input type="file" name="icon" class="form-control">
+          </div>   
         </div>
         <div class="dker p-a text-right">
           <button type="submit" class="btn info">Submit</button>
