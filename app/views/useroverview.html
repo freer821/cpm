@@ -7,49 +7,34 @@
     </div>
       <div class="row p-a">
         <div class="col-sm-5">
-          <form ui-jp="parsley" id="form" action="/users/add" method="get">
-            <select class="input-sm form-control w-sm inline v-middle" name="action">
-              <option value="adduser">Add New User</option>
-              <option value="delselected">Delete selected</option>
-            </select>
-            <button class="btn btn-sm white">Apply</button> 
-          </form>               
+           <a href="/users/add" type="button" class="btn btn-sm white">Add New User</a> 
         </div> 
         <div class="col-sm-4">
         </div>
         <div class="col-sm-3">
           <div class="input-group input-group-sm">
-            <input type="text" class="form-control" placeholder="Search">
-            <span class="input-group-btn">
-              <button class="btn b-a white" type="button">Go!</button>
-            </span>
+            <input type="text" id="filter" class="form-control" placeholder="Search">
           </div>
         </div>
       </div>
       <div class="table-responsive">
-        <table class="table table-striped b-t">
+        <table class="table m-b-none b-t" ui-jp="footable" data-filter="#filter" data-page-size="5">
           <thead>
             <tr>
-              <th style="width:20px;">
-                <label class="ui-check m-0">
-                  <input type="checkbox"><i></i>
-                </label>
-              </th>
               <th>Name</th>
               <th>Email</th>
               <th>Tel</th>
               <th>Position</th>
               <th>Role</th>
               <th>created</th>
-              <th style="width:20px;"></th>
-              <th style="width:20px;"></th>
-              <th style="width:20px;"></th>
+              <th style="width:20px;" data-sort-ignore="true"></th>
+              <th style="width:20px;" data-sort-ignore="true"></th>
+              <th style="width:20px;" data-sort-ignore="true"></th>
             </tr>
           </thead>
           <tbody>
             {% for user in users %}
               <tr>
-                <td><label class="ui-check m-0"><input type="checkbox" name="post[]"><i class="dark-white"></i></label></td>
                 <td>{{user.firstname}}</td>
                 <td>{{user.email}}</td>
                 <td>{{user.tel}}</td>
@@ -57,51 +42,81 @@
                 <td>{{user.role}}</td>
                 <td>{{user.ts}}</td>
                 <td>
-                  <a href="#" data-toggle="modal" data-target="#m-md"><i class="material-icons md-24">&#xe88e;</i></a>
+                  <a href="#" data-toggle="modal" data-target="#show-user"><i class="material-icons md-24">&#xe88e;</i></a>
                 </td>
                 <td>
-                  <a href="#" data-toggle="modal" data-target="#m-md"><i class="material-icons md-24">&#xe3c9;</i></a>
+                  <a href="/users/edit/"+{{user.email}}><i class="material-icons md-24">&#xe3c9;</i></a>
                 </td>
                 <td>
-                  <a href="#" data-toggle="modal" data-target="#m-md"><i class="material-icons md-24">&#xe872;</i></a>
+                  <a href="#" data-toggle="modal" data-target="#del-user"><i class="material-icons md-24">&#xe872;</i></a>
                 </td>
               </tr>
             {% endfor %}           
           </tbody>
+          <tfoot class="hide-if-no-paging">
+          <tr>
+              <td colspan="5" class="text-center">
+                  <ul class="pagination"></ul>
+              </td>
+          </tr>
+        </tfoot>
         </table>
       </div>
-      <footer class="dker p-a">
-        <div class="row">
-          <div class="col-sm-4 hidden-xs">
-          </div>
-          <div class="col-sm-4 text-center">
-            <small class="text-muted inline m-t-sm m-b-sm">showing 20-30 of 50 items</small>
-          </div>
-          <div class="col-sm-4 text-right text-center-xs">                
-            <ul class="pagination pagination-sm m-0">
-              <li><a href><i class="fa fa-chevron-left"></i></a></li>
-              <li class="active"><a href>1</a></li>
-              <li><a href>2</a></li>
-              <li><a href>3</a></li>
-              <li><a href>4</a></li>
-              <li><a href>5</a></li>
-              <li><a href><i class="fa fa-chevron-right"></i></a></li>
-            </ul>
-          </div>
-        </div>
-      </footer>
   </div>
 
 
 <!-- large modal -->
-<div id="m-md" class="modal" data-backdrop="true">
+<div id="show-user" class="modal" data-backdrop="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Large modal</h5>
+        <h5 class="modal-title">User Detail</h5>
       </div>
       <div class="modal-body text-center p-lg">
-        <p>Are you sure to execute this action?</p>
+          <div class="row">
+            <div class="col-xs-7 col-md-5"><div class="box p-a">.col-xs-12 .col-md-8</div></div>
+            <div class="col-xs-7 col-md-5"><div class="box p-a">.col-xs-12 .col-md-8</div></div>
+            <div class="col-xs-4 col-md-2"><div class="box p-a">.col-xs-6 .col-md-4</div></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-md-8"><div class="box p-a">.col-xs-12 .col-md-8</div></div>
+            <div class="col-xs-6 col-md-4"><div class="box p-a">.col-xs-6 .col-md-4</div></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-md-8"><div class="box p-a">.col-xs-12 .col-md-8</div></div>
+            <div class="col-xs-6 col-md-4"><div class="box p-a">.col-xs-6 .col-md-4</div></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-md-8"><div class="box p-a">.col-xs-12 .col-md-8</div></div>
+            <div class="col-xs-6 col-md-4"><div class="box p-a">.col-xs-6 .col-md-4</div></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-md-8"><div class="box p-a">.col-xs-12 .col-md-8</div></div>
+            <div class="col-xs-6 col-md-4"><div class="box p-a">.col-xs-6 .col-md-4</div></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-md-8"><div class="box p-a">.col-xs-12 .col-md-8</div></div>
+            <div class="col-xs-6 col-md-4"><div class="box p-a">.col-xs-6 .col-md-4</div></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-md-8"><div class="box p-a">.col-xs-12 .col-md-8</div></div>
+            <div class="col-xs-6 col-md-4"><div class="box p-a">.col-xs-6 .col-md-4</div></div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn danger p-x-md" data-dismiss="modal">OK</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div>
+</div>
+<div id="del-user" class="modal" data-backdrop="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete User</h5>
+      </div>
+      <div class="modal-body text-center p-lg">
+        <p>Are you sure to delete this user?</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn dark-white p-x-md" data-dismiss="modal">No</button>
@@ -110,8 +125,7 @@
     </div><!-- /.modal-content -->
   </div>
 </div>
+
 <!-- / .modal -->
-
-
 <!-- ############ PAGE END-->
 {% endblock %}
