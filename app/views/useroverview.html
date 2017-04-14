@@ -55,7 +55,7 @@
                 <td>{{user.role}}</td>
                 <td>{{user.ts}}</td>
                 <td>
-                  <a href="/users/edit/111"><i class="material-icons md-24">&#xe3c9;</i></a>
+                  <a href="#" type="button" data-toggle="modal" data-target="#m-md"><i class="material-icons md-24">&#xe3c9;</i></a>
                 </td>
               </tr>
             {% endfor %}           
@@ -83,6 +83,27 @@
         </div>
       </footer>
   </div>
+
+
+<!-- large modal -->
+<div id="m-md" class="modal" data-backdrop="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Large modal</h5>
+      </div>
+      <div class="modal-body text-center p-lg">
+        <p>Are you sure to execute this action?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn dark-white p-x-md" data-dismiss="modal">No</button>
+        <button type="button" class="btn danger p-x-md" data-dismiss="modal">Yes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div>
+</div>
+<!-- / .modal -->
+
 
 <!-- ############ PAGE END-->
 {% endblock %}
