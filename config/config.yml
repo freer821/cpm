@@ -17,3 +17,5 @@ default:
       enabled: true
       level: 'error'
       file: './log/cpm-error.log'
+  upload:
+    icon: './app/upload/icon'
