@@ -40,7 +40,7 @@ const adduser = function (req, res, next) {
             db.saveUser(new_user);
             req.flash('message', 'user saved!');
         }
-        res.render('useroverview');
+        res.redirect('/users');
     });
 };
 
