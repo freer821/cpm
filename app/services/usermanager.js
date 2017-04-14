@@ -9,9 +9,7 @@ const config = require('../common/config');
 
 
 const handle = function (req, res, next) {
-    if (req.query.action === 'adduser') {
-        res.render('adduser');
-    }
+    res.render('adduser');
 };
 
 const adduser = function (req, res, next) {
