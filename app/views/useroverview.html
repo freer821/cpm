@@ -36,84 +36,29 @@
                 </label>
               </th>
               <th>Name</th>
+              <th>Email</th>
+              <th>Tel</th>
               <th>Position</th>
-              <th>Date</th>
+              <th>Role</th>
+              <th>created</th>
               <th style="width:50px;"></th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td><label class="ui-check m-0"><input type="checkbox" name="post[]"><i class="dark-white"></i></label></td>
-              <td>Idrawfast</td>
-              <td>4c</td>
-              <td>Jul 25, 2013</td>
-              <td>
-                <a href="/users/edit/111"><i class="material-icons md-24">&#xe3c9;</i></a>
-              </td>
-            </tr>
-            <tr>
-              <td><label class="ui-check m-0"><input type="checkbox" name="post[]"><i class="dark-white"></i></label></td>
-              <td>Formasa</td>
-              <td>8c</td>
-              <td>Jul 22, 2013</td>
-              <td>
-                <a href="/users/edit/111"><i class="material-icons md-24">&#xe3c9;</i></a>
-              </td>
-            </tr>
-            <tr>
-              <td><label class="ui-check m-0"><input type="checkbox" name="post[]"><i class="dark-white"></i></label></td>
-              <td>Avatar system</td>
-              <td>15c</td>
-              <td>Jul 15, 2013</td>
-              <td>
-                <a href="/users/edit/111"><i class="material-icons md-24">&#xe3c9;</i></a>
-              </td>
-            </tr>
-            <tr>
-              <td><label class="ui-check m-0"><input type="checkbox" name="post[]"><i class="dark-white"></i></label></td>
-              <td>Throwdown</td>
-              <td>4c</td>
-              <td>Jul 11, 2013</td>
-              <td>
-                <a href="/users/edit/111"><i class="material-icons md-24">&#xe3c9;</i></a>
-              </td>
-            </tr>
-            <tr>
-              <td><label class="ui-check m-0"><input type="checkbox" name="post[]"><i class="dark-white"></i></label></td>
-              <td>Idrawfast</td>
-              <td>4c</td>
-              <td>Jul 7, 2013</td>
-              <td>
-                <a href="/users/edit/111"><i class="material-icons md-24">&#xe3c9;</i></a>
-              </td>
-            </tr>
-            <tr>
-              <td><label class="ui-check m-0"><input type="checkbox" name="post[]"><i class="dark-white"></i></label></td>
-              <td>Formasa</td>
-              <td>8c</td>
-              <td>Jul 3, 2013</td>
-              <td>
-                <a href="/users/edit/111"><i class="material-icons md-24">&#xe3c9;</i></a>
-              </td>
-            </tr>
-            <tr>
-              <td><label class="ui-check m-0"><input type="checkbox" name="post[]"><i class="dark-white"></i></label></td>
-              <td>Avatar system</td>
-              <td>15c</td>
-              <td>Jul 2, 2013</td>
-              <td>
-                <a href="/users/edit/111"><i class="material-icons md-24">&#xe3c9;</i></a>
-              </td>
-            </tr>
-            <tr>
-              <td><label class="ui-check m-0"><input type="checkbox" name="post[]"><i class="dark-white"></i></label></td>
-              <td>Videodown</td>
-              <td>4c</td>
-              <td>Jul 1, 2013</td>
-              <td>
-                <a href="/users/edit/111"><i class="material-icons md-24">&#xe3c9;</i></a>
-              </td>
-            </tr>
+            {% for user in users %}
+              <tr>
+                <td><label class="ui-check m-0"><input type="checkbox" name="post[]"><i class="dark-white"></i></label></td>
+                <td>{{user.firstname}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.tel}}</td>
+                <td>{{user.position}}</td>
+                <td>{{user.role}}</td>
+                <td>{{user.ts}}</td>
+                <td>
+                  <a href="/users/edit/111"><i class="material-icons md-24">&#xe3c9;</i></a>
+                </td>
+              </tr>
+            {% endfor %}           
           </tbody>
         </table>
       </div>

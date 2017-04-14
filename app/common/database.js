@@ -53,6 +53,17 @@ const findUser = function (user, callback) {
     });
 };
 
+const findUsers = function (callback) {
+    User.find({}, function (err, users) {
+        if (err) {
+            logger.error('error to find user', err.message);
+            callback(err)
+        } else {
+            callback(undefined, users);
+        }
+    });
+};
+
 const saveUser = function (user) {
     User.create(user, function (err, user) {
         if (err) {
@@ -65,5 +76,6 @@ const saveUser = function (user) {
 module.exports = {
     setup: setup,
     findUser:findUser,
-    saveUser:saveUser
+    saveUser:saveUser,
+    findUsers: findUsers
 };

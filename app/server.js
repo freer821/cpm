@@ -95,9 +95,7 @@ function initRoutes() {
 
     router.post('/signup',signup.handle);
 
-    router.get('/users',function(req,res){
-        res.render('useroverview',{title:'Overview', name: 'Zhenyu Geng'});
-    });
+    router.get('/users',usermanager.getAllUser);
 
     router.get('/users/add',usermanager.handle);
     router.post('/users/add',usermanager.adduser);

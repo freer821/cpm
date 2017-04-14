@@ -19,9 +19,8 @@ const adduser = function (req, res, next) {
     let new_user = req.body;
     db.findUser(new_user, function (err, user) {
         if (err) {
-            logger.error('error to call signup', err.message);
-        }
-        if (user) {
+            logger.error('error to find user in db', err.message);
+        } else if (user) {
             req.flash('message', 'email is aready used, pls try other email!');
         } else {
             if (req.files) {
@@ -46,5 +45,21 @@ const adduser = function (req, res, next) {
         res.render('useroverview');
     });
 };
-module.exports.handle = handle;
-module.exports.adduser = adduser;
+
+const getAllUser = function(req, res, next) {
+    db.findUsers(function (err, users) {
+       if(err) {
+           logger.error('error to find users in db', err.message);
+       } else if (users) {
+           res.render('useroverview', {title:'Overview', name: 'Zhenyu Geng', users:users});
+       } else {
+           res.render('useroverview', {title:'Overview', name: 'Zhenyu Geng', users:[]});
+       }
+    });
+};
+
+module.exports = {
+    handle: handle,
+    adduser:adduser,
+    getAllUser:getAllUser
+};
