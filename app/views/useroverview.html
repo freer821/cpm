@@ -45,10 +45,10 @@
                   <a href="#" data-toggle="modal" data-target="#show-user"><i class="material-icons md-24">&#xe88e;</i></a>
                 </td>
                 <td>
-                  <a href="/users/edit/"+{{user.email}}><i class="material-icons md-24">&#xe3c9;</i></a>
+                  <a href="/users/edit"><i class="material-icons md-24">&#xe3c9;</i></a>
                 </td>
                 <td>
-                  <a href="#" data-toggle="modal" data-target="#del-user"><i class="material-icons md-24">&#xe872;</i></a>
+                  <a href="#" data-href="/users/del/freerglueck@googlemail.com" data-toggle="modal" data-target="#del-user"><i class="material-icons md-24">&#xe872;</i></a>
                 </td>
               </tr>
             {% endfor %}           
@@ -109,6 +109,7 @@
     </div><!-- /.modal-content -->
   </div>
 </div>
+
 <div id="del-user" class="modal" data-backdrop="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -120,7 +121,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn dark-white p-x-md" data-dismiss="modal">No</button>
-        <button type="button" class="btn danger p-x-md" data-dismiss="modal">Yes</button>
+        <a type="button" class="btn danger p-x-md">Yes</a>
       </div>
     </div><!-- /.modal-content -->
   </div>
@@ -128,4 +129,14 @@
 
 <!-- / .modal -->
 <!-- ############ PAGE END-->
+<script type="text/javascript">
+  //triggered when modal is about to be shown
+  $('#show-user').on('show.bs.modal', function(e) {
+    console.log("hallo");
+  });
+
+  $('#del-user').on('show.bs.modal', function(e) {
+      $(this).find('.danger').attr('href', $(e.relatedTarget).data('href'));
+  });
+</script>>
 {% endblock %}

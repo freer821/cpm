@@ -56,8 +56,14 @@ const getAllUser = function(req, res, next) {
     });
 };
 
+const delUser = function(req, res, next) {
+    db.delUser(req.params.email);
+    res.redirect('/users');
+};
+
 module.exports = {
     handle: handle,
     adduser:adduser,
-    getAllUser:getAllUser
+    getAllUser:getAllUser,
+    delUser:delUser
 };

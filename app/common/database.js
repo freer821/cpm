@@ -73,9 +73,20 @@ const saveUser = function (user) {
     })
 };
 
+const delUser = function (email) {
+    User.findOneAndRemove({'email': email}, function (err, user) {
+        if (err) {
+            logger.error('error to del user', err.message);
+        }
+        // saved!
+    })
+};
+
+
 module.exports = {
     setup: setup,
     findUser:findUser,
     saveUser:saveUser,
-    findUsers: findUsers
+    findUsers: findUsers,
+    delUser:delUser
 };

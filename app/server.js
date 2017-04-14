@@ -100,6 +100,7 @@ function initRoutes() {
     router.get('/users/add',usermanager.handle);
     router.post('/users/add',usermanager.adduser);
 
+    router.get('/users/del/:email',usermanager.delUser);
 
     router.use(function(req, res, next) {
 
