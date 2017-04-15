@@ -79,7 +79,7 @@ process.on('uncaughtException', function (err) {
 function initRoutes() {
 
     router.get('/',function(req,res){
-        res.render('dashboard',{title:'Main',name: 'Zhenyu Geng'});
+        res.render('main',{title:'Main',name: 'Zhenyu Geng'});
     });
 
 
