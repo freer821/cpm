@@ -73,8 +73,8 @@ const saveUser = function (user) {
     })
 };
 
-const delUser = function (email) {
-    User.findOneAndRemove({'email': email}, function (err, user) {
+const delUser = function (id) {
+    User.findOneAndRemove({'_id': id}, function (err, user) {
         if (err) {
             logger.error('error to del user', err.message);
         }

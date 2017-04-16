@@ -97,10 +97,13 @@ function initRoutes() {
 
     router.get('/users',usermanager.getAllUser);
 
-    router.get('/users/add',usermanager.handle);
+    router.get('/users/add',usermanager.adduser);
     router.post('/users/add',usermanager.adduser);
 
-    router.get('/users/del/:email',usermanager.delUser);
+    router.get('/users/del/:id',usermanager.delUser);
+
+    router.get('/users/edit/:id',usermanager.delUser);
+    router.post('/users/edit/:id',usermanager.delUser);
 
     router.use(function(req, res, next) {
 
