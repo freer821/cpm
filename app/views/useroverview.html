@@ -35,7 +35,7 @@
           </thead>
           <tbody>
             {% for user in users %}
-            {% set editurl = '/users/edit/'+user.email %}
+            {% set editurl = '/users/edit?email='+user.email %}
             {% set delurl = '/users/del/'+user._id %}
 
               <tr>

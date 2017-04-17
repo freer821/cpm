@@ -10,7 +10,7 @@ const config = require('../common/config');
 const adduser = function (req, res, next) {
 
     if (req.method === "GET") {
-        res.render('addandedituser', {title:'User Management', subtitle:'Add User', name: 'Zhenyu Geng'});
+        res.render('addandedituser', {title:'User Management', action: '/users/add', subtitle:'Add User', name: 'Zhenyu Geng'});
     } else {
         let new_user = req.body;
         db.findUser(new_user.email, function (err, user) {
@@ -70,14 +70,14 @@ const delUser = function(req, res, next) {
 
 const editUser = function(req, res, next) {
     if (req.method === "GET") {
-        db.findUser(req.params.email, function (err, user) {
+
+        db.findUser(req.query.email, function (err, user) {
             if(err) {
                 logger.error('error to find user in db', err.message);
             } else {
-                //res.render('addandedituser', {title:'User Management', subtitle:'Edit User', name: 'Zhenyu Geng'});
+                res.render('addandedituser', {title:'User Management',action: '/users/edit', subtitle:'Edit User', name: 'Zhenyu Geng',user:user});
             }
         });
-        res.render('addandedituser', {title:'User Management', subtitle:'Edit User', name: 'Zhenyu Geng'});
     } else {
         let user = req.body;
         saveUser(req,user);

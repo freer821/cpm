@@ -102,8 +102,8 @@ function initRoutes() {
 
     router.get('/users/del/:id',usermanager.delUser);
 
-    router.get('/users/edit/:email',usermanager.editUser);
-    //router.post('/users/edit/:email',usermanager.editUser);
+    router.get('/users/edit',usermanager.editUser);
+    router.post('/users/edit',usermanager.editUser);
 
     router.use(function(req, res, next) {
 
