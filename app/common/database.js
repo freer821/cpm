@@ -42,8 +42,8 @@ function initCPMSchema() {
     User = cpmDB.model('user', userSchema, config.mongodb.collection_user);
 }
 
-const findUser = function (user, callback) {
-    User.findOne({'email': user.email}, function (err, user) {
+const findUser = function (email, callback) {
+    User.findOne({'email': email}, function (err, user) {
         if (err) {
             logger.error('error to find user', err.message);
             callback(err)
@@ -65,13 +65,31 @@ const findUsers = function (callback) {
 };
 
 const saveUser = function (user) {
-    User.create(user, function (err, user) {
-        if (err) {
-            logger.error('error to save user', err.message);
+    User.update({email: user.email}, // Query
+        { // Updates
+            $set: user,
+            $setOnInsert: {
+                created: new Date(),
+                shortname: getShortname(user.firstname,user.secondname)
+            }
+        },
+        {upsert: true},
+        function (err) {
+            if (err) {
+                logger.error('Failed to save user in MongoDB', user);
+            } else {
+                logger.trace('added user in MongoDB', user);
+            }
         }
-        // saved!
-    })
+    );
 };
+
+function getShortname(frt,sec) {
+    let first = frt? frt.substring(0,2):'';
+    let second = sec? sec.substring(0,3):'';
+
+    return first+second;
+}
 
 const delUser = function (id) {
     User.findOneAndRemove({'_id': id}, function (err, user) {

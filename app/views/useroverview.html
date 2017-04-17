@@ -23,8 +23,9 @@
             <tr>
               <th>Name</th>
               <th>Email</th>
-              <th>Tel</th>
               <th>Position</th>
+              <th>Company</th>
+              <th>Tel</th>
               <th>Role</th>
               <th>created</th>
               <th style="width:20px;" data-sort-ignore="true"></th>
@@ -34,14 +35,15 @@
           </thead>
           <tbody>
             {% for user in users %}
-            {% set editurl = '/users/edit/'+user._id %}
+            {% set editurl = '/users/edit/'+user.email %}
             {% set delurl = '/users/del/'+user._id %}
 
               <tr>
                 <td>{{user.firstname}}</td>
                 <td>{{user.email}}</td>
-                <td>{{user.tel}}</td>
                 <td>{{user.position}}</td>
+                <td>{{user.company}}</td>
+                <td>{{user.tel}}</td>
                 <td>{{user.role}}</td>
                 <td>{{user.ts}}</td>
                 <td>
