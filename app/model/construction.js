@@ -12,84 +12,84 @@ const constructionSchema = new Schema({
     }, // type+year+ intern_nr
     addr: {
         ort: String, // gemeide
-        strasse: String
+        street: String
     },
-    plz: String,
-    stadt: String,
+    zipcode: String,
+    city: String,
     comment: String,
     path: String, // network file path
-    fremdleitungsplan: Boolean,
-    auftrag:[
+    foreignlineplan: Boolean, // fremdleitungsplan
+    contract:[       // auftrag
         {
             id: String,
-            auftraggeber: String, // customer
-            kst: String,          // cost
-            projekt_nr: String,   // project number
-            sap_nr: String,       // sap number
-            gas_nr: String,       // gas number
-            wasser_nr: String,    // water number
-            partner_tel: String,  // partner tel
-            auftrag_uebergeb: Date,  // contract delivery
-            unterlage_uebergeb: Date, // documents delivery
-            arbeitsbemerkung: String, // work comments
-            auftrag_typ: {            // contract type
-                elektro: Boolean,     // electric
-                wasser: Boolean,      // water
+            customer: String, // auftraggeber
+            cost: String,          // kst
+            project_nr: String,
+            sap_nr: String,
+            gas_nr: String,
+            water_nr: String,
+            partner_tel: String,
+            contract_delivery: Date,  // contract delivery auftrag_uebergeb
+            doc_delivery: Date, // documents delivery unterlage_uebergeb
+            work_comment: String, // arbeitsbemerkung
+            contract_typ: {            // auftrag typ
+                electric: Boolean,     // elektro
+                water: Boolean,      // wasser
                 gas: Boolean,         // gas
-                telekom: Boolean,     // telecom
-                sonst: Boolean        // others
+                telecom: Boolean,     // telekom
+                others: Boolean        // others
             },
-            kampfmittell: Boolean,    // bomb, weapon
-            schaetzwert: String,      // estimated value
+            isBomb: Boolean,    // bomb, weapon kampfmittell
+            estimated_value: String,      // schaetzwert
             files_path: String,
-            bauleiter_name: String,   // worker name
+            chef_name: String,   // bauleiter_name
             rot_b: Boolean,
             comment: String,
-            ursache: String,          // reason
-            geplanter_baubegin: Date, // the begin of plan
-            geplanter_bauende: Date,  // the end of plan
-            kolonnen: String,         // worker
-            leistungsmonate: String,  // Ordering month
-            tiefbau_montage: {        // building
-                zustand: String,      // status
-                auto_fertigstellung: Number // the procent of completion
+            reason: String,          // ursache
+            build_begin_plan: Date, // geplanter_baubegin
+            build_end_plan: Date,  // geplanter_bauende
+            worker: String,         // kolonnen
+            working_months: String,  // leistungsmonate
+            undergroud_building: {        // tiefbau_montage
+                status: String,      // zustand
+                procent_completion: Number // the procent of completion auto_fertigstellung
             },
-            meldungs_nr: String, // message number
-            ofw_kolonne: String, // ofw worker
-            ofw_uebergaben: Date, // ofw delivery
-            ofw_fertig_am: Date,  // ofw completion at
-            geraeumt: Boolean,    // clean
-            abn_noetig: Boolean,  // Need acceptance
-            abn_beantragt: Date, // Date to apply for acceptance
-            abn_erteilt: Date,  // Date to grant the acceptance
-            ofw_zustand: {      // ofw status
+            messages_nr: String, // meldungs_nr
+            ofw_worker: String, // ofw kolonne
+            ofw_delivery: Date, // ofw_uebergaben
+            ofw_completion_at: Date,  // ofw fertig_am
+            clean: Boolean,    // clean geraeumt
+            acceptance_needed: Boolean,  // Need acceptance abn_noetig
+            acceptance_apply: Date, // abn_beantragt
+            acceptance_granted: Date,  // abn_erteilt
+            ofw_status: {      // ofw_zustand
                 ofw_sub_untern: String,  //1/0 +String
                 sum_subu: String,   // Sum of Sub companies
             },
             fibu: {
-                betrag: String,  // price
-                b_mon: String,   // Ordering month
-                zustand: Boolean  // status
+                price: String,  // betrag
+                ordering_month: String,   // buchung mon
+                status: Boolean  // zustand
             },
-            abrechnung: [         // invoice
+            invoice: [         // abrechnung
                 {
                     nr: String,   // number
-                    zeitwert: String,  // time
-                    summe: String,  // sum
+                    time_value: String,  // zeitwert
+                    sum: String,  // summe
                     aufmass_am: Date, // oversize
                     bewert_aufmass: Date, // oversize
                     guts_datum: Date, // goods time
-                    zustand: String  // status
+                    status: String  // status
                 }
                 ],
             baz_vaz: [
                 {
                     typ: String,
-                    datum_bv_anzeige: Date, // time
-                    verk_beginn: Date,     // the begin time
-                    verk_ende: Date, // the end time
-                    verk_kosten: String, // costt
-                    zustand: String // status
+                    date_bv_anzeige: Date, // datum_bv_anzeige
+                    verk_begin: Date,     // the begin time
+                    verk_end: Date, // the end time
+                    verk_cost: String, // verk_kosten
+                    status: String // status
                 }
             ]
         }
