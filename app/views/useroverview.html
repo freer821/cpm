@@ -1,10 +1,12 @@
 {% extends 'layout.html' %}
 {% block content %}
 <!-- ############ PAGE START-->
+<div class="padding">
   <div class="box">
     <div class="box-header">
       <h3>{{subtitle}}</h3>
     </div>
+    <div class="box-body">
       <div class="row p-a">
         <div class="col-sm-5">
            <a href="/users/add" type="button" class="btn btn-sm white">Add New User</a> 
@@ -67,8 +69,9 @@
         </tfoot>
         </table>
       </div>
+    </div>
   </div>
-
+</div>
 
 <!-- large modal -->
 <div id="show-user" class="modal" data-backdrop="true">
