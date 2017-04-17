@@ -27,12 +27,12 @@
 	        <div class="box p-a">
 	          <div class="pull-left m-r">
 	            <span class="w-48 rounded warn">
-	              <i class="material-icons">&#xe8d3;</i>
+	              <i class="material-icons">&#xe8f9;</i>
 	            </span>
 	          </div>
 	          <div class="clear">
-	            <h4 class="m-0 text-lg _300"><a href>600 <span class="text-sm">Users</span></a></h4>
-	            <small class="text-muted">632 vips.</small>
+	            <h4 class="m-0 text-lg _300"><a href>600 <span class="text-sm">todos</span></a></h4>
+	            <small class="text-muted">300 emergencies</small>
 	          </div>
 	        </div>
 	    </div>
@@ -42,7 +42,7 @@
 	    	<div class="box">
 	    		<div class="box-header">
 	    			<h3>Open Projects <span class="label warning">9</span></h3>
-	    			<small>Your data status</small>
+	    			<small>Your open projects</small>
 	    		</div>
 		    	<ul class="list inset">
 			        <li class="list-item">
@@ -53,7 +53,7 @@
 			          </a>
 			          <div class="list-body">
 			          	<div class="m-y-sm pull-right">
-			            	<a href class="btn btn-xs white">Manage</a>
+			            	<i class="fa fa-level-up"></i> 80%
 			            	<a href class="btn btn-xs white btn-icon"><i class="fa fa-pencil"></i></a>
 		            	</div>
 			            <div><a href>Broadcast web app mockup</a></div>
@@ -71,7 +71,7 @@
 			          </a>
 			          <div class="list-body">
 			          	<div class="m-y-sm pull-right">
-			            	<a href class="btn btn-xs white">Manage</a>
+			            	<i class="fa fa-level-down"></i> 40%
 			            	<a href class="btn btn-xs white btn-icon"><i class="fa fa-pencil"></i></a>
 		            	</div>
 			            <div><a href>GoodDesign Bootstrap 4 migration</a></div>
@@ -89,7 +89,7 @@
 			          </a>
 			          <div class="list-body">
 			          	<div class="m-y-sm pull-right">
-			            	<a href class="btn btn-xs white">Manage</a>
+			            	<i class="fa fa-level-down"></i> 8%
 			            	<a href class="btn btn-xs white btn-icon"><i class="fa fa-pencil"></i></a>
 		            	</div>
 			            <div><a href>#Hashtag android app develop</a></div>
@@ -107,7 +107,7 @@
 			          </a>
 			          <div class="list-body">
 			          	<div class="m-y-sm pull-right">
-			            	<a href class="btn btn-xs white">Manage</a>
+			            	<i class="fa fa-level-up"></i> 20%
 			            	<a href class="btn btn-xs white btn-icon"><i class="fa fa-pencil"></i></a>
 		            	</div>
 			            <div><a href>Google material design application</a></div>
@@ -125,7 +125,7 @@
 			          </a>
 			          <div class="list-body">
 			          	<div class="m-y-sm pull-right">
-			            	<a href class="btn btn-xs white">Manage</a>
+			            	<i class="fa fa-level-up"></i> 30%
 			            	<a href class="btn btn-xs white btn-icon"><i class="fa fa-pencil"></i></a>
 		            	</div>
 			            <div><a href>Facebook connection web application</a></div>
@@ -141,8 +141,8 @@
 	    <div class="col-sm-12 col-md-6">
 	    	<div class="box">
 		      <div class="box-header">
-		        <h3>Stats</h3>
-		        <small>Your data status</small>
+		        <h3>TODO Lists</h3>
+		        <small>Your todo List</small>
 		      </div>
 		      <div class="box-tool">
 		        <ul class="nav">
@@ -168,64 +168,45 @@
 		      <table class="table">
 		        <thead>
 		          <tr>
-		            <th style="width:60px;" class="text-center">Graph</th>
 		            <th>Item</th>                    
 		            <th style="width:70px;"></th>
 		          </tr>
 		        </thead>
 		        <tbody>
 		          <tr>
-		            <td>
-		              <div ui-jp="sparkline" ui-refresh="app.setting.color" ui-options="[ 16,15,15,14,17,18,16,15,16 ], {type:'bar', height:19, barWidth:4, barSpacing:2, barColor:'#0cc2aa'}" class="sparkline inline">loading.</div>
-		            </td>
 		            <td>App downloads</td>
 		            <td class="text-success">
-		              <i class="fa fa-level-up"></i> 40%
+		              <a href class="active" ui-toggle-class><i class="fa fa-check text-success none"></i><i class="fa fa-times text-danger inline"></i></a>
 		            </td>
 		          </tr>
 		          <tr>
-		            <td class="text-center">
-		              <div ui-jp="sparkline" ui-refresh="app.setting.color" ui-options="[ 60,30,10 ], {type:'pie', height:19, sliceColors:['#fcc100','#fff','#0cc2aa']}" class="sparkline inline">loading.</div>
-		            </td>
 		            <td>Social connection</td>
 		            <td class="text-success">
-		              <i class="fa fa-level-up"></i> 20%
+		             <a href class="active" ui-toggle-class><i class="fa fa-check text-success none"></i><i class="fa fa-times text-danger inline"></i></a>
 		            </td>
 		          </tr>
 		          <tr>                    
-		            <td>
-		              <div ui-jp="sparkline" ui-refresh="app.setting.color" ui-options="[ 16,15,15,14,17,18,16,15,16 ], {type:'line', height:19, width:60, lineColor:'#0cc2aa', fillColor:'transparent'}" class="sparkline inline">loading.</div>
-		            </td>
 		            <td>Revenue</td>
 		            <td class="text-warning">
-		              <i class="fa fa-level-down"></i> 5%
+		              <a href class="active" ui-toggle-class><i class="fa fa-check text-success none"></i><i class="fa fa-times text-danger inline"></i></a>
 		            </td>
 		          </tr>
 		          <tr>                    
-		            <td>
-		              <div ui-jp="sparkline" ui-refresh="app.setting.color" ui-options="[ 16,15,15,14,17,18,16,15,16 ], {type:'discrete', height:19, width:60, lineColor:'#6cc788'}" class="sparkline inline">loading.</div>
-		            </td>
 		            <td>Customer increase</td>
 		            <td class="text-danger">
-		              <i class="fa fa-level-down"></i> 20%
+		              <a href class="active" ui-toggle-class><i class="fa fa-check text-success none"></i><i class="fa fa-times text-danger inline"></i></a>
 		            </td>
 		          </tr>
 		          <tr>                    
-		            <td>
-		              <div ui-jp="sparkline" ui-refresh="app.setting.color" ui-options="[ 16,15,15,14,17,18,16,15,16 ], {type:'line', height:19, width:60, lineColor:'#fcc100', fillColor:'#fcc100'}" class="sparkline inline">loading.</div>
-		            </td>
 		            <td>Order placed</td>
 		            <td class="text-warning">
-		              <i class="fa fa-level-down"></i> 5%
+		              <a href class="active" ui-toggle-class><i class="fa fa-check text-success none"></i><i class="fa fa-times text-danger inline"></i></a>
 		            </td>
 		          </tr>
 		          <tr>
-		            <td>
-		              <div ui-jp="sparkline" ui-refresh="app.setting.color" ui-options="[ 16,15,15,16,15,16,14,17,18 ], {type:'line', height:19, width:60, lineColor:'#fcc100', fillColor:'transparent'}" class="sparkline inline">loading.</div>
-		            </td>
 		            <td>Visitors</td>
 		            <td class="text-warning">
-		              <i class="fa fa-level-down"></i> 8%
+		              <a href class="active" ui-toggle-class><i class="fa fa-check text-success none"></i><i class="fa fa-times text-danger inline"></i></a>
 		            </td>
 		          </tr>
 		        </tbody>

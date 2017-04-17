@@ -83,15 +83,15 @@ function initRoutes() {
     });
 
     router.get('/projects/all',function(req,res){
-        res.render('project',{title:'Profile', name: 'Zhenyu Geng'});
+        res.render('project',{title:'project Management',subtitle: 'Overview Projects', name: 'Zhenyu Geng'});
     });
 
     router.get('/projects/my',function(req,res){
-        res.render('project',{title:'Profile', name: 'Zhenyu Geng'});
+        res.render('project',{title:'project Management',subtitle: 'Overview My Projects', name: 'Zhenyu Geng'});
     });
 
     router.get('/projects/add',function(req,res){
-        res.render('addandeditcontract',{title:'New Contract', name: 'Zhenyu Geng'});
+        res.render('addandeditcontract',{title:'project Management',subtitle: 'New Contract', name: 'Zhenyu Geng'});
     });
 
     router.get('/profile',function(req,res){
