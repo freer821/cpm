@@ -10,33 +10,16 @@ const config = require('../common/config');
 const adduser = function (req, res, next) {
 
     if (req.method === "GET") {
-        res.render('adduser');
+        res.render('addandedituser', {title:'User Management', action: '/users/add', subtitle:'Add User', name: 'Zhenyu Geng'});
     } else {
         let new_user = req.body;
-        db.findUser(new_user, function (err, user) {
+        db.findUser(new_user.email, function (err, user) {
             if (err) {
                 logger.error('error to find user in db', err.message);
             } else if (user) {
                 req.flash('message', 'email is aready used, pls try other email!');
             } else {
-                if (req.files) {
-                    let iconfile = req.files.icon;
-                    mkdirp(config.upload.icon+'/'+new_user.email, function(err) {
-                        if (err) {
-                            logger.error('failed to create folder', err.message);
-                            return;
-                        }
-                        iconfile.mv(config.upload.icon+'/'+new_user.email+'/'+iconfile.name, function (err) {
-                            if (err) {
-                                logger.error('failed to save icon ', err.message);
-                                return;
-                            }
-                            new_user.icon = '/upload'+'/'+new_user.email+'/'+iconfile.name;
-                        });
-                    });
-                }
-                db.saveUser(new_user);
-                req.flash('message', 'user saved!');
+                saveUser(req,new_user);
             }
             res.redirect('/users');
         });
@@ -44,14 +27,38 @@ const adduser = function (req, res, next) {
 
 };
 
+function saveUser(req,user) {
+    user.ts = new Date();
+    if (req.files.icon) {
+        let iconfile = req.files.icon;
+        mkdirp(config.upload.icon+'/'+user.email, function(err) {
+            if (err) {
+                logger.error('failed to create folder', err.message);
+            } else {
+                iconfile.mv(config.upload.icon+'/'+user.email+'/'+iconfile.name, function (err) {
+                    if (err) {
+                        logger.error('failed to save icon ', err.message);
+                        return;
+                    }
+                    user.icon = '/upload'+'/'+user.email+'/'+iconfile.name;
+                });
+            }
+            db.saveUser(user);
+        });
+    } else {
+        db.saveUser(user);
+    }
+    req.flash('message', 'user saved!');
+}
+
 const getAllUser = function(req, res, next) {
     db.findUsers(function (err, users) {
        if(err) {
            logger.error('error to find users in db', err.message);
        } else if (users) {
-           res.render('useroverview', {title:'Overview', name: 'Zhenyu Geng', users:users});
+           res.render('useroverview', {title:'User Management', subtitle: 'Overview Users', name: 'Zhenyu Geng', users:users});
        } else {
-           res.render('useroverview', {title:'Overview', name: 'Zhenyu Geng', users:[]});
+           res.render('useroverview', {title:'User Management', subtitle: 'Overview Users', name: 'Zhenyu Geng', users:[]});
        }
     });
 };
@@ -62,7 +69,20 @@ const delUser = function(req, res, next) {
 };
 
 const editUser = function(req, res, next) {
-    res.redirect('/users');
+    if (req.method === "GET") {
+
+        db.findUser(req.query.email, function (err, user) {
+            if(err) {
+                logger.error('error to find user in db', err.message);
+            } else {
+                res.render('addandedituser', {title:'User Management',action: '/users/edit', subtitle:'Edit User', name: 'Zhenyu Geng',user:user});
+            }
+        });
+    } else {
+        let user = req.body;
+        saveUser(req,user);
+        res.redirect('/users');
+    }
 };
 
 
