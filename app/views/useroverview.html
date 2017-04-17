@@ -34,6 +34,9 @@
           </thead>
           <tbody>
             {% for user in users %}
+            {% set editurl = '/users/edit/'+user._id %}
+            {% set delurl = '/users/del/'+user._id %}
+
               <tr>
                 <td>{{user.firstname}}</td>
                 <td>{{user.email}}</td>
@@ -42,13 +45,13 @@
                 <td>{{user.role}}</td>
                 <td>{{user.ts}}</td>
                 <td>
-                  <a href="#" data-toggle="modal" data-target="#show-user"><i class="material-icons md-24">&#xe88e;</i></a>
+                  <a href="#" data-toggle="modal" data-target="#show-user" data-user="{{user|json}}""><i class="material-icons md-24">&#xe88e;</i></a>
                 </td>
                 <td>
-                  <a href="/users/edit"><i class="material-icons md-24">&#xe3c9;</i></a>
+                  <a href="{{editurl}}"><i class="material-icons md-24">&#xe3c9;</i></a>
                 </td>
                 <td>
-                  <a href="#" data-href="/users/del/freerglueck@googlemail.com" data-toggle="modal" data-target="#del-user"><i class="material-icons md-24">&#xe872;</i></a>
+                  <a href="#" data-href="{{delurl}}" data-toggle="modal" data-target="#del-user"><i class="material-icons md-24">&#xe872;</i></a>
                 </td>
               </tr>
             {% endfor %}           
@@ -132,7 +135,7 @@
 <script type="text/javascript">
   //triggered when modal is about to be shown
   $('#show-user').on('show.bs.modal', function(e) {
-    console.log("hallo");
+    console.log($(e.relatedTarget).data('user'));
   });
 
   $('#del-user').on('show.bs.modal', function(e) {
