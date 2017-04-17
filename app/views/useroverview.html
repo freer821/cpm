@@ -1,0 +1,142 @@
+{% extends 'layout.html' %}
+{% block content %}
+<!-- ############ PAGE START-->
+  <div class="box">
+    <div class="box-header">
+      <h3>List of the Users</h3>
+    </div>
+      <div class="row p-a">
+        <div class="col-sm-5">
+           <a href="/users/add" type="button" class="btn btn-sm white">Add New User</a> 
+        </div> 
+        <div class="col-sm-4">
+        </div>
+        <div class="col-sm-3">
+          <div class="input-group input-group-sm">
+            <input type="text" id="filter" class="form-control" placeholder="Search">
+          </div>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="table m-b-none b-t" ui-jp="footable" data-filter="#filter" data-page-size="5">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Tel</th>
+              <th>Position</th>
+              <th>Role</th>
+              <th>created</th>
+              <th style="width:20px;" data-sort-ignore="true"></th>
+              <th style="width:20px;" data-sort-ignore="true"></th>
+              <th style="width:20px;" data-sort-ignore="true"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for user in users %}
+              <tr>
+                <td>{{user.firstname}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.tel}}</td>
+                <td>{{user.position}}</td>
+                <td>{{user.role}}</td>
+                <td>{{user.ts}}</td>
+                <td>
+                  <a href="#" data-toggle="modal" data-target="#show-user"><i class="material-icons md-24">&#xe88e;</i></a>
+                </td>
+                <td>
+                  <a href="/users/edit"><i class="material-icons md-24">&#xe3c9;</i></a>
+                </td>
+                <td>
+                  <a href="#" data-href="/users/del/freerglueck@googlemail.com" data-toggle="modal" data-target="#del-user"><i class="material-icons md-24">&#xe872;</i></a>
+                </td>
+              </tr>
+            {% endfor %}           
+          </tbody>
+          <tfoot class="hide-if-no-paging">
+          <tr>
+              <td colspan="5" class="text-center">
+                  <ul class="pagination"></ul>
+              </td>
+          </tr>
+        </tfoot>
+        </table>
+      </div>
+  </div>
+
+
+<!-- large modal -->
+<div id="show-user" class="modal" data-backdrop="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">User Detail</h5>
+      </div>
+      <div class="modal-body text-center p-lg">
+          <div class="row">
+            <div class="col-xs-7 col-md-5"><div class="box p-a">.col-xs-12 .col-md-8</div></div>
+            <div class="col-xs-7 col-md-5"><div class="box p-a">.col-xs-12 .col-md-8</div></div>
+            <div class="col-xs-4 col-md-2"><div class="box p-a">.col-xs-6 .col-md-4</div></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-md-8"><div class="box p-a">.col-xs-12 .col-md-8</div></div>
+            <div class="col-xs-6 col-md-4"><div class="box p-a">.col-xs-6 .col-md-4</div></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-md-8"><div class="box p-a">.col-xs-12 .col-md-8</div></div>
+            <div class="col-xs-6 col-md-4"><div class="box p-a">.col-xs-6 .col-md-4</div></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-md-8"><div class="box p-a">.col-xs-12 .col-md-8</div></div>
+            <div class="col-xs-6 col-md-4"><div class="box p-a">.col-xs-6 .col-md-4</div></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-md-8"><div class="box p-a">.col-xs-12 .col-md-8</div></div>
+            <div class="col-xs-6 col-md-4"><div class="box p-a">.col-xs-6 .col-md-4</div></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-md-8"><div class="box p-a">.col-xs-12 .col-md-8</div></div>
+            <div class="col-xs-6 col-md-4"><div class="box p-a">.col-xs-6 .col-md-4</div></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-md-8"><div class="box p-a">.col-xs-12 .col-md-8</div></div>
+            <div class="col-xs-6 col-md-4"><div class="box p-a">.col-xs-6 .col-md-4</div></div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn danger p-x-md" data-dismiss="modal">OK</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div>
+</div>
+
+<div id="del-user" class="modal" data-backdrop="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete User</h5>
+      </div>
+      <div class="modal-body text-center p-lg">
+        <p>Are you sure to delete this user?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn dark-white p-x-md" data-dismiss="modal">No</button>
+        <a type="button" class="btn danger p-x-md">Yes</a>
+      </div>
+    </div><!-- /.modal-content -->
+  </div>
+</div>
+
+<!-- / .modal -->
+<!-- ############ PAGE END-->
+<script type="text/javascript">
+  //triggered when modal is about to be shown
+  $('#show-user').on('show.bs.modal', function(e) {
+    console.log("hallo");
+  });
+
+  $('#del-user').on('show.bs.modal', function(e) {
+      $(this).find('.danger').attr('href', $(e.relatedTarget).data('href'));
+  });
+</script>
+{% endblock %}
