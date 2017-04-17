@@ -82,6 +82,13 @@ function initRoutes() {
         res.render('dashboard',{title:'Main',name: 'Zhenyu Geng'});
     });
 
+    router.get('/contract',function(req,res){
+        res.render('contract',{title:'Profile', name: 'Zhenyu Geng'});
+    });
+
+    router.get('/project',function(req,res){
+        res.render('project',{title:'Profile', name: 'Zhenyu Geng'});
+    });
 
     router.get('/profile',function(req,res){
         res.render('profile',{title:'Profile', name: 'Zhenyu Geng'});
