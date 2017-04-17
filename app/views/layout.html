@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>{{ title }}</title>
+  <title>{{title}}</title>
   <meta name="description" content="Admin, Dashboard, Bootstrap, Bootstrap 4, Angular, AngularJS" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -88,12 +88,17 @@
                   </a>
                   <ul class="nav-sub">
                     <li>
-                      <a href="/project" >
-                        <span class="nav-text">My Project</span>
+                      <a href="/projects/all" >
+                        <span class="nav-text">All Projects</span>
                       </a>
                     </li>
                     <li>
-                      <a href="/contract" >
+                      <a href="/projects/my" >
+                        <span class="nav-text">My Projects</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="/projects/add" >
                         <span class="nav-text">New Contract</span>
                       </a>
                     </li>
@@ -166,7 +171,7 @@
               <ul class="nav navbar-nav mr-auto">
                 <li class="nav-item dropdown">
                   <a class="nav-link" href data-toggle="dropdown">
-                    <span style="font-weight:bold">{{ title }}</span>
+                    <span style="font-weight:bold">Kuhmann construction management system</span>
                   </a>
                   <div ui-include="'/pages/blocks/dropdown.new.html'"></div>
                 </li>
