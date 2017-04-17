@@ -1,7 +1,7 @@
 /**
  * Created by Zhenyu on 03.04.2017.
  */
-
+'use strict';
 const LocalStrategy = require('passport-local').Strategy;
 
 const db = require('./database');
