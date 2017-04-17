@@ -3,7 +3,7 @@
 <!-- ############ PAGE START-->
   <div class="box">
     <div class="box-header">
-      <h3>List of the Users</h3>
+      <h3>{{subtitle}}</h3>
     </div>
       <div class="row p-a">
         <div class="col-sm-5">
@@ -45,7 +45,7 @@
                 <td>{{user.company}}</td>
                 <td>{{user.tel}}</td>
                 <td>{{user.role}}</td>
-                <td>{{user.ts}}</td>
+                <td>{{user.created | date('Y-m-d H:m:s')}}</td>
                 <td>
                   <a href="#" data-toggle="modal" data-target="#show-user" data-user="{{user|json}}""><i class="material-icons md-24">&#xe88e;</i></a>
                 </td>
@@ -109,7 +109,7 @@
               <div class="form-group row">
                 <label for="position" class="col-sm-4 form-control-label">Position</label>
                 <div class="col-sm-8">
-                  <input type="text" class="form-control" id="position" placeholder="Position">
+                  <input type="text" class="form-control" id="position" placeholder="Position" readonly>
                 </div>
               </div>
             </div>
@@ -117,7 +117,7 @@
               <div class="form-group row">
                 <label for="department" class="col-sm-4 form-control-label">Department</label>
                 <div class="col-sm-8">
-                  <input type="text" class="form-control" id="department" placeholder="department">
+                  <input type="text" class="form-control" id="department" placeholder="department" readonly>
                 </div>
               </div>
             </div>
@@ -125,7 +125,7 @@
               <div class="form-group row">
                 <label for="company" class="col-sm-4 form-control-label">Company</label>
                 <div class="col-sm-8">
-                  <input type="text" class="form-control" id="company" placeholder="company">
+                  <input type="text" class="form-control" id="company" placeholder="company" readonly>
                 </div>
               </div>
             </div>
@@ -225,10 +225,12 @@
     var user = $(e.relatedTarget).data('user');
     $("#firstname").val(user.firstname);
     $("#secondname").val(user.secondname);
+    $("#shortname").val(user.shortname);
     $("#position").val(user.position);
     $("#department").val(user.department);
     $("#company").val(user.company);
     $("#addr").val(user.addr);
+    $("#plz").val(user.plz);
     $("#city").val(user.city);
     $("#email").val(user.email);
     $("#tel").val(user.tel);

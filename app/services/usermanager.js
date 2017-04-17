@@ -10,7 +10,7 @@ const config = require('../common/config');
 const adduser = function (req, res, next) {
 
     if (req.method === "GET") {
-        res.render('addandedituser', {title:'Add User', name: 'Zhenyu Geng'});
+        res.render('addandedituser', {title:'User Management', subtitle:'Add User', name: 'Zhenyu Geng'});
     } else {
         let new_user = req.body;
         db.findUser(new_user.email, function (err, user) {
@@ -28,23 +28,26 @@ const adduser = function (req, res, next) {
 };
 
 function saveUser(req,user) {
-    if (req.files) {
+    user.ts = new Date();
+    if (req.files.icon) {
         let iconfile = req.files.icon;
-        mkdirp(config.upload.icon+'/'+new_user.email, function(err) {
+        mkdirp(config.upload.icon+'/'+user.email, function(err) {
             if (err) {
                 logger.error('failed to create folder', err.message);
-                return;
+            } else {
+                iconfile.mv(config.upload.icon+'/'+user.email+'/'+iconfile.name, function (err) {
+                    if (err) {
+                        logger.error('failed to save icon ', err.message);
+                        return;
+                    }
+                    user.icon = '/upload'+'/'+user.email+'/'+iconfile.name;
+                });
             }
-            iconfile.mv(config.upload.icon+'/'+new_user.email+'/'+iconfile.name, function (err) {
-                if (err) {
-                    logger.error('failed to save icon ', err.message);
-                    return;
-                }
-                new_user.icon = '/upload'+'/'+new_user.email+'/'+iconfile.name;
-            });
+            db.saveUser(user);
         });
+    } else {
+        db.saveUser(user);
     }
-    db.saveUser(user);
     req.flash('message', 'user saved!');
 }
 
@@ -53,9 +56,9 @@ const getAllUser = function(req, res, next) {
        if(err) {
            logger.error('error to find users in db', err.message);
        } else if (users) {
-           res.render('useroverview', {title:'Overview', name: 'Zhenyu Geng', users:users});
+           res.render('useroverview', {title:'User Management', subtitle: 'Overview Users', name: 'Zhenyu Geng', users:users});
        } else {
-           res.render('useroverview', {title:'Overview', name: 'Zhenyu Geng', users:[]});
+           res.render('useroverview', {title:'User Management', subtitle: 'Overview Users', name: 'Zhenyu Geng', users:[]});
        }
     });
 };
@@ -71,9 +74,10 @@ const editUser = function(req, res, next) {
             if(err) {
                 logger.error('error to find user in db', err.message);
             } else {
-                res.render('addandedituser', {title:'Edit User', name: 'Zhenyu Geng', user:user});
+                //res.render('addandedituser', {title:'User Management', subtitle:'Edit User', name: 'Zhenyu Geng'});
             }
         });
+        res.render('addandedituser', {title:'User Management', subtitle:'Edit User', name: 'Zhenyu Geng'});
     } else {
         let user = req.body;
         saveUser(req,user);

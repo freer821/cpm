@@ -76,7 +76,7 @@ const saveUser = function (user) {
         {upsert: true},
         function (err) {
             if (err) {
-                logger.error('Failed to save user in MongoDB', user);
+                logger.error('Failed to save user in MongoDB', user,err);
             } else {
                 logger.trace('added user in MongoDB', user);
             }
@@ -85,8 +85,8 @@ const saveUser = function (user) {
 };
 
 function getShortname(frt,sec) {
-    let first = frt? frt.substring(0,2):'';
-    let second = sec? sec.substring(0,3):'';
+    let first = frt? frt.substring(0,1):'';
+    let second = sec? sec.substring(0,2):'';
 
     return first+second;
 }

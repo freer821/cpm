@@ -6,22 +6,18 @@
   
   <div class="box">
     <div class="box-header b-b">
-      <h3>Add User</h3>
+      <h3>{{subtitle}}</h3>
     </div>
     <div class="box-body">
       <form ui-jp="parsley" id="form" action="/users/add" method="post" encType="multipart/form-data">
         <div class="row m-b">
-          <div class="col-sm-5">
+          <div class="col-sm-6">
             <label>First name</label>
             <input type="text" class="form-control" required name="firstname">   
           </div>
-          <div class="col-sm-5">
+          <div class="col-sm-6">
             <label>Second Name</label>
             <input type="text" class="form-control" required name="secondname">   
-          </div>
-          <div class="col-sm-2">
-            <label>Short Name</label>
-            <input type="text" class="form-control" name="shortname">   
           </div>
         </div>
         <div class="form-group">
@@ -50,24 +46,28 @@
         </div>
         <div class="row m-b">
           <div class="col-sm-6">
-            <label>Strasse</label>
+            <label>Street</label>
             <input type="text" class="form-control" name="addr">
           </div>
           <div class="col-sm-2">
-            <label>PLZ</label>
+            <label>Postcode</label>
             <input type="number" class="form-control" placeholder="XXXXX" name="plz">
           </div>   
           <div class="col-sm-4">
-            <label>Stadt</label>
+            <label>City</label>
             <input type="text" class="form-control" name="city">
           </div>  
         </div>
         <div class="row m-b">
-          <div class="col-sm-6">
+          <div class="col-sm-4">
+            <label>Position</label>
+            <input type="text" class="form-control" name="position">
+          </div>
+          <div class="col-sm-4">
             <label>Department</label>
             <input type="text" class="form-control" name="department">
           </div>
-          <div class="col-sm-6">
+          <div class="col-sm-4">
             <label>Company</label>
             <input type="text" class="form-control" name="company">
           </div>   
