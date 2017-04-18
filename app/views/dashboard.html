@@ -146,21 +146,12 @@
 		      </div>
 		      <div class="box-tool">
 		        <ul class="nav">
-		          <li class="nav-item inline">
-		            <a class="nav-link">
-		              <i class="material-icons md-18">&#xe863;</i>
-		            </a>
-		          </li>
 		          <li class="nav-item inline dropdown">
 		            <a class="nav-link" data-toggle="dropdown">
 		              <i class="material-icons md-18">&#xe5d4;</i>
 		            </a>
 		            <div class="dropdown-menu dropdown-menu-scale pull-right">
-		              <a class="dropdown-item" href>This week</a>
-		              <a class="dropdown-item" href>This month</a>
-		              <a class="dropdown-item" href>This week</a>
-		              <div class="dropdown-divider"></div>
-		              <a class="dropdown-item">Today</a>
+		              <a href="#" data-toggle="modal" data-target="#add-item" class="dropdown-item">Add new Item</a>
 		            </div>
 		          </li>
 		        </ul>
@@ -168,7 +159,8 @@
 		      <table class="table">
 		        <thead>
 		          <tr>
-		            <th>Item</th>                    
+		            <th>Item</th>
+		            <th style="width:70px;">Status</th>                    
 		            <th style="width:70px;"></th>
 		          </tr>
 		        </thead>
@@ -214,6 +206,40 @@
 		    </div>
 	    </div>
 	</div>
+</div>
+
+<div id="add-item" class="modal" data-backdrop="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+    <form id="form" action="/additem" method="post" >
+      <div class="modal-header">
+        <h5 class="modal-title">New Item</h5>
+      </div>
+      <div class="modal-body">
+      	<div class="form-group row">
+		    <label class="col-sm-2 form-control-label">Content</label>
+		    <div class="col-sm-10">
+			    <textarea class="form-control" rows="5" name="content"></textarea>
+		    </div>
+		</div>
+        <div class="form-group row">
+            <label for="inputPassword3" class="col-sm-2 form-control-label">Priority</label>
+            <div class="col-sm-10">
+                <select class="form-control c-select" name="priority">
+                  <option value="Emergency">Emergency</option>
+                  <option value="Urgent">Urgent</option>
+                  <option value="Standard">Standard</option>
+                  <option value="Normal">Normal</option>
+                </select>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn dark-white p-x-md" data-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn danger p-x-md">Submit</button>
+      </div>
+    </form>
+    </div><!-- /.modal-content -->
+  </div>
 </div>
 
 <!-- ############ PAGE END-->

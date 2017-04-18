@@ -114,6 +114,8 @@ function initRoutes() {
     router.get('/users/edit',usermanager.editUser);
     router.post('/users/edit',usermanager.editUser);
 
+    router.post('/additem',usermanager.additem);
+
     router.use(function(req, res, next) {
 
         if (req.isAuthenticated()) {

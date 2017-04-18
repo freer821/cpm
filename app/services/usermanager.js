@@ -95,12 +95,20 @@ const getCurrentUser = function(req, res, next) {
             }
         });        
     }
-}
+};
+
+const additem = function (req, res, next) {
+    let item = req.body;
+    item.ts = new Date();
+    db.addItem({}, item);
+    res.redirect('/');
+};
 
 module.exports = {
     adduser:adduser,
     getAllUser:getAllUser,
     delUser:delUser,
     editUser:editUser,
-    getCurrentUser: getCurrentUser
+    getCurrentUser: getCurrentUser,
+    additem: additem
 };

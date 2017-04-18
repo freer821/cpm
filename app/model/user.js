@@ -21,7 +21,15 @@ const userSchema = new Schema({
     tel: String,
     mobil: String,
     created: Date,
-    ts: Date
+    ts: Date,
+    items: [
+        {
+            content: String,
+            priority: {type: String, enum: ['Emergency', 'Urgent', 'Standard', 'Normal']},
+            status: {type: String, enum: ['open', 'closed']},
+            ts: Date
+        }
+    ]
 },{ versionKey: false });
 
 module.exports = userSchema;
