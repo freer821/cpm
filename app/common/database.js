@@ -42,8 +42,8 @@ function initCPMSchema() {
     User = cpmDB.model('user', userSchema, config.mongodb.collection_user);
 }
 
-const findUser = function (email, callback) {
-    User.findOne({'email': email}, function (err, user) {
+const findUser = function (condition, callback) {
+    User.findOne(condition, function (err, user) {
         if (err) {
             logger.error('error to find user', err.message);
             callback(err)

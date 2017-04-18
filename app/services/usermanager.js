@@ -13,7 +13,7 @@ const adduser = function (req, res, next) {
         res.render('addandedituser', {title:'User Management', action: '/users/add', subtitle:'Add User', name: 'Zhenyu Geng'});
     } else {
         let new_user = req.body;
-        db.findUser(new_user.email, function (err, user) {
+        db.findUser({'email': new_user.email}, function (err, user) {
             if (err) {
                 logger.error('error to find user in db', err.message);
             } else if (user) {
@@ -71,7 +71,7 @@ const delUser = function(req, res, next) {
 const editUser = function(req, res, next) {
     if (req.method === "GET") {
 
-        db.findUser(req.query.email, function (err, user) {
+        db.findUser({'email': req.query.email}, function (err, user) {
             if(err) {
                 logger.error('error to find user in db', err.message);
             } else {
@@ -85,6 +85,17 @@ const editUser = function(req, res, next) {
     }
 };
 
+const getCurrentUser = function(req, res, next) {
+    if (req.method === "GET") {
+        db.findUser({}, function (err, user) {
+            if(err) {
+                logger.error('error to find user in db', err.message);
+            } else {
+                res.render('addandedituser', {title:'User Management',action: '/users/edit', subtitle:'Edit User', name: 'Zhenyu Geng',user:user});
+            }
+        });        
+    }
+}
 
 module.exports = {
     adduser:adduser,
