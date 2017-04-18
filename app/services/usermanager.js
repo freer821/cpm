@@ -91,7 +91,7 @@ const getCurrentUser = function(req, res, next) {
             if(err) {
                 logger.error('error to find user in db', err.message);
             } else {
-                res.render('addandedituser', {title:'User Management',action: '/users/edit', subtitle:'Edit User', name: 'Zhenyu Geng',user:user});
+                res.render('profile',{title:'Profile', name: 'Zhenyu Geng', user:user});
             }
         });        
     }
@@ -101,5 +101,6 @@ module.exports = {
     adduser:adduser,
     getAllUser:getAllUser,
     delUser:delUser,
-    editUser:editUser
+    editUser:editUser,
+    getCurrentUser: getCurrentUser
 };

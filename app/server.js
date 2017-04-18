@@ -94,9 +94,7 @@ function initRoutes() {
         res.render('addandeditcontract',{title:'project Management',subtitle: 'New Contract', name: 'Zhenyu Geng'});
     });
 
-    router.get('/profile',function(req,res){
-        res.render('profile',{title:'Profile', name: 'Zhenyu Geng'});
-    });
+    router.get('/profile',usermanager.getCurrentUser);
 
     router.post('/login',passport.authenticate('local',{
         successRedirect : '/Dashboard', // redirect to the secure profile section
