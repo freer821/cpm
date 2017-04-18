@@ -117,6 +117,17 @@ const delUser = function (id) {
     })
 };
 
+const getItems = function (condition, callback) {
+    User.findOne(condition, function (err, user) {
+        if (err) {
+            logger.error('error to find user', err.message);
+            callback(err)
+        } else {
+            callback(undefined, user.items);
+        }
+    });
+};
+
 
 module.exports = {
     setup: setup,
@@ -124,5 +135,6 @@ module.exports = {
     saveUser:saveUser,
     findUsers: findUsers,
     delUser:delUser,
-    addItem:addItem
+    addItem:addItem,
+    getItems: getItems
 };

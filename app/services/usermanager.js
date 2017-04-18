@@ -97,12 +97,25 @@ const getCurrentUser = function(req, res, next) {
     }
 };
 
-const additem = function (req, res, next) {
+const addItem = function (req, res, next) {
     let item = req.body;
+    item.status = 'open';
     item.ts = new Date();
     db.addItem({}, item);
     res.redirect('/');
 };
+
+const getAllInfos = function (req, res, next) {
+    db.getItems({}, function (err, items) {
+        if(err) {
+            logger.error('error to find user in db', err.message);
+            res.render('dashboard',{title:'Main',name: 'Zhenyu Geng'});
+        } else {
+            res.render('dashboard',{title:'Main',name: 'Zhenyu Geng', items: items});
+        }
+    });
+};
+
 
 module.exports = {
     adduser:adduser,
@@ -110,5 +123,6 @@ module.exports = {
     delUser:delUser,
     editUser:editUser,
     getCurrentUser: getCurrentUser,
-    additem: additem
+    addItem: addItem,
+    getAllInfos: getAllInfos
 };

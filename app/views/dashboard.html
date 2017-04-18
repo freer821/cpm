@@ -160,47 +160,18 @@
 		        <thead>
 		          <tr>
 		            <th>Item</th>
-		            <th style="width:70px;">Status</th>                    
-		            <th style="width:70px;"></th>
+		            <th style="width:70px;">Priority</th>                    
+		            <th style="width:70px;">Status</th>
 		          </tr>
 		        </thead>
 		        <tbody>
-		          <tr>
-		            <td>App downloads</td>
-		            <td class="text-success">
-		              <a href class="active" ui-toggle-class><i class="fa fa-check text-success none"></i><i class="fa fa-times text-danger inline"></i></a>
-		            </td>
-		          </tr>
-		          <tr>
-		            <td>Social connection</td>
-		            <td class="text-success">
-		             <a href class="active" ui-toggle-class><i class="fa fa-check text-success none"></i><i class="fa fa-times text-danger inline"></i></a>
-		            </td>
-		          </tr>
-		          <tr>                    
-		            <td>Revenue</td>
-		            <td class="text-warning">
-		              <a href class="active" ui-toggle-class><i class="fa fa-check text-success none"></i><i class="fa fa-times text-danger inline"></i></a>
-		            </td>
-		          </tr>
-		          <tr>                    
-		            <td>Customer increase</td>
-		            <td class="text-danger">
-		              <a href class="active" ui-toggle-class><i class="fa fa-check text-success none"></i><i class="fa fa-times text-danger inline"></i></a>
-		            </td>
-		          </tr>
-		          <tr>                    
-		            <td>Order placed</td>
-		            <td class="text-warning">
-		              <a href class="active" ui-toggle-class><i class="fa fa-check text-success none"></i><i class="fa fa-times text-danger inline"></i></a>
-		            </td>
-		          </tr>
-		          <tr>
-		            <td>Visitors</td>
-		            <td class="text-warning">
-		              <a href class="active" ui-toggle-class><i class="fa fa-check text-success none"></i><i class="fa fa-times text-danger inline"></i></a>
-		            </td>
-		          </tr>
+		        	{% for item in items %}
+			          <tr>
+			            <td>{{item.content}}</td>
+			            <td>{{item.priority}}</td>
+			            <td>{{item.status}}</td>
+			          </tr>
+			        {% endfor %} 
 		        </tbody>
 		      </table>
 		    </div>
