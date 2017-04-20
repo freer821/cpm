@@ -86,8 +86,9 @@ const editUser = function(req, res, next) {
 };
 
 const getCurrentUser = function(req, res, next) {
+    let user = req.user;
     if (req.method === "GET") {
-        db.findUser({}, function (err, user) {
+        db.findUser({email:user.email}, function (err, user) {
             if(err) {
                 logger.error('error to find user in db', err.message);
             } else {
@@ -102,11 +103,12 @@ const addItem = function (req, res, next) {
     item.status = 'open';
     item.ts = new Date();
     db.addItem({}, item);
-    res.redirect('/');
+    res.redirect('/dashboard');
 };
 
 const getAllInfos = function (req, res, next) {
-    db.getItems({}, function (err, items) {
+    let user = req.user;
+    db.getItems({email:user.email}, function (err, items) {
         if(err) {
             logger.error('error to find user in db', err.message);
             res.render('dashboard',{title:'Main',name: 'Zhenyu Geng'});
