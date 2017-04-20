@@ -20,7 +20,6 @@ const logger = require('./common/logger');
 const auth = require('./common/authentication');
 
 // services
-const signup = require('./services/login');
 const usermanager = require('./services/usermanager');
 
 
@@ -78,7 +77,25 @@ process.on('uncaughtException', function (err) {
 
 function initRoutes() {
 
-    router.get('/', usermanager.getAllInfos);
+    router.get('/', function(req,res){
+        res.render('login');
+    });
+
+    router.post('/login',passport.authenticate('local',{
+        successRedirect : '/dashboard', // redirect to the secure profile section
+        failureRedirect : '/', // redirect back to the signup page if there is an error
+        failureFlash : true // allow flash messages
+    }));
+
+    router.use(function(req, res, next) {
+
+        if (req.isAuthenticated()) {
+            next();
+        }
+        res.redirect('/');
+    });
+
+    router.get('/dashboard', usermanager.getAllInfos);
 
     router.get('/projects/all',function(req,res){
         res.render('project',{title:'project Management',subtitle: 'Overview Projects', name: 'Zhenyu Geng'});
@@ -94,14 +111,6 @@ function initRoutes() {
 
     router.get('/profile',usermanager.getCurrentUser);
 
-    router.post('/login',passport.authenticate('local',{
-        successRedirect : '/Dashboard', // redirect to the secure profile section
-        failureRedirect : '/', // redirect back to the signup page if there is an error
-        failureFlash : true // allow flash messages
-    }));
-
-    router.post('/signup',signup.handle);
-
     router.get('/users',usermanager.getAllUser);
 
     router.get('/users/add',usermanager.adduser);
@@ -113,13 +122,5 @@ function initRoutes() {
     router.post('/users/edit',usermanager.editUser);
 
     router.post('/additem',usermanager.addItem);
-
-    router.use(function(req, res, next) {
-
-        if (req.isAuthenticated()) {
-            next();
-        }
-        res.redirect('/');
-    });
 
 }

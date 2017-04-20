@@ -25,12 +25,11 @@ function initPassport (passport) {
             passReqToCallback : true // allows us to pass back the entire request to the callback
         },
         function(req, email, password, done) {
-            let tmp_user = {'email': email, 'passw': password};
-            db.findUser(tmp_user, function (err, user) {
+            db.findUser({'email': email}, function (err, user) {
                 if (err) {
                     return done(err);
                 }
-                if (user && password === tmp_user.passw  ) {
+                if (user && password === user.password ) {
                     return done(undefined, user);
                 } else {
                     return done(undefined, false);
