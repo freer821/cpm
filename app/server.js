@@ -91,8 +91,9 @@ function initRoutes() {
 
         if (req.isAuthenticated()) {
             next();
+        } else {
+            res.redirect('/');
         }
-        res.redirect('/');
     });
 
     router.get('/dashboard', usermanager.getAllInfos);

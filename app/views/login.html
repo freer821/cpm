@@ -42,13 +42,13 @@
       <div class="m-b text-sm">
         Sign in with your Kuhlmann Account
       </div>
-      <form name="form">
+      <form name="form" action="/login" method="post">
         <div class="md-form-group float-label">
-          <input type="email" class="md-input" ng-model="user.email" required>
+          <input type="email" class="md-input" name="email" required>
           <label>Email</label>
         </div>
         <div class="md-form-group float-label">
-          <input type="password" class="md-input" ng-model="user.password" required>
+          <input type="password" class="md-input" name="password" required>
           <label>Password</label>
         </div>      
         <div class="m-b-md">        
