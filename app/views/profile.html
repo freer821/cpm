@@ -4,14 +4,14 @@
 
   <div class="item">
     <div class="item-bg">
-      <img src="../assets/images/a1.jpg" class="blur opacity-3">
+      <img src="/assets/images/a1.jpg" class="blur opacity-3">
     </div>
     <div class="p-a-md">
       <div class="row m-t">
         <div class="col-sm-7">
           <a href class="pull-left m-r-md">
             <span class="avatar w-96">
-              <img src="../assets/images/a1.jpg">
+              <img src="/assets/images/a1.jpg">
               <i class="on b-white"></i>
             </span>
           </a>
@@ -50,40 +50,40 @@
             <div class="row m-b">
               <div class="col-xs-6">
                 <small class="text-muted">Initialen</small>
-                <div class="_500">zge</div>
+                <div class="_500">{{user.shortname}}</div>
               </div>
               <div class="col-xs-6">
                 <small class="text-muted">Email</small>
-                <div class="_500">freergzy8212@hotmail.com</div>
+                <div class="_500">{{user.email}}</div>
               </div>
             </div>
 
             <div class="row m-b">
               <div class="col-xs-6">
                 <small class="text-muted">Position</small>
-                <div class="_500">Verwaltung</div>
+                <div class="_500">{{user.position}}</div>
               </div>
               <div class="col-xs-6">
                 <small class="text-muted">Telefon</small>
-                <div class="_500">+49(4742)9297-42</div>
+                <div class="_500">{{user.tel}}</div>
               </div>
             </div>
 
             <div class="row m-b">
               <div class="col-xs-6">
                 <small class="text-muted">Abteilung</small>
-                <div class="_500">VW</div>
+                <div class="_500">{{user.department}}</div>
               </div>
               <div class="col-xs-6">
                 <small class="text-muted">Firma</small>
-                <div class="_500">Seier Familien AG</div>
+                <div class="_500">{{user.company}}</div>
               </div>
             </div>
 
             <div class="row m-b">
               <div class="col-xs-6">
                 <small class="text-muted">Strasse</small>
-                <div class="_500">Fleichergasse 14</div>
+                <div class="_500">{{user.addr}}</div>
               </div>
               <div class="col-xs-6">
                 <small class="text-muted">Ort</small>
@@ -91,11 +91,11 @@
               </div>
               <div class="col-xs-6">
                 <small class="text-muted">PLZ</small>
-                <div class="_500">60487</div>
+                <div class="_500">{{user.plz}}</div>
               </div>
               <div class="col-xs-6">
                 <small class="text-muted">Stadt</small>
-                <div class="_500">Frankfurt am Main</div>
+                <div class="_500">{{user.city}}</div>
               </div>
               <div class="col-xs-6">
                 <small class="text-muted">Bundesland</small>

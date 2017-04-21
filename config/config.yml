@@ -1,0 +1,19 @@
+default:
+  server:
+    port: 3000
+  mongodb:
+    connection: 'mongodb://192.168.99.100:27017/cpm'
+    collection_user: 'user'
+  session:
+    secret: 'cpmsecret'
+  logging:
+    trace:
+      enabled: true
+      level: 'trace'
+      file: './log/cpm-trace.log'
+    error:
+      enabled: true
+      level: 'error'
+      file: './log/cpm-error.log'
+  upload:
+    icon: './app/upload/icon'

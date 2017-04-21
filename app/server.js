@@ -78,9 +78,7 @@ process.on('uncaughtException', function (err) {
 
 function initRoutes() {
 
-    router.get('/',function(req,res){
-        res.render('dashboard',{title:'Main',name: 'Zhenyu Geng'});
-    });
+    router.get('/', usermanager.getAllInfos);
 
     router.get('/projects/all',function(req,res){
         res.render('project',{title:'project Management',subtitle: 'Overview Projects', name: 'Zhenyu Geng'});
@@ -94,9 +92,7 @@ function initRoutes() {
         res.render('addandeditcontract',{title:'project Management',subtitle: 'New Contract', name: 'Zhenyu Geng'});
     });
 
-    router.get('/profile',function(req,res){
-        res.render('profile',{title:'Profile', name: 'Zhenyu Geng'});
-    });
+    router.get('/profile',usermanager.getCurrentUser);
 
     router.post('/login',passport.authenticate('local',{
         successRedirect : '/Dashboard', // redirect to the secure profile section
@@ -115,6 +111,8 @@ function initRoutes() {
 
     router.get('/users/edit',usermanager.editUser);
     router.post('/users/edit',usermanager.editUser);
+
+    router.post('/additem',usermanager.addItem);
 
     router.use(function(req, res, next) {
 

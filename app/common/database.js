@@ -86,6 +86,23 @@ const saveUser = function (user) {
     );
 };
 
+const addItem = function (condition, item) {
+    User.update(condition, // Query
+        { // Updates
+            $push: {'items': item}
+        },
+        {upsert: true},
+        function (err) {
+            if (err) {
+                logger.error('Failed to add Item in MongoDB', item,err);
+            } else {
+                logger.trace('added Item in MongoDB', item);
+            }
+        }
+    );
+};
+
+
 function getShortname(frt,sec) {
     let first = frt? frt.substring(0,1):'';
     let second = sec? sec.substring(0,2):'';
@@ -102,11 +119,24 @@ const delUser = function (id) {
     })
 };
 
+const getItems = function (condition, callback) {
+    User.findOne(condition, function (err, user) {
+        if (err) {
+            logger.error('error to find user', err.message);
+            callback(err)
+        } else {
+            callback(undefined, user.items);
+        }
+    });
+};
+
 
 module.exports = {
     setup: setup,
     findUser:findUser,
     saveUser:saveUser,
     findUsers: findUsers,
-    delUser:delUser
+    delUser:delUser,
+    addItem:addItem,
+    getItems: getItems
 };
