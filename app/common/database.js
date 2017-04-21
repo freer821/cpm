@@ -20,6 +20,8 @@ const setup = function (callback) {
 };
 
 function connectcpmDB() {
+    mongoose.Promise = global.Promise;
+    
     let options = {
         server: {
             autoReconnect: true
