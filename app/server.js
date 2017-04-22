@@ -12,6 +12,7 @@ const cookieParser = require('cookie-parser'); // read cookies (needed for auth)
 const flash = require('connect-flash'); // use connect-flash for flash messages stored in session
 const router = express.Router();
 const fileUpload = require('express-fileupload');
+const logout = require('express-passport-logout');
 
 // our libs
 const config = require('./common/config');
@@ -123,5 +124,5 @@ function initRoutes() {
     router.post('/users/edit',usermanager.editUser);
 
     router.post('/additem',usermanager.addItem);
-
+    router.get('/logout', logout());
 }
