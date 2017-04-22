@@ -29,7 +29,11 @@ const userSchema = new Schema({
             status: {type: String, enum: ['open', 'closed']},
             ts: Date
         }
-    ]
+    ],
+    kst:[{
+        nr: Number,
+        comment: String
+    }]
 },{ versionKey: false });
 
 module.exports = userSchema;
