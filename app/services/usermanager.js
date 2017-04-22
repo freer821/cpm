@@ -34,18 +34,16 @@ function saveUser(req,user) {
         mkdirp(config.upload.icon+'/'+user.email, function(err) {
             if (err) {
                 logger.error('failed to create folder', err.message);
-                db.saveUser(user);
             } else {
                 iconfile.mv(config.upload.icon+'/'+user.email+'/'+iconfile.name, function (err) {
                     if (err) {
                         logger.error('failed to save icon ', err.message);
-                        db.saveUser(user);
                         return;
                     }
                     user.icon = '/upload'+'/'+user.email+'/'+iconfile.name;
-                    db.saveUser(user);
                 });
             }
+            db.saveUser(user);
         });
     } else {
         db.saveUser(user);

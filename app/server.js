@@ -62,7 +62,7 @@ app.use('/assets', express.static(__dirname + '/views/assets'));
 app.use('/pages', express.static(__dirname + '/views/pages'));
 app.use('/libs', express.static(__dirname + '/views/libs'));
 app.use('/scripts', express.static(__dirname + '/views/scripts'));
-app.use('/upload', express.static(__dirname + '/upload'));
+app.use('/upload', express.static(__dirname + '/upload/icon'));
 
 // set routes
 initRoutes();
