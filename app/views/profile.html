@@ -34,7 +34,7 @@
         <div class="p-y-md clearfix nav-active-primary">
           <ul class="nav nav-pills nav-sm">
             <li class="nav-item active">
-              <a class="nav-link" href data-toggle="tab" data-target="#tab_1">Profile</a>
+              <a class="nav-link" id="update" href data-toggle="tab" data-target="#tab_1">Update</a>
             </li>
           </ul>
         </div>
@@ -46,70 +46,84 @@
       <div class="col-sm-8 col-lg-9">
         <div class="tab-content">      
           <div class="tab-pane p-v-sm active" id="tab_1">
+            <form ui-jp="parsley" id="form" action="{{action}}" method="post" encType="multipart/form-data">
+              <div class="row m-b">
+                <div class="col-xs-6">
+                  <small class="text-muted">Initialen</small>
+                  <input style="display: none;" type="text" class="form-control" name="shortname" value="{{user.shortname}}">
+                  <div class="_500">{{user.shortname}}</div>
+                </div>
+                <div class="col-xs-6">
+                  <small class="text-muted">Email</small>
+                  <input style="display: none;" type="text" class="form-control" name="email" value="{{user.email}}">
+                  <div class="_500">{{user.email}}</div>
+                </div>
+              </div>
 
-            <div class="row m-b">
-              <div class="col-xs-6">
-                <small class="text-muted">Initialen</small>
-                <div class="_500">{{user.shortname}}</div>
+              <div class="row m-b">
+                <div class="col-xs-6">
+                  <small class="text-muted">Position</small>
+                  <input style="display: none;" type="text" class="form-control" name="position" value="{{user.position}}">
+                  <div class="_500">{{user.position}}</div>
+                </div>
+                <div class="col-xs-6">
+                  <small class="text-muted">Telefon</small>
+                  <input style="display: none;" type="text" class="form-control" name="tel" value="{{user.tel}}">
+                  <div class="_500">{{user.tel}}</div>
+                </div>
               </div>
-              <div class="col-xs-6">
-                <small class="text-muted">Email</small>
-                <div class="_500">{{user.email}}</div>
-              </div>
-            </div>
 
-            <div class="row m-b">
-              <div class="col-xs-6">
-                <small class="text-muted">Position</small>
-                <div class="_500">{{user.position}}</div>
+              <div class="row m-b">
+                <div class="col-xs-6">
+                  <small class="text-muted">Abteilung</small>
+                  <input style="display: none;" type="text" class="form-control" name="department" value="{{user.department}}">
+                  <div class="_500">{{user.department}}</div>
+                </div>
+                <div class="col-xs-6">
+                  <small class="text-muted">Firma</small>
+                  <input style="display: none;" type="text" class="form-control" name="company" value="{{user.company}}">
+                  <div class="_500">{{user.company}}</div>
+                </div>
               </div>
-              <div class="col-xs-6">
-                <small class="text-muted">Telefon</small>
-                <div class="_500">{{user.tel}}</div>
-              </div>
-            </div>
 
-            <div class="row m-b">
-              <div class="col-xs-6">
-                <small class="text-muted">Abteilung</small>
-                <div class="_500">{{user.department}}</div>
+              <div class="row m-b">
+                <div class="col-xs-6">
+                  <small class="text-muted">Strasse</small>
+                  <input style="display: none;" type="text" class="form-control" name="addr" value="{{user.addr}}">
+                  <div class="_500">{{user.addr}}</div>
+                </div>
+                <div class="col-xs-6">
+                  <small class="text-muted">Ort</small>
+                  <input style="display: none;" type="text" class="form-control" name="ort" value="Bockenheim">
+                  <div class="_500">Bockenheim</div>
+                </div>
+                <div class="col-xs-6">
+                  <small class="text-muted">PLZ</small>
+                  <input style="display: none;" type="text" class="form-control" name="plz" value="{{user.plz}}">
+                  <div class="_500">{{user.plz}}</div>
+                </div>
+                <div class="col-xs-6">
+                  <small class="text-muted">Stadt</small>
+                  <input style="display: none;" type="text" class="form-control" name="city" value="{{user.city}}">
+                  <div class="_500">{{user.city}}</div>
+                </div>
+                <div class="col-xs-6">
+                  <small class="text-muted">Bundesland</small>
+                  <input style="display: none;" type="text" class="form-control" name="bundesland" value="Hessen">
+                  <div class="_500">Hessen</div>
+                </div>
+                <div class="col-xs-6">
+                  <small class="text-muted">Land/Region</small>
+                  <input style="display: none;" type="text" class="form-control" name="Region" value="Deutschland">
+                  <div class="_500">Deutschland</div>
+                </div>
+              </div>      
+              <div>
+                <small class="text-muted">Bio</small>
+                <textarea id="bio_textarea" class="form-control" rows="2" style="display: none;"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id neque quam. Aliquam sollicitudin venenatis ipsum ac feugiat. Vestibulum ullamcorper sodales nisi nec condimentum. Mauris convallis mauris at pellentesque volutpat. Phasellus at ultricies neque, quis malesuada augue.</textarea>
+                <div id="bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id neque quam. Aliquam sollicitudin venenatis ipsum ac feugiat. Vestibulum ullamcorper sodales nisi nec condimentum. Mauris convallis mauris at pellentesque volutpat. Phasellus at ultricies neque, quis malesuada augue.</div>
               </div>
-              <div class="col-xs-6">
-                <small class="text-muted">Firma</small>
-                <div class="_500">{{user.company}}</div>
-              </div>
-            </div>
-
-            <div class="row m-b">
-              <div class="col-xs-6">
-                <small class="text-muted">Strasse</small>
-                <div class="_500">{{user.addr}}</div>
-              </div>
-              <div class="col-xs-6">
-                <small class="text-muted">Ort</small>
-                <div class="_500">Bockenheim</div>
-              </div>
-              <div class="col-xs-6">
-                <small class="text-muted">PLZ</small>
-                <div class="_500">{{user.plz}}</div>
-              </div>
-              <div class="col-xs-6">
-                <small class="text-muted">Stadt</small>
-                <div class="_500">{{user.city}}</div>
-              </div>
-              <div class="col-xs-6">
-                <small class="text-muted">Bundesland</small>
-                <div class="_500">Hessen</div>
-              </div>
-              <div class="col-xs-6">
-                <small class="text-muted">Land/Region</small>
-                <div class="_500">Deutschland</div>
-              </div>
-            </div>      
-            <div>
-              <small class="text-muted">Bio</small>
-              <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id neque quam. Aliquam sollicitudin venenatis ipsum ac feugiat. Vestibulum ullamcorper sodales nisi nec condimentum. Mauris convallis mauris at pellentesque volutpat. Phasellus at ultricies neque, quis malesuada augue.</div>
-            </div>
+            </form>  
           </div>
         </div>
       </div>
@@ -117,4 +131,12 @@
   </div>
 
 <!-- ############ PAGE END-->
+<script type="text/javascript">
+$('#update').on('click', function(e) {
+  $('.col-xs-6 input').toggle();
+  $('.col-xs-6 div').toggle();
+  $('#bio_textarea').toggle();
+  $('#bio').toggle();
+});
+</script>
 {% endblock %}
