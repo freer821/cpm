@@ -37,13 +37,14 @@ db.setup(function (connection) {
         }),
         secret: config.session.secret,
         resave: false,
-        saveUninitialized: false,
-        cookie: { secure: true }
+        saveUninitialized: false
     }));
-});
 
-app.use(passport.initialize());
-app.use(passport.session());
+    app.use(passport.initialize());
+    app.use(passport.session());
+
+    logger.trace('passport init finished!');
+});
 app.use(flash());
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
