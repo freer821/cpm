@@ -14,7 +14,7 @@ function initPassport (passport) {
     });
 
     passport.deserializeUser(function (user, callback) {
-        db.findUser(user, callback)
+        db.findUser({email:user.email}, callback)
     });
 
     passport.use(new LocalStrategy(

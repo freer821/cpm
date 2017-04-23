@@ -30,20 +30,21 @@ const app = express();
 
 // set up connection to mongodb
 db.setup(function (connection) {
+    app.use(cookieParser());
     app.use(session({
         store: new MongoStore({
             mongooseConnection:connection
         }),
         secret: config.session.secret,
         resave: false,
-        saveUninitialized: false
+        saveUninitialized: false,
+        cookie: { secure: true }
     }));
 });
 
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
-app.use(cookieParser());
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
