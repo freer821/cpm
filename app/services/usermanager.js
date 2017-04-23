@@ -104,7 +104,7 @@ const addItem = function (req, res, next) {
     let item = req.body;
     item.status = 'open';
     item.ts = new Date();
-    db.addItem({}, item);
+    db.addItem({email:req.user.email}, item);
     res.redirect('/dashboard');
 };
 
