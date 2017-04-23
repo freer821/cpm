@@ -10,11 +10,11 @@ function initPassport (passport) {
 
 
     passport.serializeUser(function (user, callback) {
-        callback(null, user)
+        callback(null, user);
     });
 
     passport.deserializeUser(function (user, callback) {
-        db.findUser({email:user.email}, callback)
+        db.findUser({email:user.email}, callback);
     });
 
     passport.use(new LocalStrategy(
@@ -32,10 +32,10 @@ function initPassport (passport) {
                 }
                 if (user && password === user.password ) {
                     logger.trace('user logged in ', user );
-                    return done(undefined, user);
+                    return done(null, user);
                 } else {
                     logger.trace('user not logged in ', email );
-                    return done(undefined, false);
+                    return done(null, false);
                 }
             });
         }
