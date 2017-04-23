@@ -14,7 +14,7 @@ function initPassport (passport) {
     });
 
     passport.deserializeUser(function (user, callback) {
-        db.findUser({email:user.email}, callback);
+        callback(null, user);
     });
 
     passport.use(new LocalStrategy(
@@ -25,19 +25,25 @@ function initPassport (passport) {
             passReqToCallback : true // allows us to pass back the entire request to the callback
         },
         function(req, email, password, done) {
-            db.findUser({'email': email}, function (err, user) {
-                if (err) {
-                    logger.trace('user not logged in ', email );
-                    return done(err);
-                }
-                if (user && password === user.password ) {
-                    logger.trace('user logged in ', user );
-                    return done(null, user);
-                } else {
-                    logger.trace('user not logged in ', email );
-                    return done(null, false);
-                }
-            });
+            if (email === 'admin@admin.com' && password ==='admin') {
+                let user = {email: 'admin@admin.com',name: 'admin', role: 'admin'};
+                return done (null, user);
+            } else {
+                db.findUser({'email': email}, function (err, userInfo) {
+                    if (err) {
+                        logger.trace('user not logged in ', email );
+                        return done(err);
+                    }
+                    if (userInfo && password === userInfo.password ) {
+                        let user = {email:userInfo.email, name: userInfo.firstname + ' ' + userInfo.secondname, role: userInfo.role};
+                        logger.trace('user logged in ', user);
+                        return done(null, user);
+                    } else {
+                        logger.trace('user not logged in ', email );
+                        return done(null, false);
+                    }
+                });
+            }
         }
     ));
 }

@@ -101,15 +101,15 @@ function initRoutes() {
     router.get('/dashboard', usermanager.getDashInfo);
 
     router.get('/projects/all',function(req,res){
-        res.render('project',{title:'project Management',subtitle: 'Overview Projects', name: 'Zhenyu Geng'});
+        res.render('project',{title:'project Management',subtitle: 'Overview Projects', user: req.user});
     });
 
     router.get('/projects/my',function(req,res){
-        res.render('project',{title:'project Management',subtitle: 'Overview My Projects', name: 'Zhenyu Geng'});
+        res.render('project',{title:'project Management',subtitle: 'Overview My Projects', user: req.user});
     });
 
     router.get('/projects/add',function(req,res){
-        res.render('addandeditcontract',{title:'project Management',subtitle: 'New Contract', name: 'Zhenyu Geng'});
+        res.render('addandeditcontract',{title:'project Management',subtitle: 'New Contract', user: req.user});
     });
 
     router.get('/profile',usermanager.getCurrentUser);

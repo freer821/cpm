@@ -58,9 +58,9 @@ const getAllUser = function(req, res, next) {
        if(err) {
            logger.error('error to find users in db', err.message);
        } else if (users) {
-           res.render('useroverview', {title:'User Management', subtitle: 'Overview Users', name: 'Zhenyu Geng', users:users});
+           res.render('useroverview', {title:'User Management', subtitle: 'Overview Users', user: req.user, users:users});
        } else {
-           res.render('useroverview', {title:'User Management', subtitle: 'Overview Users', name: 'Zhenyu Geng', users:[]});
+           res.render('useroverview', {title:'User Management', subtitle: 'Overview Users', user: req.user, users:[]});
        }
     });
 };
@@ -77,7 +77,7 @@ const editUser = function(req, res, next) {
             if(err) {
                 logger.error('error to find user in db', err.message);
             } else {
-                res.render('addandedituser', {title:'User Management',action: '/users/edit', subtitle:'Edit User', name: 'Zhenyu Geng',user:user});
+                res.render('addandedituser', {title:'User Management',action: '/users/edit', subtitle:'Edit User', user: req.user ,user:user});
             }
         });
     } else {
@@ -88,13 +88,12 @@ const editUser = function(req, res, next) {
 };
 
 const getCurrentUser = function(req, res, next) {
-    let user = req.user;
     if (req.method === "GET") {
-        db.findUser({email:user.email}, function (err, user) {
+        db.findUser({email:req.user.email}, function (err, user) {
             if(err) {
                 logger.error('error to find user in db', err.message);
             } else {
-                res.render('profile',{title:'Profile', name: 'Zhenyu Geng', user:user});
+                res.render('profile',{title:'Profile', user:req.user, currentUser:user});
             }
         });        
     }
@@ -113,9 +112,9 @@ const getDashInfo = function (req, res, next) {
     db.getItems({email:user.email}, function (err, items) {
         if(err) {
             logger.error('error to find user in db', err.message);
-            res.render('dashboard',{title:'Main',name: 'Zhenyu Geng'});
+            res.render('dashboard',{title:'Main', user:user});
         } else {
-            res.render('dashboard',{title:'Main',name: 'Zhenyu Geng', items: items});
+            res.render('dashboard',{title:'Main', user:user , items: items});
         }
     });
 };

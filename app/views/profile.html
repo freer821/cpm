@@ -4,19 +4,19 @@
 
   <div class="item">
     <div class="item-bg">
-      <img src="{{user.icon}}" class="blur opacity-3">
+      <img src="{{currentUser.icon}}" class="blur opacity-3">
     </div>
     <div class="p-a-md">
       <div class="row m-t">
         <div class="col-sm-7">
           <a href class="pull-left m-r-md">
             <span class="avatar w-96">
-              <img src="{{user.icon}}">
+              <img src="{{currentUser.icon}}">
               <i class="on b-white"></i>
             </span>
           </a>
           <div class="clear m-b">
-            <h3 class="m-0 m-b-xs">{{name}}</h3>
+            <h3 class="m-0 m-b-xs">{{user.name}}</h3>
             <p class="text-muted"><span class="m-r">UX/UI Director</span> <small><i class="fa fa-map-marker m-r-xs"></i>London, UK</small></p>
           </div>
         </div>
@@ -50,47 +50,47 @@
               <div class="row m-b">
                 <div class="col-xs-6">
                   <small class="text-muted">Initialen</small>
-                  <input style="display: none;" type="text" class="form-control" name="shortname" value="{{user.shortname}}">
-                  <div class="_500">{{user.shortname}}</div>
+                  <input style="display: none;" type="text" class="form-control" name="shortname" value="{{currentUser.shortname}}">
+                  <div class="_500">{{currentUser.shortname}}</div>
                 </div>
                 <div class="col-xs-6">
                   <small class="text-muted">Email</small>
-                  <input style="display: none;" type="text" class="form-control" name="email" value="{{user.email}}">
-                  <div class="_500">{{user.email}}</div>
+                  <input style="display: none;" type="text" class="form-control" name="email" value="{{currentUser.email}}">
+                  <div class="_500">{{currentUser.email}}</div>
                 </div>
               </div>
 
               <div class="row m-b">
                 <div class="col-xs-6">
                   <small class="text-muted">Position</small>
-                  <input style="display: none;" type="text" class="form-control" name="position" value="{{user.position}}">
-                  <div class="_500">{{user.position}}</div>
+                  <input style="display: none;" type="text" class="form-control" name="position" value="{{currentUser.position}}">
+                  <div class="_500">{{currentUser.position}}</div>
                 </div>
                 <div class="col-xs-6">
                   <small class="text-muted">Telefon</small>
-                  <input style="display: none;" type="text" class="form-control" name="tel" value="{{user.tel}}">
-                  <div class="_500">{{user.tel}}</div>
+                  <input style="display: none;" type="text" class="form-control" name="tel" value="{{currentUser.tel}}">
+                  <div class="_500">{{currentUser.tel}}</div>
                 </div>
               </div>
 
               <div class="row m-b">
                 <div class="col-xs-6">
                   <small class="text-muted">Abteilung</small>
-                  <input style="display: none;" type="text" class="form-control" name="department" value="{{user.department}}">
-                  <div class="_500">{{user.department}}</div>
+                  <input style="display: none;" type="text" class="form-control" name="department" value="{{currentUser.department}}">
+                  <div class="_500">{{currentUser.department}}</div>
                 </div>
                 <div class="col-xs-6">
                   <small class="text-muted">Firma</small>
-                  <input style="display: none;" type="text" class="form-control" name="company" value="{{user.company}}">
-                  <div class="_500">{{user.company}}</div>
+                  <input style="display: none;" type="text" class="form-control" name="company" value="{{currentUser.company}}">
+                  <div class="_500">{{currentUser.company}}</div>
                 </div>
               </div>
 
               <div class="row m-b">
                 <div class="col-xs-6">
                   <small class="text-muted">Strasse</small>
-                  <input style="display: none;" type="text" class="form-control" name="addr" value="{{user.addr}}">
-                  <div class="_500">{{user.addr}}</div>
+                  <input style="display: none;" type="text" class="form-control" name="addr" value="{{currentUser.addr}}">
+                  <div class="_500">{{currentUser.addr}}</div>
                 </div>
                 <div class="col-xs-6">
                   <small class="text-muted">Ort</small>
@@ -99,13 +99,13 @@
                 </div>
                 <div class="col-xs-6">
                   <small class="text-muted">PLZ</small>
-                  <input style="display: none;" type="text" class="form-control" name="plz" value="{{user.plz}}">
-                  <div class="_500">{{user.plz}}</div>
+                  <input style="display: none;" type="text" class="form-control" name="plz" value="{{currentUser.plz}}">
+                  <div class="_500">{{currentUser.plz}}</div>
                 </div>
                 <div class="col-xs-6">
                   <small class="text-muted">Stadt</small>
-                  <input style="display: none;" type="text" class="form-control" name="city" value="{{user.city}}">
-                  <div class="_500">{{user.city}}</div>
+                  <input style="display: none;" type="text" class="form-control" name="city" value="{{currentUser.city}}">
+                  <div class="_500">{{currentUser.city}}</div>
                 </div>
                 <div class="col-xs-6">
                   <small class="text-muted">Bundesland</small>
