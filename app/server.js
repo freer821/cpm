@@ -96,7 +96,7 @@ function initRoutes() {
         }
     });
 
-    router.get('/dashboard', usermanager.getAllInfos);
+    router.get('/dashboard', usermanager.getDashInfo);
 
     router.get('/projects/all',function(req,res){
         res.render('project',{title:'project Management',subtitle: 'Overview Projects', name: 'Zhenyu Geng'});

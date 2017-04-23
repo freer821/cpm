@@ -108,7 +108,7 @@ const addItem = function (req, res, next) {
     res.redirect('/dashboard');
 };
 
-const getAllInfos = function (req, res, next) {
+const getDashInfo = function (req, res, next) {
     let user = req.user;
     db.getItems({email:user.email}, function (err, items) {
         if(err) {
@@ -128,5 +128,5 @@ module.exports = {
     editUser:editUser,
     getCurrentUser: getCurrentUser,
     addItem: addItem,
-    getAllInfos: getAllInfos
+    getDashInfo: getDashInfo
 };
