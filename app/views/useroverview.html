@@ -195,6 +195,16 @@
               </div>
             </div>
           </div>
+          <div class="row">
+            <div class="col-xs-18 col-md-12">
+              <div class="form-group row">
+                <label for="tel" class="col-sm-3 form-control-label">Cost Code</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" id="cost_code" placeholder="Cost Code" readonly>
+                </div>
+              </div>
+            </div>
+          </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn danger p-x-md" data-dismiss="modal">OK</button>
@@ -239,6 +249,7 @@
     $("#tel").val(user.tel);
     $("#mobil").val(user.mobil);
     $("#role").val(user.role);
+    $("#cost_code").val(user.cost_code);
   });
 
   $('#del-user').on('show.bs.modal', function(e) {

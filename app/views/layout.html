@@ -57,7 +57,7 @@
       </div>
       <div class="hide-scroll" data-flex>
           <nav class="scroll nav-light">
-            
+              {% if user.role === 'user' %}
               <ul class="nav" ui-nav>
                 <li class="nav-header hidden-folded">
                   <small class="text-muted">User Panel</small>
@@ -105,36 +105,34 @@
                   </ul>
                 </li>            
               </ul>
+              {% endif %}
+              {% if user.role === 'admin' %}
               <ul class="nav" ui-nav>
                 <li class="nav-header hidden-folded">
                   <small class="text-muted">Admin Panel</small>
-                </li>     
-				        <li>
-                  <a>
-                    <span class="nav-caret">
-                      <i class="fa fa-caret-down"></i>
-                    </span>
+                </li>   
+                <li>
+                  <a href="/users" >
                     <span class="nav-icon">
                       <i class="material-icons">&#xe429;
                         <span ui-include="'/assets/images/i_4.svg'"></span>
                       </i>
                     </span>
-                    <span class="nav-text">Admin</span>
+                    <span class="nav-text">User Management</span>
                   </a>
-                  <ul class="nav-sub nav-mega nav-mega-3">
-                    <li>
-                      <a href="/users" >
-                        <span class="nav-text">User Management</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="/" >
-                        <span class="nav-text">Report</span>
-                      </a>
-                    </li>
-                  </ul>
                 </li>
 
+                <li>
+                  <a href="/users" >
+                    <span class="nav-icon">
+                      <i class="material-icons">&#xe1b8;
+                        <span ui-include="'/assets/images/i_8.svg'"></span>
+                      </i>
+                    </span>
+                    <span class="nav-text">Report</span>
+                  </a>
+                </li>
+                {% endif %}
               </ul>
           </nav>
       </div>

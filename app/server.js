@@ -83,11 +83,24 @@ function initRoutes() {
         res.render('login');
     });
 
-    router.post('/login',passport.authenticate('local',{
-        successRedirect : '/dashboard', // redirect to the secure profile section
-        failureRedirect : '/', // redirect back to the signup page if there is an error
-        failureFlash : true // allow flash messages
-    }));
+    router.post('/login',function(req, res, next) {
+        passport.authenticate('local',function(err, user, info) {
+            if (err) { return next(err); }
+            if (user) {
+                req.logIn(user, function(err) {
+                    if (err) { return next(err); }
+                    // Redirect if it succeeds
+                    if (user.role === 'admin') {
+                        return res.redirect('/users');
+                    } else {
+                        return res.redirect('/dashboard');
+                    }
+                });
+            } else {
+                return res.redirect('/');
+            }
+        })(req, res, next)
+    });
 
     router.use(function(req, res, next) {
 

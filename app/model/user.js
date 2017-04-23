@@ -30,10 +30,7 @@ const userSchema = new Schema({
             ts: Date
         }
     ],
-    kst:[{
-        nr: Number,
-        comment: String
-    }]
+    cost_code:[String]
 },{ versionKey: false });
 
 module.exports = userSchema;

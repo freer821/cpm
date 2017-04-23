@@ -10,7 +10,7 @@ const config = require('../common/config');
 const adduser = function (req, res, next) {
 
     if (req.method === "GET") {
-        res.render('addandedituser', {title:'User Management', action: '/users/add', subtitle:'Add User', name: 'Zhenyu Geng'});
+        res.render('addandedituser', {title:'User Management', action: '/users/add', subtitle:'Add User', user: req.user});
     } else {
         let new_user = req.body;
         db.findUser({'email': new_user.email}, function (err, user) {
@@ -29,6 +29,10 @@ const adduser = function (req, res, next) {
 
 function saveUser(req,user) {
     user.ts = new Date();
+    if (user.cost_code) {
+        let cost_code = user.cost_code;
+        user.cost_code = cost_code.toString().split(",");
+    }
     if (req.files.icon) {
         let iconfile = req.files.icon;
         mkdirp(config.upload.icon+'/'+user.email, function(err) {
@@ -77,7 +81,7 @@ const editUser = function(req, res, next) {
             if(err) {
                 logger.error('error to find user in db', err.message);
             } else {
-                res.render('addandedituser', {title:'User Management',action: '/users/edit', subtitle:'Edit User', user: req.user ,user:user});
+                res.render('addandedituser', {title:'User Management',action: '/users/edit', subtitle:'Edit User', user: req.user ,currentUser:user});
             }
         });
     } else {
