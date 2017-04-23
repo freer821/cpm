@@ -4,9 +4,9 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const companySchema = new Schema({
+const depSchema = new Schema({
     name: String,
-    department: [String]
+    company: String
 },{ versionKey: false });
 
-module.exports = companySchema;
+module.exports = depSchema;

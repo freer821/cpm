@@ -4,6 +4,7 @@ default:
   mongodb:
     connection: 'mongodb://192.168.99.100:27017/cpm'
     collection_user: 'user'
+    collection_department: 'department'
   session:
     secret: 'cpmsecret'
   logging:

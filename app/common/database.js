@@ -7,9 +7,11 @@ const logger = require('./logger');
 const config = require('./config');
 const moment = require('moment');
 const userSchema = require('./../model/user');
+const depSchema = require('./../model/department');
 
 var cpmDB;
 var User;
+var Department;
 
 const setup = function (callback) {
     connectcpmDB();
@@ -42,6 +44,7 @@ function connectcpmDB() {
 
 function initCPMSchema() {
     User = cpmDB.model('user', userSchema, config.mongodb.collection_user);
+    Department = cpmDB.model('dep', depSchema, config.mongodb.collection_department);
 }
 
 const findUser = function (condition, callback) {
@@ -130,6 +133,39 @@ const getItems = function (condition, callback) {
     });
 };
 
+const findDeps = function (condition, callback) {
+    Department.find(condition, function (err, deps) {
+        if (err) {
+            logger.error('error to find deps', err.message);
+            callback(err)
+        } else {
+            callback(undefined, deps);
+        }
+    });
+};
+
+
+const saveDep = function (dep) {
+    Department.create(dep, function (err, dept) {
+        if (err) {
+            logger.error('Failed to save dep in MongoDB', dep,err);
+        } else {
+            logger.trace('added dep in MongoDB', dep);
+        }
+        // saved!
+    });
+};
+
+const delDep = function (id) {
+    Department.findOneAndRemove({'_id': id}, function (err, user) {
+        if (err) {
+            logger.error('error to del dep', err.message);
+        }
+        // saved!
+    })
+};
+
+
 
 module.exports = {
     setup: setup,
@@ -138,5 +174,8 @@ module.exports = {
     findUsers: findUsers,
     delUser:delUser,
     addItem:addItem,
-    getItems: getItems
+    getItems: getItems,
+    findDeps:findDeps,
+    saveDep:saveDep,
+    delDep:delDep
 };

@@ -21,7 +21,7 @@ const auth = require('./common/authentication');
 
 // services
 const usermanager = require('./services/usermanager');
-
+const depmanager = require('./services/depmanager');
 
 // init Passwort System
 auth.initPassport(passport);
@@ -138,6 +138,12 @@ function initRoutes() {
     router.post('/users/edit',usermanager.editUser);
 
     router.post('/additem',usermanager.addItem);
+
+    router.get('/deps',depmanager.getAllDeps);
+    router.post('/deps/add',depmanager.addDep);
+    router.get('/deps/del/:id',depmanager.delDep);
+
+
     router.get('/logout', function (req, res){
         req.session.destroy(function (err) {
             res.redirect('/'); //Inside a callback… bulletproof!
