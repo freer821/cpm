@@ -9,15 +9,14 @@
     <div class="p-a-md">
       <div class="row m-t">
         <div class="col-sm-7">
-          <a href class="pull-left m-r-md">
+          <a class="pull-left m-r-md">
             <span class="avatar w-96">
               <img src="{{currentUser.icon}}">
-              <i class="on b-white"></i>
+              <i class="on b-white"></i></a>
             </span>
           </a>
           <div class="clear m-b">
             <h3 class="m-0 m-b-xs">{{user.name}}</h3>
-            <p class="text-muted"><span class="m-r">UX/UI Director</span> <small><i class="fa fa-map-marker m-r-xs"></i>London, UK</small></p>
           </div>
         </div>
         <div class="col-sm-5">
@@ -34,7 +33,7 @@
         <div class="p-y-md clearfix nav-active-primary">
           <ul class="nav nav-pills nav-sm">
             <li class="nav-item active">
-              <a class="nav-link" id="update" href data-toggle="tab" data-target="#tab_1">Update</a>
+              <a class="nav-link" id="update" href="#">Update</a>
             </li>
           </ul>
         </div>
@@ -55,7 +54,7 @@
                 </div>
                 <div class="col-xs-6">
                   <small class="text-muted">Email</small>
-                  <input style="display: none;" type="text" class="form-control" name="email" value="{{currentUser.email}}">
+                  <input style="display: none;" type="text" class="form-control" name="email" value="{{currentUser.email}}" readonly="true">
                   <div class="_500">{{currentUser.email}}</div>
                 </div>
               </div>
@@ -76,12 +75,12 @@
               <div class="row m-b">
                 <div class="col-xs-6">
                   <small class="text-muted">Abteilung</small>
-                  <input style="display: none;" type="text" class="form-control" name="department" value="{{currentUser.department}}">
+                  <input style="display: none;" type="text" class="form-control" name="department" value="{{currentUser.department}}" readonly="true">
                   <div class="_500">{{currentUser.department}}</div>
                 </div>
                 <div class="col-xs-6">
                   <small class="text-muted">Firma</small>
-                  <input style="display: none;" type="text" class="form-control" name="company" value="{{currentUser.company}}">
+                  <input style="display: none;" type="text" class="form-control" name="company" value="{{currentUser.company}}" readonly="true">
                   <div class="_500">{{currentUser.company}}</div>
                 </div>
               </div>
@@ -93,11 +92,6 @@
                   <div class="_500">{{currentUser.addr}}</div>
                 </div>
                 <div class="col-xs-6">
-                  <small class="text-muted">Ort</small>
-                  <input style="display: none;" type="text" class="form-control" name="ort" value="Bockenheim">
-                  <div class="_500">Bockenheim</div>
-                </div>
-                <div class="col-xs-6">
                   <small class="text-muted">PLZ</small>
                   <input style="display: none;" type="text" class="form-control" name="plz" value="{{currentUser.plz}}">
                   <div class="_500">{{currentUser.plz}}</div>
@@ -107,21 +101,25 @@
                   <input style="display: none;" type="text" class="form-control" name="city" value="{{currentUser.city}}">
                   <div class="_500">{{currentUser.city}}</div>
                 </div>
+              </div>
+              <div class="row m-b">
+                <div id="iconDiv" style="display: none;" class="col-xs-6">
+                  <small class="text-muted">Icon</small>
+                  <input style="display: none;" type="file" name="icon" class="form-control"></input>
+                </div>                 
+              </div>                
+              <div class="row m-b">
                 <div class="col-xs-6">
-                  <small class="text-muted">Bundesland</small>
-                  <input style="display: none;" type="text" class="form-control" name="bundesland" value="Hessen">
-                  <div class="_500">Hessen</div>
-                </div>
-                <div class="col-xs-6">
-                  <small class="text-muted">Land/Region</small>
-                  <input style="display: none;" type="text" class="form-control" name="Region" value="Deutschland">
-                  <div class="_500">Deutschland</div>
-                </div>
-              </div>      
-              <div>
-                <small class="text-muted">Bio</small>
-                <textarea id="bio_textarea" class="form-control" rows="2" style="display: none;"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id neque quam. Aliquam sollicitudin venenatis ipsum ac feugiat. Vestibulum ullamcorper sodales nisi nec condimentum. Mauris convallis mauris at pellentesque volutpat. Phasellus at ultricies neque, quis malesuada augue.</textarea>
-                <div id="bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id neque quam. Aliquam sollicitudin venenatis ipsum ac feugiat. Vestibulum ullamcorper sodales nisi nec condimentum. Mauris convallis mauris at pellentesque volutpat. Phasellus at ultricies neque, quis malesuada augue.</div>
+                  <small class="text-muted">Cost Code</small>
+                  <input style="display: none;" type="text" class="form-control" name="cost_code" value="{{currentUser.cost_code}}" readonly="true">
+                  <div class="_500">{{currentUser.cost_code}}</div>
+                </div>                 
+              </div>              
+              <div class="row m-b">
+                <div class="col-xs-6" id="editButtons" style="display: none;">
+                  <a href="#" id="cancel" type="button" class="btn white">Cancel</a>
+                  <button style="cursor: pointer" type="submit" class="btn info">Submit</button>
+                </div> 
               </div>
             </form>  
           </div>
@@ -131,12 +129,39 @@
   </div>
 
 <!-- ############ PAGE END-->
+<div id="uploadUserHeadIcon" class="modal" data-backdrop="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <form ui-jp="parsley" id="upform" action="/user/icon/edit" method="post" encType="multipart/form-data">
+        <div class="modal-header">
+          <h5 class="modal-title">Upload User Head Icon</h5>
+        </div>
+        <div class="modal-body text-center p-lg">
+          <input type="file" name="icon" class="form-control"/>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn dark-white p-x-md" data-dismiss="modal">Cancel</button>
+          <input type="submit" value="SUBMIT" class="btn info"/>
+        </div>
+      </form>
+    </div><!-- /.modal-content -->
+  </div>
+</div>
+
 <script type="text/javascript">
 $('#update').on('click', function(e) {
+  changeEditState();
+});
+
+$('#cancel').on('click', function(e) {
+  changeEditState();
+});
+
+function changeEditState(){
   $('.col-xs-6 input').toggle();
   $('.col-xs-6 div').toggle();
-  $('#bio_textarea').toggle();
-  $('#bio').toggle();
-});
+  $('#editButtons').toggle();
+  $('#iconDiv').toggle();
+}
 </script>
 {% endblock %}

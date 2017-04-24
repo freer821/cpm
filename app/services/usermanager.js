@@ -33,28 +33,33 @@ function saveUser(req,user) {
         let cost_code = user.cost_code;
         user.cost_code = cost_code.toString().split(",");
     }
-    if (req.files.icon) {
-        let iconfile = req.files.icon;
-        mkdirp(config.upload.icon+'/'+user.email, function(err) {
-            if (err) {
-                logger.error('failed to create folder', err.message);
-                db.saveUser(user);
-            } else {
-                iconfile.mv(config.upload.icon+'/'+user.email+'/'+iconfile.name, function (err) {
-                    if (err) {
-                        logger.error('failed to save icon ', err.message);
-                        db.saveUser(user);
-                        return;
-                    }
-                    user.icon = '/upload'+'/'+user.email+'/'+iconfile.name;
-                    db.saveUser(user);
-                });
-            }
-        });
-    } else {
-        db.saveUser(user);
-    }
+    db.saveUser(user);
     req.flash('message', 'user saved!');
+}
+
+function saveUserHeadIcon(req,user){
+    if (!req.files) return false;
+    if (!req.files.icon) return false;
+
+    let iconfile = req.files.icon;
+
+    mkdirp(config.upload.icon+'/'+user.email, function(err) {
+        if (err) {
+            logger.error('failed to create folder', err.message);
+            return false;
+        }
+
+        iconfile.mv(config.upload.icon+'/'+user.email+'/'+iconfile.name, function (err) {
+            if (err) {
+                logger.error('failed to save icon ', err.message);
+                return false;
+            }
+            user.icon = '/upload'+'/'+user.email+'/'+iconfile.name;
+            db.saveUser(user);
+            res.redirect('/profile');
+            return true;
+        });
+    });
 }
 
 const getAllUser = function(req, res, next) {
@@ -97,9 +102,24 @@ const getCurrentUser = function(req, res, next) {
             if(err) {
                 logger.error('error to find user in db', err.message);
             } else {
-                res.render('profile',{title:'Profile', user:req.user, currentUser:user});
+                res.render('profile',{title:'Profile', action: '/profile/edit', user:req.user, currentUser:user});
             }
         });        
+    }
+};
+
+const updateCurrentUserProfile = function(req, res, next) {
+    if (req.method === "POST") {
+        let user = req.body;
+        saveUser(req,user);
+        //if (saveUserHeadIcon(req,req.user) == false)
+        res.redirect('/profile');
+    }
+};
+
+const updateCurrentUserHeadIcon = function(req, res, next) {
+    if (req.method === "POST") {
+        saveUserHeadIcon(req,req.user);
     }
 };
 
@@ -130,6 +150,8 @@ module.exports = {
     delUser:delUser,
     editUser:editUser,
     getCurrentUser: getCurrentUser,
+    updateCurrentUserProfile: updateCurrentUserProfile,
+    updateCurrentUserHeadIcon: updateCurrentUserHeadIcon,
     addItem: addItem,
     getDashInfo: getDashInfo
 };

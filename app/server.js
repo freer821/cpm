@@ -126,6 +126,8 @@ function initRoutes() {
     });
 
     router.get('/profile',usermanager.getCurrentUser);
+    router.post('/profile/edit',usermanager.updateCurrentUserProfile);
+    router.post('/user/icon/edit',usermanager.updateCurrentUserHeadIcon);
 
     router.get('/users',usermanager.getAllUser);
 
