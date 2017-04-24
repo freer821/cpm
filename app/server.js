@@ -22,6 +22,7 @@ const auth = require('./common/authentication');
 // services
 const usermanager = require('./services/usermanager');
 const depmanager = require('./services/depmanager');
+const itemmanager = require('./services/itemmanager');
 
 // init Passwort System
 auth.initPassport(passport);
@@ -139,7 +140,7 @@ function initRoutes() {
     router.get('/users/edit',usermanager.editUser);
     router.post('/users/edit',usermanager.editUser);
 
-    router.post('/additem',usermanager.addItem);
+    router.post('/items/add',itemmanager.addItem);
 
     router.get('/deps',depmanager.getAllDeps);
     router.post('/deps/add',depmanager.addDep);

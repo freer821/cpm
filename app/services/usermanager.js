@@ -123,17 +123,9 @@ const updateCurrentUserHeadIcon = function(req, res, next) {
     }
 };
 
-const addItem = function (req, res, next) {
-    let item = req.body;
-    item.status = 'open';
-    item.ts = new Date();
-    db.addItem({email:req.user.email}, item);
-    res.redirect('/dashboard');
-};
-
 const getDashInfo = function (req, res, next) {
     let user = req.user;
-    db.getItems({email:user.email}, function (err, items) {
+    db.getItems({user_email:user.email}, function (err, items) {
         if(err) {
             logger.error('error to find user in db', err.message);
             res.render('dashboard',{title:'Main', user:user});
@@ -152,6 +144,5 @@ module.exports = {
     getCurrentUser: getCurrentUser,
     updateCurrentUserProfile: updateCurrentUserProfile,
     updateCurrentUserHeadIcon: updateCurrentUserHeadIcon,
-    addItem: addItem,
     getDashInfo: getDashInfo
 };

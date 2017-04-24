@@ -24,10 +24,10 @@ const userSchema = new Schema({
     ts: Date,
     items: [
         {
-            content: String,
+            title: String,
+            note: [String],
             priority: {type: String, enum: ['Emergency', 'Urgent', 'Standard', 'Normal']},
-            status: {type: String, enum: ['open', 'closed']},
-            ts: Date
+            status: {type: String, enum: ['open', 'pause', 'closed']},
         }
     ],
     cost_code:[String]

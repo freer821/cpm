@@ -8,10 +8,12 @@ const config = require('./config');
 const moment = require('moment');
 const userSchema = require('./../model/user');
 const depSchema = require('./../model/department');
+const itemSchema = require('./../model/item');
 
 var cpmDB;
 var User;
 var Department;
+var Item;
 
 const setup = function (callback) {
     connectcpmDB();
@@ -45,6 +47,7 @@ function connectcpmDB() {
 function initCPMSchema() {
     User = cpmDB.model('user', userSchema, config.mongodb.collection_user);
     Department = cpmDB.model('dep', depSchema, config.mongodb.collection_department);
+    Item = cpmDB.model('item', itemSchema, config.mongodb.collection_item);
 }
 
 const findUser = function (condition, callback) {
@@ -89,22 +92,6 @@ const saveUser = function (user) {
     );
 };
 
-const addItem = function (condition, item) {
-    User.update(condition, // Query
-        { // Updates
-            $push: {'items': item}
-        },
-        {upsert: true},
-        function (err) {
-            if (err) {
-                logger.error('Failed to add Item in MongoDB', item,err);
-            } else {
-                logger.trace('added Item in MongoDB', item);
-            }
-        }
-    );
-};
-
 
 function getShortname(frt,sec) {
     let first = frt? frt.substring(0,1):'';
@@ -120,17 +107,6 @@ const delUser = function (id) {
         }
         // saved!
     })
-};
-
-const getItems = function (condition, callback) {
-    User.findOne(condition, function (err, user) {
-        if (err) {
-            logger.error('error to find user', err.message);
-            callback(err)
-        } else {
-            callback(undefined, user.items);
-        }
-    });
 };
 
 const findDeps = function (condition, callback) {
@@ -164,6 +140,45 @@ const delDep = function (id) {
         // saved!
     })
 };
+
+const addItem = function (item) {
+    Item.create(item, function (err) {
+        if (err) {
+            logger.error('Failed to add Item in MongoDB', item,err);
+        } else {
+            logger.trace('added Item in MongoDB', item);
+        }
+    });
+};
+
+
+const editItem = function (condition, item) {
+    Item.update(condition, // Query
+        { // Updates
+            $set: item
+        },
+        {upsert: true},
+        function (err) {
+            if (err) {
+                logger.error('Failed to Update Item in MongoDB', item,err);
+            } else {
+                logger.trace('updated Item in MongoDB', item);
+            }
+        }
+    );
+};
+
+const getItems = function (condition, callback) {
+    Item.find(condition, function (err, items) {
+        if (err) {
+            logger.error('error to find items', err.message);
+            callback(err)
+        } else {
+            callback(undefined, items);
+        }
+    });
+};
+
 
 
 

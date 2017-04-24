@@ -146,10 +146,18 @@
 		      </div>
 		      <div class="box-tool">
 		        <ul class="nav">
-		          <li class="nav-item inline dropdown">
+		          <li class="nav-item inline">
 		            <div class="input-group input-group-sm">
 				        <input type="text" id="filter" class="form-control" placeholder="Search">
 			        </div>
+		          </li>
+		          <li class="nav-item inline dropdown">
+					<a class="nav-link" data-toggle="dropdown">
+		              <i class="material-icons md-18">&#xe5d4;</i>
+		            </a>
+		            <div class="dropdown-menu dropdown-menu-scale pull-right">
+		              <a href="#" data-toggle="modal" data-target="#add-item" class="dropdown-item">Add new Item</a>
+		            </div>
 		          </li>
 		        </ul>
 		      </div>
@@ -164,13 +172,12 @@
 		          </thead>
 		          <tbody>
 		            {% for item in items %}
-		            {% set editurl = '/items/edit?_id='+item.status %}
 		              <tr>
-			            <td>{{item.content}}</td>
+			            <td>{{item.title}}</td>
 			            <td>{{item.priority}}</td>
 			            <td>{{item.status}}</td>
 		                <td>
-		                  <a href="{{editurl}}"><i class="material-icons md-24">&#xe3c9;</i></a>
+		                  <a href="#" data-toggle="modal" data-target="#edit-item"><i class="material-icons md-24">&#xe3c9;</i></a>
 		                </td>
 		              </tr>
 		            {% endfor %}           
@@ -191,15 +198,15 @@
 <div id="add-item" class="modal" data-backdrop="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-    <form id="form" action="/additem" method="post" >
+    <form id="form" action="/items/add" method="post" >
       <div class="modal-header">
         <h5 class="modal-title">New Item</h5>
       </div>
       <div class="modal-body">
       	<div class="form-group row">
-		    <label class="col-sm-2 form-control-label">Content</label>
+		    <label class="col-sm-2 form-control-label">Title</label>
 		    <div class="col-sm-10">
-			    <textarea class="form-control" rows="5" name="content"></textarea>
+			    <input type="text" class="form-control" name="title"></textarea>
 		    </div>
 		</div>
         <div class="form-group row">
@@ -222,6 +229,32 @@
     </div><!-- /.modal-content -->
   </div>
 </div>
+
+<script type="text/javascript">
+  //triggered when modal is about to be shown
+  $('#edit-item').on('show.bs.modal', function(e) {
+    var user = $(e.relatedTarget).data('user');
+    $("#firstname").val(user.firstname);
+    $("#secondname").val(user.secondname);
+    $("#shortname").val(user.shortname);
+    $("#position").val(user.position);
+    $("#department").val(user.department);
+    $("#company").val(user.company);
+    $("#addr").val(user.addr);
+    $("#plz").val(user.plz);
+    $("#city").val(user.city);
+    $("#email").val(user.email);
+    $("#tel").val(user.tel);
+    $("#mobil").val(user.mobil);
+    $("#role").val(user.role);
+    $("#cost_code").val(user.cost_code);
+  });
+
+  $('#del-user').on('show.bs.modal', function(e) {
+      $("#delusername").html($(e.relatedTarget).data('user_name'));
+      $(this).find('.danger').attr('href', $(e.relatedTarget).data('href'));
+  });
+</script>
 
 <!-- ############ PAGE END-->
 {% endblock %}
