@@ -37,7 +37,7 @@ function saveUser(req,user) {
     req.flash('message', 'user saved!');
 }
 
-function saveUserHeadIcon(req,user){
+function saveUserHeadIcon(req,res,user){
     if (!req.files) return false;
     if (!req.files.icon) return false;
 
@@ -57,6 +57,7 @@ function saveUserHeadIcon(req,user){
             user.icon = '/upload'+'/'+user.email+'/'+iconfile.name;
             db.saveUser(user);
             res.redirect('/profile');
+            logger.trace('11111111111111');
             return true;
         });
     });
@@ -112,14 +113,14 @@ const updateCurrentUserProfile = function(req, res, next) {
     if (req.method === "POST") {
         let user = req.body;
         saveUser(req,user);
-        //if (saveUserHeadIcon(req,req.user) == false)
-        res.redirect('/profile');
+        saveUserHeadIcon(req,res,req.user);
+        //res.redirect('/profile');
     }
 };
 
 const updateCurrentUserHeadIcon = function(req, res, next) {
     if (req.method === "POST") {
-        saveUserHeadIcon(req,req.user);
+        saveUserHeadIcon(req,res,req.user);
     }
 };
 
