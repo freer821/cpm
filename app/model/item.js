@@ -9,7 +9,7 @@ const itemSchema = new Schema({
     title: String,
     note: [String],
     priority: {type: String, enum: ['Emergency', 'Urgent', 'Standard', 'Normal']},
-    status: {type: String, enum: ['open', 'pause', 'closed']},
+    status: {type: String, enum: ['Open', 'Pause', 'Closed']},
     ts: Date
 },{ versionKey: false });
 
