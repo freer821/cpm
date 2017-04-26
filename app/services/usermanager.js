@@ -121,7 +121,9 @@ const getCurrentUser = function(req, res, next) {
             if(err) {
                 logger.error('error to find user in db', err.message);
             } else {
-                res.render('profile',{title:'Profile', action: '/profile/edit', user:user});
+                // user: session user, only 4 attributes
+                // currentUser: all user attributes
+                res.render('profile',{title:'Profile', action: '/profile/edit', user:req.user, currentUser:user});
             }
         });        
     }
@@ -151,9 +153,9 @@ const getDashInfo = function (req, res, next) {
             db.getItems({user_email:req.user.email}, function (err, items) {
                 if(err) {
                     logger.error('error to find user in db', err.message);
-                    res.render('dashboard',{title:'Main', user:user});
+                    res.render('dashboard',{title:'Main', user:req.user});
                 } else {
-                    res.render('dashboard',{title:'Main', user:user , items: items});
+                    res.render('dashboard',{title:'Main', user:req.user , items: items});
                 }
             });            
         }
