@@ -64,7 +64,7 @@
                 </li>
                 
                 <li>
-                  <a href="/dashboard" >
+                  <a href="/dashboard">
                     <span class="nav-icon">
                       <i class="material-icons">&#xe3fc;
                         <span ui-include="'/assets/images/i_0.svg'"></span>
@@ -139,7 +139,7 @@
       </div>
       <div class="b-t">
         <div class="nav-fold">
-        	<a href="/profile">
+        	<a {% if user.role != 'admin' %}href="/profile"{% endif %}>
         	    <span class="pull-left">
         	      <img src="/assets/images/a0.jpg" alt="." class="w-40 img-circle">
         	    </span>

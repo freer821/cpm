@@ -10,7 +10,17 @@ const config = require('../common/config');
 const adduser = function (req, res, next) {
 
     if (req.method === "GET") {
-        res.render('addandedituser', {title:'User Management', action: '/users/add', subtitle:'Add User', user: req.user});
+        db.findDeps({}, function (err, deps) {
+            if (deps) {
+                res.render('addandedituser', {title:'User Management', action: '/users/add', subtitle:'Add User', user:req.user, deps:deps});
+                return;
+            }
+            if(err) {
+                logger.error('error to find deps in db', err.message);
+            } 
+            res.render('addandedituser', {title:'User Management', action: '/users/add', subtitle:'Add User', user: req.user, deps:[]});
+            return;
+        });
     } else {
         let new_user = req.body;
         db.findUser({'email': new_user.email}, function (err, user) {
@@ -81,12 +91,21 @@ const delUser = function(req, res, next) {
 
 const editUser = function(req, res, next) {
     if (req.method === "GET") {
-
         db.findUser({'email': req.query.email}, function (err, user) {
             if(err) {
                 logger.error('error to find user in db', err.message);
             } else {
-                res.render('addandedituser', {title:'User Management',action: '/users/edit', subtitle:'Edit User', user: req.user ,currentUser:user});
+                db.findDeps({}, function (err, deps) {
+                    if (deps) {
+                        res.render('addandedituser', {title:'User Management',action: '/users/edit', subtitle:'Edit User', user: req.user ,currentUser:user, deps:deps});
+                        return;
+                    }
+                    if(err) {
+                        logger.error('error to find deps in db', err.message);
+                    } 
+                    res.render('addandedituser', {title:'User Management',action: '/users/edit', subtitle:'Edit User', user: req.user ,currentUser:user, deps:[]});
+                    return;
+                });                
             }
         });
     } else {
