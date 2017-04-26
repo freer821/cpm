@@ -141,6 +141,8 @@ function initRoutes() {
     router.post('/users/edit',usermanager.editUser);
 
     router.post('/items/add',itemmanager.addItem);
+    router.post('/items/edit',itemmanager.editItem);
+    router.get('/items/del/:id',itemmanager.delItem);
 
     router.get('/deps',depmanager.getAllDeps);
     router.post('/deps/add',depmanager.addDep);

@@ -133,7 +133,7 @@ const saveDep = function (dep) {
 };
 
 const delDep = function (id) {
-    Department.findOneAndRemove({'_id': id}, function (err, user) {
+    Department.findOneAndRemove({'_id': id}, function (err) {
         if (err) {
             logger.error('error to del dep', err.message);
         }
@@ -168,6 +168,16 @@ const editItem = function (condition, item) {
     );
 };
 
+const delItem = function (id) {
+    Item.findOneAndRemove({'_id': id}, function (err) {
+        if (err) {
+            logger.error('error to del item', err.message);
+        }
+        // saved!
+    })
+};
+
+
 const getItems = function (condition, callback) {
     Item.find(condition, function (err, items) {
         if (err) {
@@ -189,6 +199,8 @@ module.exports = {
     findUsers: findUsers,
     delUser:delUser,
     addItem:addItem,
+    editItem:editItem,
+    delItem:delItem,
     getItems: getItems,
     findDeps:findDeps,
     saveDep:saveDep,

@@ -7,7 +7,7 @@ const db = require('../common/database');
 
 const addItem = function (req, res, next) {
     let item = req.body;
-    item.status = 'open';
+    item.status = 'Open';
     item.ts = new Date();
     item.user_email = req.user.email;
     db.addItem(item);
@@ -15,6 +15,22 @@ const addItem = function (req, res, next) {
 };
 
 
+const editItem = function (req, res, next) {
+    let item = req.body;
+    db.editItem({user_email:item.email},item);
+    res.redirect('/dashboard');
+};
+
+const delItem= function(req, res, next) {
+    db.delItem(req.params.id);
+    res.redirect('/dashboard');
+};
+
+
+
+
 module.exports = {
-    addItem: addItem
+    addItem: addItem,
+    editItem:editItem,
+    delItem:delItem
 };
