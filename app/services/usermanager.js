@@ -7,7 +7,7 @@ const logger = require('../common/logger');
 const db = require('../common/database');
 const config = require('../common/config');
 
-const adduser = function (req, res, next) {
+const adduser = function (req, res, next) { 
 
     if (req.method === "GET") {
         db.findDeps({}, function (err, deps) {
@@ -121,7 +121,7 @@ const getCurrentUser = function(req, res, next) {
             if(err) {
                 logger.error('error to find user in db', err.message);
             } else {
-                res.render('profile',{title:'Profile', action: '/profile/edit', user:req.user, currentUser:user});
+                res.render('profile',{title:'Profile', action: '/profile/edit', user:user});
             }
         });        
     }
@@ -144,15 +144,20 @@ const updateCurrentUserHeadIcon = function(req, res, next) {
 };
 
 const getDashInfo = function (req, res, next) {
-    let user = req.user;
-    db.getItems({user_email:user.email}, function (err, items) {
+    db.findUser({email:req.user.email}, function (err, user) {
         if(err) {
             logger.error('error to find user in db', err.message);
-            res.render('dashboard',{title:'Main', user:user});
         } else {
-            res.render('dashboard',{title:'Main', user:user , items: items});
+            db.getItems({user_email:req.user.email}, function (err, items) {
+                if(err) {
+                    logger.error('error to find user in db', err.message);
+                    res.render('dashboard',{title:'Main', user:user});
+                } else {
+                    res.render('dashboard',{title:'Main', user:user , items: items});
+                }
+            });            
         }
-    });
+    });     
 };
 
 

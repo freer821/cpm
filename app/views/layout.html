@@ -141,7 +141,7 @@
         <div class="nav-fold">
         	<a {% if user.role != 'admin' %}href="/profile"{% endif %}>
         	    <span class="pull-left">
-        	      <img src="/assets/images/a0.jpg" alt="." class="w-40 img-circle">
+        	      <img src="{% if user.role === 'admin' %}/assets/images/a0.jpg{% else %}{{user.icon}}{% endif %}" alt="." class="w-40 img-circle">
         	    </span>
         	    <span class="clear hidden-folded p-x">
         	      <span class="block _500">{{ user.name }}</span>
@@ -193,7 +193,7 @@
               <li class="nav-item dropdown">
                 <a class="nav-link p-0 clear" href="#" data-toggle="dropdown">
                   <span class="avatar w-32">
-                    <img src="/assets/images/a0.jpg" alt=".">
+                    <img src="{% if user.role === 'admin' %}/assets/images/a0.jpg{% else %}{{user.icon}}{% endif %}" alt=".">
                     <i class="on b-white bottom"></i>
                   </span>
                 </a>
