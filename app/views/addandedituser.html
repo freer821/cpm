@@ -59,18 +59,18 @@
               <input type="text" class="form-control" name="position" value="{{currentUser.position}}">
             </div>
             <div class="col-sm-4">
-              <label for="company">Company</label>
-              <select id="company" name="company" class="form-control select2" ui-jp="select2" ui-options="{theme: 'bootstrap'}">
-                <option value="Kuhmann">Kuhmann</option>
-              </select>
-            </div>                     
-            <div class="col-sm-4">
               <label for="department">Department</label>
               <select id="department" name="department" class="form-control select2" ui-jp="select2" ui-options="{theme: 'bootstrap'}">
                 {% for dep in deps %}
                 <option value="{{dep.name}}"{% if dep.name==currentUser.department %}selected="selected"{% endif %}>{{dep.name}}</option>
                 {% endfor %}
                 </select>
+            </div>
+            <div class="col-sm-4">
+              <label for="company">Company</label>
+              <select id="company" name="company" class="form-control select2" ui-jp="select2" ui-options="{theme: 'bootstrap'}">
+                <option value="Kuhmann">Kuhmann</option>
+              </select>
             </div>
           </div>
           <div class="row m-b">
