@@ -114,7 +114,7 @@ function initRoutes() {
     });
 
     router.get('/dashboard', usermanager.getDashInfo);
-    
+
     router.get('/profile',usermanager.getCurrentUser);
     router.post('/profile/edit',usermanager.updateCurrentUserProfile);
     router.post('/user/icon/edit',usermanager.updateCurrentUserHeadIcon);
@@ -138,6 +138,7 @@ function initRoutes() {
     router.get('/deps/del/:id',depmanager.delDep);
 
     router.get('/projects',projectmanager.getAllProjects);
+    router.post('/projects/add',projectmanager.addProject);
 
 
 

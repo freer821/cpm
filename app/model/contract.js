@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const contractSchema = new Schema({
-    _id: String,
+    id: String,
     project_id: String,
     customer: String, // auftraggeber
     cost_code: String,          // kst
@@ -86,7 +86,9 @@ const contractSchema = new Schema({
             cost: Number, // verk_kosten
             status: String // status, auto to cal
         }
-    ]
+    ],
+    ts: Date,
+    created: Date
 });
 
 module.exports = contractSchema;

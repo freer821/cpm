@@ -9,6 +9,10 @@ const moment = require('moment');
 const userSchema = require('./../model/user');
 const depSchema = require('./../model/department');
 const itemSchema = require('./../model/item');
+const projectSchema = require('./../model/project');
+const contractSchema = require('./../model/contract');
+
+const com = require('./appcom');
 
 var cpmDB;
 var User;
@@ -50,8 +54,8 @@ function initCPMSchema() {
     User = cpmDB.model('user', userSchema, config.mongodb.collection_user);
     Department = cpmDB.model('dep', depSchema, config.mongodb.collection_department);
     Item = cpmDB.model('item', itemSchema, config.mongodb.collection_item);
-    Project = cpmDB.model('project', itemSchema, config.mongodb.collection_project);
-    Contract = cpmDB.model('contract', itemSchema, config.mongodb.collection_contract);
+    Project = cpmDB.model('project', projectSchema, config.mongodb.collection_project);
+    Contract = cpmDB.model('contract', contractSchema, config.mongodb.collection_contract);
 }
 
 const findUser = function (condition, callback) {
@@ -193,6 +197,48 @@ const getItems = function (condition, callback) {
     });
 };
 
+const addProject = function (project) {
+    countProject(function (err, count) {
+        if (err) {
+            logger.error('error to add project', project);
+        } else {
+            project.id = com.zeroPad(count, 6);
+            editProject({id: project.id}, project);
+        }
+    });
+};
+
+function countProject(callback) {
+    Project.count({}, function (err, count) {
+        if (err) {
+            logger.error('error to count projects', err.message);
+            callback(err)
+        } else {
+            callback(undefined, count);
+        }
+    });
+}
+
+const editProject = function (condition, project) {
+    Project.update(condition, // Query
+        { // Updates
+            $set: project,
+            $setOnInsert: {
+                created: new Date()
+            }
+        },
+        {upsert: true},
+        function (err) {
+            if (err) {
+                logger.error('Failed to Update Project in MongoDB', project,err);
+            } else {
+                logger.trace('Project Item in MongoDB', project);
+            }
+        }
+    );
+};
+
+
 const getProjects = function (condition, callback) {
     Project.find(condition, function (err, prjects) {
         if (err) {
@@ -230,5 +276,7 @@ module.exports = {
     saveDep:saveDep,
     delDep:delDep,
     getProjects:getProjects,
-    getContracts:getContracts
+    getContracts:getContracts,
+    addProject:addProject,
+    editProject:editProject
 };

@@ -17,7 +17,15 @@ const getAllProjects = function(req, res, next) {
     });
 };
 
+const addProject = function (req, res, next) {
+    let project = req.body;
+    project.ts = new Date();
+    db.addProject(project);
+    res.redirect('/projects');
+};
+
 
 module.exports = {
-    getAllProjects: getAllProjects
+    getAllProjects: getAllProjects,
+    addProject:addProject
 };

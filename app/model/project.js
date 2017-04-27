@@ -5,18 +5,16 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const projectSchema = new Schema({
-    _id: String, // 6 digits
-    addr: {
-        ort: String, // gemeide
-        street: String
-    },
+    id: String, // 6 digits
+    street: String,
+    community: String, // gemeide
     zipcode: String,
     city: String,
     comment: String,
     files_path: String, // network file path
-    linesplan: Boolean, // fremdleitungsplan
-    linesplan_files_path: String   // for fremdleitungsplan
-
+    linesplan_files_path: String,   // for fremdleitungsplan
+    ts: Date,
+    created: Date
 },{ versionKey: false });
 
 module.exports = projectSchema;
