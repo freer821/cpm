@@ -6,6 +6,8 @@ default:
     collection_user: 'user'
     collection_department: 'department'
     collection_item: 'item'
+    collection_project: 'project'
+    collection_contract: 'contract'
   session:
     secret: 'cpmsecret'
   logging:

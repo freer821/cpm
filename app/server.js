@@ -23,6 +23,7 @@ const auth = require('./common/authentication');
 const usermanager = require('./services/usermanager');
 const depmanager = require('./services/depmanager');
 const itemmanager = require('./services/itemmanager');
+const projectmanager = require('./services/projectmanager');
 
 // init Passwort System
 auth.initPassport(passport);
@@ -113,19 +114,7 @@ function initRoutes() {
     });
 
     router.get('/dashboard', usermanager.getDashInfo);
-
-    router.get('/projects/all',function(req,res){
-        res.render('project',{title:'project Management',subtitle: 'Overview Projects', user: req.user});
-    });
-
-    router.get('/projects/my',function(req,res){
-        res.render('project',{title:'project Management',subtitle: 'Overview My Projects', user: req.user});
-    });
-
-    router.get('/projects/add',function(req,res){
-        res.render('addandeditcontract',{title:'project Management',subtitle: 'New Contract', user: req.user});
-    });
-
+    
     router.get('/profile',usermanager.getCurrentUser);
     router.post('/profile/edit',usermanager.updateCurrentUserProfile);
     router.post('/user/icon/edit',usermanager.updateCurrentUserHeadIcon);
@@ -147,6 +136,9 @@ function initRoutes() {
     router.get('/deps',depmanager.getAllDeps);
     router.post('/deps/add',depmanager.addDep);
     router.get('/deps/del/:id',depmanager.delDep);
+
+    router.get('/projects',projectmanager.getAllProjects);
+
 
 
     router.get('/logout', function (req, res){

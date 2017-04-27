@@ -14,6 +14,8 @@ var cpmDB;
 var User;
 var Department;
 var Item;
+var Project;
+var Contract;
 
 const setup = function (callback) {
     connectcpmDB();
@@ -48,6 +50,8 @@ function initCPMSchema() {
     User = cpmDB.model('user', userSchema, config.mongodb.collection_user);
     Department = cpmDB.model('dep', depSchema, config.mongodb.collection_department);
     Item = cpmDB.model('item', itemSchema, config.mongodb.collection_item);
+    Project = cpmDB.model('project', itemSchema, config.mongodb.collection_project);
+    Contract = cpmDB.model('contract', itemSchema, config.mongodb.collection_contract);
 }
 
 const findUser = function (condition, callback) {
@@ -189,7 +193,27 @@ const getItems = function (condition, callback) {
     });
 };
 
+const getProjects = function (condition, callback) {
+    Project.find(condition, function (err, prjects) {
+        if (err) {
+            logger.error('error to find projects', err.message);
+            callback(err)
+        } else {
+            callback(undefined, prjects);
+        }
+    });
+};
 
+const getContracts = function (condition, callback) {
+    Contract.find(condition, function (err, contracts) {
+        if (err) {
+            logger.error('error to find contracts', err.message);
+            callback(err)
+        } else {
+            callback(undefined, contracts);
+        }
+    });
+};
 
 
 module.exports = {
@@ -204,5 +228,7 @@ module.exports = {
     getItems: getItems,
     findDeps:findDeps,
     saveDep:saveDep,
-    delDep:delDep
+    delDep:delDep,
+    getProjects:getProjects,
+    getContracts:getContracts
 };

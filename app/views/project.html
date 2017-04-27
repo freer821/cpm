@@ -23,40 +23,24 @@
         <table class="table m-b-none b-t" ui-jp="footable" data-filter="#filter" data-page-size="5">
           <thead>
             <tr>
-              <th>Adresse</th>
-              <th>Contract Type</th>
-              <th>BAZ &#38; VAZ Type</th>
-              <th>OFW Status</th>
-              <th>financial accounting</th>
-              <th>Building Plan</th>
-              <th>Fibu Check</th>
-              <th style="width:20px;" data-sort-ignore="true"></th>
-              <th style="width:20px;" data-sort-ignore="true"></th>
-              <th style="width:20px;" data-sort-ignore="true"></th>
+              <th>Project Nr</th>
+              <th>City</th>
+              <th>Community</th>
+              <th>Street</th>
+              <th>Static</th>
+              <th data-sort-ignore="true">Project Types</th>
             </tr>
           </thead>
           <tbody>
             {% for project in projects %}
-            {% set editurl = '/projects/edit?id='+project._id %}
-            {% set delurl = '/projects/del/'+project._id %}
-
               <tr>
+                <td>{{project._id}}</td>
+                <td>{{project.city}}</td>
+                <td>{{project.addr.ort}}</td>
+                <td>{{project.addr.street}}</td>
+                <td>{{project.static}}</td>
                 <td>{{project.adresse}}</td>
-                <td>{{project.adresse}}</td>
-                <td>{{project.adresse}}</td>
-                <td>{{project.adresse}}</td>
-                <td>{{project.adresse}}</td>
-                <td>{{project.adresse}}</td>
-                <td>{{project.fibu}}</td>
-                <td>
-                  <a href="#" data-toggle="modal" data-target="#show-user" data-user="{{user|json}}""><i class="material-icons md-24">&#xe88e;</i></a>
-                </td>
-                <td>
-                  <a href="{{editurl}}"><i class="material-icons md-24">&#xe3c9;</i></a>
-                </td>
-                <td>
-                  <a href="#" data-href="{{delurl}}" data-toggle="modal" data-target="#del-user" data-user_name="{{user.firstname}}""><i class="material-icons md-24">&#xe872;</i></a>
-                </td>
+                <td>{{project.types}}</td>
               </tr>
             {% endfor %}           
           </tbody>
