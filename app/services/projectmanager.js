@@ -18,7 +18,7 @@ const getAllProjects = function(req, res, next) {
 };
 
 const addProject = function (req, res, next) {
-    let project = req.body;
+    project = req.body;
     project.ts = new Date();
     db.addProject(project);
     res.redirect('/projects');
