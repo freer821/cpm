@@ -66,6 +66,7 @@ app.use('/pages', express.static(__dirname + '/views/pages'));
 app.use('/libs', express.static(__dirname + '/views/libs'));
 app.use('/scripts', express.static(__dirname + '/views/scripts'));
 app.use('/upload', express.static(__dirname + '/upload/icon'));
+app.use('/node_modules', express.static(__dirname + './../node_modules'));
 
 // set routes
 initRoutes();

@@ -6,6 +6,7 @@ const Schema = mongoose.Schema;
 
 const projectSchema = new Schema({
     id: String, // 6 digits
+    housenr: String,
     street: String,
     community: String, // gemeide
     zipcode: String,
