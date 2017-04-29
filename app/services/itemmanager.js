@@ -22,9 +22,6 @@ const editItem = function (req, res, next) {
         item.note.forEach ((note) => {
             if (! note.ts) {
                 note.ts = new Date();
-            } else {
-                // donot update time
-                delete note.ts;
             }
         });
     }

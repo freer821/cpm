@@ -307,8 +307,20 @@
     $("#edit-item-title").val(item.title);
     $(".row.note").remove();
     if (item.note.length > 0) {
+    	item.note.sort(function(a,b){
+
+    		if (a.ts > b.ts) {
+    			return -1;
+    		}
+
+    		if (a.ts < b.ts) {
+    			return 1;
+    		}
+
+    		return 0;
+    	});
     	item.note.forEach(function(note) {
-    		$("#edit-item-note").append('<div class="row note"><input type="text" class="col-sm-9 form-control" name="content" value="'+note.content+'"><input type="text" class="col-sm-2 form-control" name="ts" value="'+moment(note.ts).format("DD-MM-YYYY")+'" readonly><a class="col-sm-1 btn btn-icon white" name="remove"><i class="fa fa-remove"></i></a></div>');
+    		$("#edit-item-note").append('<div class="row note"><input type="text" class="col-sm-9 form-control" name="content" value="'+note.content+'"><input type="text" class="col-sm-2 form-control" value="'+moment(note.ts).format("DD-MM-YYYY")+'" readonly><input type="hidden" class="form-control" name="ts" value="'+note.ts+'"><a class="col-sm-1 btn btn-icon white" name="remove"><i class="fa fa-remove"></i></a></div>');
     	});
     } else {
     	$("#edit-item-note").append('<div class="row note"><input type="text" class="col-sm-11 form-control" name="content"><a class="col-sm-1 btn btn-icon white" name="remove"><i class="fa fa-remove"></i></a></div>');
@@ -316,7 +328,7 @@
 
     $("#edit-item-priority").val(item.priority);
     $("#edit-item-status").val(item.status);
-   	$("#submit-button").append('<input type="hidden" class="form-control" name="email" value="'+item.user_email+'">');
+   	$("#submit-button").append('<input type="hidden" class="form-control" name="id" value="'+item._id+'">');
    	$("a[name='remove']").click(function (e) {
 		    $(this).parent().remove();
 	});
