@@ -238,7 +238,7 @@
 <div id="edit-item" class="modal" data-backdrop="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-    <form id="form" action="/items/edit" method="post" >
+    <form id="edit-item-form">
       <div class="modal-header">
 	    <div class="form-group row">
 			<label class="col-sm-2 form-control-label">Title</label>
@@ -308,23 +308,51 @@
     $(".row.note").remove();
     if (item.note.length > 0) {
     	item.note.forEach(function(note) {
-    		$("#edit-item-note").append('<div class="row note"><input type="text" class="col-sm-9 form-control" name="note" value="'+note.content+'"><input type="text" class="col-sm-2 form-control" name="ts" value="'+moment(note.ts).format("DD-MM-YYYY")+'"><a class="col-sm-1 btn btn-icon white" name="remove"><i class="fa fa-remove"></i></a></div>');
+    		$("#edit-item-note").append('<div class="row note"><input type="text" class="col-sm-9 form-control" name="content" value="'+note.content+'"><input type="text" class="col-sm-2 form-control" name="ts" value="'+moment(note.ts).format("DD-MM-YYYY")+'" readonly><a class="col-sm-1 btn btn-icon white" name="remove"><i class="fa fa-remove"></i></a></div>');
     	});
     } else {
-    	$("#edit-item-note").append('<div class="row note"><input type="text" class="col-sm-11 form-control" name="note"><a class="col-sm-1 btn btn-icon white" name="remove"><i class="fa fa-remove"></i></a></div>');
+    	$("#edit-item-note").append('<div class="row note"><input type="text" class="col-sm-11 form-control" name="content"><a class="col-sm-1 btn btn-icon white" name="remove"><i class="fa fa-remove"></i></a></div>');
     }
-    $("#add-note").click(function() {
-    	$("#edit-item-note").append('<div class="row note"><input type="text" class="col-sm-11 form-control" name="note"><a class="col-sm-1 btn btn-icon white" name="remove"><i class="fa fa-remove"></i></a></div>');
-    });
-
-    $("a[name='remove']").click(function (e) {
-	    $(this).parent().remove();
-    });
 
     $("#edit-item-priority").val(item.priority);
     $("#edit-item-status").val(item.status);
    	$("#submit-button").append('<input type="hidden" class="form-control" name="email" value="'+item.user_email+'">');
+   	$("a[name='remove']").click(function (e) {
+		    $(this).parent().remove();
+	});
   });
+
+    $("#add-note").click(function() {
+    	$("#edit-item-note").append('<div class="row note"><input type="text" class="col-sm-11 form-control" name="content"><a class="col-sm-1 btn btn-icon white" name="remove"><i class="fa fa-remove"></i></a></div>');
+    	$("a[name='remove']").click(function (e) {
+		    $(this).parent().remove();
+	    });
+
+    });
+
+    $("#edit-item-form").on("submit", function(){
+    	var item = {
+   			'title': $(this).find('input[name="title"]').val(),
+   			'priority': $(this).find('select[name="priority"]').val(),
+   			'status': $(this).find('select[name="status"]').val(),
+   			'note': []
+   		};
+   		$( ".row.note" ).each(function() {
+		    item.note.push({"content": $(this).find('input[name="content"]').val(), "ts": $(this).find('input[name="ts"]').val()});
+		});
+
+		$.ajax({
+		    type: "POST",
+		    url: "/items/edit",
+		    // The key needs to match your method's input parameter (case-sensitive).
+		    data: JSON.stringify(item),
+		    contentType: "application/json; charset=utf-8",
+		    dataType: "json",
+		    success: function(data){},
+		    failure: function(err) {}
+		});
+    });
+
 
   $('#del-item').on('show.bs.modal', function(e) {
       $("#delitemtitle").html($(e.relatedTarget).data('item-tilte'));

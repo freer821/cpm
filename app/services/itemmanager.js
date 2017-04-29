@@ -17,7 +17,18 @@ const addItem = function (req, res, next) {
 
 const editItem = function (req, res, next) {
     let item = req.body;
-    db.editItem({user_email:item.email},item);
+
+    if (item.note) {
+        item.note.forEach ((note) => {
+            if (! note.ts) {
+                note.ts = new Date();
+            } else {
+                // donot update time
+                delete note.ts;
+            }
+        });
+    }
+    db.editItem({user_email:req.user.email},item);
     res.redirect('/dashboard');
 };
 
