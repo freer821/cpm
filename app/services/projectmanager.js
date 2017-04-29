@@ -1,7 +1,7 @@
 /**
  * Created by Zhenyu on 27.04.2017.
  */
-
+'use strict';
 const logger = require('../common/logger');
 const db = require('../common/database');
 
@@ -18,7 +18,7 @@ const getAllProjects = function(req, res, next) {
 };
 
 const addProject = function (req, res, next) {
-    project = req.body;
+    let project = req.body;
     project.ts = new Date();
     db.addProject(project);
     res.redirect('/projects');
