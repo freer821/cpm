@@ -305,16 +305,16 @@
   $('#edit-item').on('show.bs.modal', function(e) {
     var item = $(e.relatedTarget).data('item');
     $("#edit-item-title").val(item.title);
-    $("input[name=note]").remove();
+    $(".row.note").remove();
     if (item.note.length > 0) {
     	item.note.forEach(function(note) {
-    		$("#edit-item-note").append('<div class="row"><input type="text" class="col-sm-11 form-control" name="note" value="'+note+'"><a class="col-sm-1 btn btn-icon white" name="remove"><i class="fa fa-remove"></i></a></div>');
+    		$("#edit-item-note").append('<div class="row note"><input type="text" class="col-sm-9 form-control" name="note" value="'+note.content+'"><input type="text" class="col-sm-2 form-control" name="ts" value="'+moment(note.ts).format("DD-MM-YYYY")+'"><a class="col-sm-1 btn btn-icon white" name="remove"><i class="fa fa-remove"></i></a></div>');
     	});
     } else {
-    	$("#edit-item-note").append('<div class="row"><input type="text" class="col-sm-11 form-control" name="note"><a class="col-sm-1 btn btn-icon white" name="remove"><i class="fa fa-remove"></i></a></div>');
+    	$("#edit-item-note").append('<div class="row note"><input type="text" class="col-sm-11 form-control" name="note"><a class="col-sm-1 btn btn-icon white" name="remove"><i class="fa fa-remove"></i></a></div>');
     }
     $("#add-note").click(function() {
-    	$("#edit-item-note").append('<div class="row"><input type="text" class="col-sm-11 form-control" name="note"><a class="col-sm-1 btn btn-icon white" name="remove"><i class="fa fa-remove"></i></a></div>');
+    	$("#edit-item-note").append('<div class="row note"><input type="text" class="col-sm-11 form-control" name="note"><a class="col-sm-1 btn btn-icon white" name="remove"><i class="fa fa-remove"></i></a></div>');
     });
 
     $("a[name='remove']").click(function (e) {
