@@ -21,3 +21,5 @@ default:
       file: './log/cpm-error.log'
   upload:
     icon: './app/upload/icon'
+  files:
+    root_path: 'E:\doc\cpms'
