@@ -1,0 +1,16 @@
+/**
+ * Created by Zhenyu on 01.05.2017.
+ */
+const logger = require('../common/logger');
+const db = require('../common/database');
+
+const addContract = function (req, res, next) {
+    let contract = req.body;
+    // TODO
+    res.redirect('/projects');
+};
+
+
+module.exports = {
+    addContract:addContract
+};

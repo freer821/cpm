@@ -1,173 +1,301 @@
 {% extends 'layout.html' %}
 {% block content %}
 <!-- ############ PAGE START-->
-<div class="row no-gutter">
-  <div class="col-sm-3 col-lg-2">
-    <div class="p-y">
-      <div class="nav-active-border left b-primary">
-        <ul class="nav nav-sm flex-column">
-          <li class="nav-item">
-            <a class="nav-link block active" href data-toggle="tab" data-target="#tab-1">Contract</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link block" href data-toggle="tab" data-target="#tab-2">Buliding Preparation</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link block" href data-toggle="tab" data-target="#tab-3">Undergroud Building</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link block" href data-toggle="tab" data-target="#tab-4">OFW Status</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link block" href data-toggle="tab" data-target="#tab-5">financial accounting</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link block" href data-toggle="tab" data-target="#tab-6">Fibu</a>
-          </li>
-        </ul>
-      </div>
+<div class="padding">
+  <div class="box">
+    <div class="box-header">
+      <h3>{{project_id}}</h3>
+      <small>{{project_adr}}</small>
     </div>
-  </div>
-  <div class="col-sm-9 col-lg-10 light lt">
-    <div class="tab-content pos-rlt">
-      <div class="tab-pane active" id="tab-1">
-        <div class="p-a-md dker _600">Contract</div>
-        <form role="form" class="p-a-md col-md-6">
-          <div class="form-group">
-            <label>First Name</label>
-            <input type="text" class="form-control">
+    <div class="box-body">
+      <div class="row no-gutter">
+        <div class="col-sm-3 col-lg-2">
+          <div class="p-y">
+            <div class="nav-active-border left b-primary">
+              <ul class="nav nav-sm flex-column">
+                <li class="nav-item">
+                  <a class="nav-link block active" href data-toggle="tab" data-target="#tab-1">Basic Info</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link block" href data-toggle="tab" data-target="#tab-2">Buliding Preparation</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link block" href data-toggle="tab" data-target="#tab-3">Undergroud Building</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link block" href data-toggle="tab" data-target="#tab-4">OFW Status</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link block" href data-toggle="tab" data-target="#tab-5">financial accounting</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link block" href data-toggle="tab" data-target="#tab-6">Fibu</a>
+                </li>
+              </ul>
+            </div>
           </div>
-          <div class="form-group">
-            <label>Last Name</label>
-            <input type="text" class="form-control">
-          </div>
-          <div class="form-group">
-            <label>URL</label>
-            <input type="text" class="form-control">
-          </div>
-          <div class="form-group">
-            <label>Company</label>
-            <input type="text" class="form-control">
-          </div>
-          <div class="form-group">
-            <label>Location</label>
-            <input type="text" class="form-control">
-          </div>
-          <div class="checkbox">
-            <label class="ui-check">
-              <input type="checkbox"><i class="dark-white"></i> Available for hire
-            </label>
-          </div>
-          <button type="submit" class="btn btn-info m-t">Update</button>
-        </form>
-      </div>
-      <div class="tab-pane" id="tab-2">
-        <div class="p-a-md dker _600">Buliding Preparation</div>
-        <form role="form" class="p-a-md col-md-6">
-          <div class="form-group">
-            <label>Client ID</label>
-            <input type="text" disabled class="form-control" value="d6386c0651d6380745846efe300b9869">
-          </div>
-          <div class="form-group">
-            <label>Secret Key</label>
-            <input type="text" disabled class="form-control" value="3f9573e88f65787d86d8a685aeb4bd13">
-          </div>
-          <div class="form-group">
-            <label>App Name</label>
-            <input type="text" class="form-control">
-          </div>
-          <div class="form-group">
-            <label>App URL</label>
-            <input type="text" class="form-control">
-          </div>
-          <button type="submit" class="btn btn-info m-t">Update</button>
-        </form>
-      </div>
-      <div class="tab-pane" id="tab-3">
-        <div class="p-a-md dker _600">Undergroud Building</div>
-        <form role="form" class="p-a-md col-md-6">
-          <p>E-mail me whenever</p>
-          <div class="checkbox">
-            <label class="ui-check">
-              <input type="checkbox"><i class="dark-white"></i> Anyone posts a comment
-            </label>
-          </div>
-          <div class="checkbox">
-            <label class="ui-check">
-              <input type="checkbox"><i class="dark-white"></i> Anyone follow me
-            </label>
-          </div>
-          <div class="checkbox">
-            <label class="ui-check">
-              <input type="checkbox"><i class="dark-white"></i> Anyone send me a message
-            </label>
-          </div>
-          <div class="checkbox">
-            <label class="ui-check">
-              <input type="checkbox"><i class="dark-white"></i> Anyone invite me to group
-            </label>
-          </div>
-          <button type="submit" class="btn btn-info m-t">Update</button>
-        </form>
-      </div>
-      <div class="tab-pane" id="tab-4">
-        <div class="p-a-md dker _600">OFW Status</div>
-        <form role="form" class="p-a-md col-md-6">
-          <p>Notice me whenever</p>
-          <div class="checkbox">
-            <label class="ui-check">
-              <input type="checkbox"><i class="dark-white"></i> Anyone seeing my profile page
-            </label>
-          </div>
-          <div class="checkbox">
-            <label class="ui-check">
-              <input type="checkbox"><i class="dark-white"></i> Anyone follow me
-            </label>
-          </div>
-          <div class="checkbox">
-            <label class="ui-check">
-              <input type="checkbox"><i class="dark-white"></i> Anyone send me a message
-            </label>
-          </div>
-          <div class="checkbox">
-            <label class="ui-check">
-              <input type="checkbox"><i class="dark-white"></i> Anyone invite me to group
-            </label>
-          </div>
-          <button type="submit" class="btn btn-info m-t">Update</button>
-        </form>
-      </div>
-      <div class="tab-pane" id="tab-5">
-        <div class="p-a-md dker _600">Financial Accounting</div>
-        <div class="p-a-md">
-          <div class="clearfix m-b-lg">
-            <form role="form" class="col-md-6 p-a-0">
-              <div class="form-group">
-                <label>Old Password</label>
-                <input type="password" class="form-control">
-              </div>
-              <div class="form-group">
-                <label>New Password</label>
-                <input type="password" class="form-control">
-              </div>
-              <div class="form-group">
-                <label>New Password Again</label>
-                <input type="password" class="form-control">
-              </div>
-              <button type="submit" class="btn btn-info m-t">Update</button>
-            </form>
-          </div>
-
-          <p><strong>Delete account?</strong></p>
-          <button type="submit" class="btn btn-danger m-t" data-toggle="modal" data-target="#modal">Delete Account</button>
-
         </div>
-      </div>
-      <div class="tab-pane" id="tab-6">
-        <div class="p-a-md dker _600">Security</div>
-        <div class="p-a-md">
-          <div class="clearfix m-b-lg">
-            Waiting for the definition
+        <div class="col-sm-9 col-lg-10 light lt">
+          <div class="tab-content pos-rlt">
+            <div class="tab-pane active" id="tab-1">
+              <div class="p-a-md dker _600">Basic Info</div>
+              <form role="form" class="p-a-md">
+              
+                <div class="form-group row">
+                  <div class="col-md-6">
+                    <div class="form-group row">
+                      <label class="col-md-3 form-control-label">Customer</label>
+                      <div class="col-md-9">
+                        <input type="text" class="form-control" name="customer">
+                      </div>
+                    </div>   
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group row">
+                      <label class="col-md-3 form-control-label">Partner Name</label>
+                      <div class="col-md-9">
+                        <input type="text" class="form-control" name="partner_name"">
+                      </div>
+                    </div>   
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group row">
+                      <label class="col-sm-3 form-control-label">Project Nr</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" name="project_nr"">
+                      </div>
+                    </div>   
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group row">
+                      <label class="col-sm-3 form-control-label">SAP Nr</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" name="sap_nr">
+                      </div> 
+                    </div>  
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group row">
+                      <label class="col-sm-3 form-control-label">Contract Delivery</label>
+                      <div class='input-group date col-sm-9' ui-jp="datetimepicker" ui-options="{
+                            icons: {
+                              time: 'fa fa-clock-o',
+                              date: 'fa fa-calendar',
+                              up: 'fa fa-chevron-up',
+                              down: 'fa fa-chevron-down',
+                              previous: 'fa fa-chevron-left',
+                              next: 'fa fa-chevron-right',
+                              today: 'fa fa-screenshot',
+                              clear: 'fa fa-trash',
+                              close: 'fa fa-remove'
+                            }
+                          }">
+                        <input type='text' class="form-control" name="contract_delivery">
+                        <span class="input-group-addon">
+                            <span class="fa fa-calendar"></span>
+                        </span>
+                      </div>
+                    </div>   
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group row">
+                      <label class="col-sm-3 form-control-label">Doc Delivery</label>
+                      <div class='input-group date col-sm-9' ui-jp="datetimepicker" ui-options="{
+                            icons: {
+                              time: 'fa fa-clock-o',
+                              date: 'fa fa-calendar',
+                              up: 'fa fa-chevron-up',
+                              down: 'fa fa-chevron-down',
+                              previous: 'fa fa-chevron-left',
+                              next: 'fa fa-chevron-right',
+                              today: 'fa fa-screenshot',
+                              clear: 'fa fa-trash',
+                              close: 'fa fa-remove'
+                            }
+                          }">
+                        <input type='text' class="form-control" name="contract_delivery">
+                        <span class="input-group-addon">
+                            <span class="fa fa-calendar"></span>
+                        </span>
+                      </div>   
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-4">
+                    <div class="form-group row">
+                      <label class="col-sm-2 form-control-label">A-Elt Nr</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" name="electric_nr">
+                      </div>
+                    </div>  
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group row">
+                      <label class="col-sm-2 form-control-label">A-W Nr</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" name="water_nr"">   
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group row">
+                      <label class="col-sm-2 form-control-label">A-G Nr</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" name="gas_nr">  
+                      </div>
+                    </div> 
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-sm-2 form-control-label">Work Content</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="work_content">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label>Last Name</label>
+                  <input type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label>URL</label>
+                  <input type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label>Company</label>
+                  <input type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label>Location</label>
+                  <input type="text" class="form-control">
+                </div>
+                <div class="checkbox">
+                  <label class="ui-check">
+                    <input type="checkbox"><i class="dark-white"></i> Available for hire
+                  </label>
+                </div>
+                <button type="submit" class="btn btn-info m-t">Update</button>
+              </form>
+            </div>
+            <div class="tab-pane" id="tab-2">
+              <div class="p-a-md dker _600">Buliding Preparation</div>
+              <form role="form" class="p-a-md col-md-6">
+                <div class="form-group">
+                  <label>Client ID</label>
+                  <input type="text" disabled class="form-control" value="d6386c0651d6380745846efe300b9869">
+                </div>
+                <div class="form-group">
+                  <label>Secret Key</label>
+                  <input type="text" disabled class="form-control" value="3f9573e88f65787d86d8a685aeb4bd13">
+                </div>
+                <div class="form-group">
+                  <label>App Name</label>
+                  <input type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label>App URL</label>
+                  <input type="text" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-info m-t">Update</button>
+              </form>
+            </div>
+            <div class="tab-pane" id="tab-3">
+              <div class="p-a-md dker _600">Undergroud Building</div>
+              <form role="form" class="p-a-md col-md-6">
+                <p>E-mail me whenever</p>
+                <div class="checkbox">
+                  <label class="ui-check">
+                    <input type="checkbox"><i class="dark-white"></i> Anyone posts a comment
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label class="ui-check">
+                    <input type="checkbox"><i class="dark-white"></i> Anyone follow me
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label class="ui-check">
+                    <input type="checkbox"><i class="dark-white"></i> Anyone send me a message
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label class="ui-check">
+                    <input type="checkbox"><i class="dark-white"></i> Anyone invite me to group
+                  </label>
+                </div>
+                <button type="submit" class="btn btn-info m-t">Update</button>
+              </form>
+            </div>
+            <div class="tab-pane" id="tab-4">
+              <div class="p-a-md dker _600">OFW Status</div>
+              <form role="form" class="p-a-md col-md-6">
+                <p>Notice me whenever</p>
+                <div class="checkbox">
+                  <label class="ui-check">
+                    <input type="checkbox"><i class="dark-white"></i> Anyone seeing my profile page
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label class="ui-check">
+                    <input type="checkbox"><i class="dark-white"></i> Anyone follow me
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label class="ui-check">
+                    <input type="checkbox"><i class="dark-white"></i> Anyone send me a message
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label class="ui-check">
+                    <input type="checkbox"><i class="dark-white"></i> Anyone invite me to group
+                  </label>
+                </div>
+                <button type="submit" class="btn btn-info m-t">Update</button>
+              </form>
+            </div>
+            <div class="tab-pane" id="tab-5">
+              <div class="p-a-md dker _600">Financial Accounting</div>
+              <div class="p-a-md">
+                <div class="clearfix m-b-lg">
+                  <form role="form" class="col-md-6 p-a-0">
+                    <div class="form-group">
+                      <label>Old Password</label>
+                      <input type="password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label>New Password</label>
+                      <input type="password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label>New Password Again</label>
+                      <input type="password" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-info m-t">Update</button>
+                  </form>
+                </div>
+
+                <p><strong>Delete account?</strong></p>
+                <button type="submit" class="btn btn-danger m-t" data-toggle="modal" data-target="#modal">Delete Account</button>
+
+              </div>
+            </div>
+            <div class="tab-pane" id="tab-6">
+              <div class="p-a-md dker _600">Security</div>
+              <div class="p-a-md">
+                <div class="clearfix m-b-lg">
+                  Waiting for the definition
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

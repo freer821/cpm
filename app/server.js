@@ -24,6 +24,7 @@ const usermanager = require('./services/usermanager');
 const depmanager = require('./services/depmanager');
 const itemmanager = require('./services/itemmanager');
 const projectmanager = require('./services/projectmanager');
+const contractmanager = require('./services/contractmanager');
 
 // init Passwort System
 auth.initPassport(passport);
@@ -141,6 +142,7 @@ function initRoutes() {
     router.get('/projects',projectmanager.getAllProjects);
     router.post('/projects/add',projectmanager.addProject);
 
+    router.post('/contracts/add',contractmanager.addContract);
 
 
     router.get('/logout', function (req, res){

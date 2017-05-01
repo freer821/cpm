@@ -197,18 +197,7 @@ const getItems = function (condition, callback) {
     });
 };
 
-const addProject = function (project) {
-    countProject(function (err, count) {
-        if (err) {
-            logger.error('error to add project', project);
-        } else {
-            project.id = com.zeroPad(count, 6);
-            editProject({id: project.id}, project);
-        }
-    });
-};
-
-function countProject(callback) {
+const countProject = function (callback) {
     Project.count({}, function (err, count) {
         if (err) {
             logger.error('error to count projects', err.message);
@@ -217,9 +206,9 @@ function countProject(callback) {
             callback(undefined, count);
         }
     });
-}
+};
 
-const editProject = function (condition, project) {
+const editProject = function (condition, project, callback) {
     Project.update(condition, // Query
         { // Updates
             $set: project,
@@ -277,6 +266,6 @@ module.exports = {
     delDep:delDep,
     getProjects:getProjects,
     getContracts:getContracts,
-    addProject:addProject,
+    countProject:countProject,
     editProject:editProject
 };
