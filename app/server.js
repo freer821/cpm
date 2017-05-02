@@ -142,6 +142,7 @@ function initRoutes() {
     router.get('/projects',projectmanager.getAllProjects);
     router.post('/projects/add',projectmanager.addProject);
 
+    router.get('/contracts/add',contractmanager.addContract);
     router.post('/contracts/add',contractmanager.addContract);
 
 

@@ -32,10 +32,12 @@
               <th>Lines Files Path</th>
               <th>Static</th>
               <th data-sort-ignore="true">Project Types</th>
+              <th style="width:20px;" data-sort-ignore="true"></th>
             </tr>
           </thead>
           <tbody>
             {% for project in projects %}
+              {% set editurl = '/contracts/add?project_id='+project.id+'&amp;project_adr='+project.street+', '+project.community+', '+project.zipcode+', '+project.city' %}
               <tr>
                 <td class="details-control"></td>
                 <td>{{project.id}}</td>
@@ -46,6 +48,9 @@
                 <td>{{project.linesplan_files_path}}</td>
                 <td>{{project.adresse}}</td>
                 <td>{{project.types}}</td>
+                <td>
+                  <a href="{{editurl}}"><i class="material-icons md-24">&#xe3c9;</i></a>
+                </td>
               </tr>
             {% endfor %}           
           </tbody>

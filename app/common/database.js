@@ -221,7 +221,7 @@ const editProject = function (condition, project, callback) {
             if (err) {
                 logger.error('Failed to Update Project in MongoDB', project,err);
             } else {
-                logger.trace('Project Item in MongoDB', project);
+                logger.trace('add Project in MongoDB', project);
             }
         }
     );
@@ -250,6 +250,26 @@ const getContracts = function (condition, callback) {
     });
 };
 
+const editContract = function (condition, contract, callback) {
+    Contract.update(condition, // Query
+        { // Updates
+            $set: contract,
+            $setOnInsert: {
+                created: new Date()
+            }
+        },
+        {upsert: true},
+        function (err) {
+            if (err) {
+                logger.error('Failed to Update Contract in MongoDB', contract,err);
+            } else {
+                logger.trace('add Contract in MongoDB', contract);
+            }
+        }
+    );
+};
+
+
 
 module.exports = {
     setup: setup,
@@ -265,7 +285,8 @@ module.exports = {
     saveDep:saveDep,
     delDep:delDep,
     getProjects:getProjects,
-    getContracts:getContracts,
     countProject:countProject,
-    editProject:editProject
+    editProject:editProject,
+    getContracts:getContracts,
+    editContract:editContract
 };
