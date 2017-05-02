@@ -20,9 +20,10 @@
         </div>
       </div>
       <div class="table-responsive">
-        <table class="table m-b-none b-t" ui-jp="footable" data-filter="#filter" data-page-size="5">
+        <table id="project" class="table m-b-none b-t" ui-jp="dataTable" data-filter="#filter" data-page-size="5">
           <thead>
             <tr>
+              <th></th>
               <th>Project Nr</th>
               <th>City</th>
               <th>Community</th>
@@ -36,6 +37,7 @@
           <tbody>
             {% for project in projects %}
               <tr>
+                <td class="details-control"></td>
                 <td>{{project.id}}</td>
                 <td>{{project.city}}</td>
                 <td>{{project.community}}</td>
@@ -47,13 +49,6 @@
               </tr>
             {% endfor %}           
           </tbody>
-          <tfoot class="hide-if-no-paging">
-          <tr>
-              <td colspan="5" class="text-center">
-                  <ul class="pagination"></ul>
-              </td>
-          </tr>
-        </tfoot>
         </table>
       </div>
     </div>
@@ -165,28 +160,45 @@
 <!-- / .modal -->
 <!-- ############ PAGE END-->
 <script type="text/javascript">
-  //triggered when modal is about to be shown
-  $('#show-user').on('show.bs.modal', function(e) {
-    var user = $(e.relatedTarget).data('user');
-    $("#firstname").val(user.firstname);
-    $("#secondname").val(user.secondname);
-    $("#shortname").val(user.shortname);
-    $("#position").val(user.position);
-    $("#department").val(user.department);
-    $("#company").val(user.company);
-    $("#addr").val(user.addr);
-    $("#plz").val(user.plz);
-    $("#city").val(user.city);
-    $("#email").val(user.email);
-    $("#tel").val(user.tel);
-    $("#mobil").val(user.mobil);
-    $("#role").val(user.role);
-  });
-
-  $('#del-user').on('show.bs.modal', function(e) {
-      $("#delusername").html($(e.relatedTarget).data('user_name'));
-      $(this).find('.danger').attr('href', $(e.relatedTarget).data('href'));
-  });
+/* Formatting function for row details - modify as you need */
+function format ( d ) {
+    // `d` is the original data object for the row
+    return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+        '<tr>'+
+            '<td>community:</td>'+
+            '<td>'+d.community+'</td>'+
+        '</tr>'+
+        '<tr>'+
+            '<td>street:</td>'+
+            '<td>'+d.street+'</td>'+
+        '</tr>'+
+        '<tr>'+
+            '<td>Extra info:</td>'+
+            '<td>And any further details here (images etc)...</td>'+
+        '</tr>'+
+    '</table>';
+}
+ 
+$(document).ready(function() {
+    var table = $('#project').DataTable({
+    } );
+    // Add event listener for opening and closing details
+    $('#project tbody').on('click', 'td.details-control', function () {
+        var tr = $(this).closest('tr');
+        var row = table.row( tr );
+ 
+        if ( row.child.isShown() ) {
+            // This row is already open - close it
+            row.child.hide();
+            tr.removeClass('shown');
+        }
+        else {
+            // Open this row
+            row.child( format(row.data()) ).show();
+            tr.addClass('shown');
+        }
+    } );
+} );
 </script>
 <!-- ############ PAGE END-->
 {% endblock %}
