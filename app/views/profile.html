@@ -20,7 +20,8 @@
           </div>
         </div>
         <div class="col-sm-5">
-          <p class="text-md profile-status">I am feeling good!</p>
+          <a onclick="openWindow()">
+          <p class="text-md profile-status">I am feeling good!</p></a>
         </div>
       </div>
     </div>
@@ -162,6 +163,10 @@ function changeEditState(){
   $('.col-xs-6 div').toggle();
   $('#editButtons').toggle();
   $('#iconDiv').toggle();
+}
+
+function openWindow(){
+  window.open("ftp://ftp.topsec.com.cn");
 }
 </script>
 {% endblock %}

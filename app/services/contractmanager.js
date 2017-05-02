@@ -5,7 +5,7 @@ const logger = require('../common/logger');
 const db = require('../common/database');
 
 const addContract = function (req, res, next) {
-    let contract = req.body;
+    contract = req.body;
     // TODO
     res.redirect('/projects');
 };
