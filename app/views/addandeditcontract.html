@@ -17,10 +17,10 @@
                   <a class="nav-link block active" href data-toggle="tab" data-target="#tab-1">Basic Info</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link block" href data-toggle="tab" data-target="#tab-2">Buliding Preparation</a>
+                  <a class="nav-link block" href data-toggle="tab" data-target="#tab-2">Buliding</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link block" href data-toggle="tab" data-target="#tab-3">Undergroud Building</a>
+                  <a class="nav-link block" href data-toggle="tab" data-target="#tab-3">Building Permission</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link block" href data-toggle="tab" data-target="#tab-4">OFW Status</a>
@@ -278,24 +278,95 @@
               </form>
             </div>
             <div class="tab-pane" id="tab-2">
-              <div class="p-a-md dker _600">Buliding Preparation</div>
-              <form role="form" class="p-a-md col-md-6">
-                <div class="form-group">
-                  <label>Client ID</label>
-                  <input type="text" disabled class="form-control" value="d6386c0651d6380745846efe300b9869">
+              <div class="p-a-md dker _600">Buliding</div>
+              <form role="form" class="p-a-md">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group row">
+                      <label class="col-sm-3 form-control-label">Plan Begin</label>
+                      <div class='input-group date col-sm-9' ui-jp="datetimepicker" ui-options="{
+                            icons: {
+                              time: 'fa fa-clock-o',
+                              date: 'fa fa-calendar',
+                              up: 'fa fa-chevron-up',
+                              down: 'fa fa-chevron-down',
+                              previous: 'fa fa-chevron-left',
+                              next: 'fa fa-chevron-right',
+                              today: 'fa fa-screenshot',
+                              clear: 'fa fa-trash',
+                              close: 'fa fa-remove'
+                            }
+                          }">
+                        <input type='text' class="form-control" name="plan_begin">
+                        <span class="input-group-addon">
+                            <span class="fa fa-calendar"></span>
+                        </span>
+                      </div>
+                    </div>   
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group row">
+                      <label class="col-sm-3 form-control-label">Plan End</label>
+                      <div class='input-group date col-sm-9' ui-jp="datetimepicker" ui-options="{
+                            icons: {
+                              time: 'fa fa-clock-o',
+                              date: 'fa fa-calendar',
+                              up: 'fa fa-chevron-up',
+                              down: 'fa fa-chevron-down',
+                              previous: 'fa fa-chevron-left',
+                              next: 'fa fa-chevron-right',
+                              today: 'fa fa-screenshot',
+                              clear: 'fa fa-trash',
+                              close: 'fa fa-remove'
+                            }
+                          }">
+                        <input type='text' class="form-control" name="plan_end">
+                        <span class="input-group-addon">
+                            <span class="fa fa-calendar"></span>
+                        </span>
+                      </div>   
+                    </div>
+                  </div>
                 </div>
-                <div class="form-group">
-                  <label>Secret Key</label>
-                  <input type="text" disabled class="form-control" value="3f9573e88f65787d86d8a685aeb4bd13">
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group row">
+                      <label class="col-md-3 form-control-label">Worker</label>
+                      <div class="col-md-9">
+                        <input type="text" class="form-control" name="worker_name">
+                      </div>
+                    </div>   
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group row">
+                      <label class="col-md-3 form-control-label">Working Month</label>
+                      <div class="col-md-9">
+                        <input type="text" class="form-control" name="working_months"">
+                      </div>
+                    </div>   
+                  </div>
                 </div>
-                <div class="form-group">
-                  <label>App Name</label>
-                  <input type="text" class="form-control">
-                </div>
-                <div class="form-group">
-                  <label>App URL</label>
-                  <input type="text" class="form-control">
-                </div>
+
+                <div class="form-group row">
+                  <label class="col-md-1 form-control-label">Status</label>
+                  <div class="col-md-11">
+                    <select class="form-control c-select" id="building_status" name="status">
+                      <option value="open">Open</option>
+                      <option value="progress">in Progress</option>
+                      <option value="finished">Finished</option>
+                      <option value="done">Done</option>
+                    </select>
+                  </div>
+                </div>   
+
+                <div class="form-group row">
+                  <label class="col-md-1 form-control-label">Procent</label>
+                  <div id="procent_completion" class="col-md-11 progress mb-4">
+                  </div>
+                </div>   
+
+                <input type="hidden" name="project_id" value="{{project_id}}">                
                 <button type="submit" class="btn btn-info m-t">Update</button>
               </form>
             </div>
@@ -394,4 +465,30 @@
   </div>
 </div>
 <!-- ############ PAGE END-->
+
+<script type="text/javascript">
+
+$("#procent_completion").append('<div id="procent_completion" class="progress-bar progress-bar-striped progress-bar-animated info" style="width: 25%">25%</div>');
+
+$("#building_status").on('change', function() {
+  $("#procent_completion").empty();
+  switch(this.value) {
+    case 'open':
+      $("#procent_completion").append('<div id="procent_completion" class="progress-bar progress-bar-striped progress-bar-animated info" style="width: 25%">25%</div>');
+      break;
+    case 'progress':
+      $("#procent_completion").append('<div id="procent_completion" class="progress-bar progress-bar-striped progress-bar-animated info" style="width: 50%">50%</div>');
+      break;
+    case 'finished':
+      $("#procent_completion").append('<div id="procent_completion" class="progress-bar progress-bar-striped progress-bar-animated info" style="width: 100%">100%</div>');
+      break;
+    case 'done':
+      $("#procent_completion").append('<div id="procent_completion" class="progress-bar progress-bar-striped progress-bar-animated info" style="width: 100%">100%</div>');
+      break;
+    default:
+      $("#procent_completion").append('<div id="procent_completion" class="progress-bar progress-bar-striped progress-bar-animated info" style="width: 25%">25%</div>');
+  }
+});
+
+</script>
 {% endblock %}

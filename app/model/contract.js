@@ -38,7 +38,7 @@ const contractSchema = new Schema({
         reason: String
     },          // Unterlage bei. Ursache mapZustand
     building_work: {        // tiefbau_montage
-        begin_plan: Date, // geplanter_baubegin
+        plan_begin: Date, // geplanter_baubegin
         plan_end: Date,  // geplanter_bauende
         worker_name: String,         // kolonnen
         working_months: Date,  // leistungsmonate MM-YYYY
