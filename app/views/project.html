@@ -11,16 +11,9 @@
         <div class="col-sm-5">
            <a href="#" data-toggle="modal" data-target="#add-project" class="btn btn-sm white">Add New Project</a> 
         </div> 
-        <div class="col-sm-4">
-        </div>
-        <div class="col-sm-3">
-          <div class="input-group input-group-sm">
-            <input type="text" id="filter" class="form-control" placeholder="Search">
-          </div>
-        </div>
       </div>
       <div class="table-responsive">
-        <table id="project" class="table m-b-none b-t" ui-jp="dataTable" data-filter="#filter" data-page-size="5">
+        <table id="project" class="table table-striped b-t b-b dataTable no-footer" ui-jp="dataTable">
           <thead>
             <tr>
               <th></th>
@@ -39,7 +32,7 @@
             {% for project in projects %}
               {% set editurl = '/contracts/add?project_id='+project.id+'&amp;project_adr='+project.street+', '+project.community+', '+project.zipcode+', '+project.city' %}
               <tr>
-                <td class="details-control"></td>
+                <td class="details-control"><a href=""></a></td>
                 <td>{{project.id}}</td>
                 <td>{{project.city}}</td>
                 <td>{{project.community}}</td>
@@ -168,41 +161,46 @@
 /* Formatting function for row details - modify as you need */
 function format ( d ) {
     // `d` is the original data object for the row
-    return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
-        '<tr>'+
-            '<td>community:</td>'+
-            '<td>'+d.community+'</td>'+
-        '</tr>'+
-        '<tr>'+
-            '<td>street:</td>'+
-            '<td>'+d.street+'</td>'+
-        '</tr>'+
-        '<tr>'+
-            '<td>Extra info:</td>'+
-            '<td>And any further details here (images etc)...</td>'+
-        '</tr>'+
-    '</table>';
+    return '<table id="'+d[1]+'"class="table table-striped b-t b-b dataTable no-footer" cellpadding="5" ui-jp="dataTable" cellspacing="0" border="0" style="padding-left:50px;">'+
+      '</table>';
 }
  
 $(document).ready(function() {
-    var table = $('#project').DataTable({
-    } );
-    // Add event listener for opening and closing details
-    $('#project tbody').on('click', 'td.details-control', function () {
-        var tr = $(this).closest('tr');
-        var row = table.row( tr );
- 
-        if ( row.child.isShown() ) {
-            // This row is already open - close it
-            row.child.hide();
-            tr.removeClass('shown');
-        }
-        else {
-            // Open this row
-            row.child( format(row.data()) ).show();
-            tr.addClass('shown');
-        }
-    } );
+  // Add event listener for opening and closing details
+  $('#project tbody').on('click', 'td.details-control', function () {
+      var table = $('#project').DataTable();
+      var tr = $(this).closest('tr');
+      var row = table.row( tr );
+
+      if ( row.child.isShown() ) {
+          // This row is already open - close it
+          row.child.hide();
+          tr.removeClass('shown');
+      }
+      else {
+          // Open this row
+          row.child( format(row.data()) ).show();
+          // set subTableid,use project_id
+          id = row.data()[1];
+          var subTable = $('#'+id).DataTable( {
+            "info" : false,
+            "paging": false,
+            "ordering": false,
+            "searching": false,
+            "ajax": '/contracts/project?projectid=' + id,
+            "columns": [
+                { "data": "project_id" },
+                { "data": "customer" },
+                { "data": "cost_code" },
+                { "data": "project_nr" },
+                { "data": "sap_nr" },
+                { "data": "electric_nr" }
+            ]
+          } );
+          $( subTable.table().header() ).remove();
+          tr.addClass('shown');
+      }
+  } );
 } );
 </script>
 <!-- ############ PAGE END-->

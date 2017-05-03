@@ -144,6 +144,7 @@ function initRoutes() {
 
     router.get('/contracts/add',contractmanager.addContract);
     router.post('/contracts/add',contractmanager.addContract);
+    router.get('/contracts/project',contractmanager.getContractByProjectID);
 
 
     router.get('/logout', function (req, res){

@@ -56,6 +56,18 @@ function getContractID() {
     return '17-44-0001-01';
 }
 
+const getContractByProjectID = function (req, res, next) {
+	let project_id = req.query.projectid;
+    db.getContracts({'project_id':project_id}, function (err, contracts) {
+	    if(err) {
+	        logger.error('error to find contract in db', err.message);
+	    }
+	    res.setHeader('Content-Type', 'application/json');
+	    res.send(JSON.stringify({'data':contracts}));
+	});
+};
+
 module.exports = {
-    addContract:addContract
+    addContract:addContract,
+    getContractByProjectID:getContractByProjectID
 };
