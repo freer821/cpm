@@ -79,8 +79,8 @@ const contractSchema = new Schema({
     ],
     building_permission: [
         {
-            typ: {type: String, enum: ['BAZ', 'VAZ', 'VBA']},
-            date_doc_delivery: Date, //
+            type: {type: String, enum: ['BAZ', 'VAZ', 'VBA']},
+            doc_delivery: Date, //
             begin: Date,     // the begin time
             end: Date, // the end time
             cost: Number, // verk_kosten
