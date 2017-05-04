@@ -480,28 +480,117 @@
             </div>
             <div class="tab-pane" id="tab-4">
               <div class="p-a-md dker _600">OFW Status</div>
-              <form role="form" class="p-a-md col-md-6">
-                <p>Notice me whenever</p>
-                <div class="checkbox">
-                  <label class="ui-check">
-                    <input type="checkbox"><i class="dark-white"></i> Anyone seeing my profile page
-                  </label>
+              <form role="form" class="p-a-md">
+
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group row">
+                      <label class="col-sm-3 form-control-label">Worker Name</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" name="worker_name"">
+                      </div>
+                    </div>   
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group row">
+                      <label class="col-sm-3 form-control-label">Permission Number</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" name="permission_nr">
+                      </div> 
+                    </div>  
+                  </div>
                 </div>
-                <div class="checkbox">
-                  <label class="ui-check">
-                    <input type="checkbox"><i class="dark-white"></i> Anyone follow me
-                  </label>
+
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group row">
+                      <label class="col-sm-3 form-control-label">Delivery at</label>
+                      <div class='input-group date col-sm-9' ui-jp="datetimepicker" ui-options="{
+                            icons: {
+                              time: 'fa fa-clock-o',
+                              date: 'fa fa-calendar',
+                              up: 'fa fa-chevron-up',
+                              down: 'fa fa-chevron-down',
+                              previous: 'fa fa-chevron-left',
+                              next: 'fa fa-chevron-right',
+                              today: 'fa fa-screenshot',
+                              clear: 'fa fa-trash',
+                              close: 'fa fa-remove'
+                            }
+                          }">
+                        <input type='text' class="form-control" name="delivery">
+                        <span class="input-group-addon">
+                            <span class="fa fa-calendar"></span>
+                        </span>
+                      </div>
+                    </div>   
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group row">
+                      <label class="col-sm-3 form-control-label">Finished at</label>
+                      <div class='input-group date col-sm-9' ui-jp="datetimepicker" ui-options="{
+                            icons: {
+                              time: 'fa fa-clock-o',
+                              date: 'fa fa-calendar',
+                              up: 'fa fa-chevron-up',
+                              down: 'fa fa-chevron-down',
+                              previous: 'fa fa-chevron-left',
+                              next: 'fa fa-chevron-right',
+                              today: 'fa fa-screenshot',
+                              clear: 'fa fa-trash',
+                              close: 'fa fa-remove'
+                            }
+                          }">
+                        <input type='text' class="form-control" name="completion_at">
+                        <span class="input-group-addon">
+                            <span class="fa fa-calendar"></span>
+                        </span>
+                      </div>   
+                    </div>
+                  </div>
                 </div>
-                <div class="checkbox">
-                  <label class="ui-check">
-                    <input type="checkbox"><i class="dark-white"></i> Anyone send me a message
-                  </label>
+
+                <div class="form-group row">
+                  <label class="col-sm-3 form-control-label">Clean</label>
+                  <div class="col-sm-9">
+                    <label class="ui-switch primary m-t-xs m-r">
+                      <input type="checkbox" name="clean">
+                      <i></i>
+                    </label>
+                  </div>
                 </div>
-                <div class="checkbox">
-                  <label class="ui-check">
-                    <input type="checkbox"><i class="dark-white"></i> Anyone invite me to group
-                  </label>
+
+
+                <div class="form-group row">
+                  <label class="col-sm-2 form-control-label">acceptance</label>
+                  <div class="col-sm-10">
+                    <label class="ui-switch primary m-t-xs m-r">
+                      <input type="checkbox" id="is_acceptanced" name="is_acceptanced">
+                      <i></i>
+                    </label>
+                  </div>
                 </div>
+                <div id="add_acceptance" class="row"></div>
+
+                <div class="form-group row">
+                  <label class="col-sm-2 form-control-label">Extern Company</label>
+                  <div class="col-sm-10">
+                    <label class="ui-switch primary m-t-xs m-r">
+                      <input type="checkbox" id="is_extern_company" name="is_extern_company">
+                      <i></i>
+                    </label>
+                  </div>
+                </div>
+
+                <div id="add_extern_company" class="row"></div>
+
+                <div class="form-group row">
+                  <label class="col-md-1 form-control-label">OFW Status</label>
+                  <div id="ofw_status" class="col-md-11 progress mb-4">
+                  </div>
+                </div>   
+
+                <input type="hidden" name="project_id" value="{{project_id}}">                
                 <button type="submit" class="btn btn-info m-t">Update</button>
               </form>
             </div>
@@ -571,5 +660,86 @@ $("#building_status").on('change', function() {
   }
 });
 
+$("#is_acceptanced").on('change', function() {
+  if($(this).is(":checked")) {
+    $("#add_acceptance").append('<div class="col-sm-6">'+
+                    '<div class="form-group row">'+
+                     ' <label class="col-sm-2 form-control-label">applied</label>'+
+                      '<div class="col-sm-10">'+
+                        '<div class=\'input-group date col-sm-9\' ui-jp="datetimepicker" ui-options="{'+
+                           ' icons: {'+
+                            '  time: \'fa fa-clock-o\','+
+                             ' date: \'fa fa-calendar\','+
+                            '  up: \'fa fa-chevron-up\','+
+                            '  down: \'fa fa-chevron-down\','+
+                            '  previous: \'fa fa-chevron-left\','+
+                            '  next: \'fa fa-chevron-right\','+
+                            '  today: \'fa fa-screenshot\','+
+                            '  clear: \'fa fa-trash\','+
+                            '  close: \'fa fa-remove\''+
+                            '}'+
+                          '}">'+
+                        '<input type=\'text\' class="form-control" name="applied">'+
+                        '<span class="input-group-addon">'+
+                        '    <span class="fa fa-calendar"></span>'+
+                        '</span>'+
+                      '</div>  '+
+                     ' </div>'+
+                   ' </div> '+
+                   ' </div> '+
+                   '<div class="col-sm-6">'+
+                   ' <div class="form-group row">'+
+                   '   <label class="col-sm-2 form-control-label">granted</label>'+
+                   '   <div class="col-sm-10">'+
+                   '     <div class=\'input-group date col-sm-9\' ui-jp="datetimepicker" ui-options="{'+
+                   '         icons: {'+
+                   '           time: \'fa fa-clock-o\','+
+                   '           date: \'fa fa-calendar\','+
+                   '           up: \'fa fa-chevron-up\','+
+                   '           down: \'fa fa-chevron-down\','+
+                   '           previous: \'fa fa-chevron-left\','+
+                   '           next: \'fa fa-chevron-right\','+
+                   '           today: \'fa fa-screenshot\','+
+                   '           clear: \'fa fa-trash\','+
+                   '           close: \'fa fa-remove\''+
+                   '         }'+
+                   '       }">'+
+                   '     <input type=\'text\' class="form-control" name="granted">'+
+                   '     <span class="input-group-addon">'+
+                   '         <span class="fa fa-calendar"></span>'+
+                   '     </span>'+
+                   '   </div> '+
+                   '   </div>'+
+                   ' </div> '+
+                  '</div>');
+  } else {
+    $("#add_acceptance").empty();
+  }
+});
+
+$("#is_extern_company").on('change', function() {
+  if($(this).is(":checked")) {
+    $("#add_extern_company").append('<div class="col-sm-6">'+
+                    '<div class="form-group row">'+
+                     ' <label class="col-sm-2 form-control-label">name</label>'+
+                      '<div class="col-sm-10">'+
+                        '<input type=\'text\' class="form-control" name="company_name">'+
+                      '</div>  '+
+                     ' </div>'+
+                   ' </div> '+
+                   ' </div> '+
+                   '<div class="col-sm-6">'+
+                   ' <div class="form-group row">'+
+                   '   <label class="col-sm-2 form-control-label">price</label>'+
+                   '   <div class="col-sm-10">'+
+                   '     <input type=\'text\' class="form-control" name="price">'+
+                   '   </div> '+
+                   '   </div>'+
+                   ' </div> '+
+                  '</div>');
+  } else {
+    $("#add_extern_company").empty();
+  }
+});
 </script>
 {% endblock %}
