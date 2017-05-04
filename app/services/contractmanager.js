@@ -55,7 +55,7 @@ function getContractID() {
     db.countContract(function (err, count) {
         if (err) {
             logger.error('error to count contract');
-            return '17-44-0001-01'
+            return '17-44-0001-01';
         } else {
         	let id = '17-44-0001-' + (count+1).toString();
         	logger.error('generate contractid' + id);
