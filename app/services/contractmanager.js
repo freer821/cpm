@@ -51,9 +51,17 @@ const addContract = function (req, res, next) {
 };
 
 function getContractID() {
-
     // TODO
-    return '17-44-0001-01';
+    db.countContract(function (err, count) {
+        if (err) {
+            logger.error('error to count contract');
+            return '17-44-0001-01'
+        } else {
+        	let id = '17-44-0001-' + (count+1).toString();
+        	logger.error('generate contractid' + id);
+        	return id;
+        }
+    });
 }
 
 const getContractByProjectID = function (req, res, next) {

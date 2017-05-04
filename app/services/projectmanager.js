@@ -21,7 +21,7 @@ const getAllProjects = function(req, res, next) {
 const addProject = function (req, res, next) {
     db.countProject(function (err, count) {
         if (err) {
-            logger.error('error to add project', project);
+            logger.error('error to add project');
         } else {
             let project = req.body;
             project.ts = new Date();

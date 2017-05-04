@@ -269,7 +269,16 @@ const editContract = function (condition, contract, callback) {
     );
 };
 
-
+const countContract = function (callback) {
+    Contract.count({}, function (err, count) {
+        if (err) {
+            logger.error('error to count projects', err.message);
+            callback(err)
+        } else {
+            callback(undefined, count);
+        }
+    });
+};
 
 module.exports = {
     setup: setup,
@@ -288,5 +297,6 @@ module.exports = {
     countProject:countProject,
     editProject:editProject,
     getContracts:getContracts,
-    editContract:editContract
+    editContract:editContract,
+    countContract:countContract
 };
