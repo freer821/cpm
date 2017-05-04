@@ -159,13 +159,92 @@
 <!-- ############ PAGE END-->
 <script type="text/javascript">
 /* Formatting function for row details - modify as you need */
-function format ( d ) {
+function format0 ( d ) {
     // `d` is the original data object for the row
     return '<table id="'+d[1]+'"class="table table-striped b-t b-b dataTable no-footer" cellpadding="5" ui-jp="dataTable" cellspacing="0" border="0" style="padding-left:50px;">'+
       '</table>';
 }
+
+function format1 ( d ) {
+    // `d` is the original data object for the row
+    return     '<p>Text &amp; Icon</p>'+
+      '<div class="box">'+
+        '<ul class="list inset m-0">'+
+          '<li class="list-item">'+
+            '<a herf class="list-left">'+
+              '<span class="w-40 circle accent">'+
+                '<i class="fa fa-envelope"></i>'+
+              '</span>'+
+            '</a>'+
+            '<div class="list-body">'+
+              '<div><a href>Chris Fox</a></div>'+
+              '<small class="text-muted text-ellipsis">Designer, Blogger</small>'+
+            '</div>'+
+          '</li>'+
+          '<li class="list-item">'+
+            '<a herf class="list-left">'+
+              '<span class="w-40 circle green">'+
+                '<i class="fa fa-comment"></i>'+
+              '</span>'+
+            '</a>'+
+            '<div class="list-body">'+
+              '<div><a href>Mogen Polish</a></div>'+
+              '<small class="text-muted text-ellipsis">Writter, Mag Editor</small>'+
+            '</div>'+
+          '</li>'+
+          '<li class="list-item">'+
+            '<a herf class="list-left">'+
+              '<span class="w-40 circle purple avatar">'+
+                '<span>J</span>'+
+                '<i class="busy b-white"></i>'+
+              '</span>'+
+            '</a>'+
+            '<div class="list-body">'+
+              '<div><a href>Joge Lucky</a></div>'+
+              '<small class="text-muted text-ellipsis">Art director, Movie Cut</small>'+
+            '</div>'+
+          '</li>'+
+          '<li class="list-item">'+
+            '<a herf class="list-left">'+
+              '<span class="w-40 circle danger avatar">'+
+                '<span>F</span>'+
+                '<i class="off b-danger"></i>'+
+              '</span>'+
+            '</a>'+
+            '<div class="list-body">'+
+              '<div><a href>Folisise Chosielie</a></div>'+
+              '<small class="text-muted text-ellipsis">Musician, Player</small>'+
+            '</div>'+
+          '</li>'+
+          '<li class="list-item">'+
+            '<a herf class="list-left">'+
+              '<span class="w-40 circle warning avatar">'+
+                '<span>P</span>'+
+                '<i class="on b-white"></i>'+
+              '</span>'+
+            '</a>'+
+            '<div class="list-body">'+
+              '<div><a href>Peter</a></div>'+
+              '<small class="text-muted text-ellipsis">Musician, Player</small>'+
+            '</div>'+
+          '</li>'+
+        '</ul>'+
+      '</div>';
+}
  
 $(document).ready(function() {
+    $('#H000000 tr').dblclick(function() {
+    var tr = $(this).closest('tr');
+    var row = table.row( tr ); 
+    if ( row.child.isShown() ) {
+      // This row is already open - close it
+      row.child.hide();
+      tr.removeClass('shown');
+    } else {
+      row.child( format1(row.data()) ).show();
+      tr.addClass('shown');
+    }  
+  });
   // Add event listener for opening and closing details
   $('#project tbody').on('click', 'td.details-control', function () {
       var table = $('#project').DataTable();
@@ -179,7 +258,7 @@ $(document).ready(function() {
       }
       else {
           // Open this row
-          row.child( format(row.data()) ).show();
+          row.child( format0(row.data()) ).show();
           // set subTableid,use project_id
           id = row.data()[1];
           var subTable = $('#'+id).DataTable( {
