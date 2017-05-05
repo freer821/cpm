@@ -32,7 +32,7 @@
             {% for project in projects %}
               {% set editurl = '/contracts/add?project_id='+project.id+'&amp;project_adr='+project.street+', '+project.community+', '+project.zipcode+', '+project.city' %}
               <tr>
-                <td class="details-control"><a href=""></a></td>
+                <td class="details-control"></td>
                 <td>{{project.id}}</td>
                 <td>{{project.city}}</td>
                 <td>{{project.community}}</td>
@@ -226,6 +226,9 @@ function format1 ( d ) {
             '<div class="list-body">'+
               '<div><a href>Peter</a></div>'+
               '<small class="text-muted text-ellipsis">Musician, Player</small>'+
+              '<div class="progress mb-2">'+
+              '<div class="progress-bar progress-bar-striped progress-bar-animated primary"'+ 'style="width: 25%">25%</div>'+
+              '</div>'+
             '</div>'+
           '</li>'+
         '</ul>'+
@@ -233,18 +236,7 @@ function format1 ( d ) {
 }
  
 $(document).ready(function() {
-    $('#H000000 tr').dblclick(function() {
-    var tr = $(this).closest('tr');
-    var row = table.row( tr ); 
-    if ( row.child.isShown() ) {
-      // This row is already open - close it
-      row.child.hide();
-      tr.removeClass('shown');
-    } else {
-      row.child( format1(row.data()) ).show();
-      tr.addClass('shown');
-    }  
-  });
+
   // Add event listener for opening and closing details
   $('#project tbody').on('click', 'td.details-control', function () {
       var table = $('#project').DataTable();
@@ -268,6 +260,12 @@ $(document).ready(function() {
             "searching": false,
             "ajax": '/contracts/project?projectid=' + id,
             "columns": [
+                {
+                    "className":      'details-control-sub',
+                    "orderable":      false,
+                    "data":           null,
+                    "defaultContent": ''
+                },
                 { "data": "id" },
                 { "data": "customer" },
                 { "data": "cost_code" },
@@ -278,6 +276,20 @@ $(document).ready(function() {
           } );
           $( subTable.table().header() ).remove();
           tr.addClass('shown');
+
+          $('#'+id+' tbody').on('click', 'td.details-control-sub', function () {
+          var tr = $(this).closest('tr');
+          var row = subTable.row( tr ); 
+          if ( row.child.isShown() ) {
+            // This row is already open - close it
+            row.child.hide();
+            tr.removeClass('shown');
+          } else {
+            row.child( format1(row.data()) ).show();
+            tr.addClass('shown');
+          }  
+        });
+
       }
   } );
 } );
