@@ -368,10 +368,7 @@
                   <div class="form-group row">
                     <label class="col-md-3 form-control-label">Procent</label>
                     <div class="col-md-9">
-                      <div class="progress mt-2">
-                        <div class="progress-bar progress-bar-striped progress-bar-animated primary"style="width: 25%">25%
-                        </div>
-                      </div>
+                      <div id="procent_completion" class="progress mt-2"></div>
                     </div>
                   </div>
                 </div> 
@@ -606,37 +603,166 @@
             </div>
             <div class="tab-pane" id="tab-5">
               <div class="p-a-md dker _600">Financial Accounting</div>
-              <div class="p-a-md">
-                <div class="clearfix m-b-lg">
-                  <form role="form" class="col-md-6 p-a-0">
-                    <div class="form-group">
-                      <label>Old Password</label>
-                      <input type="password" class="form-control">
-                    </div>
-                    <div class="form-group">
-                      <label>New Password</label>
-                      <input type="password" class="form-control">
-                    </div>
-                    <div class="form-group">
-                      <label>New Password Again</label>
-                      <input type="password" class="form-control">
-                    </div>
-                    <button type="submit" class="btn btn-info m-t">Update</button>
-                  </form>
+              <form role="form" action="/contracts/add" class="p-a-md" method="post">
+
+                <div class="form-group row">
+                  <label class="col-md-3 form-control-label">Invoice Nr.</label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control" name="rechnung_nr">
+                  </div>
                 </div>
 
-                <p><strong>Delete account?</strong></p>
-                <button type="submit" class="btn btn-danger m-t" data-toggle="modal" data-target="#modal">Delete Account</button>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group row">
+                      <label class="col-md-3 form-control-label">Current Value</label>
+                      <div class="col-md-9">
+                        <input type="text" class="form-control" name="current_value">
+                      </div>
+                    </div>   
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group row">
+                      <label class="col-md-3 form-control-label">Sum Value</label>
+                      <div class="col-md-9">
+                        <input type="text" class="form-control" name="sum"">
+                      </div>
+                    </div>   
+                  </div>
+                </div>
 
-              </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group row">
+                      <label class="col-sm-3 form-control-label">Invocie Send</label>
+                      <div class='input-group date col-sm-9' ui-jp="datetimepicker" ui-options="{
+                            icons: {
+                              time: 'fa fa-clock-o',
+                              date: 'fa fa-calendar',
+                              up: 'fa fa-chevron-up',
+                              down: 'fa fa-chevron-down',
+                              previous: 'fa fa-chevron-left',
+                              next: 'fa fa-chevron-right',
+                              today: 'fa fa-screenshot',
+                              clear: 'fa fa-trash',
+                              close: 'fa fa-remove'
+                            }
+                          }">
+                        <input type='text' class="form-control" name="aufmass_am">
+                        <span class="input-group-addon">
+                            <span class="fa fa-calendar"></span>
+                        </span>
+                      </div>
+                    </div>   
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group row">
+                      <label class="col-sm-3 form-control-label">Invocie Permitted</label>
+                      <div class='input-group date col-sm-9' ui-jp="datetimepicker" ui-options="{
+                            icons: {
+                              time: 'fa fa-clock-o',
+                              date: 'fa fa-calendar',
+                              up: 'fa fa-chevron-up',
+                              down: 'fa fa-chevron-down',
+                              previous: 'fa fa-chevron-left',
+                              next: 'fa fa-chevron-right',
+                              today: 'fa fa-screenshot',
+                              clear: 'fa fa-trash',
+                              close: 'fa fa-remove'
+                            }
+                          }">
+                        <input type='text' class="form-control" name="bewert_aufmass">
+                        <span class="input-group-addon">
+                            <span class="fa fa-calendar"></span>
+                        </span>
+                      </div>   
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group row">
+                      <label class="col-sm-3 form-control-label">Invocie Send</label>
+                      <div class='input-group date col-sm-9' ui-jp="datetimepicker" ui-options="{
+                            icons: {
+                              time: 'fa fa-clock-o',
+                              date: 'fa fa-calendar',
+                              up: 'fa fa-chevron-up',
+                              down: 'fa fa-chevron-down',
+                              previous: 'fa fa-chevron-left',
+                              next: 'fa fa-chevron-right',
+                              today: 'fa fa-screenshot',
+                              clear: 'fa fa-trash',
+                              close: 'fa fa-remove'
+                            }
+                          }">
+                        <input type='text' class="form-control" name="guts_datum">
+                        <span class="input-group-addon">
+                            <span class="fa fa-calendar"></span>
+                        </span>
+                      </div>
+                    </div>   
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group row">
+                      <label class="col-sm-3 form-control-label">status</label>
+                      <div class='input-group date col-sm-9'>
+                        <input type='text' class="form-control" name="status">
+                      </div>   
+                    </div>
+                  </div>
+                </div>
+                <input type="hidden" name="project_id" value="{{project_id}}">
+                <button type="submit" class="btn btn-info m-t">Update</button>
+              </form>
             </div>
             <div class="tab-pane" id="tab-6">
-              <div class="p-a-md dker _600">Security</div>
-              <div class="p-a-md">
-                <div class="clearfix m-b-lg">
-                  Waiting for the definition
+              <div class="p-a-md dker _600">Fibu</div>
+              <form role="form" action="/contracts/add" class="p-a-md" method="post">
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group row">
+                      <label class="col-md-3 form-control-label">Price</label>
+                      <div class="col-md-9">
+                        <input type="text" class="form-control" name="price">
+                      </div>
+                    </div>   
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group row">
+                      <label class="col-md-3 form-control-label">Ordering Month</label>
+                      <div class='input-group date col-sm-9' ui-jp="datetimepicker" ui-options="{
+                            icons: {
+                              time: 'fa fa-clock-o',
+                              date: 'fa fa-calendar',
+                              up: 'fa fa-chevron-up',
+                              down: 'fa fa-chevron-down',
+                              previous: 'fa fa-chevron-left',
+                              next: 'fa fa-chevron-right',
+                              today: 'fa fa-screenshot',
+                              clear: 'fa fa-trash',
+                              close: 'fa fa-remove'
+                            }
+                          }">
+                        <input type='text' class="form-control" name="ordering_month">
+                        <span class="input-group-addon">
+                            <span class="fa fa-calendar"></span>
+                        </span>
+                      </div>
+                    </div>   
+                  </div>
                 </div>
-              </div>
+
+                <div class="form-group row">
+                  <label class="col-md-3 form-control-label">Status</label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control" name="status">
+                  </div>
+                </div>
+
+              </form>
             </div>
           </div>
         </div>
@@ -648,25 +774,25 @@
 
 <script type="text/javascript">
 
-$("#procent_completion").append('<div id="procent_completion" class="progress-bar progress-bar-striped progress-bar-animated info" style="width: 25%">25%</div>');
+$("#procent_completion").append('<div class="progress-bar progress-bar-striped progress-bar-animated primary" style="width: 25%">25%</div>');
 
 $("#building_status").on('change', function() {
   $("#procent_completion").empty();
   switch(this.value) {
     case 'open':
-      $("#procent_completion").append('<div id="procent_completion" class="progress-bar progress-bar-striped progress-bar-animated info" style="width: 25%">25%</div>');
+      $("#procent_completion").append('<div class="progress-bar progress-bar-striped progress-bar-animated primary" style="width: 25%">25%</div>');
       break;
     case 'progress':
-      $("#procent_completion").append('<div id="procent_completion" class="progress-bar progress-bar-striped progress-bar-animated info" style="width: 50%">50%</div>');
+      $("#procent_completion").append('<div class="progress-bar progress-bar-striped progress-bar-animated primary" style="width: 50%">50%</div>');
       break;
     case 'finished':
-      $("#procent_completion").append('<div id="procent_completion" class="progress-bar progress-bar-striped progress-bar-animated info" style="width: 100%">100%</div>');
+      $("#procent_completion").append('<div class="progress-bar progress-bar-striped progress-bar-animated primary" style="width: 100%">100%</div>');
       break;
     case 'done':
-      $("#procent_completion").append('<div id="procent_completion" class="progress-bar progress-bar-striped progress-bar-animated info" style="width: 100%">100%</div>');
+      $("#procent_completion").append('<div class="progress-bar progress-bar-striped progress-bar-animated primary" style="width: 100%">100%</div>');
       break;
     default:
-      $("#procent_completion").append('<div id="procent_completion" class="progress-bar progress-bar-striped progress-bar-animated info" style="width: 25%">25%</div>');
+      $("#procent_completion").append('<div class="progress-bar progress-bar-striped progress-bar-animated primary" style="width: 25%">25%</div>');
   }
 });
 
