@@ -212,7 +212,12 @@ const getContractByProjectID = function (req, res, next) {
 	});
 };
 
+const editContract = function (req, res, next) {
+
+};
+
 module.exports = {
     addContract:addContract,
+    editContract:editContract,
     getContractByProjectID:getContractByProjectID
 };

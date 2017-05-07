@@ -146,6 +146,10 @@ function initRoutes() {
     router.post('/contracts/add/:action',contractmanager.addContract);
     router.get('/contracts/project',contractmanager.getContractByProjectID);
 
+    router.get('/contracts/edit/:id',contractmanager.editContract);
+    router.post('/contracts/edit/:action',contractmanager.editContract);
+
+
 
     router.get('/logout', function (req, res){
         req.session.destroy(function (err) {
