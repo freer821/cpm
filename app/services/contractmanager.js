@@ -17,7 +17,7 @@ const addContract = function (req, res, next) {
 				
             });
         } else if(req.params.action === 'building') {
-            updateContractBuilding(request, function () {
+            updateContractBuilding(request, res, function () {
 
             });
         } else if(req.params.action === 'permission') {
@@ -87,8 +87,24 @@ function updateContractBasic(request, callback) {
     });
 }
 
-function updateContractBuilding(request, callback) {
+function updateContractBuilding(request, res, callback) {
+    //todo
+    let contract_id = '17-44-0001-1';
 
+    let contract = {
+        building_work:{
+            plan_begin: request.plan_begin,
+            plan_end: request.plan_end,
+            worker_name: request.worker_name,
+            working_months: request.working_months,
+            status: request.status,
+        }
+    };
+    db.editContract({id: contract_id},contract);
+    if (typeof callback === 'function') {
+        callback();
+    }
+    res.redirect('/projects');
 }
 
 function updateContractPermission(request, callback) {
