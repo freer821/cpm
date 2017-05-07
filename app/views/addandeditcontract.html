@@ -123,6 +123,7 @@
                     <div class="form-group row">
                       <label class="col-sm-3 form-control-label">Contract Delivery</label>
                       <div class='input-group date col-sm-9' ui-jp="datetimepicker" ui-options="{
+                            format: 'DD-MM-YYYY',
                             icons: {
                               time: 'fa fa-clock-o',
                               date: 'fa fa-calendar',
@@ -146,6 +147,7 @@
                     <div class="form-group row">
                       <label class="col-sm-3 form-control-label">Doc Delivery</label>
                       <div class='input-group date col-sm-9' ui-jp="datetimepicker" ui-options="{
+                            format: 'DD-MM-YYYY',
                             icons: {
                               time: 'fa fa-clock-o',
                               date: 'fa fa-calendar',
@@ -285,6 +287,7 @@
                     <div class="form-group row">
                       <label class="col-sm-3 form-control-label">Plan Begin</label>
                       <div class='input-group date col-sm-9' ui-jp="datetimepicker" ui-options="{
+                            format: 'DD-MM-YYYY',
                             icons: {
                               time: 'fa fa-clock-o',
                               date: 'fa fa-calendar',
@@ -308,6 +311,7 @@
                     <div class="form-group row">
                       <label class="col-sm-3 form-control-label">Plan End</label>
                       <div class='input-group date col-sm-9' ui-jp="datetimepicker" ui-options="{
+                            format: 'DD-MM-YYYY',
                             icons: {
                               time: 'fa fa-clock-o',
                               date: 'fa fa-calendar',
@@ -469,6 +473,7 @@
                     <div class="form-group row">
                       <label class="col-sm-3 form-control-label">Delivery at</label>
                       <div class='input-group date col-sm-9' ui-jp="datetimepicker" ui-options="{
+                            format: 'DD-MM-YYYY',
                             icons: {
                               time: 'fa fa-clock-o',
                               date: 'fa fa-calendar',
@@ -492,6 +497,7 @@
                     <div class="form-group row">
                       <label class="col-sm-3 form-control-label">Finished at</label>
                       <div class='input-group date col-sm-9' ui-jp="datetimepicker" ui-options="{
+                            format: 'DD-MM-YYYY',
                             icons: {
                               time: 'fa fa-clock-o',
                               date: 'fa fa-calendar',
@@ -636,6 +642,7 @@
                     <div class="form-group row">
                       <label class="col-md-3 form-control-label">Ordering Month</label>
                       <div class='input-group date col-sm-9' ui-jp="datetimepicker" ui-options="{
+                            format: 'DD-MM-YYYY',
                             icons: {
                               time: 'fa fa-clock-o',
                               date: 'fa fa-calendar',
@@ -680,7 +687,7 @@
 <div id="add-permission" class="modal" data-backdrop="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-    <form id="form" action="/contracts//add" method="post" >
+    <form id="form" action="/contracts/add/permission" method="post" >
       <div class="modal-header">
         <h5 class="modal-title">New Permission</h5>
       </div>
@@ -700,6 +707,7 @@
         <div class="form-group row">
           <label class="col-sm-3 form-control-label">Doc Delivery</label>
           <div class='input-group date col-sm-9' ui-jp="datetimepicker" ui-options="{
+                    format: 'DD-MM-YYYY',
                     icons: {
                       time: 'fa fa-clock-o',
                       date: 'fa fa-calendar',
@@ -722,6 +730,7 @@
         <div class="form-group row">
           <label class="col-sm-3 form-control-label">Permission Begin</label>
           <div class='input-group date col-sm-9' ui-jp="datetimepicker" ui-options="{
+                    format: 'DD-MM-YYYY',
                     icons: {
                       time: 'fa fa-clock-o',
                       date: 'fa fa-calendar',
@@ -744,6 +753,7 @@
         <div class="form-group row">
           <label class="col-sm-3 form-control-label">Permission End</label>
           <div class='input-group date col-sm-9' ui-jp="datetimepicker" ui-options="{
+                    format: 'DD-MM-YYYY',
                     icons: {
                       time: 'fa fa-clock-o',
                       date: 'fa fa-calendar',
@@ -854,7 +864,7 @@
 <div id="add-invocie" class="modal" data-backdrop="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-    <form id="form" action="/contracts//add" method="post" >
+    <form id="form" action="/contracts/add/invocie" method="post" >
       <div class="modal-header">
         <h5 class="modal-title">New Invocie</h5>
       </div>
@@ -883,6 +893,7 @@
         <div class="form-group row">
           <label class="col-sm-3 form-control-label">Invocie Send</label>
           <div class='input-group date col-sm-9' ui-jp="datetimepicker" ui-options="{
+                    format: 'DD-MM-YYYY',
                     icons: {
                       time: 'fa fa-clock-o',
                       date: 'fa fa-calendar',
@@ -905,6 +916,7 @@
         <div class="form-group row">
           <label class="col-sm-3 form-control-label">Invocie Permitted</label>
           <div class='input-group date col-sm-9' ui-jp="datetimepicker" ui-options="{
+                    format: 'DD-MM-YYYY',
                     icons: {
                       time: 'fa fa-clock-o',
                       date: 'fa fa-calendar',
@@ -927,6 +939,7 @@
         <div class="form-group row">
           <label class="col-sm-3 form-control-label">Permission End</label>
           <div class='input-group date col-sm-9' ui-jp="datetimepicker" ui-options="{
+                    format: 'DD-MM-YYYY',
                     icons: {
                       time: 'fa fa-clock-o',
                       date: 'fa fa-calendar',
@@ -949,6 +962,7 @@
         <div class="form-group row">
           <label class="col-sm-3 form-control-label">Invocie Paid</label>
           <div class='input-group date col-sm-9' ui-jp="datetimepicker" ui-options="{
+                    format: 'DD-MM-YYYY',
                     icons: {
                       time: 'fa fa-clock-o',
                       date: 'fa fa-calendar',

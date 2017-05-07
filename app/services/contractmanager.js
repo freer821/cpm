@@ -28,7 +28,7 @@ const addContract = function (req, res, next) {
             updateContractOFW(request, function () {
                 res.redirect('/projects');
             });
-        } else if(req.params.action === 'financial') {
+        } else if(req.params.action === 'invocie') {
             updateContractFinancial(request, function () {
                 res.redirect('/projects');
             });
