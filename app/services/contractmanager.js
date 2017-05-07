@@ -21,19 +21,19 @@ const addContract = function (req, res, next) {
 
             });
         } else if(req.params.action === 'permission') {
-            updateContractPermission(request, function () {
+            updateContractPermission(request, res, function () {
 
             });
         } else if(req.params.action === 'ofw') {
-            updateContractOFW(request, function () {
+            updateContractOFW(request, res, function () {
 
             });
         } else if(req.params.action === 'financial') {
-            updateContractFinancial(request, function () {
+            updateContractFinancial(request, res, function () {
 
             });
         } else if(req.params.action === 'fibu') {
-            updateContractFibu(request, function () {
+            updateContractFibu(request, res, function () {
 
             });
         }
@@ -97,7 +97,7 @@ function updateContractBuilding(request, res, callback) {
             plan_end: request.plan_end,
             worker_name: request.worker_name,
             working_months: request.working_months,
-            status: request.status,
+            status: request.status
         }
     };
     db.editContract({id: contract_id},contract);
@@ -107,20 +107,98 @@ function updateContractBuilding(request, res, callback) {
     res.redirect('/projects');
 }
 
-function updateContractPermission(request, callback) {
+function updateContractPermission(request, res, callback) {
+    //todo
+    let contract_id = '17-44-0001-1';
 
+    //todo deal with array
+    let contract = {
+        building_permission:[{
+            type: request.type,
+            doc_delivery: request.doc_delivery,
+            begin: request.begin,
+            end: request.end,
+            cost: request.cost,
+            //todo
+            //status: request.status
+        }]
+    };
+    db.editContract({id: contract_id},contract);
+    if (typeof callback === 'function') {
+        callback();
+    }
+    res.redirect('/projects');
 }
 
-function updateContractOFW(request, callback) {
+function updateContractOFW(request, res, callback) {
+    //todo
+    let contract_id = '17-44-0001-1';
 
+    let contract = {
+        ofw:{
+            permission_nr: request.permission_nr,
+            worker_name: request.worker_name,
+            delivery: request.delivery,
+            completion_at: request.completion_at,
+            clean: request.clean,
+            acceptance :{
+                applied: request.applied,
+                granted: request.granted
+            },
+            //todo
+            //ofw_status: request.ofw_status,
+            extern_company: {
+                name: request.name,
+                price: request.price
+            }
+        }
+    };
+    db.editContract({id: contract_id},contract);
+    if (typeof callback === 'function') {
+        callback();
+    }
+    res.redirect('/projects');
 }
 
-function updateContractFinancial(request, callback) {
+function updateContractFinancial(request, res, callback) {
+    //todo
+    let contract_id = '17-44-0001-1';
 
+    //todo deal with array
+    let contract = {
+        invoice:[{
+            rechnung_nr: request.rechnung_nr,
+            current_value: request.current_value,
+            sum: request.sum,
+            aufmass_am: request.aufmass_am,
+            bewert_aufmass: request.bewert_aufmass,
+            guts_datum: request.guts_datum,
+            status: request.status
+        }]
+    };
+    db.editContract({id: contract_id},contract);
+    if (typeof callback === 'function') {
+        callback();
+    }
+    res.redirect('/projects');
 }
 
-function updateContractFibu(request, callback) {
+function updateContractFibu(request, res, callback) {
+    //todo
+    let contract_id = '17-44-0001-1';
 
+    let contract = {
+        fibu:{
+            price: request.price,
+            ordering_month: request.ordering_month,
+            status: request.status
+        }
+    };
+    db.editContract({id: contract_id},contract);
+    if (typeof callback === 'function') {
+        callback();
+    }
+    res.redirect('/projects');
 }
 
 function getContractID(count) {
