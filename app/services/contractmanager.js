@@ -14,27 +14,27 @@ const addContract = function (req, res, next) {
 
         if(req.params.action === 'basic') {
             updateContractBasic(request, function () {
-				
+                res.redirect('/projects');
             });
         } else if(req.params.action === 'building') {
-            updateContractBuilding(request, res, function () {
-
+            updateContractBuilding(request, function () {
+                res.redirect('/projects');
             });
         } else if(req.params.action === 'permission') {
-            updateContractPermission(request, res, function () {
-
+            updateContractPermission(request, function () {
+                res.redirect('/projects');
             });
         } else if(req.params.action === 'ofw') {
-            updateContractOFW(request, res, function () {
-
+            updateContractOFW(request, function () {
+                res.redirect('/projects');
             });
         } else if(req.params.action === 'financial') {
-            updateContractFinancial(request, res, function () {
-
+            updateContractFinancial(request, function () {
+                res.redirect('/projects');
             });
         } else if(req.params.action === 'fibu') {
-            updateContractFibu(request, res, function () {
-
+            updateContractFibu(request, function () {
+                res.redirect('/projects');
             });
         }
     }
@@ -87,7 +87,7 @@ function updateContractBasic(request, callback) {
     });
 }
 
-function updateContractBuilding(request, res, callback) {
+function updateContractBuilding(request, callback) {
     //todo
     let contract_id = '17-44-0001-1';
 
@@ -104,10 +104,9 @@ function updateContractBuilding(request, res, callback) {
     if (typeof callback === 'function') {
         callback();
     }
-    res.redirect('/projects');
 }
 
-function updateContractPermission(request, res, callback) {
+function updateContractPermission(request, callback) {
     //todo
     let contract_id = '17-44-0001-1';
 
@@ -127,10 +126,9 @@ function updateContractPermission(request, res, callback) {
     if (typeof callback === 'function') {
         callback();
     }
-    res.redirect('/projects');
 }
 
-function updateContractOFW(request, res, callback) {
+function updateContractOFW(request, callback) {
     //todo
     let contract_id = '17-44-0001-1';
 
@@ -157,10 +155,9 @@ function updateContractOFW(request, res, callback) {
     if (typeof callback === 'function') {
         callback();
     }
-    res.redirect('/projects');
 }
 
-function updateContractFinancial(request, res, callback) {
+function updateContractFinancial(request, callback) {
     //todo
     let contract_id = '17-44-0001-1';
 
@@ -180,10 +177,9 @@ function updateContractFinancial(request, res, callback) {
     if (typeof callback === 'function') {
         callback();
     }
-    res.redirect('/projects');
 }
 
-function updateContractFibu(request, res, callback) {
+function updateContractFibu(request, callback) {
     //todo
     let contract_id = '17-44-0001-1';
 
@@ -198,7 +194,6 @@ function updateContractFibu(request, res, callback) {
     if (typeof callback === 'function') {
         callback();
     }
-    res.redirect('/projects');
 }
 
 function getContractID(count) {
