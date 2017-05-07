@@ -8,35 +8,12 @@ const db = require('../common/database');
 
 const addContract = function (req, res, next) {
     if (req.method === "GET") {
-        res.render('addandeditcontract', {title:'Project Management', project_id: req.query.project_id, project_adr:req.query.project_adr,  user: req.user});
+        res.render('addcontract', {title:'Project Management', project_id: req.query.project_id, project_adr:req.query.project_adr,  user: req.user});
     } else {
         let request = req.body;
-
-        if(req.params.action === 'basic') {
-            updateContractBasic(request, function () {
-                res.redirect('/projects');
-            });
-        } else if(req.params.action === 'building') {
-            updateContractBuilding(request, function () {
-                res.redirect('/projects');
-            });
-        } else if(req.params.action === 'permission') {
-            updateContractPermission(request, function () {
-                res.redirect('/projects');
-            });
-        } else if(req.params.action === 'ofw') {
-            updateContractOFW(request, function () {
-                res.redirect('/projects');
-            });
-        } else if(req.params.action === 'invocie') {
-            updateContractFinancial(request, function () {
-                res.redirect('/projects');
-            });
-        } else if(req.params.action === 'fibu') {
-            updateContractFibu(request, function () {
-                res.redirect('/projects');
-            });
-        }
+        updateContractBasic(request, function () {
+            res.redirect('/projects');
+        });
     }
 };
 
@@ -213,7 +190,37 @@ const getContractByProjectID = function (req, res, next) {
 };
 
 const editContract = function (req, res, next) {
+    if (req.method === "GET") {
+        res.render('editcontract', {title:'Project Management', project_id: req.query.project_id, project_adr:req.query.project_adr,  user: req.user});
+    } else {
+        let request = req.body;
 
+        if(req.params.action === 'basic') {
+            updateContractBasic(request, function () {
+                res.redirect('/projects');
+            });
+        } else if(req.params.action === 'building') {
+            updateContractBuilding(request, function () {
+                res.redirect('/projects');
+            });
+        } else if(req.params.action === 'permission') {
+            updateContractPermission(request, function () {
+                res.redirect('/projects');
+            });
+        } else if(req.params.action === 'ofw') {
+            updateContractOFW(request, function () {
+                res.redirect('/projects');
+            });
+        } else if(req.params.action === 'invocie') {
+            updateContractFinancial(request, function () {
+                res.redirect('/projects');
+            });
+        } else if(req.params.action === 'fibu') {
+            updateContractFibu(request, function () {
+                res.redirect('/projects');
+            });
+        }
+    }
 };
 
 module.exports = {
