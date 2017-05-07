@@ -39,7 +39,7 @@
           <div class="tab-content pos-rlt">
             <div class="tab-pane active"  id="tab-1">
               <div class="p-a-md dker _600" >Basic Info</div>
-              <form role="form" action="/contracts/add" class="p-a-md" method="post">
+              <form role="form" action="/contracts/add/basic" class="p-a-md" method="post">
               
                 <div class="row">
                   <div class="col-md-6">
@@ -279,7 +279,7 @@
             </div>
             <div class="tab-pane" id="tab-2">
               <div class="p-a-md dker _600">Buliding</div>
-              <form role="form" class="p-a-md">
+              <form role="form" action="/contracts/add/building" class="p-a-md" method="post">
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="form-group row">
@@ -379,7 +379,7 @@
             </div>
             <div class="tab-pane" id="tab-3">
               <div class="p-a-md dker _600">Building Permission</div>
-              <form role="form" class="p-a-md">
+              <form role="form" action="/contracts/add/permission" class="p-a-md" method="post">
 
                 <div class="row">
                   <div class="col-md-6">
@@ -487,7 +487,7 @@
             </div>
             <div class="tab-pane" id="tab-4">
               <div class="p-a-md dker _600">OFW Status</div>
-              <form role="form" class="p-a-md">
+              <form role="form" action="/contracts/add/ofw" class="p-a-md" method="post">
 
                 <div class="row">
                   <div class="col-sm-6">
@@ -603,7 +603,7 @@
             </div>
             <div class="tab-pane" id="tab-5">
               <div class="p-a-md dker _600">Financial Accounting</div>
-              <form role="form" action="/contracts/add" class="p-a-md" method="post">
+              <form role="form" action="/contracts/add/financial" class="p-a-md" method="post">
 
                 <div class="form-group row">
                   <label class="col-md-3 form-control-label">Invoice Nr.</label>
@@ -719,7 +719,7 @@
             </div>
             <div class="tab-pane" id="tab-6">
               <div class="p-a-md dker _600">Fibu</div>
-              <form role="form" action="/contracts/add" class="p-a-md" method="post">
+              <form role="form" action="/contracts/add/fibu" class="p-a-md" method="post">
 
                 <div class="row">
                   <div class="col-md-6">
@@ -762,6 +762,8 @@
                   </div>
                 </div>
 
+                <input type="hidden" name="project_id" value="{{project_id}}">                
+                <button type="submit" class="btn btn-info m-t">Update</button>
               </form>
             </div>
           </div>
