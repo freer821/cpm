@@ -29,13 +29,22 @@ const addProject = function (req, res, next) {
             db.editProject({id: project.id}, project);
 
             let project_adr = project.street+', '+project.community+', '+project.zipcode+', '+project.city;
-            res.render('addandeditcontract', {title:'Project Management', project_id: project.id, project_adr:project_adr,  user: req.user});
+            res.render('addcontract', {title:'Project Management', project_id: project.id, project_adr:project_adr,  user: req.user});
         }
     });
 };
 
+const updateProject = function (req, res, next) {
+    let project = req.body;
+    let project_id = req.params.id;
+    logger.trace(project_id);
+    project.id = project_id;
+    db.editProject({id: project_id}, project);
+    res.redirect('/projects');
+};
 
 module.exports = {
     getAllProjects: getAllProjects,
-    addProject:addProject
+    addProject:addProject,
+    updateProject:updateProject
 };
