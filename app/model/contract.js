@@ -41,7 +41,7 @@ const contractSchema = new Schema({
         plan_begin: Date, // geplanter_baubegin
         plan_end: Date,  // geplanter_bauende
         worker_name: String,         // kolonnen
-        working_months: Date,  // leistungsmonate MM-YYYY
+        working_months: String,  // leistungsmonate MM-YYYY
         status: String,      //  4 zustände
         procent_completion: Number // the procent of completion auto_fertigstellung
     },

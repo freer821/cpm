@@ -5,7 +5,7 @@
   <div class="box">
     <div class="box-header">
       <h3>{{project_id}}</h3>
-      <small>{{project_adr}}</small>
+      <small>{{project_adr}}</br> {{contract|json}}</small>
     </div>
     <div class="box-body">
       <div class="row">
@@ -136,7 +136,7 @@
                               close: 'fa fa-remove'
                             }
                           }">
-                        <input type='text' class="form-control" name="contract_delivery" value="{{contract.contract_delivery}}">
+                        <input type='text' class="form-control" name="contract_delivery" value="{{contract.contract_delivery | date('d-m-Y')}}">
                         <span class="input-group-addon">
                             <span class="fa fa-calendar"></span>
                         </span>
@@ -160,7 +160,7 @@
                               close: 'fa fa-remove'
                             }
                           }">
-                        <input type='text' class="form-control" name="doc_delivery" value="{{contract.doc_delivery}}">
+                        <input type='text' class="form-control" name="doc_delivery" value="{{contract.doc_delivery | date('d-m-Y')}}">
                         <span class="input-group-addon">
                             <span class="fa fa-calendar"></span>
                         </span>
@@ -273,9 +273,9 @@
                 </div>
                 <div class="form-group">
                   <label>Comment</label>
-                  <input type="text" class="form-control" name="comment">
+                  <input type="text" class="form-control" name="comment" value="{{contract.comment}}">
                 </div>
-                <input type="hidden" name="project_id" value="{{project_id}}">
+                <input type="hidden" name="contract_id" value="{{contract.id}}">
                 <button type="submit" class="btn btn-info m-t">Update</button>
               </form>
             </div>
@@ -300,7 +300,7 @@
                               close: 'fa fa-remove'
                             }
                           }">
-                        <input type='text' class="form-control" name="plan_begin" value="{{contract.building_work.plan_begin}}">
+                        <input type='text' class="form-control" name="plan_begin" value="{{contract.building_work.plan_begin | date('d-m-Y')}}">
                         <span class="input-group-addon">
                             <span class="fa fa-calendar"></span>
                         </span>
@@ -324,7 +324,7 @@
                               close: 'fa fa-remove'
                             }
                           }">
-                        <input type='text' class="form-control" name="plan_end" value="{{contract.building_work.plan_end}}">
+                        <input type='text' class="form-control" name="plan_end" value="{{contract.building_work.plan_end | date('d-m-Y')}}">
                         <span class="input-group-addon">
                             <span class="fa fa-calendar"></span>
                         </span>
@@ -357,11 +357,11 @@
                     <div class="form-group row">
                       <label class="col-md-3 form-control-label">Status</label>
                       <div class="col-md-9">
-                        <select class="form-control c-select" id="building_status" name="status" value="{{contract.building_work.status}}">
-                          <option value="open">Open</option>
-                          <option value="progress">in Progress</option>
-                          <option value="finished">Finished</option>
-                          <option value="done">Done</option>
+                        <select class="form-control c-select" id="building_status" name="status">
+                          <option value="open" {% if contract.building_work.status ==='open' %}selected{% endif %} >Open</option>
+                          <option value="progress" {% if contract.building_work.status ==='progress' %}selected{% endif %} >in Progress</option>
+                          <option value="finished" {% if contract.building_work.status ==='finished' %}selected{% endif %}>Finished</option>
+                          <option value="done" {% if contract.building_work.status ==='done' %}selected{% endif %} >Done</option>
                         </select>
                       </div>
                     </div>
@@ -377,7 +377,7 @@
                   </div>
                 </div> 
               </div>
-                <input type="hidden" name="project_id" value="{{project_id}}">                
+                <input type="hidden" name="contract_id" value="{{contract.id}}">
                 <button type="submit" class="btn btn-info m-t">Update</button>
               </form>
             </div>
@@ -486,7 +486,7 @@
                               close: 'fa fa-remove'
                             }
                           }">
-                        <input type='text' class="form-control" name="delivery" value="{{contract.ofw.delivery}}">
+                        <input type='text' class="form-control" name="delivery" value="{{contract.ofw.delivery | date('d-m-Y')}}">
                         <span class="input-group-addon">
                             <span class="fa fa-calendar"></span>
                         </span>
@@ -510,7 +510,7 @@
                               close: 'fa fa-remove'
                             }
                           }">
-                        <input type='text' class="form-control" name="completion_at" value="{{contract.ofw.completion_at}}">
+                        <input type='text' class="form-control" name="completion_at" value="{{contract.ofw.completion_at | date('d-m-Y')}}">
                         <span class="input-group-addon">
                             <span class="fa fa-calendar"></span>
                         </span>
@@ -559,7 +559,7 @@
                   </div>
                 </div>   
 
-                <input type="hidden" name="project_id" value="{{project_id}}">                
+                <input type="hidden" name="contract_id" value="{{contract.id}}">
                 <button type="submit" class="btn btn-info m-t">Update</button>
               </form>
             </div>
@@ -655,7 +655,7 @@
                               close: 'fa fa-remove'
                             }
                           }">
-                        <input type='text' class="form-control" name="ordering_month" value="{{contract.fibu.ordering_month}}">
+                        <input type='text' class="form-control" name="ordering_month" value="{{contract.fibu.ordering_month | date('d-m-Y')}}">
                         <span class="input-group-addon">
                             <span class="fa fa-calendar"></span>
                         </span>
@@ -671,7 +671,7 @@
                   </div>
                 </div>
 
-                <input type="hidden" name="project_id" value="{{project_id}}">                
+                <input type="hidden" name="contract_id" value="{{contract.id}}">
                 <button type="submit" class="btn btn-info m-t">Update</button>
               </form>
             </div>
@@ -787,7 +787,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <input type="hidden" name="project_id" value="{{project_id}}">
+        <input type="hidden" name="contract_id" value="{{contract.id}}">
         <button type="button" class="btn dark-white p-x-md" data-dismiss="modal">Cancel</button>
         <button type="submit" class="btn danger p-x-md">Submit</button>
       </div>
@@ -989,7 +989,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <input type="hidden" name="project_id" value="{{project_id}}">
+        <input type="hidden" name="contract_id" value="{{contract.id}}">
         <button type="button" class="btn dark-white p-x-md" data-dismiss="modal">Cancel</button>
         <button type="submit" class="btn danger p-x-md">Submit</button>
       </div>

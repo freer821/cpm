@@ -11,114 +11,140 @@ const addContract = function (req, res, next) {
         res.render('addcontract', {title:'Project Management', project_id: req.query.project_id, project_adr:req.query.project_adr,  user: req.user});
     } else {
         let request = req.body;
-        updateContractBasic(request, function () {
+        db.countContract(function (err, count) {
+            if (err) {
+                logger.error('error to count contract');
+                count = 0;
+            }
+            let contract = {
+                id: getContractID(count),
+                project_id: request.project_id,
+                customer: request.customer,
+                cost_code: request.cost_code,          // kst
+                project_nr: request.project_nr,  // vom auftraggeber
+                sap_nr: request.sap_nr,
+                electric_nr: request.electric_nr,
+                gas_nr: request.gas_nr,
+                water_nr: request.water_nr,
+                partner_name: request.partner_name,
+                contract_delivery: request.contract_delivery? moment(request.contract_delivery): undefined,  // contract delivery auftrag_uebergeb
+                doc_delivery: request.doc_delivery? moment(request.doc_delivery): undefined, // documents delivery unterlage_uebergeb
+                work_content: request.work_content, // arbeitsbemerkung
+                contract_typ: {            // auftrag typ
+                    electric: request.is_electric,     // elektro
+                    water: request.is_water,      // wasser
+                    gas: request.is_gas,         // gas
+                    telecom: request.is_telecom,     // telekom
+                    light: request.is_light,
+                    others: request.is_others        // others
+                },
+                isBombExisted: request.isBombExisted,    // bomb, weapon kampfmittell
+                estimated_value: request.estimated_value,      // schaetzwert (Euro)
+                manager_name: request.manager_name,   // bauleiter_name
+                rot_b: request.rot_b,         // Auftrageber Telekom
+                comment: request.comment,
+                doc_location: {
+                    person: request.person,
+                    reason: request.reason
+                }
+            };
+
+            db.editContract({id: contract.id},contract);
+
             res.redirect('/projects');
         });
     }
 };
 
 function updateContractBasic(request, callback) {
-    db.countContract(function (err, count) {
-        if (err) {
-            logger.error('error to count contract');
-            count = 0;
-        }
-        let contract = {
-            id: getContractID(count),
-            project_id: request.project_id,
-            customer: request.customer,
-            cost_code: request.cost_code,          // kst
-            project_nr: request.project_nr,  // vom auftraggeber
-            sap_nr: request.sap_nr,
-            electric_nr: request.electric_nr,
-            gas_nr: request.gas_nr,
-            water_nr: request.water_nr,
-            partner_name: request.partner_name,
-            contract_delivery: request.contract_delivery? moment(request.contract_delivery): undefined,  // contract delivery auftrag_uebergeb
-            doc_delivery: request.doc_delivery? moment(request.doc_delivery): undefined, // documents delivery unterlage_uebergeb
-            work_content: request.work_content, // arbeitsbemerkung
-            contract_typ: {            // auftrag typ
-                electric: request.is_electric,     // elektro
-                water: request.is_water,      // wasser
-                gas: request.is_gas,         // gas
-                telecom: request.is_telecom,     // telekom
-                light: request.is_light,
-                others: request.is_others        // others
-            },
-            isBombExisted: request.isBombExisted,    // bomb, weapon kampfmittell
-            estimated_value: request.estimated_value,      // schaetzwert (Euro)
-            manager_name: request.manager_name,   // bauleiter_name
-            rot_b: request.rot_b,         // Auftrageber Telekom
-            comment: request.comment,
-            doc_location: {
-                person: request.person,
-                reason: request.reason
-            }
-        };
 
-        db.editContract({id: contract.id},contract);
-
-        if (typeof callback === 'function') {
-        	callback();
+    let contract = {
+        customer: request.customer,
+        cost_code: request.cost_code,          // kst
+        project_nr: request.project_nr,  // vom auftraggeber
+        sap_nr: request.sap_nr,
+        electric_nr: request.electric_nr,
+        gas_nr: request.gas_nr,
+        water_nr: request.water_nr,
+        partner_name: request.partner_name,
+        contract_delivery: request.contract_delivery? moment(request.contract_delivery,"DD-MM-YYYY"): undefined,  // contract delivery auftrag_uebergeb
+        doc_delivery: request.doc_delivery? moment(request.doc_delivery,"DD-MM-YYYY"): undefined, // documents delivery unterlage_uebergeb
+        work_content: request.work_content, // arbeitsbemerkung
+        contract_typ: {            // auftrag typ
+            electric: request.is_electric,     // elektro
+            water: request.is_water,      // wasser
+            gas: request.is_gas,         // gas
+            telecom: request.is_telecom,     // telekom
+            light: request.is_light,
+            others: request.is_others        // others
+        },
+        isBombExisted: request.isBombExisted,    // bomb, weapon kampfmittell
+        estimated_value: request.estimated_value,      // schaetzwert (Euro)
+        manager_name: request.manager_name,   // bauleiter_name
+        rot_b: request.rot_b,         // Auftrageber Telekom
+        comment: request.comment,
+        doc_location: {
+            person: request.person,
+            reason: request.reason
         }
-    });
+    };
+
+    db.editContract({id: request.contract_id},contract);
+
+    if (typeof callback === 'function') {
+        callback();
+    }
 }
 
 function updateContractBuilding(request, callback) {
-    //todo
-    let contract_id = '17-44-0001-1';
 
     let contract = {
         building_work:{
-            plan_begin: request.plan_begin,
-            plan_end: request.plan_end,
+            plan_begin: request.plan_begin? moment(request.plan_begin,"DD-MM-YYYY"): undefined,
+            plan_end: request.plan_end? moment(request.plan_end,"DD-MM-YYYY"): undefined,
             worker_name: request.worker_name,
             working_months: request.working_months,
             status: request.status
         }
     };
-    db.editContract({id: contract_id},contract);
+    db.editContract({id: request.contract_id},contract);
     if (typeof callback === 'function') {
         callback();
     }
 }
 
 function updateContractPermission(request, callback) {
-    //todo
-    let contract_id = '17-44-0001-1';
 
     //todo deal with array
     let contract = {
         building_permission:[{
             type: request.type,
-            doc_delivery: request.doc_delivery,
-            begin: request.begin,
-            end: request.end,
+            doc_delivery: request.doc_delivery? moment(request.doc_delivery,"DD-MM-YYYY"): undefined,
+            begin: request.begin? moment(request.begin,"DD-MM-YYYY"): undefined,
+            end: request.end? moment(request.end,"DD-MM-YYYY"): undefined,
             cost: request.cost
             //todo
             //status: request.status
         }]
     };
-    db.editContract({id: contract_id},contract);
+    db.editContract({id: request.contract_id},contract);
     if (typeof callback === 'function') {
         callback();
     }
 }
 
 function updateContractOFW(request, callback) {
-    //todo
-    let contract_id = '17-44-0001-1';
 
     let contract = {
         ofw:{
             permission_nr: request.permission_nr,
             worker_name: request.worker_name,
-            delivery: request.delivery,
-            completion_at: request.completion_at,
+            delivery: request.delivery? moment(request.delivery,"DD-MM-YYYY"): undefined,
+            completion_at: request.completion_at? moment(request.completion_at,"DD-MM-YYYY"): undefined,
             clean: request.clean,
             acceptance :{
-                applied: request.applied,
-                granted: request.granted
+                applied: request.applied? moment(request.applied,"DD-MM-YYYY"): undefined,
+                granted: request.granted? moment(request.granted,"DD-MM-YYYY"): undefined
             },
             //todo
             //ofw_status: request.ofw_status,
@@ -128,15 +154,13 @@ function updateContractOFW(request, callback) {
             }
         }
     };
-    db.editContract({id: contract_id},contract);
+    db.editContract({id: request.contract_id},contract);
     if (typeof callback === 'function') {
         callback();
     }
 }
 
 function updateContractFinancial(request, callback) {
-    //todo
-    let contract_id = '17-44-0001-1';
 
     //todo deal with array
     let contract = {
@@ -144,21 +168,19 @@ function updateContractFinancial(request, callback) {
             rechnung_nr: request.rechnung_nr,
             current_value: request.current_value,
             sum: request.sum,
-            aufmass_am: request.aufmass_am,
-            bewert_aufmass: request.bewert_aufmass,
-            guts_datum: request.guts_datum,
+            aufmass_am: request.aufmass_am? moment(request.aufmass_am,"DD-MM-YYYY"): undefined,
+            bewert_aufmass: request.bewert_aufmass? moment(request.bewert_aufmass,"DD-MM-YYYY"): undefined,
+            guts_datum: request.guts_datum? moment(request.guts_datum,"DD-MM-YYYY"): undefined,
             status: request.status
         }]
     };
-    db.editContract({id: contract_id},contract);
+    db.editContract({id: request.contract_id},contract);
     if (typeof callback === 'function') {
         callback();
     }
 }
 
 function updateContractFibu(request, callback) {
-    //todo
-    let contract_id = '17-44-0001-1';
 
     let contract = {
         fibu:{
@@ -167,7 +189,7 @@ function updateContractFibu(request, callback) {
             status: request.status
         }
     };
-    db.editContract({id: contract_id},contract);
+    db.editContract({id: request.contract_id},contract);
     if (typeof callback === 'function') {
         callback();
     }
