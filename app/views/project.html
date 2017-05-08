@@ -250,7 +250,8 @@ $(document).ready(function() {
           // Open this row
           row.child( contractOverview(row.data()) ).show();
           // set subTableid,use project_id
-          id = row.data()[1];
+          var id = row.data()[1];
+          var addr = row.data()[4] +', '+ row.data()[3]+ ', '+row.data()[2];
           var subTable = $('#'+id).DataTable( {
             "info" : false,
             "paging": false,
@@ -273,7 +274,7 @@ $(document).ready(function() {
                 {
                   "data": "id",
                   "render": function ( data, type, full, meta ) {
-                    return '<a href="/contracts/edit/'+data+'" ><i class="material-icons md-24">&#xe3c9;</i></a>';
+                    return '<a href="/contracts/edit/'+data+'?project_id='+id+'&project_adr='+addr+'" ><i class="material-icons md-24">&#xe3c9;</i></a>';
                   }
                 }
             ]

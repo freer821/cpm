@@ -46,7 +46,7 @@
                     <div class="form-group row">
                       <label class="col-md-3 form-control-label">Customer</label>
                       <div class="col-md-9">
-                        <input type="text" class="form-control" name="customer">
+                        <input type="text" class="form-control" name="customer" value="{{contract.customer}}">
                       </div>
                     </div>   
                   </div>
@@ -54,7 +54,7 @@
                     <div class="form-group row">
                       <label class="col-md-3 form-control-label">Partner Name</label>
                       <div class="col-md-9">
-                        <input type="text" class="form-control" name="partner_name"">
+                        <input type="text" class="form-control" name="partner_name" value="{{contract.partner_name}}">
                       </div>
                     </div>   
                   </div>
@@ -65,7 +65,7 @@
                     <div class="form-group row">
                       <label class="col-sm-3 form-control-label">Project Nr</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" name="project_nr"">
+                        <input type="text" class="form-control" name="project_nr" value="{{contract.project_nr}}">
                       </div>
                     </div>   
                   </div>
@@ -73,7 +73,7 @@
                     <div class="form-group row">
                       <label class="col-sm-3 form-control-label">SAP Nr</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" name="sap_nr">
+                        <input type="text" class="form-control" name="sap_nr" value="{{contract.sap_nr}}">
                       </div> 
                     </div>  
                   </div>
@@ -84,7 +84,7 @@
                     <div class="form-group row">
                       <label class="col-sm-3 form-control-label">Cost Code</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" name="cost_code"">
+                        <input type="text" class="form-control" name="cost_code" value="{{contract.cost_code}}">
                       </div>
                     </div>   
                   </div>
@@ -92,7 +92,7 @@
                     <div class="form-group row">
                       <label class="col-sm-3 form-control-label">Manager Name</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" name="manager_name">
+                        <input type="text" class="form-control" name="manager_name" value="{{contract.manager_name}}">
                       </div> 
                     </div>  
                   </div>
@@ -103,7 +103,7 @@
                     <div class="form-group row">
                       <label class="col-sm-3 form-control-label">Estimated Value</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" name="estimated_value"">
+                        <input type="text" class="form-control" name="estimated_value" value="{{contract.estimated_value}}">
                       </div>
                     </div>   
                   </div>
@@ -111,7 +111,7 @@
                     <div class="form-group row">
                       <label class="col-sm-3 form-control-label">Work Content</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" name="work_content">
+                        <input type="text" class="form-control" name="work_content" value="{{contract.work_content}}">
                       </div> 
                     </div>  
                   </div>
@@ -136,7 +136,7 @@
                               close: 'fa fa-remove'
                             }
                           }">
-                        <input type='text' class="form-control" name="contract_delivery">
+                        <input type='text' class="form-control" name="contract_delivery" value="{{contract.contract_delivery}}">
                         <span class="input-group-addon">
                             <span class="fa fa-calendar"></span>
                         </span>
@@ -160,7 +160,7 @@
                               close: 'fa fa-remove'
                             }
                           }">
-                        <input type='text' class="form-control" name="contract_delivery">
+                        <input type='text' class="form-control" name="doc_delivery" value="{{contract.doc_delivery}}">
                         <span class="input-group-addon">
                             <span class="fa fa-calendar"></span>
                         </span>
@@ -174,32 +174,32 @@
                   <div class="col-sm-9">
                     <div class="form-group row">
                       <label class="md-check col-sm-2 form-control-label">
-                        <input type="checkbox" name="is_electric">
+                        <input type="checkbox" name="is_electric" {% if contract.contract_typ.electric %}checked{% endif %}>
                         <i class="red"></i>
                           electric
                       </label>
                       <label class="md-check col-sm-2 form-control-label">
-                        <input type="checkbox" name="is_water">
+                        <input type="checkbox" name="is_water" {% if contract.contract_typ.water %}checked{% endif %}>
                         <i class="green"></i>
                           water
                       </label>
                       <label class="md-check col-sm-2 form-control-label">
-                        <input type="checkbox" name="is_gas">
+                        <input type="checkbox" name="is_gas" {% if contract.contract_typ.gas %}checked{% endif %}>
                         <i class="yellow"></i>
                           gas
                       </label>
                       <label class="md-check col-sm-2 form-control-label">
-                        <input type="checkbox" name="is_telecom">
+                        <input type="checkbox" name="is_telecom" {% if contract.contract_typ.telecom %}checked{% endif %}>
                         <i class="blue"></i>
                           telecom
                       </label>
                       <label class="md-check col-sm-2 form-control-label">
-                        <input type="checkbox" name="is_light">
+                        <input type="checkbox" name="is_light" {% if contract.contract_typ.light %}checked{% endif %}>
                         <i class="orange"></i>
                           light
                       </label>
                       <label class="md-check col-sm-2 form-control-label">
-                        <input type="checkbox" name="is_others">
+                        <input type="checkbox" name="is_others" {% if contract.contract_typ.others %}checked{% endif %}>
                         <i class="grey"></i>
                           others
                       </label>
@@ -212,7 +212,7 @@
                     <div class="form-group row">
                       <label class="col-sm-2 form-control-label">A-Elt Nr</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" name="electric_nr">
+                        <input type="text" class="form-control" name="electric_nr" value="{{contract.electric_nr}}">
                       </div>
                     </div>  
                   </div>
@@ -220,7 +220,7 @@
                     <div class="form-group row">
                       <label class="col-sm-2 form-control-label">A-W Nr</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" name="water_nr"">   
+                        <input type="text" class="form-control" name="water_nr" value="{{contract.water_nr}}">   
                       </div>
                     </div>
                   </div>
@@ -228,7 +228,7 @@
                     <div class="form-group row">
                       <label class="col-sm-2 form-control-label">A-G Nr</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" name="gas_nr">  
+                        <input type="text" class="form-control" name="gas_nr" value="{{contract.gas_nr}}">  
                       </div>
                     </div> 
                   </div>
@@ -238,7 +238,7 @@
                   <label class="col-sm-3 form-control-label">Rot B</label>
                   <div class="col-sm-9">
                     <label class="ui-switch primary m-t-xs m-r">
-                      <input type="checkbox" name="rot_b">
+                      <input type="checkbox" name="rot_b" {% if contract.rot_b %}checked{% endif %}>
                       <i></i>
                     </label>
                   </div>
@@ -248,7 +248,7 @@
                   <label class="col-sm-3 form-control-label">Bomb Existed</label>
                   <div class="col-sm-9">
                     <label class="ui-switch info m-t-xs m-r">
-                      <input type="checkbox" name="isBombExisted">
+                      <input type="checkbox" name="isBombExisted" {% if contract.isBombExisted %}checked{% endif %}>
                       <i></i>
                     </label>
                   </div>
@@ -260,13 +260,13 @@
                     <div class="form-group row">
                       <label class="col-sm-2 form-control-label">Person</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" name="person">  
+                        <input type="text" class="form-control" name="person" value="{{contract.doc_location.person}}">  
                       </div>
                     </div> 
                     <div class="form-group row">
                       <label class="col-sm-2 form-control-label">Reason</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" name="reason">  
+                        <input type="text" class="form-control" name="reason" value="{{contract.doc_location.reason}}">  
                       </div>
                     </div> 
                   </div>
@@ -300,7 +300,7 @@
                               close: 'fa fa-remove'
                             }
                           }">
-                        <input type='text' class="form-control" name="plan_begin">
+                        <input type='text' class="form-control" name="plan_begin" value="{{contract.building_work.plan_begin}}">
                         <span class="input-group-addon">
                             <span class="fa fa-calendar"></span>
                         </span>
@@ -324,7 +324,7 @@
                               close: 'fa fa-remove'
                             }
                           }">
-                        <input type='text' class="form-control" name="plan_end">
+                        <input type='text' class="form-control" name="plan_end" value="{{contract.building_work.plan_end}}">
                         <span class="input-group-addon">
                             <span class="fa fa-calendar"></span>
                         </span>
@@ -338,7 +338,7 @@
                     <div class="form-group row">
                       <label class="col-md-3 form-control-label">Worker</label>
                       <div class="col-md-9">
-                        <input type="text" class="form-control" name="worker_name">
+                        <input type="text" class="form-control" name="worker_name" value="{{contract.building_work.worker_name}}">
                       </div>
                     </div>   
                   </div>
@@ -346,7 +346,7 @@
                     <div class="form-group row">
                       <label class="col-md-3 form-control-label">Working Month</label>
                       <div class="col-md-9">
-                        <input type="text" class="form-control" name="working_months"">
+                        <input type="text" class="form-control" name="working_months" value="{{contract.building_work.working_months}}">
                       </div>
                     </div>   
                   </div>
@@ -357,7 +357,7 @@
                     <div class="form-group row">
                       <label class="col-md-3 form-control-label">Status</label>
                       <div class="col-md-9">
-                        <select class="form-control c-select" id="building_status" name="status">
+                        <select class="form-control c-select" id="building_status" name="status" value="{{contract.building_work.status}}">
                           <option value="open">Open</option>
                           <option value="progress">in Progress</option>
                           <option value="finished">Finished</option>
@@ -418,7 +418,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      {% for permission in permissions %}
+                      {% for permission in contract.building_permission %}
                         {% set delurl = '/contract/permission/del/'+permission._id %}
                         <tr>
                         <td>{{permission.type}}</td>
@@ -454,7 +454,7 @@
                     <div class="form-group row">
                       <label class="col-sm-3 form-control-label">Worker Name</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" name="worker_name"">
+                        <input type="text" class="form-control" name="worker_name" value="{{contract.ofw.worker_name}}">
                       </div>
                     </div>   
                   </div>
@@ -462,7 +462,7 @@
                     <div class="form-group row">
                       <label class="col-sm-3 form-control-label">Permission Number</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" name="permission_nr">
+                        <input type="text" class="form-control" name="permission_nr" value="{{contract.ofw.permission_nr}}">
                       </div> 
                     </div>  
                   </div>
@@ -486,7 +486,7 @@
                               close: 'fa fa-remove'
                             }
                           }">
-                        <input type='text' class="form-control" name="delivery">
+                        <input type='text' class="form-control" name="delivery" value="{{contract.ofw.delivery}}">
                         <span class="input-group-addon">
                             <span class="fa fa-calendar"></span>
                         </span>
@@ -510,7 +510,7 @@
                               close: 'fa fa-remove'
                             }
                           }">
-                        <input type='text' class="form-control" name="completion_at">
+                        <input type='text' class="form-control" name="completion_at" value="{{contract.ofw.completion_at}}">
                         <span class="input-group-addon">
                             <span class="fa fa-calendar"></span>
                         </span>
@@ -523,7 +523,7 @@
                   <label class="col-sm-3 form-control-label">Clean</label>
                   <div class="col-sm-9">
                     <label class="ui-switch primary m-t-xs m-r">
-                      <input type="checkbox" name="clean">
+                      <input type="checkbox" name="clean" {% if contract.ofw.clean %}checked{% endif %} >
                       <i></i>
                     </label>
                   </div>
@@ -534,7 +534,7 @@
                   <label class="col-sm-2 form-control-label">acceptance</label>
                   <div class="col-sm-10">
                     <label class="ui-switch primary m-t-xs m-r">
-                      <input type="checkbox" id="is_acceptanced" name="is_acceptanced">
+                      <input type="checkbox" id="is_acceptanced" name="is_acceptanced" {% if contract.ofw.acceptance %}checked{% endif %}>
                       <i></i>
                     </label>
                   </div>
@@ -545,7 +545,7 @@
                   <label class="col-sm-2 form-control-label">Extern Company</label>
                   <div class="col-sm-10">
                     <label class="ui-switch primary m-t-xs m-r">
-                      <input type="checkbox" id="is_extern_company" name="is_extern_company">
+                      <input type="checkbox" id="is_extern_company" name="is_extern_company" {% if contract.ofw.extern_company %}checked{% endif %}">
                       <i></i>
                     </label>
                   </div>
@@ -599,7 +599,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      {% for invoice in invoices %}
+                      {% for invoice in contract.invoice %}
                         {% set delurl = '/contract/invoice/del/'+invoice._id %}
                         <tr>
                         <td>{{invoice.rechnung_nr}}</td>
@@ -634,7 +634,7 @@
                     <div class="form-group row">
                       <label class="col-md-3 form-control-label">Price</label>
                       <div class="col-md-9">
-                        <input type="text" class="form-control" name="price">
+                        <input type="text" class="form-control" name="price" value="{{contract.fibu.price}}">
                       </div>
                     </div>   
                   </div>
@@ -655,7 +655,7 @@
                               close: 'fa fa-remove'
                             }
                           }">
-                        <input type='text' class="form-control" name="ordering_month">
+                        <input type='text' class="form-control" name="ordering_month" value="{{contract.fibu.ordering_month}}">
                         <span class="input-group-addon">
                             <span class="fa fa-calendar"></span>
                         </span>
@@ -667,7 +667,7 @@
                 <div class="form-group row">
                   <label class="col-md-3 form-control-label">Status</label>
                   <div class="col-md-9">
-                    <input type="text" class="form-control" name="status">
+                    <input type="text" class="form-control" name="status" value="{{contract.fibu.status}}">
                   </div>
                 </div>
 

@@ -94,7 +94,7 @@ function updateContractPermission(request, callback) {
             doc_delivery: request.doc_delivery,
             begin: request.begin,
             end: request.end,
-            cost: request.cost,
+            cost: request.cost
             //todo
             //status: request.status
         }]
@@ -191,7 +191,14 @@ const getContractByProjectID = function (req, res, next) {
 
 const editContract = function (req, res, next) {
     if (req.method === "GET") {
-        res.render('editcontract', {title:'Project Management', project_id: req.query.project_id, project_adr:req.query.project_adr,  user: req.user});
+        db.getContracts({'id':req.params.id}, function (err, contracts) {
+            if(err) {
+                logger.error('contract id not exits: ', req.params.id);
+                res.redirect('/projects');
+                return;
+            }
+            res.render('editcontract', {title:'Contract Management', project_id: req.query.project_id, project_adr:req.query.project_adr, contract: contracts[0],  user: req.user});
+        });
     } else {
         let request = req.body;
 
