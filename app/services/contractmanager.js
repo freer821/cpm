@@ -27,8 +27,8 @@ const addContract = function (req, res, next) {
                 gas_nr: request.gas_nr,
                 water_nr: request.water_nr,
                 partner_name: request.partner_name,
-                contract_delivery: request.contract_delivery? moment(request.contract_delivery): undefined,  // contract delivery auftrag_uebergeb
-                doc_delivery: request.doc_delivery? moment(request.doc_delivery): undefined, // documents delivery unterlage_uebergeb
+                contract_delivery: request.contract_delivery? moment(request.contract_delivery,"DD-MM-YYYY"): undefined,  // contract delivery auftrag_uebergeb
+                doc_delivery: request.doc_delivery? moment(request.doc_delivery,"DD-MM-YYYY"): undefined, // documents delivery unterlage_uebergeb
                 work_content: request.work_content, // arbeitsbemerkung
                 contract_typ: {            // auftrag typ
                     electric: request.is_electric,     // elektro
