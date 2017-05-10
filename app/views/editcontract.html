@@ -377,7 +377,7 @@
                   </div>
                 </div> 
               </div>
-                <input type="hidden" name="contract_id" value="{{contract.id}}">
+                <input type="hidden" name="contract_id" value="{{contract.id}}"/>
                 <button type="submit" class="btn btn-info m-t">Update</button>
               </form>
             </div>
@@ -1001,6 +1001,25 @@
 
 
 <script type="text/javascript">
+
+// Attach a submit handler to the form
+$( "form" ).submit(function( event ) {
+ 
+  // Stop form from submitting normally
+  event.preventDefault();
+ 
+  // Get some values from elements on the page:
+    url = $(this).attr( "action" );
+ 
+  // Send the data using post
+  var posting = $.post( url, $(this).serialize() );
+ 
+  // Put the results in a div
+  posting.done(function( data ) {
+    //todo
+    alert('update ok');
+  });
+});
 
 $("#procent_completion").append('<div class="progress-bar progress-bar-striped progress-bar-animated primary" style="width: 25%">25%</div>');
 
