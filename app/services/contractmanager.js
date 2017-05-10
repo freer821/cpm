@@ -115,20 +115,29 @@ function updateContractBuilding(request, callback) {
 
 function updateContractPermission(request, callback) {
 
-    let permission = {
-        type: request.type,
-        doc_delivery: request.doc_delivery? moment(request.doc_delivery,"DD-MM-YYYY"): undefined,
-        begin: request.begin? moment(request.begin,"DD-MM-YYYY"): undefined,
-        end: request.end? moment(request.end,"DD-MM-YYYY"): undefined,
-        cost: request.cost
-        //todo
-        //status: request.status
-    };
-
-
     if (request.permission_id) {
-        db.editContract({id: request.contract_id, building_permission: {$elemMatch: {_id : request.permission_id}}},{"building_permission.$": permission});
+        let permission = {
+            "building_permission.$.type": request.type,
+            "building_permission.$.doc_delivery": request.doc_delivery? moment(request.doc_delivery,"DD-MM-YYYY"): undefined,
+            "building_permission.$.begin": request.begin? moment(request.begin,"DD-MM-YYYY"): undefined,
+            "building_permission.$.end": request.end? moment(request.end,"DD-MM-YYYY"): undefined,
+            "building_permission.$.cost": request.cost
+            //todo
+            //status: request.status
+        };
+
+        db.editContract({id: request.contract_id, building_permission: {$elemMatch: {_id : request.permission_id}}},permission);
     } else {
+        let permission = {
+            type: request.type,
+            doc_delivery: request.doc_delivery? moment(request.doc_delivery,"DD-MM-YYYY"): undefined,
+            begin: request.begin? moment(request.begin,"DD-MM-YYYY"): undefined,
+            end: request.end? moment(request.end,"DD-MM-YYYY"): undefined,
+            cost: request.cost
+            //todo
+            //status: request.status
+        };
+
         db.editContractAddIntoArray({id: request.contract_id},{building_permission: permission});
     }
 
@@ -166,19 +175,29 @@ function updateContractOFW(request, callback) {
 
 function updateContractFinancial(request, callback) {
 
-    let invoice = {
-        rechnung_nr: request.rechnung_nr,
-        current_value: request.current_value,
-        sum: request.sum,
-        aufmass_am: request.aufmass_am? moment(request.aufmass_am,"DD-MM-YYYY"): undefined,
-        bewert_aufmass: request.bewert_aufmass? moment(request.bewert_aufmass,"DD-MM-YYYY"): undefined,
-        guts_datum: request.guts_datum? moment(request.guts_datum,"DD-MM-YYYY"): undefined,
-        status: request.status
-    };
-
     if (request.invocie_id) {
-        db.editContract({id: request.contract_id, invoice: {$elemMatch: {_id : request.invocie_id}}},{"invoice.$": invoice});
+        let invoice = {
+            "invoice.$.rechnung_nr": request.rechnung_nr,
+            "invoice.$.current_value": request.current_value,
+            "invoice.$.sum": request.sum,
+            "invoice.$.aufmass_am": request.aufmass_am? moment(request.aufmass_am,"DD-MM-YYYY"): undefined,
+            "invoice.$.bewert_aufmass": request.bewert_aufmass? moment(request.bewert_aufmass,"DD-MM-YYYY"): undefined,
+            "invoice.$.guts_datum": request.guts_datum? moment(request.guts_datum,"DD-MM-YYYY"): undefined,
+            "invoice.$.status": request.status
+        };
+
+        db.editContract({id: request.contract_id, invoice: {$elemMatch: {_id : request.invocie_id}}},invoice);
     } else {
+        let invoice = {
+            rechnung_nr: request.rechnung_nr,
+            current_value: request.current_value,
+            sum: request.sum,
+            aufmass_am: request.aufmass_am? moment(request.aufmass_am,"DD-MM-YYYY"): undefined,
+            bewert_aufmass: request.bewert_aufmass? moment(request.bewert_aufmass,"DD-MM-YYYY"): undefined,
+            guts_datum: request.guts_datum? moment(request.guts_datum,"DD-MM-YYYY"): undefined,
+            status: request.status
+        };
+
         db.editContractAddIntoArray({id: request.contract_id},{invoice: invoice});
     }
 
