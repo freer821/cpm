@@ -269,6 +269,23 @@ const editContract = function (condition, contract, callback) {
     );
 };
 
+const editContractAddIntoArray = function (condition, arrayItem, callback) {
+    Contract.update(condition, // Query
+        { // Updates
+            $push: arrayItem,
+        },
+        {upsert: true},
+        function (err) {
+            if (err) {
+                logger.error('Failed to Update Contract Array in MongoDB', arrayItem,err);
+            } else {
+                logger.trace('add Contract Array in MongoDB', arrayItem);
+            }
+        }
+    );
+};
+
+
 const countContract = function (callback) {
     Contract.count({}, function (err, count) {
         if (err) {
@@ -298,5 +315,6 @@ module.exports = {
     editProject:editProject,
     getContracts:getContracts,
     editContract:editContract,
+    editContractAddIntoArray: editContractAddIntoArray,
     countContract:countContract
 };
