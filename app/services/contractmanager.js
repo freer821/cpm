@@ -259,8 +259,21 @@ const editContract = function (req, res, next) {
     }
 };
 
+const delContract = function (req, res, next) {
+    if(req.params.action === 'permission') {
+        db.editContractRemoveFromArray({'id':req.params.id},{building_permission: {_id: req.query.id}}, function () {
+            res.redirect('/projects');
+        })
+    } else if(req.params.action === 'invocie') {
+        db.editContractRemoveFromArray({'id':req.params.id},{invocie: {_id: req.query.id}}, function () {
+            res.redirect('/projects');
+        })
+    }
+};
+
 module.exports = {
     addContract:addContract,
     editContract:editContract,
+    delContract:delContract,
     getContractByProjectID:getContractByProjectID
 };

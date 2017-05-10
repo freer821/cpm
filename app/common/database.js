@@ -272,7 +272,7 @@ const editContract = function (condition, contract, callback) {
 const editContractAddIntoArray = function (condition, arrayItem, callback) {
     Contract.update(condition, // Query
         { // Updates
-            $push: arrayItem,
+            $push: arrayItem
         },
         {upsert: true},
         function (err) {
@@ -281,6 +281,23 @@ const editContractAddIntoArray = function (condition, arrayItem, callback) {
             } else {
                 logger.trace('add Contract Array in MongoDB', arrayItem);
             }
+        }
+    );
+};
+
+
+const editContractRemoveFromArray = function (condition, arrayItem, callback) {
+    Contract.findOneAndUpdate(condition, // Query
+        { // Updates
+            $pull: arrayItem
+        },
+        function (err, data) {
+            if (err) {
+                logger.error('Failed to remove Contract Array in MongoDB', arrayItem,err);
+            } else {
+                logger.trace('removed Contract Array in MongoDB', arrayItem);
+            }
+            callback();
         }
     );
 };
@@ -316,5 +333,6 @@ module.exports = {
     getContracts:getContracts,
     editContract:editContract,
     editContractAddIntoArray: editContractAddIntoArray,
+    editContractRemoveFromArray:editContractRemoveFromArray,
     countContract:countContract
 };

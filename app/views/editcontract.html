@@ -419,7 +419,7 @@
                     </thead>
                     <tbody>
                       {% for permission in contract.building_permission %}
-                        {% set delurl = '/contract/permission/del/'+permission._id %}
+                        {% set delurl = '/contracts/del/permission?id='+permission._id %}
                         <tr>
                         <td>{{permission.type}}</td>
                         <td>{{permission.begin | date('d-m-Y')}}</td>
@@ -430,7 +430,7 @@
                             <a href="#" data-toggle="modal" data-target="#edit-permission" data-permission="{{permission|json}}"><i class="material-icons md-24">&#xe3c9;</i></a>
                           </td>
                           <td>
-                            <a href="#" data-href="{{delurl}}" data-toggle="modal" data-target="#del-permission" data-item-tilte="{{permission.type}}""><i class="material-icons md-24">&#xe872;</i></a>
+                            <a href="#" data-href="{{delurl}}" data-toggle="modal" data-target="#del-item" data-item-tilte="{{permission.type}}""><i class="material-icons md-24">&#xe872;</i></a>
                           </td>
                         </tr>
                       {% endfor %}           
@@ -600,7 +600,7 @@
                     </thead>
                     <tbody>
                       {% for invoice in contract.invoice %}
-                        {% set delurl = '/contract/invoice/del/'+invoice._id %}
+                        {% set delurl = '/contracts/del/invoice?id='+invoice._id %}
                         <tr>
                         <td>{{invoice.rechnung_nr}}</td>
                         <td>{{invoice.current_value}}</td>
@@ -610,7 +610,7 @@
                             <a href="#" data-toggle="modal" data-target="#edit-invocie" data-invocie="{{invoice|json}}"><i class="material-icons md-24">&#xe3c9;</i></a>
                           </td>
                           <td>
-                            <a href="#" data-href="{{delurl}}" data-toggle="modal" data-target="#del-invoice" data-item-tilte="{{invoice.rechnung_nr}}""><i class="material-icons md-24">&#xe872;</i></a>
+                            <a href="#" data-href="{{delurl}}" data-toggle="modal" data-target="#del-item" data-item-tilte="{{invoice.rechnung_nr}}""><i class="material-icons md-24">&#xe872;</i></a>
                           </td>
                         </tr>
                       {% endfor %}           
@@ -797,23 +797,6 @@
   </div>
 </div>
 
-<div id="del-item" class="modal" data-backdrop="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Delete User</h5>
-      </div>
-      <div class="modal-body text-center p-lg">
-        <p>Are you sure to delete this Item: <span id="delitemtitle" style="font-weight:bold"></span>?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn dark-white p-x-md" data-dismiss="modal">No</button>
-        <a type="button" class="btn danger p-x-md">Yes</a>
-      </div>
-    </div><!-- /.modal-content -->
-  </div>
-</div>
-
 <div id="edit-invocie" class="modal" data-backdrop="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -951,6 +934,23 @@
     </div><!-- /.modal-content -->
   </div>
 </div>
+
+<div id="del-item" class="modal" data-backdrop="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete</h5>
+      </div>
+      <div class="modal-body text-center p-lg">
+        <p>Are you sure to delete : <span id="delitemtitle" style="font-weight:bold"></span>?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn dark-white p-x-md" data-dismiss="modal">No</button>
+        <a type="button" class="btn danger p-x-md">Yes</a>
+      </div>
+    </div><!-- /.modal-content -->
+  </div>
+</div>
 <!-- ############ Modal End-->
 
 
@@ -978,6 +978,7 @@ $( "form" ).submit(function( event ) {
 */
 
 $('#edit-permission').on('show.bs.modal', function(e) {
+    $(this).find('form')[0].reset();
     var permission = $(e.relatedTarget).data('permission');
     if (permission) {
       $("#tpye").val(permission.type);
@@ -990,6 +991,7 @@ $('#edit-permission').on('show.bs.modal', function(e) {
   });
 
 $('#edit-invocie').on('show.bs.modal', function(e) {
+    $(this).find('form')[0].reset();
     var invocie = $(e.relatedTarget).data('invocie');
     if (invocie) {
       $("#rechnung_nr").val(invocie.rechnung_nr);
@@ -1003,6 +1005,10 @@ $('#edit-invocie').on('show.bs.modal', function(e) {
     }
   });
 
+$('#del-item').on('show.bs.modal', function(e) {
+      $("#delitemtitle").html($(e.relatedTarget).data('item-tilte'));
+      $(this).find('.danger').attr('href', $(e.relatedTarget).data('href'));
+  });
 
 $("#procent_completion").append('<div class="progress-bar progress-bar-striped progress-bar-animated primary" style="width: 25%">25%</div>');
 

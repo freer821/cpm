@@ -150,6 +150,8 @@ function initRoutes() {
     router.get('/contracts/edit/:id',contractmanager.editContract);
     router.post('/contracts/edit/:action',contractmanager.editContract);
 
+    router.get('/contracts/del/:action',contractmanager.delContract);
+
 
 
     router.get('/logout', function (req, res){
