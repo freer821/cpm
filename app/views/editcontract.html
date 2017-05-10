@@ -422,8 +422,8 @@
                         {% set delurl = '/contract/permission/del/'+permission._id %}
                         <tr>
                         <td>{{permission.type}}</td>
-                        <td>{{permission.begin}}</td>
-                        <td>{{permission.end}}</td>
+                        <td>{{permission.begin | date('d-m-Y')}}</td>
+                        <td>{{permission.end | date('d-m-Y')}}</td>
                         <td>{{permission.cost}}</td>
                         <td>{{permission.status}}</td>
                           <td>
