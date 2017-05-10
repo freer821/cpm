@@ -84,7 +84,15 @@ process.on('uncaughtException', function (err) {
 function initRoutes() {
 
     router.get('/', function(req,res){
-        res.render('login');
+        if (req.isAuthenticated()) {
+            if (req.user.role === 'admin') {
+                res.redirect('/users');
+            } else {
+                res.redirect('/dashboard');
+            }
+        } else {
+            res.render('login');
+        }
     });
 
     router.post('/login',function(req, res, next) {
