@@ -287,7 +287,7 @@ const editContractAddIntoArray = function (condition, arrayItem, callback) {
 
 
 const editContractRemoveFromArray = function (condition, arrayItem, callback) {
-    Contract.findOneAndUpdate(condition, // Query
+    Contract.update(condition, // Query
         { // Updates
             $pull: arrayItem
         },
