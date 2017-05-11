@@ -83,6 +83,7 @@ function updateContractBasic(request, callback) {
         estimated_value: request.estimated_value,      // schaetzwert (Euro)
         manager_name: request.manager_name,   // bauleiter_name
         rot_b: request.rot_b,         // Auftrageber Telekom
+        is_building_permission: request.is_building_permission,
         comment: request.comment,
         doc_location: {
             person: request.person,

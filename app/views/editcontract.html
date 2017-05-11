@@ -255,6 +255,16 @@
                 </div>
 
                 <div class="form-group row">
+                  <label class="col-sm-3 form-control-label">Building Permission Activ?</label>
+                  <div class="col-sm-9">
+                    <label class="ui-switch primary m-t-xs m-r">
+                      <input type="checkbox" name="is_building_permission" {% if contract.is_building_permission %}checked{% endif %}>
+                      <i></i>
+                    </label>
+                  </div>
+                </div>
+
+                <div class="form-group row">
                   <label class="col-sm-3 form-control-label">Doc Location</label>
                   <div class="col-sm-9">
                     <div class="form-group row">
@@ -300,7 +310,7 @@
                               close: 'fa fa-remove'
                             }
                           }">
-                        <input type='text' class="form-control" name="plan_begin" value="{{contract.building_work.plan_begin | date('d-m-Y')}}">
+                        <input type='text' class="form-control" id="plan_begin" name="plan_begin" value="{{contract.building_work.plan_begin | date('d-m-Y')}}">
                         <span class="input-group-addon">
                             <span class="fa fa-calendar"></span>
                         </span>
@@ -310,7 +320,7 @@
                   <div class="col-sm-6">
                     <div class="form-group row">
                       <label class="col-sm-3 form-control-label">Plan End</label>
-                      <div class='input-group date col-sm-9' ui-jp="datetimepicker" ui-options="{
+                      <div id="plan_end_div" class='input-group date col-sm-9' ui-jp="datetimepicker" ui-options="{
                             format: 'DD-MM-YYYY',
                             icons: {
                               time: 'fa fa-clock-o',
@@ -324,7 +334,7 @@
                               close: 'fa fa-remove'
                             }
                           }">
-                        <input type='text' class="form-control" name="plan_end" value="{{contract.building_work.plan_end | date('d-m-Y')}}">
+                        <input type='text' class="form-control" id="plan_end" name="plan_end" value="{{contract.building_work.plan_end | date('d-m-Y')}}">
                         <span class="input-group-addon">
                             <span class="fa fa-calendar"></span>
                         </span>
@@ -358,10 +368,12 @@
                       <label class="col-md-3 form-control-label">Status</label>
                       <div class="col-md-9">
                         <select class="form-control c-select" id="building_status" name="status">
-                          <option value="open" {% if contract.building_work.status ==='open' %}selected{% endif %} >Open</option>
-                          <option value="progress" {% if contract.building_work.status ==='progress' %}selected{% endif %} >in Progress</option>
-                          <option value="finished" {% if contract.building_work.status ==='finished' %}selected{% endif %}>Finished</option>
-                          <option value="done" {% if contract.building_work.status ==='done' %}selected{% endif %} >Done</option>
+                          <option disabled selected value> -- select an status -- </option>
+                          <option value="00" {% if contract.building_work.status ==='00' %}selected{% endif %} >00- in der Vorbereitung</option>
+                          <option value="01" {% if contract.building_work.status ==='01' %}selected{% endif %} >01- vorbereiten zu bauen</option>
+                          <option value="02" {% if contract.building_work.status ==='02' %}selected{% endif %}>02- geplant in Bau</option>
+                          <option value="03" {% if contract.building_work.status ==='03' %}selected{% endif %} >03- fertig gebaut, Mappe abzug</option>
+                          <option value="04" {% if contract.building_work.status ==='04' %}selected{% endif %} >04- Tiefbau &amp; Montage erledigt</option>
                         </select>
                       </div>
                     </div>
@@ -954,7 +966,6 @@
 
 <script type="text/javascript">
 
-
 // Attach a submit handler to the form
 $( "form" ).submit(function( event ) {
  
@@ -1007,25 +1018,26 @@ $('#del-item').on('show.bs.modal', function(e) {
       $(this).find('.danger').attr('href', $(e.relatedTarget).data('href'));
   });
 
-$("#procent_completion").append('<div class="progress-bar progress-bar-striped progress-bar-animated primary" style="width: 25%">25%</div>');
+$("#procent_completion").append('<div class="progress-bar progress-bar-striped progress-bar-animated primary" style="width: 0%">0%</div>');
 
 $("#building_status").on('change', function() {
   $("#procent_completion").empty();
   switch(this.value) {
-    case 'open':
-      $("#procent_completion").append('<div class="progress-bar progress-bar-striped progress-bar-animated primary" style="width: 25%">25%</div>');
+    case '00':
+      $("#procent_completion").append('<div class="progress-bar progress-bar-striped progress-bar-animated primary" style="width: 0%">0%</div>');
       break;
-    case 'progress':
-      $("#procent_completion").append('<div class="progress-bar progress-bar-striped progress-bar-animated primary" style="width: 50%">50%</div>');
+    case '01':
+      $("#procent_completion").append('<div class="progress-bar progress-bar-striped progress-bar-animated primary" style="width: 10%">10%</div>');
       break;
-    case 'finished':
+    case '02':
+      $("#procent_completion").append('<div class="progress-bar progress-bar-striped progress-bar-animated primary" style="width: 80%">80%</div>');
+      break;
+    case '03':
       $("#procent_completion").append('<div class="progress-bar progress-bar-striped progress-bar-animated primary" style="width: 100%">100%</div>');
       break;
-    case 'done':
+    case '04':
       $("#procent_completion").append('<div class="progress-bar progress-bar-striped progress-bar-animated primary" style="width: 100%">100%</div>');
       break;
-    default:
-      $("#procent_completion").append('<div class="progress-bar progress-bar-striped progress-bar-animated primary" style="width: 25%">25%</div>');
   }
 });
 
@@ -1109,6 +1121,33 @@ $("#is_extern_company").on('change', function() {
   } else {
     $("#add_extern_company").empty();
   }
+});
+
+
+function calStatusOfBuilding() {
+  if (moment($("#plan_begin").val(), "DD-MM-YYYY", true).isValid()  && moment($("#plan_end").val(), "DD-MM-YYYY", true).isValid() ) {
+    var now = moment();
+    var building_begin = moment($("#plan_begin").val(),"DD-MM-YYYY");
+    var building_end = moment($("#plan_end").val(),"DD-MM-YYYY");
+
+    console.log($("#plan_end").val());
+
+    if (now.isAfter(building_end)) {
+      $("#building_status").val('03');
+    } else if (now.isAfter(building_begin)) {
+      $("#building_status").val('02');
+    }
+  } else {
+    $("#building_status").val('01');
+  }
+
+  $("#building_status").change();
+}
+
+calStatusOfBuilding();
+
+$('#plan_end_div').on('dp.change', function (ev) {
+    calStatusOfBuilding();
 });
 </script>
 {% endblock %}

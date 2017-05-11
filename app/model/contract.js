@@ -77,6 +77,7 @@ const contractSchema = new Schema({
             status: String  // status, auto to cal
         }
     ],
+    is_building_permission: Boolean,
     building_permission: [
         {
             type: {type: String, enum: ['BAZ', 'VAZ', 'VBA']},
