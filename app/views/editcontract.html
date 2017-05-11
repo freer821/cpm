@@ -598,7 +598,7 @@
                     </thead>
                     <tbody>
                       {% for invoice in contract.invoice %}
-                        {% set delurl = '/contracts/del/invoice?id='+invoice._id %}
+                        {% set delurl = '/contracts/'+contract.id+'/del/invoice?id='+invoice._id %}
                         <tr>
                         <td>{{invoice.rechnung_nr}}</td>
                         <td>{{invoice.current_value}}</td>
