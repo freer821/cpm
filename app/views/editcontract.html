@@ -418,7 +418,7 @@
                     </thead>
                     <tbody>
                       {% for permission in contract.building_permission %}
-                        {% set delurl = '/contracts/del/permission?id='+permission._id %}
+                        {% set delurl = '/contracts/'+contract.id+'/del/permission?id='+permission._id %}
                         <tr>
                         <td>{{permission.type}}</td>
                         <td>{{permission.begin | date('d-m-Y')}}</td>
