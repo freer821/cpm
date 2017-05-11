@@ -285,7 +285,7 @@ const delContract = function (req, res, next) {
             res.redirect('/projects');
         })
     } else if(req.params.action === 'invocie') {
-        db.editContractRemoveFromArray({'id':req.params.id},{invocie: {_id: req.query.id}}, function () {
+        db.editContractRemoveFromArray({'id':req.params.id},{invocie: {_id: new ObjectId(req.query.id)}}, function () {
             res.redirect('/projects');
         })
     }
