@@ -5,6 +5,7 @@
 const moment = require('moment');
 const logger = require('../common/logger');
 const db = require('../common/database');
+var ObjectId = require('mongoose').Types.ObjectId;
 
 const addContract = function (req, res, next) {
     if (req.method === "GET") {
@@ -280,7 +281,7 @@ const editContract = function (req, res, next) {
 
 const delContract = function (req, res, next) {
     if(req.params.action === 'permission') {
-        db.editContractRemoveFromArray({'id':req.params.id},{building_permission: {_id: req.query.id}}, function () {
+        db.editContractRemoveFromArray({'id':req.params.id},{building_permission: {_id: new ObjectId(req.query.id)}}, function () {
             res.redirect('/projects');
         })
     } else if(req.params.action === 'invocie') {
