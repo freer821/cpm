@@ -967,7 +967,7 @@
 <script type="text/javascript">
 
 // Attach a submit handler to the form
-$( "form" ).submit(function( event ) {
+$("form").submit(function( event ) {
  
   // Stop form from submitting normally
   event.preventDefault();
@@ -980,8 +980,8 @@ $( "form" ).submit(function( event ) {
  
   // Put the results in a div
   posting.done(function( data ) {
-    //todo
-    alert('update ok');
+    $(".modal").modal('hide');
+    bootbox.alert(data);
   });
 });
 

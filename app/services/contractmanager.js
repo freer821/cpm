@@ -254,27 +254,33 @@ const editContract = function (req, res, next) {
 
         if(req.params.action === 'basic') {
             updateContractBasic(request, function () {
-                res.redirect('/projects');
+                let ret= 'update operation done!!';
+                res.send(ret);
             });
         } else if(req.params.action === 'building') {
             updateContractBuilding(request, function () {
-                res.redirect('/projects');
+                let ret= 'update operation done!!';
+                res.send(ret);
             });
         } else if(req.params.action === 'permission') {
             updateContractPermission(request, function () {
-                res.redirect('/projects');
+                let ret= 'update operation done!!';
+                res.send(ret);
             });
         } else if(req.params.action === 'ofw') {
             updateContractOFW(request, function () {
-                res.redirect('/projects');
+                let ret= 'update operation done!!';
+                res.send(ret);
             });
         } else if(req.params.action === 'invocie') {
             updateContractFinancial(request, function () {
-                res.redirect('/projects');
+                let ret= 'update operation done!!';
+                res.send(ret);
             });
         } else if(req.params.action === 'fibu') {
             updateContractFibu(request, function () {
-                res.redirect('/projects');
+                let ret= 'update operation done!!';
+                res.send(ret);
             });
         }
     }
@@ -283,11 +289,13 @@ const editContract = function (req, res, next) {
 const delContract = function (req, res, next) {
     if(req.params.action === 'permission') {
         db.editContractRemoveFromArray({'id':req.params.id},{building_permission: {_id: new ObjectId(req.query.id)}}, function () {
-            res.redirect('/projects');
+            let ret= 'del operation done!';
+            res.send(ret);
         })
     } else if(req.params.action === 'invocie') {
         db.editContractRemoveFromArray({'id':req.params.id},{invocie: {_id: new ObjectId(req.query.id)}}, function () {
-            res.redirect('/projects');
+            let ret= 'del operation done!';
+            res.send(ret);
         })
     }
 };
