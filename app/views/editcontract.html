@@ -525,7 +525,33 @@ function calStatusOfOFW() {
             break;
     }
 
-    $('#ofw_status').val(ofw_var1);
+    {% if contract.customer === 'STW' %}
+    if($('#permission_nr').val().trim().length > 0) {
+        ofw_var2 = $('#permission_nr').val();
+    } else {
+        ofw_var2 = 'Meld.Nr. nicht vorhand';
+    }
+    {% else %}
+    if ($('#is_acceptance_activ').is(':checked')) {
+        switch (calStatusOfTime($("#applied").val(), $("#granted").val())) {
+            case 1:
+                ofw_var2 = 'Abn. Noetig (zu beantragen)';
+                break;
+            case 1:
+                ofw_var2 = 'Abn. beantragt';
+                break;
+            case 2:
+                ofw_var2 = 'Abn. vorhanden';
+                break;
+            default:
+                break;
+        }
+    } else {
+        ofw_var2 = 'Abnahme nicht noetig';
+    }
+    {% endif %}
+
+    $('#ofw_status').val(ofw_var1+' - '+ofw_var2);
 
 }
 
