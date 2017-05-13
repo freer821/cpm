@@ -45,6 +45,7 @@ const contractSchema = new Schema({
         status: String,      //  4 zustände
         procent_completion: Number // the procent of completion auto_fertigstellung
     },
+    is_ofw_activ: Boolean,
     ofw :{
         permission_nr: String, // meldungs_nr
         worker_name: String, // ofw kolonne
@@ -64,11 +65,7 @@ const contractSchema = new Schema({
             beton: Boolean
         },
         ueberdicken: Number,
-        ofw_status: String,      // ofw_zustand
-        extern_company: {
-            name: String,
-            price: Number // EURO
-        } // OFW Sub-Unternehmen
+        ofw_status: String      // ofw_zustand
     },
     fibu: {
         price: Number,  // betrag Euro
@@ -86,7 +83,7 @@ const contractSchema = new Schema({
             status: String  // status, auto to cal
         }
     ],
-    is_building_permission: Boolean,
+    is_building_permission_activ: Boolean,
     building_permission: [
         {
             type: {type: String, enum: ['BAZ', 'VAZ', 'VBA']},

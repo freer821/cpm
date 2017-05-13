@@ -84,7 +84,8 @@ function updateContractBasic(request, callback) {
         estimated_value: request.estimated_value,      // schaetzwert (Euro)
         manager_name: request.manager_name,   // bauleiter_name
         rot_b: request.rot_b,         // Auftrageber Telekom
-        is_building_permission: request.is_building_permission,
+        is_building_permission_activ: request.is_building_permission_activ,
+        is_ofw_activ: request.is_ofw_activ,
         comment: request.comment,
         doc_location: {
             person: request.person,
@@ -170,13 +171,9 @@ function updateContractOFW(request, callback) {
                 pflaster: request.pflaster,
                 beton: request.beton
             },
-            ueberdicken: common.getNumValue(request.ueberdicken),
+            ueberdicken: common.getNumValue(request.ueberdicken)
             //todo
             //ofw_status: request.ofw_status,
-            extern_company: {
-                name: request.name,
-                price: common.getNumValue(request.price)
-            }
         }
     };
     db.editContract({id: request.contract_id},contract);

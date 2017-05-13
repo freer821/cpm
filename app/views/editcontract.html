@@ -477,32 +477,6 @@ $("#is_acceptanced").on('change', function() {
   }
 });
 
-$("#is_extern_company").on('change', function() {
-  if($(this).is(":checked")) {
-    $("#add_extern_company").append('<div class="col-sm-6">'+
-                    '<div class="form-group row">'+
-                     ' <label class="col-sm-2 form-control-label">name</label>'+
-                      '<div class="col-sm-10">'+
-                        '<input type=\'text\' class="form-control" name="company_name">'+
-                      '</div>  '+
-                     ' </div>'+
-                   ' </div> '+
-                   ' </div> '+
-                   '<div class="col-sm-6">'+
-                   ' <div class="form-group row">'+
-                   '   <label class="col-sm-2 form-control-label">price</label>'+
-                   '   <div class="col-sm-10">'+
-                   '     <input type=\'text\' class="form-control" name="price">'+
-                   '   </div> '+
-                   '   </div>'+
-                   ' </div> '+
-                  '</div>');
-  } else {
-    $("#add_extern_company").empty();
-  }
-});
-
-
 function calStatusOfBuilding() {
   if (moment($("#plan_begin").val(), "DD-MM-YYYY", true).isValid()  && moment($("#plan_end").val(), "DD-MM-YYYY", true).isValid() ) {
     var now = moment();
