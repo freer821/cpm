@@ -44,6 +44,8 @@ const addContract = function (req, res, next) {
                 estimated_value: request.estimated_value,      // schaetzwert (Euro)
                 manager_name: request.manager_name,   // bauleiter_name
                 rot_b: request.rot_b,         // Auftrageber Telekom
+                is_building_permission_activ: request.is_building_permission_activ,
+                is_ofw_activ: request.is_ofw_activ,
                 comment: request.comment,
                 doc_location: {
                     person: request.person,
