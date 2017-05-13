@@ -55,6 +55,15 @@ const contractSchema = new Schema({
             applied: Date, // abn_beantragt
             granted: Date  // abn_erteilt
         },
+        typ:{
+            bausstr: Boolean,
+            fahrbahn: Boolean,
+            fussweg: Boolean,
+            bitu: Boolean,
+            pflaster: Boolean,
+            beton: Boolean
+        },
+        ueberdicken: Number,
         ofw_status: String,      // ofw_zustand
         extern_company: {
             name: String,

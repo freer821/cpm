@@ -5,6 +5,7 @@
 const moment = require('moment');
 const logger = require('../common/logger');
 const db = require('../common/database');
+const common = require('../common/appcom');
 var ObjectId = require('mongoose').Types.ObjectId;
 
 const addContract = function (req, res, next) {
@@ -28,8 +29,8 @@ const addContract = function (req, res, next) {
                 gas_nr: request.gas_nr,
                 water_nr: request.water_nr,
                 partner_name: request.partner_name,
-                contract_delivery: request.contract_delivery? moment(request.contract_delivery,"DD-MM-YYYY"): undefined,  // contract delivery auftrag_uebergeb
-                doc_delivery: request.doc_delivery? moment(request.doc_delivery,"DD-MM-YYYY"): undefined, // documents delivery unterlage_uebergeb
+                contract_delivery: common.getDate(request.contract_delivery),  // contract delivery auftrag_uebergeb
+                doc_delivery: common.getDate(request.doc_delivery), // documents delivery unterlage_uebergeb
                 work_content: request.work_content, // arbeitsbemerkung
                 contract_typ: {            // auftrag typ
                     electric: request.is_electric,     // elektro
@@ -68,8 +69,8 @@ function updateContractBasic(request, callback) {
         gas_nr: request.gas_nr,
         water_nr: request.water_nr,
         partner_name: request.partner_name,
-        contract_delivery: request.contract_delivery? moment(request.contract_delivery,"DD-MM-YYYY"): undefined,  // contract delivery auftrag_uebergeb
-        doc_delivery: request.doc_delivery? moment(request.doc_delivery,"DD-MM-YYYY"): undefined, // documents delivery unterlage_uebergeb
+        contract_delivery: common.getDate(request.contract_delivery),  // contract delivery auftrag_uebergeb
+        doc_delivery: common.getDate(request.doc_delivery), // documents delivery unterlage_uebergeb
         work_content: request.work_content, // arbeitsbemerkung
         contract_typ: {            // auftrag typ
             electric: request.is_electric,     // elektro
@@ -102,8 +103,8 @@ function updateContractBuilding(request, callback) {
 
     let contract = {
         building_work:{
-            plan_begin: request.plan_begin? moment(request.plan_begin,"DD-MM-YYYY"): undefined,
-            plan_end: request.plan_end? moment(request.plan_end,"DD-MM-YYYY"): undefined,
+            plan_begin: common.getDate(request.plan_begin),
+            plan_end: common.getDate(request.plan_end),
             worker_name: request.worker_name,
             working_months: request.working_months,
             status: request.status
@@ -120,9 +121,9 @@ function updateContractPermission(request, callback) {
     if (request.permission_id) {
         let permission = {
             "building_permission.$.type": request.type,
-            "building_permission.$.doc_delivery": request.doc_delivery? moment(request.doc_delivery,"DD-MM-YYYY"): undefined,
-            "building_permission.$.begin": request.begin? moment(request.begin,"DD-MM-YYYY"): undefined,
-            "building_permission.$.end": request.end? moment(request.end,"DD-MM-YYYY"): undefined,
+            "building_permission.$.doc_delivery": common.getDate(request.doc_delivery),
+            "building_permission.$.begin": common.getDate(request.begin),
+            "building_permission.$.end": common.getDate(request.end),
             "building_permission.$.cost": request.cost
             //todo
             //status: request.status
@@ -132,9 +133,9 @@ function updateContractPermission(request, callback) {
     } else {
         let permission = {
             type: request.type,
-            doc_delivery: request.doc_delivery? moment(request.doc_delivery,"DD-MM-YYYY"): undefined,
-            begin: request.begin? moment(request.begin,"DD-MM-YYYY"): undefined,
-            end: request.end? moment(request.end,"DD-MM-YYYY"): undefined,
+            doc_delivery: common.getDate(request.doc_delivery),
+            begin: common.getDate(request.begin),
+            end: common.getDate(request.end),
             cost: request.cost
             //todo
             //status: request.status
@@ -154,18 +155,27 @@ function updateContractOFW(request, callback) {
         ofw:{
             permission_nr: request.permission_nr,
             worker_name: request.worker_name,
-            delivery: request.delivery? moment(request.delivery,"DD-MM-YYYY"): undefined,
-            completion_at: request.completion_at? moment(request.completion_at,"DD-MM-YYYY"): undefined,
+            delivery: common.getDate(request.delivery),
+            completion_at: common.getDate(request.completion_at),
             clean: request.clean,
             acceptance :{
-                applied: request.applied? moment(request.applied,"DD-MM-YYYY"): undefined,
-                granted: request.granted? moment(request.granted,"DD-MM-YYYY"): undefined
+                applied: common.getDate(request.applied),
+                granted: common.getDate(request.granted)
             },
+            typ:{
+                bausstr: request.bausstr,
+                fahrbahn: request.fahrbahn,
+                fussweg: request.fussweg,
+                bitu: request.bitu,
+                pflaster: request.pflaster,
+                beton: request.beton
+            },
+            ueberdicken: common.getNumValue(request.ueberdicken),
             //todo
             //ofw_status: request.ofw_status,
             extern_company: {
                 name: request.name,
-                price: request.price
+                price: common.getNumValue(request.price)
             }
         }
     };
@@ -182,9 +192,9 @@ function updateContractFinancial(request, callback) {
             "invoice.$.rechnung_nr": request.rechnung_nr,
             "invoice.$.current_value": request.current_value,
             "invoice.$.sum": request.sum,
-            "invoice.$.aufmass_am": request.aufmass_am? moment(request.aufmass_am,"DD-MM-YYYY"): undefined,
-            "invoice.$.bewert_aufmass": request.bewert_aufmass? moment(request.bewert_aufmass,"DD-MM-YYYY"): undefined,
-            "invoice.$.guts_datum": request.guts_datum? moment(request.guts_datum,"DD-MM-YYYY"): undefined,
+            "invoice.$.aufmass_am": common.getDate(request.aufmass_am),
+            "invoice.$.bewert_aufmass": common.getDate(request.bewert_aufmass),
+            "invoice.$.guts_datum": common.getDate(request.guts_datum),
             "invoice.$.status": request.status
         };
 
@@ -194,9 +204,9 @@ function updateContractFinancial(request, callback) {
             rechnung_nr: request.rechnung_nr,
             current_value: request.current_value,
             sum: request.sum,
-            aufmass_am: request.aufmass_am? moment(request.aufmass_am,"DD-MM-YYYY"): undefined,
-            bewert_aufmass: request.bewert_aufmass? moment(request.bewert_aufmass,"DD-MM-YYYY"): undefined,
-            guts_datum: request.guts_datum? moment(request.guts_datum,"DD-MM-YYYY"): undefined,
+            aufmass_am: common.getDate(request.aufmass_am),
+            bewert_aufmass: common.getDate(request.bewert_aufmass),
+            guts_datum: common.getDate(request.guts_datum),
             status: request.status
         };
 
