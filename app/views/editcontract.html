@@ -84,8 +84,11 @@
           <div class="col-md-11">
             <select class="form-control c-select" id="tpye" name="type">
               <option value="BAZ">BAZ</option>
+              {% if contract.customer === 'STW' %}
               <option value="VAZ">VAZ</option>
               <option value="VBA">VBA</option>
+              <option value="BAZVAZ">BAZ &amp; VAZ</option>
+              {% endif %}
             </select>
           </div>
         </div>   
@@ -495,8 +498,6 @@ function calStatusOfBuilding() {
     var building_begin = moment($("#plan_begin").val(),"DD-MM-YYYY");
     var building_end = moment($("#plan_end").val(),"DD-MM-YYYY");
 
-    console.log($("#plan_end").val());
-
     if (now.isAfter(building_end)) {
       $("#building_status").val('03');
     } else if (now.isAfter(building_begin)) {
@@ -507,6 +508,12 @@ function calStatusOfBuilding() {
   }
 
   $("#building_status").change();
+}
+
+function calStatusOfOFW() {
+    var ofw_var = 'OFW nicht benoetigt';
+
+
 }
 
 calStatusOfBuilding();

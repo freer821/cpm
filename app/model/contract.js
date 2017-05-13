@@ -87,7 +87,7 @@ const contractSchema = new Schema({
     is_building_permission_activ: Boolean,
     building_permission: [
         {
-            type: {type: String, enum: ['BAZ', 'VAZ', 'VBA']},
+            type: {type: String, enum: ['BAZ', 'VAZ', 'VBA', 'BAZVAZ']},
             doc_delivery: Date, //
             begin: Date,     // the begin time
             end: Date, // the end time
