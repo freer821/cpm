@@ -81,7 +81,8 @@ const contractSchema = new Schema({
             aufmass_am: Date, // time to send Invocie
             bewert_aufmass: Date, // time to permit invocie
             guts_datum: Date, // time to get money
-            status: String  // status, auto to cal
+            correction_needed: Boolean,
+            invoice_status: String  // status, auto to cal
         }
     ],
     is_building_permission_activ: Boolean,
@@ -92,7 +93,7 @@ const contractSchema = new Schema({
             begin: Date,     // the begin time
             end: Date, // the end time
             cost: Number, // verk_kosten
-            status: String // status, auto to cal
+            permission_status: String // status, auto to cal
         }
     ],
     ts: Date,

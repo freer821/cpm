@@ -82,7 +82,7 @@
         <div class="form-group row">
           <label class="col-md-1 form-control-label">Type</label>
           <div class="col-md-11">
-            <select class="form-control c-select" id="tpye" name="type">
+            <select class="form-control c-select" id="permission_tpye" name="type">
               <option value="BAZ">BAZ</option>
               {% if contract.customer === 'STW' %}
               <option value="VAZ">VAZ</option>
@@ -165,13 +165,14 @@
         <div class="form-group row">
           <label class="col-md-1 form-control-label">Cost</label>
           <div class="col-md-11">
-            <input type="text" class="form-control" id="cost" name="cost"> 
+            <input type="text" class="form-control" id="permission_cost" name="cost">
           </div>
         </div>   
 
         <div class="form-group row">
           <label class="col-md-1 form-control-label">Status</label>
           <div id="per_status" class="col-md-11 progress mb-4">
+            <input type='text' class="form-control" id="permission_status" name="permission_status" readonly>
           </div>
         </div>
       </div>
@@ -198,21 +199,21 @@
       <div class="modal-body">
         
         <div class="form-group row">
-          <label class="col-md-1 form-control-label">Invoice Nr.</label>
-          <div class="col-md-11">
+          <label class="col-md-3 form-control-label">Invoice Nr.</label>
+          <div class="col-md-9">
             <input type="text" class="form-control" id="rechnung_nr" name="rechnung_nr">
           </div>
         </div>  
 
          <div class="form-group row">
-          <label class="col-md-1 form-control-label">Current Value</label>
-          <div class="col-md-11">
+          <label class="col-md-3 form-control-label">Current Value</label>
+          <div class="col-md-9">
             <input type="text" class="form-control" id="current_value" name="current_value">
           </div>
         </div>   
         <div class="form-group row">
-          <label class="col-md-1 form-control-label">Sum Value</label>
-          <div class="col-md-11">
+          <label class="col-md-3 form-control-label">Sum Value</label>
+          <div class="col-md-9">
             <input type="text" class="form-control" id="sum" name="sum">
           </div>
         </div>   
@@ -310,6 +311,16 @@
         </div>
 
         <div class="form-group row">
+          <label class="col-sm-3 form-control-label">Need Correction</label>
+          <div class="col-sm-9">
+            <label class="ui-switch primary m-t-xs m-r">
+              <input type="checkbox" name="correction_needed" {% if contract.correction_needed %}checked{% endif %}>
+              <i></i>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group row">
           <label class="col-md-1 form-control-label">Status</label>
           <div id="per_status" class="col-md-11 progress mb-4">
           </div>
@@ -375,10 +386,12 @@ $('#edit-permission').on('show.bs.modal', function(e) {
       $("#doc_delivery").val(moment(permission.doc_delivery).format("DD-MM-YYYY"));
       $("#begin").val(moment(permission.begin).format("DD-MM-YYYY"));
       $("#end").val(moment(permission.end).format("DD-MM-YYYY"));
-      $("#cost").val(permission.cost);
+      $("#permission_cost").val(permission.cost);
+      $("#permission_status").val(permission.permission_status);
       $("#permission_id").val(permission._id);
     }
-  });
+    calPermissionStatus();
+});
 
 $('#edit-invocie').on('show.bs.modal', function(e) {
     $(this).find('form')[0].reset();
@@ -496,6 +509,7 @@ function getAcceptanceForm() {
 $(".date").on('dp.change', function (ev) {
     calStatusOfBuilding();
     calStatusOfOFW();
+    calPermissionStatus();
 });
 
 
@@ -601,8 +615,48 @@ function calStatusOfTime(t_begin, t_end) {
     } else {
         return 0;
     }
-
 }
+
+// check permission status
+$('#permission_cost').change(function(){
+    calPermissionStatus();
+});
+
+function calPermissionStatus() {
+    $('#permission_status').val('zu beantragen');
+
+    if (! moment($('#doc_delivery').val(), "DD-MM-YYYY", true).isValid()) {
+        $('#begin, #end, #permission_cost').empty();
+        $('#begin, #end, #permission_cost').attr('readonly', true);
+    } else {
+        $('#begin, #end, #permission_cost').attr('readonly', false);
+
+        var license_var1, license_var2;
+        if ($('#permission_tpye').val()=== 'VBA') {
+            if (moment($('#begin').val(), "DD-MM-YYYY", true).isValid() && moment($('#end').val(), "DD-MM-YYYY", true).isValid()){
+                license_var1 = $('#begin').val()+ ' bis '+ $('#end').val();
+            } else {
+                license_var1 = 'beantragt am '+$('#doc_delivery').val();
+            }
+        } else {
+            if (moment($('#begin').val(), "DD-MM-YYYY", true).isValid() && moment($('#end').val(), "DD-MM-YYYY", true).isValid()){
+                license_var1 = 'Beginn ab '+$('#begin').val();
+            } else {
+                license_var1 = 'beantragt am '+$('#doc_delivery').val();
+            }
+        }
+
+        license_var2 = getNumValue($('#permission_cost').val());
+        $('#permission_status').val(license_var1 + ' - ' + license_var2);
+    }
+}
+
+function getNumValue(value){
+    if (isNaN(parseFloat(value))) {
+        return '';
+    }
+    return parseFloat(value);
+};
 
 $(document).ready(function() {
   {% if jump_building_permission %}
