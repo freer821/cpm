@@ -44,7 +44,7 @@
                               close: 'fa fa-remove'
                             }
                           }">
-                    <input type='text' class="form-control" name="delivery" value="{{contract.ofw.delivery | date('d-m-Y')}}">
+                    <input type='text' class="form-control" id="ofw_delivery" name="delivery" value="{{contract.ofw.delivery | date('d-m-Y')}}">
                     <span class="input-group-addon">
                             <span class="fa fa-calendar"></span>
                         </span>
@@ -68,7 +68,7 @@
                               close: 'fa fa-remove'
                             }
                           }">
-                    <input type='text' class="form-control" name="completion_at" value="{{contract.ofw.completion_at | date('d-m-Y')}}">
+                    <input type='text' class="form-control" if="ofw_completion_at" name="completion_at" value="{{contract.ofw.completion_at | date('d-m-Y')}}">
                     <span class="input-group-addon">
                             <span class="fa fa-calendar"></span>
                         </span>
@@ -148,8 +148,9 @@
     {% endif %}
 
     <div class="form-group row">
-        <label class="col-md-3 form-control-label">OFW Status</label>
-        <div id="ofw_status" class="col-md-9 progress mb-4">
+        <label class="col-sm-1 form-control-label">OFW Status</label>
+        <div class="col-sm-11">
+            <input type='text' class="form-control" id="ofw_status" name="ofw_status" readonly>
         </div>
     </div>
 

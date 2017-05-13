@@ -493,26 +493,73 @@ function getAcceptanceForm() {
 }
 
 function calStatusOfBuilding() {
-  if (moment($("#plan_begin").val(), "DD-MM-YYYY", true).isValid()  && moment($("#plan_end").val(), "DD-MM-YYYY", true).isValid() ) {
-    var now = moment();
-    var building_begin = moment($("#plan_begin").val(),"DD-MM-YYYY");
-    var building_end = moment($("#plan_end").val(),"DD-MM-YYYY");
-
-    if (now.isAfter(building_end)) {
-      $("#building_status").val('03');
-    } else if (now.isAfter(building_begin)) {
-      $("#building_status").val('02');
+    switch (calStatusOfTime($("#plan_begin").val(), $("#plan_end").val())) {
+        case 1:
+            $("#building_status").val('02');
+            break;
+        case 2:
+            $("#building_status").val('03');
+            break;
+        default:
+            break;
     }
-  } else {
-    $("#building_status").val('01');
-  }
 
   $("#building_status").change();
 }
 
-function calStatusOfOFW() {
-    var ofw_var = 'OFW nicht benoetigt';
+calStatusOfOFW();
 
+function calStatusOfOFW() {
+    var ofw_var1, ofw_var2;
+    switch (calStatusOfTime($("#ofw_delivery").val(), $("#ofw_completion_at").val())) {
+        case 0:
+            ofw_var1 = 'OFW nicht gebaut';
+            break;
+        case 1:
+            ofw_var1 = 'OFW im Bau';
+            break;
+        case 2:
+            ofw_var1 = 'OFW fertig';
+            break;
+        default:
+            break;
+    }
+
+    $('#ofw_status').val(ofw_var1);
+
+}
+
+// -1 : status not defined
+// 0 : not begin
+// 1 : in progress
+// 2 : finished
+function calStatusOfTime(t_begin, t_end) {
+    var now = moment();
+    if ( moment(t_begin, "DD-MM-YYYY", true).isValid()  && moment(t_end, "DD-MM-YYYY", true).isValid() ) {
+        if (now.isAfter(moment(t_end,"DD-MM-YYYY"))) {
+            return 2;
+        } else if (now.isAfter(moment(t_begin,"DD-MM-YYYY"))) {
+            return 1;
+        } else {
+            return 0;
+        }
+    } else if (moment(t_begin, "DD-MM-YYYY", true).isValid() ){
+
+        if (now.isAfter(moment(t_begin,"DD-MM-YYYY"))) {
+            return 1;
+        } else {
+            return 0;
+        }
+    } else if (moment(t_end, "DD-MM-YYYY", true).isValid() ){
+
+        if (now.isAfter(moment(t_end,"DD-MM-YYYY"))) {
+            return 2;
+        } else {
+            return 0
+        }
+    } else {
+        return 0;
+    }
 
 }
 
