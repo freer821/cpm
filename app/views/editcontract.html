@@ -422,11 +422,15 @@ $("#building_status").on('change', function() {
 
 {% if contract.ofw.is_acceptance_activ %}
   $("#add_acceptance").append(getAcceptanceForm());
+  $("#applied").val("{% if contract.ofw.acceptance.applied %}{{contract.ofw.acceptance.applied | date('d-m-Y')}}{% endif %}");
+  $("#granted").val("{% if contract.ofw.acceptance.granted %}{{contract.ofw.acceptance.granted | date('d-m-Y')}}{% endif %}");
 {% endif %}
 
 $("#is_acceptance_activ").on('change', function() {
   if($(this).is(":checked")) {
       $("#add_acceptance").append(getAcceptanceForm());
+      $("#applied").val("{% if contract.ofw.acceptance.applied %}{{contract.ofw.acceptance.applied | date('d-m-Y')}}{% endif %}");
+      $("#granted").val("{% if contract.ofw.acceptance.granted %}{{contract.ofw.acceptance.granted | date('d-m-Y')}}{% endif %}");
   } else {
     $("#add_acceptance").empty();
   }
@@ -437,7 +441,7 @@ function getAcceptanceForm() {
         '<div class="form-group row">'+
         ' <label class="col-sm-2 form-control-label">applied</label>'+
         '<div class="col-sm-10">'+
-        '<div class=\'input-group date col-sm-9\' ui-jp="datetimepicker" ui-options="{'+
+        '<div class=\'input-group date col-sm-9\' ui-jp="datetimepicker" ui-options="{'+"format: 'DD-MM-YYYY',"+
         ' icons: {'+
         '  time: \'fa fa-clock-o\','+
         ' date: \'fa fa-calendar\','+
@@ -450,7 +454,7 @@ function getAcceptanceForm() {
         '  close: \'fa fa-remove\''+
         '}'+
         '}">'+
-        '<input type=\'text\' class="form-control" name="applied">'+
+        '<input type=\'text\' class="form-control" id="applied" name="applied">'+
         '<span class="input-group-addon">'+
         '    <span class="fa fa-calendar"></span>'+
         '</span>'+
@@ -462,7 +466,7 @@ function getAcceptanceForm() {
         ' <div class="form-group row">'+
         '   <label class="col-sm-2 form-control-label">granted</label>'+
         '   <div class="col-sm-10">'+
-        '     <div class=\'input-group date col-sm-9\' ui-jp="datetimepicker" ui-options="{'+
+        '     <div class=\'input-group date col-sm-9\' ui-jp="datetimepicker" ui-options="{'+"format: 'DD-MM-YYYY',"+
         '         icons: {'+
         '           time: \'fa fa-clock-o\','+
         '           date: \'fa fa-calendar\','+
@@ -475,7 +479,7 @@ function getAcceptanceForm() {
         '           close: \'fa fa-remove\''+
         '         }'+
         '       }">'+
-        '     <input type=\'text\' class="form-control" name="granted">'+
+        '     <input type=\'text\' class="form-control" id="granted" name="granted">'+
         '     <span class="input-group-addon">'+
         '         <span class="fa fa-calendar"></span>'+
         '     </span>'+
