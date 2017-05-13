@@ -420,62 +420,70 @@ $("#building_status").on('change', function() {
   }
 });
 
-$("#is_acceptanced").on('change', function() {
+{% if contract.ofw.is_acceptance_activ %}
+  $("#add_acceptance").append(getAcceptanceForm());
+{% endif %}
+
+$("#is_acceptance_activ").on('change', function() {
   if($(this).is(":checked")) {
-    $("#add_acceptance").append('<div class="col-sm-6">'+
-                    '<div class="form-group row">'+
-                     ' <label class="col-sm-2 form-control-label">applied</label>'+
-                      '<div class="col-sm-10">'+
-                        '<div class=\'input-group date col-sm-9\' ui-jp="datetimepicker" ui-options="{'+
-                           ' icons: {'+
-                            '  time: \'fa fa-clock-o\','+
-                             ' date: \'fa fa-calendar\','+
-                            '  up: \'fa fa-chevron-up\','+
-                            '  down: \'fa fa-chevron-down\','+
-                            '  previous: \'fa fa-chevron-left\','+
-                            '  next: \'fa fa-chevron-right\','+
-                            '  today: \'fa fa-screenshot\','+
-                            '  clear: \'fa fa-trash\','+
-                            '  close: \'fa fa-remove\''+
-                            '}'+
-                          '}">'+
-                        '<input type=\'text\' class="form-control" name="applied">'+
-                        '<span class="input-group-addon">'+
-                        '    <span class="fa fa-calendar"></span>'+
-                        '</span>'+
-                      '</div>  '+
-                     ' </div>'+
-                   ' </div> '+
-                   ' </div> '+
-                   '<div class="col-sm-6">'+
-                   ' <div class="form-group row">'+
-                   '   <label class="col-sm-2 form-control-label">granted</label>'+
-                   '   <div class="col-sm-10">'+
-                   '     <div class=\'input-group date col-sm-9\' ui-jp="datetimepicker" ui-options="{'+
-                   '         icons: {'+
-                   '           time: \'fa fa-clock-o\','+
-                   '           date: \'fa fa-calendar\','+
-                   '           up: \'fa fa-chevron-up\','+
-                   '           down: \'fa fa-chevron-down\','+
-                   '           previous: \'fa fa-chevron-left\','+
-                   '           next: \'fa fa-chevron-right\','+
-                   '           today: \'fa fa-screenshot\','+
-                   '           clear: \'fa fa-trash\','+
-                   '           close: \'fa fa-remove\''+
-                   '         }'+
-                   '       }">'+
-                   '     <input type=\'text\' class="form-control" name="granted">'+
-                   '     <span class="input-group-addon">'+
-                   '         <span class="fa fa-calendar"></span>'+
-                   '     </span>'+
-                   '   </div> '+
-                   '   </div>'+
-                   ' </div> '+
-                  '</div>');
+      $("#add_acceptance").append(getAcceptanceForm());
   } else {
     $("#add_acceptance").empty();
   }
 });
+
+function getAcceptanceForm() {
+    return '<div class="col-sm-6">'+
+        '<div class="form-group row">'+
+        ' <label class="col-sm-2 form-control-label">applied</label>'+
+        '<div class="col-sm-10">'+
+        '<div class=\'input-group date col-sm-9\' ui-jp="datetimepicker" ui-options="{'+
+        ' icons: {'+
+        '  time: \'fa fa-clock-o\','+
+        ' date: \'fa fa-calendar\','+
+        '  up: \'fa fa-chevron-up\','+
+        '  down: \'fa fa-chevron-down\','+
+        '  previous: \'fa fa-chevron-left\','+
+        '  next: \'fa fa-chevron-right\','+
+        '  today: \'fa fa-screenshot\','+
+        '  clear: \'fa fa-trash\','+
+        '  close: \'fa fa-remove\''+
+        '}'+
+        '}">'+
+        '<input type=\'text\' class="form-control" name="applied">'+
+        '<span class="input-group-addon">'+
+        '    <span class="fa fa-calendar"></span>'+
+        '</span>'+
+        '</div>  '+
+        ' </div>'+
+        ' </div> '+
+        ' </div> '+
+        '<div class="col-sm-6">'+
+        ' <div class="form-group row">'+
+        '   <label class="col-sm-2 form-control-label">granted</label>'+
+        '   <div class="col-sm-10">'+
+        '     <div class=\'input-group date col-sm-9\' ui-jp="datetimepicker" ui-options="{'+
+        '         icons: {'+
+        '           time: \'fa fa-clock-o\','+
+        '           date: \'fa fa-calendar\','+
+        '           up: \'fa fa-chevron-up\','+
+        '           down: \'fa fa-chevron-down\','+
+        '           previous: \'fa fa-chevron-left\','+
+        '           next: \'fa fa-chevron-right\','+
+        '           today: \'fa fa-screenshot\','+
+        '           clear: \'fa fa-trash\','+
+        '           close: \'fa fa-remove\''+
+        '         }'+
+        '       }">'+
+        '     <input type=\'text\' class="form-control" name="granted">'+
+        '     <span class="input-group-addon">'+
+        '         <span class="fa fa-calendar"></span>'+
+        '     </span>'+
+        '   </div> '+
+        '   </div>'+
+        ' </div> '+
+        '</div>';
+}
 
 function calStatusOfBuilding() {
   if (moment($("#plan_begin").val(), "DD-MM-YYYY", true).isValid()  && moment($("#plan_end").val(), "DD-MM-YYYY", true).isValid() ) {

@@ -154,6 +154,13 @@ function updateContractPermission(request, callback) {
 
 function updateContractOFW(request, callback) {
 
+    let acceptance;
+    if (request.is_acceptance_activ) {
+        acceptance = {
+            applied: common.getDate(request.applied),
+                granted: common.getDate(request.granted)
+        };
+    }
     let contract = {
         ofw:{
             permission_nr: request.permission_nr,
@@ -161,10 +168,8 @@ function updateContractOFW(request, callback) {
             delivery: common.getDate(request.delivery),
             completion_at: common.getDate(request.completion_at),
             clean: request.clean,
-            acceptance :{
-                applied: common.getDate(request.applied),
-                granted: common.getDate(request.granted)
-            },
+            is_acceptance_activ: request.is_acceptance_activ,
+            acceptance :acceptance,
             typ:{
                 bausstr: request.bausstr,
                 fahrbahn: request.fahrbahn,

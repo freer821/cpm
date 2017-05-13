@@ -52,6 +52,7 @@ const contractSchema = new Schema({
         delivery: Date, // ofw_uebergaben
         completion_at: Date,  // ofw fertig_am
         clean: Boolean,    // clean geraeumt
+        is_acceptance_activ: Boolean,
         acceptance :{
             applied: Date, // abn_beantragt
             granted: Date  // abn_erteilt
