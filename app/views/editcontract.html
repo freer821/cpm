@@ -492,6 +492,16 @@ function getAcceptanceForm() {
         '</div>';
 }
 
+// trigger change event in date form
+$(".date").on('dp.change', function (ev) {
+    calStatusOfBuilding();
+    calStatusOfOFW();
+});
+
+
+// check building status
+calStatusOfBuilding();
+
 function calStatusOfBuilding() {
     switch (calStatusOfTime($("#plan_begin").val(), $("#plan_end").val())) {
         case 1:
@@ -507,7 +517,12 @@ function calStatusOfBuilding() {
   $("#building_status").change();
 }
 
+// check ofw status
 calStatusOfOFW();
+$('#is_acceptance_activ').change(function(){
+    calStatusOfOFW();
+});
+
 
 function calStatusOfOFW() {
     var ofw_var1, ofw_var2;
@@ -588,12 +603,6 @@ function calStatusOfTime(t_begin, t_end) {
     }
 
 }
-
-calStatusOfBuilding();
-
-$('#plan_end_div').on('dp.change', function (ev) {
-    calStatusOfBuilding();
-});
 
 $(document).ready(function() {
   {% if jump_building_permission %}

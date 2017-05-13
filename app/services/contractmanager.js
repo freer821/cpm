@@ -178,9 +178,8 @@ function updateContractOFW(request, callback) {
                 pflaster: request.pflaster,
                 beton: request.beton
             },
-            ueberdicken: common.getNumValue(request.ueberdicken)
-            //todo
-            //ofw_status: request.ofw_status,
+            ueberdicken: common.getNumValue(request.ueberdicken),
+            ofw_status: request.ofw_status
         }
     };
     db.editContract({id: request.contract_id},contract);
