@@ -1,0 +1,161 @@
+<form role="form" action="/contracts/edit/ofw" class="p-a-md" method="post">
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group row">
+                <label class="col-sm-3 form-control-label">Worker Name</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" name="worker_name" value="{{contract.ofw.worker_name}}">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group row">
+                <label class="col-sm-3 form-control-label">Permission Number</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" name="permission_nr" value="{{contract.ofw.permission_nr}}">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group row">
+                <label class="col-sm-3 form-control-label">Delivery at</label>
+                <div class='input-group date col-sm-9' ui-jp="datetimepicker" ui-options="{
+                            format: 'DD-MM-YYYY',
+                            icons: {
+                              time: 'fa fa-clock-o',
+                              date: 'fa fa-calendar',
+                              up: 'fa fa-chevron-up',
+                              down: 'fa fa-chevron-down',
+                              previous: 'fa fa-chevron-left',
+                              next: 'fa fa-chevron-right',
+                              today: 'fa fa-screenshot',
+                              clear: 'fa fa-trash',
+                              close: 'fa fa-remove'
+                            }
+                          }">
+                    <input type='text' class="form-control" name="delivery" value="{{contract.ofw.delivery | date('d-m-Y')}}">
+                    <span class="input-group-addon">
+                            <span class="fa fa-calendar"></span>
+                        </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group row">
+                <label class="col-sm-3 form-control-label">Finished at</label>
+                <div class='input-group date col-sm-9' ui-jp="datetimepicker" ui-options="{
+                            format: 'DD-MM-YYYY',
+                            icons: {
+                              time: 'fa fa-clock-o',
+                              date: 'fa fa-calendar',
+                              up: 'fa fa-chevron-up',
+                              down: 'fa fa-chevron-down',
+                              previous: 'fa fa-chevron-left',
+                              next: 'fa fa-chevron-right',
+                              today: 'fa fa-screenshot',
+                              clear: 'fa fa-trash',
+                              close: 'fa fa-remove'
+                            }
+                          }">
+                    <input type='text' class="form-control" name="completion_at" value="{{contract.ofw.completion_at | date('d-m-Y')}}">
+                    <span class="input-group-addon">
+                            <span class="fa fa-calendar"></span>
+                        </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-3 form-control-label">OFW Type</label>
+        <div class="col-sm-9">
+            <div class="form-group row">
+                <label class="md-check col-sm-2 form-control-label">
+                    <input type="checkbox" name="bausstr" {% if contract.ofw.typ.bausstr %}checked{% endif %}>
+                    <i class="red"></i>
+                    Baustrasse
+                </label>
+                <label class="md-check col-sm-2 form-control-label">
+                    <input type="checkbox" name="fahrbahn" {% if contract.ofw.typ.fahrbahn %}checked{% endif %}>
+                    <i class="green"></i>
+                    Fahrbahn
+                </label>
+                <label class="md-check col-sm-2 form-control-label">
+                    <input type="checkbox" name="fussweg" {% if contract.ofw.typ.fussweg %}checked{% endif %}>
+                    <i class="yellow"></i>
+                    Fussweg
+                </label>
+                <label class="md-check col-sm-2 form-control-label">
+                    <input type="checkbox" name="bitu" {% if contract.ofw.typ.bitu %}checked{% endif %}>
+                    <i class="blue"></i>
+                    Bitu
+                </label>
+                <label class="md-check col-sm-2 form-control-label">
+                    <input type="checkbox" name="pflaster" {% if contract.ofw.typ.pflaster %}checked{% endif %}>
+                    <i class="orange"></i>
+                    Pflaster
+                </label>
+                <label class="md-check col-sm-2 form-control-label">
+                    <input type="checkbox" name="beton" {% if contract.ofw.typ.beton %}checked{% endif %}>
+                    <i class="grey"></i>
+                    Beton
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-2 form-control-label">Ueberdicken</label>
+        <div class="col-md-1">
+            <input type='text' class="form-control" name="ueberdicken" value="{{contract.ofw.ueberdicken}}">
+        </div>
+        <label class="col-sm-9 form-control-label">CM</label>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-2 form-control-label">Clean</label>
+        <div class="col-sm-10">
+            <label class="ui-switch primary m-t-xs m-r">
+                <input type="checkbox" name="clean" {% if contract.ofw.clean %}checked{% endif %} >
+                <i></i>
+            </label>
+        </div>
+    </div>
+
+
+    <div class="form-group row">
+        <label class="col-sm-2 form-control-label">acceptance</label>
+        <div class="col-sm-10">
+            <label class="ui-switch primary m-t-xs m-r">
+                <input type="checkbox" id="is_acceptanced" name="is_acceptanced" {% if contract.ofw.acceptance %}checked{% endif %}>
+                <i></i>
+            </label>
+        </div>
+    </div>
+    <div id="add_acceptance" class="row"></div>
+
+    <div class="form-group row">
+        <label class="col-sm-2 form-control-label">Extern Company</label>
+        <div class="col-sm-10">
+            <label class="ui-switch primary m-t-xs m-r">
+                <input type="checkbox" id="is_extern_company" name="is_extern_company" {% if contract.ofw.extern_company %}checked{% endif %}">
+                <i></i>
+            </label>
+        </div>
+    </div>
+
+    <div id="add_extern_company" class="row"></div>
+
+    <div class="form-group row">
+        <label class="col-md-3 form-control-label">OFW Status</label>
+        <div id="ofw_status" class="col-md-9 progress mb-4">
+        </div>
+    </div>
+
+    <input type="hidden" name="contract_id" value="{{contract.id}}">
+    <button type="submit" class="btn btn-info m-t">Update</button>
+</form>
