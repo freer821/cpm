@@ -95,11 +95,14 @@ function updateContractBasic(request, callback) {
         }
     };
 
-    db.editContract({id: request.contract_id},contract);
-
-    if (typeof callback === 'function') {
-        callback();
-    }
+    db.editContract({id: request.contract_id},contract,function (err) {
+        if(err) callback(err);
+        else{
+            if (typeof callback === 'function') {
+                callback();
+            }            
+        }
+    });
 }
 
 function updateContractBuilding(request, callback) {
@@ -113,10 +116,14 @@ function updateContractBuilding(request, callback) {
             status: request.status
         }
     };
-    db.editContract({id: request.contract_id},contract);
-    if (typeof callback === 'function') {
-        callback();
-    }
+    db.editContract({id: request.contract_id},contract,function (err) {
+        if(err) callback(err);
+        else{
+            if (typeof callback === 'function') {
+                callback();
+            }            
+        }
+    });
 }
 
 function updateContractPermission(request, callback) {
@@ -131,7 +138,14 @@ function updateContractPermission(request, callback) {
             status: request.status
         };
 
-        db.editContract({id: request.contract_id, building_permission: {$elemMatch: {_id : request.permission_id}}},permission);
+        db.editContract({id: request.contract_id, building_permission: {$elemMatch: {_id : request.permission_id}}},permission,function (err) {
+            if(err) callback(err);
+            else{
+                if (typeof callback === 'function') {
+                    callback();
+                }            
+            }
+        });
     } else {
         let permission = {
             type: request.type,
@@ -142,11 +156,14 @@ function updateContractPermission(request, callback) {
             status: request.status
         };
 
-        db.editContractAddIntoArray({id: request.contract_id},{building_permission: permission});
-    }
-
-    if (typeof callback === 'function') {
-        callback();
+        db.editContractAddIntoArray({id: request.contract_id},{building_permission: permission},function (err) {
+            if(err) callback(err);
+            else{
+                if (typeof callback === 'function') {
+                    callback();
+                }            
+            }
+        });    
     }
 }
 
@@ -180,10 +197,14 @@ function updateContractOFW(request, callback) {
             ofw_status: request.ofw_status
         }
     };
-    db.editContract({id: request.contract_id},contract);
-    if (typeof callback === 'function') {
-        callback();
-    }
+    db.editContract({id: request.contract_id},contract,function (err) {
+        if(err) callback(err);
+        else{
+            if (typeof callback === 'function') {
+                callback();
+            }            
+        }
+    });
 }
 
 function updateContractFinancial(request, callback) {
@@ -199,7 +220,14 @@ function updateContractFinancial(request, callback) {
             "invoice.$.status": request.status
         };
 
-        db.editContract({id: request.contract_id, invoice: {$elemMatch: {_id : request.invocie_id}}},invoice);
+        db.editContract({id: request.contract_id, invoice: {$elemMatch: {_id : request.invocie_id}}},invoice,function (err) {
+           if(err) callback(err);
+            else{
+                if (typeof callback === 'function') {
+                    callback();
+                }            
+            }
+        });  
     } else {
         let invoice = {
             rechnung_nr: request.rechnung_nr,
@@ -211,11 +239,14 @@ function updateContractFinancial(request, callback) {
             status: request.status
         };
 
-        db.editContractAddIntoArray({id: request.contract_id},{invoice: invoice});
-    }
-
-    if (typeof callback === 'function') {
-        callback();
+        db.editContractAddIntoArray({id: request.contract_id},{invoice: invoice},function (err) {
+            if(err) callback(err);
+            else{
+                if (typeof callback === 'function') {
+                    callback();
+                }            
+            }
+        });
     }
 }
 
@@ -228,10 +259,14 @@ function updateContractFibu(request, callback) {
             status: request.status
         }
     };
-    db.editContract({id: request.contract_id},contract);
-    if (typeof callback === 'function') {
-        callback();
-    }
+    db.editContract({id: request.contract_id},contract,function (err) {
+        if(err) callback(err);
+        else{
+            if (typeof callback === 'function') {
+                callback();
+            }            
+        }
+    });
 }
 
 function getContractID(count) {
@@ -264,45 +299,50 @@ const editContract = function (req, res, next) {
         let request = req.body;
 
         if(req.params.action === 'basic') {
-            updateContractBasic(request, function () {
+            updateContractBasic(request, function (err) {
                 let ret= 'update operation done!!';
+                if(err) ret = 'update operation failed!!';
                 res.send(ret);
             });
         } else if(req.params.action === 'building') {
-            updateContractBuilding(request, function () {
+            updateContractBuilding(request, function (err) {
                 let ret= 'update operation done!!';
+                if(err) ret = 'update operation failed!!';
                 res.send(ret);
             });
         } else if(req.params.action === 'permission') {
-            updateContractPermission(request, function () {
+            updateContractPermission(request, function (err) {
+                let last_err = err;
                 db.getContracts({'id':request.contract_id}, function (err, contracts) {
-                    if(err) {
-                        logger.error('contract id not exits: ', req.params.id);
-                        res.redirect('/projects');
+                    if(err || last_err) {
+                        res.render('editcontract', {title:'Contract Management', project_id: request.project_id, project_adr:request.project_adr, contract: contracts[0],  user: req.user, jump_building_permission:'1', err:'err'});
                         return;
                     }
                     res.render('editcontract', {title:'Contract Management', project_id: request.project_id, project_adr:request.project_adr, contract: contracts[0],  user: req.user, jump_building_permission:'1'});
                 }); 
             });
         } else if(req.params.action === 'ofw') {
-            updateContractOFW(request, function () {
+            updateContractOFW(request, function (err) {
                 let ret= 'update operation done!!';
+                if(err) ret = 'update operation failed!!';
                 res.send(ret);
             });
         } else if(req.params.action === 'invocie') {
-            updateContractFinancial(request, function () {
+            updateContractFinancial(request, function (err) {
+                if(err) res.render('editcontract', {title:'Contract Management', project_id: request.project_id, project_adr:request.project_adr, contract: contracts[0],  user: req.user, jump_financial:'1', err:'err'});
                 db.getContracts({'id':request.contract_id}, function (err, contracts) {
                     if(err) {
                         logger.error('contract id not exits: ', req.params.id);
-                        res.redirect('/projects');
+                        res.render('editcontract', {title:'Contract Management', project_id: request.project_id, project_adr:request.project_adr, contract: contracts[0],  user: req.user, jump_financial:'1', err:'err'});
                         return;
                     }
                     res.render('editcontract', {title:'Contract Management', project_id: request.project_id, project_adr:request.project_adr, contract: contracts[0],  user: req.user, jump_financial:'1'});
                 }); 
             });
         } else if(req.params.action === 'fibu') {
-            updateContractFibu(request, function () {
+            updateContractFibu(request, function (err) {
                 let ret= 'update operation done!!';
+                if(err) ret = 'update operation failed!!';
                 res.send(ret);
             });
         }
@@ -311,22 +351,24 @@ const editContract = function (req, res, next) {
 
 const delContract = function (req, res, next) {
     if(req.params.action === 'permission') {
-        db.editContractRemoveFromArray({'id':req.params.id},{building_permission: {_id: new ObjectId(req.query.id)}}, function () {
+        db.editContractRemoveFromArray({'id':req.params.id},{building_permission: {_id: new ObjectId(req.query.id)}}, function (err) {
+            if(err) res.render('editcontract', {title:'Contract Management', project_id: req.query.project_id, project_adr:req.query.project_adr, contract: contracts[0],  user: req.user, jump_building_permission:'1', err:'err'});
             db.getContracts({'id':req.params.id}, function (err, contracts) {
                 if(err) {
                     logger.error('contract id not exits: ', req.params.id);
-                    res.redirect('/projects');
+                    res.render('editcontract', {title:'Contract Management', project_id: req.query.project_id, project_adr:req.query.project_adr, contract: contracts[0],  user: req.user, jump_building_permission:'1', err:'err'});
                     return;
                 }
                 res.render('editcontract', {title:'Contract Management', project_id: req.query.project_id, project_adr:req.query.project_adr, contract: contracts[0],  user: req.user, jump_building_permission:'1'});
             });            
         })
     } else if(req.params.action === 'invoice') {
-        db.editContractRemoveFromArray({'id':req.params.id},{invoice: {_id: new ObjectId(req.query.id)}}, function () {
+        db.editContractRemoveFromArray({'id':req.params.id},{invoice: {_id: new ObjectId(req.query.id)}}, function (err) {
+            if(err) res.render('editcontract', {title:'Contract Management', project_id: req.query.project_id, project_adr:req.query.project_adr, contract: contracts[0],  user: req.user, jump_financial:'1', err:'err'});
             db.getContracts({'id':req.params.id}, function (err, contracts) {
                 if(err) {
                     logger.error('contract id not exits: ', req.params.id);
-                    res.redirect('/projects');
+                    res.render('editcontract', {title:'Contract Management', project_id: req.query.project_id, project_adr:req.query.project_adr, contract: contracts[0],  user: req.user, jump_financial:'1', err:'err'});
                     return;
                 }
                 res.render('editcontract', {title:'Contract Management', project_id: req.query.project_id, project_adr:req.query.project_adr, contract: contracts[0],  user: req.user, jump_financial:'1'});

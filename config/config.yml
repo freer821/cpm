@@ -2,7 +2,7 @@ default:
   server:
     port: 3000
   mongodb:
-    connection: 'mongodb://192.168.99.100:27017/cpm'
+    connection: 'mongodb://127.0.0.1:27017/cpm'
     collection_user: 'user'
     collection_department: 'department'
     collection_item: 'item'

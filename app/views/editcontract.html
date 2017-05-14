@@ -660,11 +660,19 @@ function getNumValue(value){
 
 $(document).ready(function() {
   {% if jump_building_permission %}
-    bootbox.alert('update building_permission done!');
+    var msg = 'update building_permission done!';
+    {% if err %}
+      msg = 'update building_permission failed!';
+    {% endif %}  
+    bootbox.alert(msg);
     $('#building_permission')[0].click();
   {% endif %}
   {% if jump_financial %}
-    bootbox.alert('update invocie done!');
+    var msg = 'update invocie done!';
+    {% if err %}
+      msg = 'update invocie failed!';
+    {% endif %}      
+    bootbox.alert(msg);
     $('#financial')[0].click();
   {% endif %}
 });

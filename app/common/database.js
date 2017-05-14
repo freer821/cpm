@@ -62,7 +62,7 @@ const findUser = function (condition, callback) {
     User.findOne(condition, function (err, user) {
         if (err) {
             logger.error('error to find user', err.message);
-            callback(err)
+            callback(err);
         } else {
             callback(undefined, user);
         }
@@ -73,7 +73,7 @@ const findUsers = function (callback) {
     User.find({}, function (err, users) {
         if (err) {
             logger.error('error to find user', err.message);
-            callback(err)
+            callback(err);
         } else {
             callback(undefined, users);
         }
@@ -121,7 +121,7 @@ const findDeps = function (condition, callback) {
     Department.find(condition, function (err, deps) {
         if (err) {
             logger.error('error to find deps', err.message);
-            callback(err)
+            callback(err);
         } else {
             callback(undefined, deps);
         }
@@ -190,7 +190,7 @@ const getItems = function (condition, callback) {
     Item.find(condition, function (err, items) {
         if (err) {
             logger.error('error to find items', err.message);
-            callback(err)
+            callback(err);
         } else {
             callback(undefined, items);
         }
@@ -201,7 +201,7 @@ const countProject = function (callback) {
     Project.count({}, function (err, count) {
         if (err) {
             logger.error('error to count projects', err.message);
-            callback(err)
+            callback(err);
         } else {
             callback(undefined, count);
         }
@@ -220,8 +220,10 @@ const editProject = function (condition, project, callback) {
         function (err) {
             if (err) {
                 logger.error('Failed to Update Project in MongoDB', project,err);
+                callback(err);
             } else {
                 logger.trace('add Project in MongoDB', project);
+                callback(undefined);
             }
         }
     );
@@ -232,7 +234,7 @@ const getProjects = function (condition, callback) {
     Project.find(condition, function (err, prjects) {
         if (err) {
             logger.error('error to find projects', err.message);
-            callback(err)
+            callback(err);
         } else {
             callback(undefined, prjects);
         }
@@ -243,7 +245,7 @@ const getContracts = function (condition, callback) {
     Contract.find(condition, function (err, contracts) {
         if (err) {
             logger.error('error to find contracts', err.message);
-            callback(err)
+            callback(err);
         } else {
             callback(undefined, contracts);
         }
@@ -262,8 +264,10 @@ const editContract = function (condition, contract, callback) {
         function (err) {
             if (err) {
                 logger.error('Failed to Update Contract in MongoDB', contract,err);
+                callback(err);
             } else {
                 logger.trace('add Contract in MongoDB', contract);
+                callback(undefined);
             }
         }
     );
@@ -278,8 +282,10 @@ const editContractAddIntoArray = function (condition, arrayItem, callback) {
         function (err) {
             if (err) {
                 logger.error('Failed to Update Contract Array in MongoDB', arrayItem,err);
+                callback(err);
             } else {
                 logger.trace('add Contract Array in MongoDB', arrayItem);
+                callback(undefined);
             }
         }
     );
@@ -294,10 +300,11 @@ const editContractRemoveFromArray = function (condition, arrayItem, callback) {
         function (err, data) {
             if (err) {
                 logger.error('Failed to remove Contract Array in MongoDB', arrayItem,err);
+                callback(err);
             } else {
                 logger.trace('removed Contract Array in MongoDB', arrayItem);
+                callback(undefined);
             }
-            callback();
         }
     );
 };
@@ -307,7 +314,7 @@ const countContract = function (callback) {
     Contract.count({}, function (err, count) {
         if (err) {
             logger.error('error to count projects', err.message);
-            callback(err)
+            callback(err);
         } else {
             callback(undefined, count);
         }
