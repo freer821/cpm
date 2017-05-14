@@ -230,12 +230,14 @@ function updateContractFinancial(request, callback) {
             "invoice.$.aufmass_am": common.getDate(request.aufmass_am),
             "invoice.$.bewert_aufmass": common.getDate(request.bewert_aufmass),
             "invoice.$.guts_datum": common.getDate(request.guts_datum),
+            "invoice.$.booking_month": request.booking_month,
+            "invoice.$.correction_needed": request.correction_needed,
             "invoice.$.invoice_status": request.invoice_status
         };
 
         db.editContract({id: request.contract_id, invoice: {$elemMatch: {_id : request.invocie_id}}},invoice,function (err) {
             if(err){
-                callback(err);
+                callback(err.message);
             } else {
                 callback();
             }
@@ -248,12 +250,14 @@ function updateContractFinancial(request, callback) {
             aufmass_am: common.getDate(request.aufmass_am),
             bewert_aufmass: common.getDate(request.bewert_aufmass),
             guts_datum: common.getDate(request.guts_datum),
+            booking_month: request.booking_month,
+            correction_needed: request.correction_needed,
             invoice_status: request.invoice_status
         };
 
         db.editContractAddIntoArray({id: request.contract_id},{invoice: invoice},function (err) {
             if(err){
-                callback(err);
+                callback(err.message);
             } else {
                 callback();
             }

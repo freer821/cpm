@@ -256,11 +256,12 @@ $(".date").on('dp.change', function (ev) {
     calStatusOfBuilding();
     calStatusOfOFW();
     calPermissionStatus();
+    calInvoiceStatus();
 });
 
 
 // check building status
-calStatusOfBuilding();
+//calStatusOfBuilding();
 
 function calStatusOfBuilding() {
     switch (calStatusOfTime($("#plan_begin").val(), $("#plan_end").val())) {
@@ -278,7 +279,7 @@ function calStatusOfBuilding() {
 }
 
 // check ofw status
-calStatusOfOFW();
+//calStatusOfOFW();
 $('#is_acceptance_activ').change(function(){
     calStatusOfOFW();
 });
@@ -309,7 +310,7 @@ function calStatusOfOFW() {
     {% else %}
     if ($('#is_acceptance_activ').is(':checked')) {
         switch (calStatusOfTime($("#applied").val(), $("#granted").val())) {
-            case 1:
+            case 0:
                 ofw_var2 = 'Abn. Noetig (zu beantragen)';
                 break;
             case 1:
@@ -397,16 +398,29 @@ function calPermissionStatus() {
     }
 }
 
+$('#correction_needed, #sum, #rechnung_nr , #booking_month').change(function(){
+    calInvoiceStatus();
+});
+
 function calInvoiceStatus() {
+    $('#aufmass_am, #bewert_aufmass, #rechnung_nr,#guts_datum, #booking_month').attr('readonly', true);
     if ($('#correction_needed').is(":checked")) {
         $('#invoice_status').val('06').change();
     } else if (getNumValue($('#sum').val())> 0) {
-        if ( !isDateValid('aufmass_am') && !isDateValid('bewert_aufmass') && isFieldEmpty('rechnung_nr') && isDateValid('guts_datum')) {
+        if ( !isDateValid('aufmass_am') && !isDateValid('bewert_aufmass') && isFieldEmpty('rechnung_nr') && !isDateValid('guts_datum')) {
             $('#invoice_status').val('03').change();
-        } else if (isDateValid('aufmass_am') && isDateValid('bewert_aufmass') && isFieldEmpty('rechnung_nr') && isDateValid('guts_datum')) {
-            $('#invoice_status').val('03').change();
-        } else if (isDateValid('aufmass_am') && isDateValid('bewert_aufmass') && isFieldEmpty('rechnung_nr') && isDateValid('guts_datum')) {
-            $('#invoice_status').val('03').change();
+            $('#aufmass_am').attr('readonly', false);
+        } else if (isDateValid('aufmass_am') && !isDateValid('bewert_aufmass') && isFieldEmpty('rechnung_nr') && !isDateValid('guts_datum')) {
+            $('#invoice_status').val('04').change();
+            $('#aufmass_am, #bewert_aufmass').attr('readonly', false);
+        } else if (isDateValid('aufmass_am') && isDateValid('bewert_aufmass') && isFieldEmpty('rechnung_nr') && !isDateValid('guts_datum')) {
+            $('#invoice_status').val('05').change();
+            $('#aufmass_am, #bewert_aufmass, #rechnung_nr').attr('readonly', false);
+        } else if (!isFieldEmpty('rechnung_nr') && isDateValid('guts_datum')) {
+            $('#invoice_status').val('06').change();
+            $('#aufmass_am, #bewert_aufmass, #rechnung_nr, #guts_datum, #booking_month').attr('readonly', false);
+        } else if (!isFieldEmpty('rechnung_nr')) {
+            $('#aufmass_am, #bewert_aufmass, #rechnung_nr, #guts_datum').attr('readonly', false);
         }
     }
 }
@@ -426,8 +440,8 @@ function isFieldEmpty(field_id) {
     return true;
 }
 
-function isDateValid(t_time) {
-    return moment(t_time, "DD-MM-YYYY", true).isValid();
+function isDateValid(field_id) {
+    return moment($('#'+field_id).val(), "DD-MM-YYYY", true).isValid();
 }
 
 $(document).ready(function() {

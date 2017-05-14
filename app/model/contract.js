@@ -82,6 +82,7 @@ const contractSchema = new Schema({
             bewert_aufmass: Date, // time to permit invocie
             guts_datum: Date, // time to get money
             correction_needed: Boolean,
+            booking_month: String,
             invoice_status: String  // status, auto to cal
         }
     ],

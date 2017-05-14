@@ -8,18 +8,12 @@
                 <div class="modal-body">
 
                     <div class="form-group row">
-                        <label class="col-md-3 form-control-label">Invoice Nr.</label>
-                        <div class="col-md-9">
-                            <input type="text" class="form-control" id="rechnung_nr" name="rechnung_nr">
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
                         <label class="col-md-3 form-control-label">Current Value</label>
                         <div class="col-md-9">
                             <input type="text" class="form-control" id="current_value" name="current_value">
                         </div>
                     </div>
+
                     <div class="form-group row">
                         <label class="col-md-3 form-control-label">Sum Value</label>
                         <div class="col-md-9">
@@ -30,92 +24,85 @@
                     <div class="form-group row">
                         <label class="col-sm-3 form-control-label">Invocie Send</label>
                         <div class='input-group date col-sm-9' ui-jp="datetimepicker" ui-options="{
-                    format: 'DD-MM-YYYY',
-                    icons: {
-                      time: 'fa fa-clock-o',
-                      date: 'fa fa-calendar',
-                      up: 'fa fa-chevron-up',
-                      down: 'fa fa-chevron-down',
-                      previous: 'fa fa-chevron-left',
-                      next: 'fa fa-chevron-right',
-                      today: 'fa fa-screenshot',
-                      clear: 'fa fa-trash',
-                      close: 'fa fa-remove'
-                    }
-                  }">
+                              format: 'DD-MM-YYYY',
+                              icons: {
+                                time: 'fa fa-clock-o',
+                                date: 'fa fa-calendar',
+                                up: 'fa fa-chevron-up',
+                                down: 'fa fa-chevron-down',
+                                previous: 'fa fa-chevron-left',
+                                next: 'fa fa-chevron-right',
+                                today: 'fa fa-screenshot',
+                                clear: 'fa fa-trash',
+                                close: 'fa fa-remove'
+                              }
+                            }">
                             <input type='text' class="form-control" id="aufmass_am" name="aufmass_am">
                             <span class="input-group-addon">
-              <span class="fa fa-calendar"></span>
-            </span>
+                              <span class="fa fa-calendar"></span>
+                            </span>
                         </div>
                     </div>
 
+                    {% if contract.customer !== 'AVA' %}
                     <div class="form-group row">
                         <label class="col-sm-3 form-control-label">Invocie Permitted</label>
                         <div class='input-group date col-sm-9' ui-jp="datetimepicker" ui-options="{
-                    format: 'DD-MM-YYYY',
-                    icons: {
-                      time: 'fa fa-clock-o',
-                      date: 'fa fa-calendar',
-                      up: 'fa fa-chevron-up',
-                      down: 'fa fa-chevron-down',
-                      previous: 'fa fa-chevron-left',
-                      next: 'fa fa-chevron-right',
-                      today: 'fa fa-screenshot',
-                      clear: 'fa fa-trash',
-                      close: 'fa fa-remove'
-                    }
-                  }">
+                              format: 'DD-MM-YYYY',
+                              icons: {
+                                time: 'fa fa-clock-o',
+                                date: 'fa fa-calendar',
+                                up: 'fa fa-chevron-up',
+                                down: 'fa fa-chevron-down',
+                                previous: 'fa fa-chevron-left',
+                                next: 'fa fa-chevron-right',
+                                today: 'fa fa-screenshot',
+                                clear: 'fa fa-trash',
+                                close: 'fa fa-remove'
+                              }
+                            }">
                             <input type='text' class="form-control" id="bewert_aufmass" name="bewert_aufmass">
                             <span class="input-group-addon">
-              <span class="fa fa-calendar"></span>
-            </span>
+                              <span class="fa fa-calendar"></span>
+                            </span> 
                         </div>
                     </div>
+                    {% endif %}
 
-                    <div class="form-group row">
-                        <label class="col-sm-3 form-control-label">Permission End</label>
-                        <div class='input-group date col-sm-9' ui-jp="datetimepicker" ui-options="{
-                    format: 'DD-MM-YYYY',
-                    icons: {
-                      time: 'fa fa-clock-o',
-                      date: 'fa fa-calendar',
-                      up: 'fa fa-chevron-up',
-                      down: 'fa fa-chevron-down',
-                      previous: 'fa fa-chevron-left',
-                      next: 'fa fa-chevron-right',
-                      today: 'fa fa-screenshot',
-                      clear: 'fa fa-trash',
-                      close: 'fa fa-remove'
-                    }
-                  }">
-                            <input type='text' class="form-control" id="end" name="end">
-                            <span class="input-group-addon">
-              <span class="fa fa-calendar"></span>
-            </span>
+                     <div class="form-group row">
+                        <label class="col-md-3 form-control-label">Invoice Nr.</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" id="rechnung_nr" name="rechnung_nr">
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="col-sm-3 form-control-label">Invocie Paid</label>
                         <div class='input-group date col-sm-9' ui-jp="datetimepicker" ui-options="{
-                    format: 'DD-MM-YYYY',
-                    icons: {
-                      time: 'fa fa-clock-o',
-                      date: 'fa fa-calendar',
-                      up: 'fa fa-chevron-up',
-                      down: 'fa fa-chevron-down',
-                      previous: 'fa fa-chevron-left',
-                      next: 'fa fa-chevron-right',
-                      today: 'fa fa-screenshot',
-                      clear: 'fa fa-trash',
-                      close: 'fa fa-remove'
-                    }
-                  }">
+                              format: 'DD-MM-YYYY',
+                              icons: {
+                                time: 'fa fa-clock-o',
+                                date: 'fa fa-calendar',
+                                up: 'fa fa-chevron-up',
+                                down: 'fa fa-chevron-down',
+                                previous: 'fa fa-chevron-left',
+                                next: 'fa fa-chevron-right',
+                                today: 'fa fa-screenshot',
+                                clear: 'fa fa-trash',
+                                close: 'fa fa-remove'
+                              }
+                            }">
                             <input type='text' class="form-control" id="guts_datum" name="guts_datum">
                             <span class="input-group-addon">
-              <span class="fa fa-calendar"></span>
-            </span>
+                              <span class="fa fa-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+
+                     <div class="form-group row">
+                        <label class="col-md-3 form-control-label">Booking Month</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" id="booking_month" name="booking_month">
                         </div>
                     </div>
 
