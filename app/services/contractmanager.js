@@ -113,7 +113,8 @@ function updateContractBuilding(request, callback) {
             plan_end: common.getDate(request.plan_end),
             worker_name: request.worker_name,
             working_months: request.working_months,
-            status: request.status
+            status: request.status,
+            procent_completion: request.procent_completion
         }
     };
     db.editContract({id: request.contract_id},contract,function (err) {

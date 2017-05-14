@@ -413,25 +413,30 @@ $('#del-item').on('show.bs.modal', function(e) {
       $(this).find('.danger').attr('href', $(e.relatedTarget).data('href'));
   });
 
-$("#procent_completion").append('<div class="progress-bar progress-bar-striped progress-bar-animated primary" style="width: 0%">0%</div>');
 
 $("#building_status").on('change', function() {
-  $("#procent_completion").empty();
   switch(this.value) {
     case '00':
-      $("#procent_completion").append('<div class="progress-bar progress-bar-striped progress-bar-animated primary" style="width: 0%">0%</div>');
+      $("#procent_completion_pg").empty();
+      $("#procent_completion_pg").append('<div class="progress-bar progress-bar-striped progress-bar-animated primary" style="width: 0%">0%</div>');
+      $("#procent_completion").attr("hidden","hidden");
+      $("#procent_completion").attr("min","0");
+      $("#procent_completion").val(0);
       break;
     case '01':
-      $("#procent_completion").append('<div class="progress-bar progress-bar-striped progress-bar-animated primary" style="width: 10%">10%</div>');
+      $("#procent_completion").removeAttr("hidden");
       break;
     case '02':
-      $("#procent_completion").append('<div class="progress-bar progress-bar-striped progress-bar-animated primary" style="width: 80%">80%</div>');
+      $("#procent_completion").removeAttr("hidden");
       break;
     case '03':
-      $("#procent_completion").append('<div class="progress-bar progress-bar-striped progress-bar-animated primary" style="width: 100%">100%</div>');
+      $("#procent_completion").removeAttr("hidden");
       break;
     case '04':
-      $("#procent_completion").append('<div class="progress-bar progress-bar-striped progress-bar-animated primary" style="width: 100%">100%</div>');
+      $("#procent_completion_pg").empty();
+      $("#procent_completion_pg").append('<div class="progress-bar progress-bar-striped progress-bar-animated primary" style="width: 100%">100%</div>');
+      $("#procent_completion").attr("hidden","hidden");
+      $("#procent_completion").val(100);
       break;
   }
 });
@@ -451,6 +456,11 @@ $("#is_acceptance_activ").on('change', function() {
     $("#add_acceptance").empty();
   }
 });
+
+function changeProgress(value){
+  $("#procent_completion_pg").empty();
+  $("#procent_completion_pg").append('<div class="progress-bar progress-bar-striped progress-bar-animated primary" style="width: '+value.toString()+'%">'+value.toString()+'%</div>');
+}
 
 function getAcceptanceForm() {
     return '<div class="col-sm-6">'+
@@ -656,7 +666,7 @@ function getNumValue(value){
         return '';
     }
     return parseFloat(value);
-};
+}
 
 $(document).ready(function() {
   {% if jump_building_permission %}
