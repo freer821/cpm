@@ -438,6 +438,7 @@ $(document).ready(function() {
     {% endif %}  
     bootbox.alert(msg);
     $('#building_permission')[0].click();
+    window.history.pushState("building_permission", "Contract Management", document.referrer);
   {% endif %}
   {% if jump_financial %}
     var msg = 'update invocie done!';
@@ -446,6 +447,7 @@ $(document).ready(function() {
     {% endif %}      
     bootbox.alert(msg);
     $('#financial')[0].click();
+    window.history.pushState("invocie", "Contract Management", document.referrer);
   {% endif %}
 });
 </script>
