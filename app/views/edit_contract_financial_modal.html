@@ -123,7 +123,7 @@
                         <label class="col-sm-3 form-control-label">Need Correction</label>
                         <div class="col-sm-9">
                             <label class="ui-switch primary m-t-xs m-r">
-                                <input type="checkbox" name="correction_needed" {% if contract.correction_needed %}checked{% endif %}>
+                                <input type="checkbox" id="correction_needed" name="correction_needed" {% if contract.correction_needed %}checked{% endif %}>
                                 <i></i>
                             </label>
                         </div>
@@ -131,7 +131,17 @@
 
                     <div class="form-group row">
                         <label class="col-md-1 form-control-label">Status</label>
-                        <div id="per_status" class="col-md-11 progress mb-4">
+                        <div class="col-md-11">
+                            <select class="form-control c-select" id="invoice_status" name="invoice_status">
+                                <option disabled selected value> -- select an status -- </option>
+                                <option value="00" >00- Warten auf Unterlagen</option>
+                                <option value="01" >01- bereit abzurechnen</option>
+                                <option value="02" >02- abgerechnet</option>
+                                <option value="03" >03- WaG, gesendet</option>
+                                <option value="04" >04- WaG, genehmigt</option>
+                                <option value="04" >05- Gutschrift vorhanden</option>
+                                <option value="04" >06- Ueberzubearbeiten</option>
+                            </select>
                         </div>
                     </div>
                 </div>

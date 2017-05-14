@@ -139,6 +139,7 @@ $('#edit-invocie').on('show.bs.modal', function(e) {
       $("#bewert_aufmass").val(moment(invocie.bewert_aufmass).format("DD-MM-YYYY"));
       $("#end").val(moment(invocie.end).format("DD-MM-YYYY"));
       $("#guts_datum").val(moment(invocie.guts_datum).format("DD-MM-YYYY"));
+      $("#invoice_status").val(invocie.invoice_status).change();
       $("#invocie_id").val(invocie._id);
     }
   });
@@ -396,11 +397,37 @@ function calPermissionStatus() {
     }
 }
 
+function calInvoiceStatus() {
+    if ($('#correction_needed').is(":checked")) {
+        $('#invoice_status').val('06').change();
+    } else if (getNumValue($('#sum').val())> 0) {
+        if ( !isDateValid('aufmass_am') && !isDateValid('bewert_aufmass') && isFieldEmpty('rechnung_nr') && isDateValid('guts_datum')) {
+            $('#invoice_status').val('03').change();
+        } else if (isDateValid('aufmass_am') && isDateValid('bewert_aufmass') && isFieldEmpty('rechnung_nr') && isDateValid('guts_datum')) {
+            $('#invoice_status').val('03').change();
+        } else if (isDateValid('aufmass_am') && isDateValid('bewert_aufmass') && isFieldEmpty('rechnung_nr') && isDateValid('guts_datum')) {
+            $('#invoice_status').val('03').change();
+        }
+    }
+}
+
 function getNumValue(value){
     if (isNaN(parseFloat(value))) {
-        return '';
+        return 0;
     }
     return parseFloat(value);
+}
+
+function isFieldEmpty(field_id) {
+    if($('#'+field_id).val().trim().length > 0) {
+        return false;
+    }
+
+    return true;
+}
+
+function isDateValid(t_time) {
+    return moment(t_time, "DD-MM-YYYY", true).isValid();
 }
 
 $(document).ready(function() {
