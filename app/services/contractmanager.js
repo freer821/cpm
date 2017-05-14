@@ -122,6 +122,23 @@ function updateContractBuilding(request, callback) {
             callback();
         }
     });
+
+    // create invoice
+    if (request.status === '03') {
+        if (!request.invoice) {
+            let invoice = {
+                contract_id: request.contract_id,
+                invoice_status: 0
+            };
+            updateContractFinancial(invoice, function (err) {
+                if (err) {
+                    logger.error('error to add invoice from building', err);
+                } else {
+                    logger.trace('success to add invoice from building');
+                }
+            });
+        }
+    }
 }
 
 function updateContractPermission(request, callback) {
@@ -212,15 +229,14 @@ function updateContractFinancial(request, callback) {
             "invoice.$.aufmass_am": common.getDate(request.aufmass_am),
             "invoice.$.bewert_aufmass": common.getDate(request.bewert_aufmass),
             "invoice.$.guts_datum": common.getDate(request.guts_datum),
-            "invoice.$.status": request.status
+            "invoice.$.invoice_status": request.invoice_status
         };
 
         db.editContract({id: request.contract_id, invoice: {$elemMatch: {_id : request.invocie_id}}},invoice,function (err) {
-           if(err) callback(err);
-            else{
-                if (typeof callback === 'function') {
-                    callback();
-                }            
+            if(err){
+                callback(err);
+            } else {
+                callback();
             }
         });  
     } else {
@@ -231,7 +247,7 @@ function updateContractFinancial(request, callback) {
             aufmass_am: common.getDate(request.aufmass_am),
             bewert_aufmass: common.getDate(request.bewert_aufmass),
             guts_datum: common.getDate(request.guts_datum),
-            status: request.status
+            invoice_status: request.invoice_status
         };
 
         db.editContractAddIntoArray({id: request.contract_id},{invoice: invoice},function (err) {
