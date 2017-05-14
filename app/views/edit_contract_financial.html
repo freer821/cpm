@@ -37,7 +37,15 @@
             <td>{{invoice.rechnung_nr}}</td>
             <td>{{invoice.current_value}}</td>
             <td>{{invoice.sum}}</td>
-            <td>{{invoice.invoice_status}}</td>
+            <td>
+            {% if invoice.invoice_status ==='00' %}Warten auf Unterlagen{% endif %}
+            {% if invoice.invoice_status ==='01' %}bereit abzurechnen{% endif %}
+            {% if invoice.invoice_status ==='02' %}abgerechnet{% endif %}
+            {% if invoice.invoice_status ==='03' %}WaG, gesendet{% endif %}
+            {% if invoice.invoice_status ==='04' %}WaG, genehmigt{% endif %}
+            {% if invoice.invoice_status ==='05' %}Gutschrift vorhanden{% endif %}
+            {% if invoice.invoice_status ==='06' %}Ueberzubearbeiten{% endif %}
+            </td>
             <td>
                 <a href="#" data-toggle="modal" data-target="#edit-invocie" data-invocie="{{invoice|json}}"><i class="material-icons md-24">&#xe3c9;</i></a>
             </td>
