@@ -1,0 +1,118 @@
+<div id="edit-permission" class="modal" data-backdrop="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form id="form" action="/contracts/edit/permission" method="post" >
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Permission</h5>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group row">
+                        <label class="col-md-1 form-control-label">Type</label>
+                        <div class="col-md-11">
+                            <select class="form-control c-select" id="permission_tpye" name="type">
+                                <option value="BAZ">BAZ</option>
+                                {% if contract.customer === 'STW' %}
+                                <option value="VAZ">VAZ</option>
+                                <option value="VBA">VBA</option>
+                                <option value="BAZVAZ">BAZ &amp; VAZ</option>
+                                {% endif %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-3 form-control-label">Doc Delivery</label>
+                        <div class='input-group date col-sm-9' ui-jp="datetimepicker" ui-options="{
+                    format: 'DD-MM-YYYY',
+                    icons: {
+                      time: 'fa fa-clock-o',
+                      date: 'fa fa-calendar',
+                      up: 'fa fa-chevron-up',
+                      down: 'fa fa-chevron-down',
+                      previous: 'fa fa-chevron-left',
+                      next: 'fa fa-chevron-right',
+                      today: 'fa fa-screenshot',
+                      clear: 'fa fa-trash',
+                      close: 'fa fa-remove'
+                    }
+                  }">
+                            <input type='text' class="form-control" id="doc_delivery" name="doc_delivery">
+                            <span class="input-group-addon">
+              <span class="fa fa-calendar"></span>
+            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-3 form-control-label">Permission Begin</label>
+                        <div class='input-group date col-sm-9' ui-jp="datetimepicker" ui-options="{
+                    format: 'DD-MM-YYYY',
+                    icons: {
+                      time: 'fa fa-clock-o',
+                      date: 'fa fa-calendar',
+                      up: 'fa fa-chevron-up',
+                      down: 'fa fa-chevron-down',
+                      previous: 'fa fa-chevron-left',
+                      next: 'fa fa-chevron-right',
+                      today: 'fa fa-screenshot',
+                      clear: 'fa fa-trash',
+                      close: 'fa fa-remove'
+                    }
+                  }">
+                            <input type='text' class="form-control" id="begin" name="begin">
+                            <span class="input-group-addon">
+              <span class="fa fa-calendar"></span>
+            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-3 form-control-label">Permission End</label>
+                        <div class='input-group date col-sm-9' ui-jp="datetimepicker" ui-options="{
+                    format: 'DD-MM-YYYY',
+                    icons: {
+                      time: 'fa fa-clock-o',
+                      date: 'fa fa-calendar',
+                      up: 'fa fa-chevron-up',
+                      down: 'fa fa-chevron-down',
+                      previous: 'fa fa-chevron-left',
+                      next: 'fa fa-chevron-right',
+                      today: 'fa fa-screenshot',
+                      clear: 'fa fa-trash',
+                      close: 'fa fa-remove'
+                    }
+                  }">
+                            <input type='text' class="form-control" id="end" name="end">
+                            <span class="input-group-addon">
+              <span class="fa fa-calendar"></span>
+            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-1 form-control-label">Cost</label>
+                        <div class="col-md-11">
+                            <input type="text" class="form-control" id="permission_cost" name="cost">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-1 form-control-label">Status</label>
+                        <div id="per_status" class="col-md-11 progress mb-4">
+                            <input type='text' class="form-control" id="permission_status" name="permission_status" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="contract_id" value="{{contract.id}}">
+                    <input type="hidden" id="permission_id" name="permission_id" value="">
+                    <input type="hidden" name="project_id" value="{{project_id}}">
+                    <input type="hidden" name="project_adr" value="{{project_adr}}">
+                    <button type="button" class="btn dark-white p-x-md" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn danger p-x-md">Submit</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div>
+</div>
