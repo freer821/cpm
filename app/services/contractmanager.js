@@ -96,11 +96,10 @@ function updateContractBasic(request, callback) {
     };
 
     db.editContract({id: request.contract_id},contract,function (err) {
-        if(err) callback(err);
-        else{
-            if (typeof callback === 'function') {
-                callback();
-            }            
+        if(err){
+            callback(err);
+        } else {
+            callback();
         }
     });
 }
@@ -117,11 +116,10 @@ function updateContractBuilding(request, callback) {
         }
     };
     db.editContract({id: request.contract_id},contract,function (err) {
-        if(err) callback(err);
-        else{
-            if (typeof callback === 'function') {
-                callback();
-            }            
+        if(err){
+            callback(err);
+        } else {
+            callback();
         }
     });
 }
@@ -139,11 +137,10 @@ function updateContractPermission(request, callback) {
         };
 
         db.editContract({id: request.contract_id, building_permission: {$elemMatch: {_id : request.permission_id}}},permission,function (err) {
-            if(err) callback(err);
-            else{
-                if (typeof callback === 'function') {
-                    callback();
-                }            
+            if(err){
+                callback(err);
+            } else {
+                callback();
             }
         });
     } else {
@@ -157,11 +154,10 @@ function updateContractPermission(request, callback) {
         };
 
         db.editContractAddIntoArray({id: request.contract_id},{building_permission: permission},function (err) {
-            if(err) callback(err);
-            else{
-                if (typeof callback === 'function') {
-                    callback();
-                }            
+            if(err){
+                callback(err);
+            } else {
+                callback();
             }
         });    
     }
@@ -198,11 +194,10 @@ function updateContractOFW(request, callback) {
         }
     };
     db.editContract({id: request.contract_id},contract,function (err) {
-        if(err) callback(err);
-        else{
-            if (typeof callback === 'function') {
-                callback();
-            }            
+        if(err){
+            callback(err);
+        } else {
+            callback();
         }
     });
 }
@@ -240,11 +235,10 @@ function updateContractFinancial(request, callback) {
         };
 
         db.editContractAddIntoArray({id: request.contract_id},{invoice: invoice},function (err) {
-            if(err) callback(err);
-            else{
-                if (typeof callback === 'function') {
-                    callback();
-                }            
+            if(err){
+                callback(err);
+            } else {
+                callback();
             }
         });
     }
@@ -260,11 +254,10 @@ function updateContractFibu(request, callback) {
         }
     };
     db.editContract({id: request.contract_id},contract,function (err) {
-        if(err) callback(err);
-        else{
-            if (typeof callback === 'function') {
-                callback();
-            }            
+        if(err){
+            callback(err);
+        } else {
+            callback();
         }
     });
 }
