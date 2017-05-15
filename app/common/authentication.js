@@ -35,7 +35,7 @@ function initPassport (passport) {
                         return done(err);
                     }
                     if (userInfo && password === userInfo.password ) {
-                        let user = {email:userInfo.email, name: userInfo.firstname + ' ' + userInfo.secondname, role: userInfo.role, icon: userInfo.icon};
+                        let user = {email:userInfo.email, name: userInfo.firstname + ' ' + userInfo.secondname, role: userInfo.role, icon: userInfo.icon, cost_code: userInfo.cost_code};
                         logger.trace('user logged in ', user);
                         return done(null, user);
                     } else {

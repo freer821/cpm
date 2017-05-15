@@ -295,7 +295,7 @@ const getContractByProjectID = function (req, res, next) {
 	        logger.error('error to find contract in db', err.message);
 	    }
 	    res.setHeader('Content-Type', 'application/json');
-	    res.send(JSON.stringify({'data':contracts}));
+	    res.send(JSON.stringify({'data':filterContractsByUser(req.user.cost_code, contracts)}));
 	});
 };
 
@@ -407,6 +407,22 @@ const delContract = function (req, res, next) {
         })
     }
 };
+
+function filterContractsByUser(user_cost_code, constracts) {
+    if (user_cost_code) {
+        if (Array.isArray(user_cost_code)){
+            return constracts.filter(function (constract) {
+                return user_cost_code.includes(constract.cost_code);
+            });
+        } else {
+            return constracts.filter(function (constract) {
+                return user_cost_code===constract.cost_code;
+            });
+        }
+    } else {
+        return [];
+    }
+}
 
 module.exports = {
     addContract:addContract,
