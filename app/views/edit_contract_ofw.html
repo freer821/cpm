@@ -1,9 +1,7 @@
-{% if !contract.is_ofw_activ %}
-<div class="form-group">
+<div id="ofw_not_activ" class="form-group">
     <label>No Need OFW</label>
 </div>
-{% else %}
-<form role="form" action="/contracts/edit/ofw" class="p-a-md" method="post">
+<form id="ofw_activ" role="form" action="/contracts/edit/ofw" class="p-a-md" method="post">
 
     <div class="row">
         <div class="col-sm-6">
@@ -157,4 +155,3 @@
     <input type="hidden" name="contract_id" value="{{contract.id}}">
     <button type="submit" class="btn btn-info m-t">Update</button>
 </form>
-{% endif %}

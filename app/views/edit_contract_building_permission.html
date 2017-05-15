@@ -1,9 +1,7 @@
-{% if !contract.is_building_permission_activ %}
-<div class="form-group">
+<div id="building_permission_not_activ" class="form-group">
     <label>No Need Building Permission</label>
 </div>
-{% else %}
-<div class="box">
+<div id="building_permission_activ" class="box">
     <div class="box-header">
         <h3>Permission Lists</h3>
     </div>
@@ -63,4 +61,3 @@
         </tfoot>
     </table>
 </div>
-{% endif %}

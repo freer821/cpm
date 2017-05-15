@@ -329,6 +329,11 @@ const editContract = function (req, res, next) {
                 let last_err = err;
                 db.getContracts({'id':request.contract_id}, function (err, contracts) {
                     if(err || last_err) {
+                        logger.error('contract id not exits: ', request.contract_id);
+                        res.redirect('/projects');
+                        return;
+                    }
+                    if(last_err){
                         res.render('editcontract', {title:'Contract Management', project_id: request.project_id, project_adr:request.project_adr, contract: contracts[0],  user: req.user, jump_building_permission:'1', err:'err'});
                         return;
                     }
@@ -343,10 +348,14 @@ const editContract = function (req, res, next) {
             });
         } else if(req.params.action === 'invocie') {
             updateContractFinancial(request, function (err) {
-                if(err) res.render('editcontract', {title:'Contract Management', project_id: request.project_id, project_adr:request.project_adr, contract: contracts[0],  user: req.user, jump_financial:'1', err:'err'});
+                let last_err = err;
                 db.getContracts({'id':request.contract_id}, function (err, contracts) {
                     if(err) {
-                        logger.error('contract id not exits: ', req.params.id);
+                        logger.error('contract id not exits: ', request.contract_id);
+                        res.redirect('/projects');
+                        return;
+                    }
+                    if(last_err){
                         res.render('editcontract', {title:'Contract Management', project_id: request.project_id, project_adr:request.project_adr, contract: contracts[0],  user: req.user, jump_financial:'1', err:'err'});
                         return;
                     }
@@ -366,10 +375,14 @@ const editContract = function (req, res, next) {
 const delContract = function (req, res, next) {
     if(req.params.action === 'permission') {
         db.editContractRemoveFromArray({'id':req.params.id},{building_permission: {_id: new ObjectId(req.query.id)}}, function (err) {
-            if(err) res.render('editcontract', {title:'Contract Management', project_id: req.query.project_id, project_adr:req.query.project_adr, contract: contracts[0],  user: req.user, jump_building_permission:'1', err:'err'});
+            let last_err = err;
             db.getContracts({'id':req.params.id}, function (err, contracts) {
                 if(err) {
                     logger.error('contract id not exits: ', req.params.id);
+                    res.redirect('/projects');
+                    return;
+                }
+                if(last_err){
                     res.render('editcontract', {title:'Contract Management', project_id: req.query.project_id, project_adr:req.query.project_adr, contract: contracts[0],  user: req.user, jump_building_permission:'1', err:'err'});
                     return;
                 }
@@ -378,10 +391,14 @@ const delContract = function (req, res, next) {
         })
     } else if(req.params.action === 'invoice') {
         db.editContractRemoveFromArray({'id':req.params.id},{invoice: {_id: new ObjectId(req.query.id)}}, function (err) {
-            if(err) res.render('editcontract', {title:'Contract Management', project_id: req.query.project_id, project_adr:req.query.project_adr, contract: contracts[0],  user: req.user, jump_financial:'1', err:'err'});
+            let last_err = err;
             db.getContracts({'id':req.params.id}, function (err, contracts) {
                 if(err) {
                     logger.error('contract id not exits: ', req.params.id);
+                    res.redirect('/projects');
+                    return;
+                }
+                if(last_err){
                     res.render('editcontract', {title:'Contract Management', project_id: req.query.project_id, project_adr:req.query.project_adr, contract: contracts[0],  user: req.user, jump_financial:'1', err:'err'});
                     return;
                 }

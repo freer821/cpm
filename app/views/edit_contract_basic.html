@@ -217,7 +217,7 @@
         <label class="col-sm-3 form-control-label">Building Permission Activ?</label>
         <div class="col-sm-9">
             <label class="ui-switch primary m-t-xs m-r">
-                <input type="checkbox" name="is_building_permission_activ" {% if contract.is_building_permission_activ %}checked{% endif %}>
+                <input type="checkbox" onclick="set_building_permission_active_state(this.checked)" name="is_building_permission_activ" {% if contract.is_building_permission_activ %}checked{% endif %}>
                 <i></i>
             </label>
         </div>
@@ -227,7 +227,7 @@
         <label class="col-sm-3 form-control-label">OFW Activ?</label>
         <div class="col-sm-9">
             <label class="ui-switch primary m-t-xs m-r">
-                <input type="checkbox" name="is_ofw_activ" {% if contract.is_ofw_activ %}checked{% endif %}>
+                <input type="checkbox" onclick="set_ofw_active_state(this.checked)" name="is_ofw_activ" {% if contract.is_ofw_activ %}checked{% endif %}>
                 <i></i>
             </label>
         </div>

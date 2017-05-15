@@ -444,6 +444,26 @@ function isDateValid(field_id) {
     return moment($('#'+field_id).val(), "DD-MM-YYYY", true).isValid();
 }
 
+function set_building_permission_active_state(state){
+  if(state){
+    $('#building_permission_not_activ').attr('hidden', 'hidden');
+    $('#building_permission_activ').removeAttr('hidden');
+  }else{
+    $('#building_permission_activ').attr('hidden', 'hidden');
+    $('#building_permission_not_activ').removeAttr('hidden');
+  }
+}
+
+function set_ofw_active_state (state) {
+  if(state){
+    $('#ofw_not_activ').attr('hidden', 'hidden');
+    $('#ofw_activ').removeAttr('hidden');
+  }else{
+    $('#ofw_activ').attr('hidden', 'hidden');
+    $('#ofw_not_activ').removeAttr('hidden');
+  }  
+}
+
 $(document).ready(function() {
   {% if jump_building_permission %}
     var msg = 'update building_permission done!';
@@ -454,6 +474,7 @@ $(document).ready(function() {
     $('#building_permission')[0].click();
     window.history.pushState("building_permission", "Contract Management", document.referrer);
   {% endif %}
+
   {% if jump_financial %}
     var msg = 'update invocie done!';
     {% if err %}
@@ -462,6 +483,18 @@ $(document).ready(function() {
     bootbox.alert(msg);
     $('#financial')[0].click();
     window.history.pushState("invocie", "Contract Management", document.referrer);
+  {% endif %}
+
+  {% if !contract.is_building_permission_activ %}
+    set_building_permission_active_state(false);
+  {% else %}
+    set_building_permission_active_state(true);
+  {% endif %}
+
+  {% if !contract.is_ofw_activ %}
+    set_ofw_active_state(false);
+  {% else %}
+    set_ofw_active_state(true);
   {% endif %}
 });
 </script>
