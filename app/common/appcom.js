@@ -1,6 +1,8 @@
 /**
  * Created by Zhenyu on 11.04.2017.
  */
+'use strict';
+
 const moment = require('moment');
 
 const zeroPad = function(num, places) {
@@ -23,8 +25,22 @@ const getDate = function (value) {
     return undefined;
 };
 
+const fullParallel = function (callbacks, last) {
+    let count = 0;
+    callbacks.forEach( (callback)  => {
+        callback( function() {
+            count++;
+            if(count == callbacks.length) {
+                last();
+            }
+        });
+    });
+};
+
+
 module.exports = {
     zeroPad: zeroPad,
     getNumValue:getNumValue,
-    getDate: getDate
+    getDate: getDate,
+    fullParallel:fullParallel
 };

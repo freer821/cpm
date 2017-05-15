@@ -42,6 +42,46 @@ const updateProject = function (req, res, next) {
     res.redirect('/projects');
 };
 
+function staticProjectContractTypes (contracts) {
+    let project_types = {
+        electric: false,     // elektro
+        water: false,      // wasser
+        gas: false,         // gas
+        telecom: false,     // telekom
+        light: false,
+        others: false        // others
+    };
+
+    if (contracts) {
+        for( var i = 0; i < contracts.length; i++) {
+            let contract = contracts[i];
+
+            if (contract.electric === true) {
+                project_types.electric = true;
+            }
+
+            if (contract.water === true) {
+                project_types.water = true;
+            }
+
+            if (contract.gas === true) {
+                project_types.gas = true;
+            }
+            if (contract.telecom === true) {
+                project_types.telecom = true;
+            }
+            if (contract.light === true) {
+                project_types.light = true;
+            }
+            if (contract.others === true) {
+                project_types.others = true;
+            }
+        }
+    }
+
+    return project_types;
+}
+
 module.exports = {
     getAllProjects: getAllProjects,
     addProject:addProject,

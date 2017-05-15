@@ -408,21 +408,6 @@ const delContract = function (req, res, next) {
     }
 };
 
-function updateProjectContractTypes (project_id, contract_type) {
-    let project = {
-        contract_types: {
-            electric: Boolean,     // elektro
-            water: Boolean,      // wasser
-            gas: Boolean,         // gas
-            telecom: Boolean,     // telekom
-            light: Boolean,
-            others: Boolean        // others
-        }
-    };
-    db.editProject({id: project_id}, project);
-    res.redirect('/projects');
-}
-
 module.exports = {
     addContract:addContract,
     editContract:editContract,
