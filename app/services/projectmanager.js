@@ -37,7 +37,6 @@ const addProject = function (req, res, next) {
 const updateProject = function (req, res, next) {
     let project = req.body;
     let project_id = req.params.id;
-    logger.trace(project_id);
     project.id = project_id;
     db.editProject({id: project_id}, project);
     res.redirect('/projects');
