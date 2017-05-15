@@ -289,7 +289,7 @@ function getContractID(count) {
 }
 
 const getContractByProjectID = function (req, res, next) {
-	let project_id = req.query.projectid;+
+	let project_id = req.query.projectid;
     db.getContracts({'project_id':project_id}, function (err, contracts) {
 	    if(err) {
 	        logger.error('error to find contract in db', err.message);
