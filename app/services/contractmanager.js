@@ -409,6 +409,8 @@ const delContract = function (req, res, next) {
 };
 
 function filterContractsByUser(user_cost_code, constracts) {
+    return constracts;
+    /*
     if (user_cost_code) {
         if (Array.isArray(user_cost_code)){
             return constracts.filter(function (constract) {
@@ -422,6 +424,7 @@ function filterContractsByUser(user_cost_code, constracts) {
     } else {
         return [];
     }
+    */
 }
 
 module.exports = {

@@ -478,7 +478,7 @@
 
     function contractDetail ( d ) {
         // `d` is the original data object for the row
-        return '<div class="box">'+
+        return '<div style="font-size:18px" class="box">'+
             '<ul class="list inset m-0">'+
             '<li class="list-item">'+
             '<a href="/contracts/edit/'+d.id+'" class="list-left">'+
@@ -488,14 +488,16 @@
             '</a>'+
             '<div class="list-body">'+
             '<div class="form-group row">'+
-            '<div class="col-md-5">'+
+            '<div class="col-md-4">'+
             '<div style="font-size:22px">Genehmigung Zustand</div>'+
             '</div>'+
-            '<div class="form-group col-md-3">'+
-            '<input class="form-control" type="text" value="'+d.manager_name+'" />'+
+            '<div id="manager_name_d" class="form-group col-md-3" onmouseover="showEditState(manager_name_edit_icon)" onmouseleave="hideEditState(manager_name_edit_icon)">'+
+            '<div id="manager_name_text">'+d.manager_name+'</div>'+
+            '<input id="manager_name_input" onkeypress="handleEnter(event, 1)" class="form-control" type="text" value="'+d.manager_name+'" hidden/>'+
+            '<a onclick="showInput(1)"> <i id="manager_name_edit_icon" class="material-icons md-24" hidden>&#xe3c9;</i></a>'+
             '</div> '+
-            '<div class="form-group col-md-3">'+
-            '<input class="form-control" type="text" value="'+d.partner_name+'" />'+
+            '<div class="form-group col-md-4">'+
+            '<input onmouseover="showEditState(this)" onmouseleave="howEditState(this)" class="form-control" type="text" value="'+d.partner_name+'" />'+
             '</div> '+
             '</div>'+
             '</div>'+
@@ -508,13 +510,13 @@
             '</a>'+
             '<div class="list-body">'+
             '<div class="form-group row">'+
-            '<div class="col-md-5">'+
+            '<div class="col-md-4">'+
             '<div style="font-size:22px">Tiefbau Montage Zustand</div>'+
             '</div>'+
             '<div class="form-group col-md-3">'+
             '<input class="form-control" type="text" value="'+d.contract_delivery+'" />'+
             '</div> '+
-            '<div class="form-group col-md-3">'+
+            '<div class="form-group col-md-4">'+
             '<input class="form-control" type="text" value="'+d.doc_delivery+'" />'+
             '</div> '+
             '</div>'+
@@ -528,13 +530,13 @@
             '</a>'+
             '<div class="list-body">'+
             '<div class="form-group row">'+
-            '<div class="col-md-5">'+
+            '<div class="col-md-4">'+
             '<div style="font-size:22px">OFW Zustand</div>'+
             '</div>'+
             '<div class="form-group col-md-3">'+
             '<input class="form-control" type="text" value="'+d.work_content+'" />'+
             '</div> '+
-            '<div class="form-group col-md-3">'+
+            '<div class="form-group col-md-4">'+
             '<input class="form-control" type="text" value="'+d.project_nr+'" />'+
             '</div> '+
             '</div>'+
@@ -548,10 +550,10 @@
             '</a>'+
             '<div class="list-body">'+
             '<div class="form-group row">'+
-            '<div class="col-md-5">'+
+            '<div class="col-md-4">'+
             '<div style="font-size:22px">Abrechnen Zustand</div>'+
             '</div>'+
-            '<div class="form-group col-md-6">'+
+            '<div class="form-group col-md-3">'+
             '<input class="form-control" type="text" value="'+d.cost_code+'" />'+
             '</div> '+
             '</div>'+
@@ -696,6 +698,57 @@
             }
         });
     } );
+
+function showEditState(id){
+  $(id).removeAttr('hidden');
+}
+
+function hideEditState(id){
+  $(id).attr('hidden', 'hidden');
+}
+
+function showInput(type){
+  switch(type)
+  {
+  case 1://manager_name
+    $('#manager_name_text').attr('hidden','hidden');
+    $('#manager_name_input').removeAttr('hidden');
+    $('#manager_name_edit_icon').attr('hidden','hidden');
+    $('#manager_name_d').removeAttr('onmouseover');
+    $('#manager_name_d').removeAttr('onmouseleave');
+    break;
+  case 2:
+    break;
+  }
+}
+
+function handleEnter(e, type){
+  let keynum = 0;
+  if(window.event) // IE
+  {
+    keynum = e.keyCode;
+  }
+  else if(e.which) // Netscape/Firefox/Opera
+  {
+    keynum = e.which;
+  }
+  if(keynum == 13) //enter press
+  {
+    alert('enter pressed!');
+    switch(type)
+    {
+    case 1://manager_name
+      alert($('#manager_name_input').val());
+      $('#manager_name_text').removeAttr('hidden','hidden');
+      $('#manager_name_input').attr('hidden', 'hidden');
+      $('#manager_name_d').attr('onmouseover', 'showEditState(manager_name_edit_icon)');
+      $('#manager_name_d').attr('onmouseleave', 'hideEditState(manager_name_edit_icon)');
+      break;
+    case 2:
+      break;
+    } 
+  }
+}
 </script>
 <!-- ############ PAGE END-->
 {% endblock %}
