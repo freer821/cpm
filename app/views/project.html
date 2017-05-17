@@ -489,7 +489,7 @@
             '<div class="list-body">'+
             '<div class="form-group row">'+
             '<div class="col-md-4">'+
-            '<div style="font-size:22px">Genehmigung Zustand</div>'+
+            '<div style="font-size:22px">'+d.permission_status+'</div>'+
             '</div>'+
             '<div id="manager_name_d" class="form-group col-md-3" onmouseover="showEditState(manager_name_edit_icon)" onmouseleave="hideEditState(manager_name_edit_icon)">'+
             '<div id="manager_name_text">'+d.manager_name+'</div>'+
@@ -497,7 +497,7 @@
             '<a onclick="showInput(1)"> <i id="manager_name_edit_icon" class="material-icons md-24" hidden>&#xe3c9;</i></a>'+
             '</div> '+
             '<div class="form-group col-md-4">'+
-            '<input onmouseover="showEditState(this)" onmouseleave="howEditState(this)" class="form-control" type="text" value="'+d.partner_name+'" />'+
+            '<input onmouseover="showEditState(this)" onmouseleave="howEditState(this)" class="form-control" type="text" value="'+d.worker_name+'" />'+
             '</div> '+
             '</div>'+
             '</div>'+
@@ -511,13 +511,13 @@
             '<div class="list-body">'+
             '<div class="form-group row">'+
             '<div class="col-md-4">'+
-            '<div style="font-size:22px">Tiefbau Montage Zustand</div>'+
+            '<div style="font-size:22px">'+d.building_status+'</div>'+
             '</div>'+
             '<div class="form-group col-md-3">'+
-            '<input class="form-control" type="text" value="'+d.contract_delivery+'" />'+
+            '<input class="form-control" type="text" value="'+d.building_begin+'" />'+
             '</div> '+
             '<div class="form-group col-md-4">'+
-            '<input class="form-control" type="text" value="'+d.doc_delivery+'" />'+
+            '<input class="form-control" type="text" value="'+d.building_end+'" />'+
             '</div> '+
             '</div>'+
             '</div>'+
@@ -531,13 +531,13 @@
             '<div class="list-body">'+
             '<div class="form-group row">'+
             '<div class="col-md-4">'+
-            '<div style="font-size:22px">OFW Zustand</div>'+
+            '<div style="font-size:22px">'+d.ofw_status+'</div>'+
             '</div>'+
             '<div class="form-group col-md-3">'+
-            '<input class="form-control" type="text" value="'+d.work_content+'" />'+
+            '<input class="form-control" type="text" value="'+d.sum_value+'" />'+
             '</div> '+
             '<div class="form-group col-md-4">'+
-            '<input class="form-control" type="text" value="'+d.project_nr+'" />'+
+            '<input class="form-control" type="text" value="'+d.current_value+'" />'+
             '</div> '+
             '</div>'+
             '</div>'+
@@ -551,7 +551,7 @@
             '<div class="list-body">'+
             '<div class="form-group row">'+
             '<div class="col-md-4">'+
-            '<div style="font-size:22px">Abrechnen Zustand</div>'+
+            '<div style="font-size:22px">'+d.invoice_status+'</div>'+
             '</div>'+
             '<div class="form-group col-md-3">'+
             '<input class="form-control" type="text" value="'+d.cost_code+'" />'+
@@ -629,7 +629,7 @@
                             "defaultContent": ''
                         },
                         { "data": "id" },
-                        { "data": "customer" },
+                        { "data": "addr" },
                         { "data": "work_content" },
                         { "data": "cost_code" },
                         { "data": "customer" },
