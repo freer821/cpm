@@ -266,7 +266,7 @@ const editContract = function (condition, contract, callback) {
                 logger.error('Failed to Update Contract in MongoDB', contract,err);
                 callback(err);
             } else {
-                logger.trace('add Contract in MongoDB', contract);
+                logger.trace('edit Contract in MongoDB', contract);
                 callback(undefined);
             }
         }

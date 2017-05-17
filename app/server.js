@@ -157,6 +157,7 @@ function initRoutes() {
 
     router.get('/contracts/edit/:id',contractmanager.editContract);
     router.post('/contracts/edit/:action',contractmanager.editContract);
+    router.post('/contracts/edit/partial/:id',contractmanager.editContractPartial);
 
     router.get('/contracts/:id/del/:action',contractmanager.delContract);
 

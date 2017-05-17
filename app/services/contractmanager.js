@@ -427,9 +427,22 @@ function filterContractsByUser(user_cost_code, constracts) {
     */
 }
 
+const editContractPartial = function(req, res, next){
+    let set = req.body;
+    let contract_id = req.params.id;
+    db.editContract({id: contract_id}, set, function (err) {
+        if(err){
+            res.send('err');
+        } else {
+            res.send('ok');
+        }
+    });
+};
+
 module.exports = {
     addContract:addContract,
     editContract:editContract,
     delContract:delContract,
-    getContractByProjectID:getContractByProjectID
+    getContractByProjectID:getContractByProjectID,
+    editContractPartial:editContractPartial
 };
