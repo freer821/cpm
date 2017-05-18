@@ -135,10 +135,13 @@ $('#edit-invocie').on('show.bs.modal', function(e) {
       $("#rechnung_nr").val(invocie.rechnung_nr);
       $("#current_value").val(invocie.current_value);
       $("#sum").val(invocie.sum);
-      $("#aufmass_am").val(moment(invocie.aufmass_am).format("DD-MM-YYYY"));
+      if(invocie.aufmass_am){
+        $("#aufmass_am").val(moment(invocie.aufmass_am).format("DD-MM-YYYY"));
+      }
       $("#bewert_aufmass").val(moment(invocie.bewert_aufmass).format("DD-MM-YYYY"));
-      $("#end").val(moment(invocie.end).format("DD-MM-YYYY"));
-      $("#guts_datum").val(moment(invocie.guts_datum).format("DD-MM-YYYY"));
+      if (invocie.guts_datum) {
+        $("#guts_datum").val(moment(invocie.guts_datum).format("DD-MM-YYYY"));
+      }
       $("#invoice_status").val(invocie.invoice_status).change();
       $("#invocie_id").val(invocie._id);
     }
@@ -348,6 +351,7 @@ $('#correction_needed, #sum, #rechnung_nr , #booking_month').change(function(){
 });
 
 function calInvoiceStatus() {
+    console.log('calInvoiceStatus');
     $('#aufmass_am, #bewert_aufmass, #rechnung_nr,#guts_datum, #booking_month').attr('readonly', true);
     if ($('#correction_needed').is(":checked")) {
         $('#invoice_status').val('06').change();
