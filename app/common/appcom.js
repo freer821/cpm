@@ -107,7 +107,7 @@ const calInvoicesStatus = function(invoices) {
             }
         }
 
-        if (status.finished_num === status.all_num) {
+        if (status.finished_num === status.all_num &&  status.all_num > 0) {
             status.is_finished = true;
         }
 
@@ -118,11 +118,11 @@ const calInvoicesStatus = function(invoices) {
 };
 
 const calOFWStatus = function (ofw) {
-  if (ofw) {
+  if (ofw.ofw_status) {
       return ofw.ofw_status;
   }
 
-  return 'no status';
+  return 'no OFW status';
 };
 
 
@@ -133,22 +133,22 @@ const getStatusOfContracts = function(contracts) {
         let invoice_status = calInvoicesStatus(contract.invoice);
         contracts_status.push({
             id: contract.id,
-            addr: 'Adresse needed',
+            addr: 'Adresse ??????',
             work_content: contract.work_content,
             cost_code: contract.cost_code,
             customer: contract.customer,
             permission_status: contract.is_building_permission_activ?calBuildingPermissionsStatus(contract.building_permission):'nicht benoetigt',
-            building_status: contract.building_work? contract.building_work.status: 'no status',
+            building_status: contract.building_work.status? contract.building_work.status: 'no building status',
             ofw_status: contract.is_ofw_activ?calOFWStatus(contract.ofw):'nicht benoetigt',
             invoice_status: invoice_status.finished_num+'/'+invoice_status.all_num,
             manager_name: contract.manager_name,
-            worker_name: contract.building_work? contract.building_work.worker_name: 'unkown',
-            building_begin: contract.building_work? contract.building_work.plan_begin: 'unkonw',
-            building_end: contract.building_work? contract.building_work.plan_end: 'unkonw',
+            worker_name: contract.building_work.worker_name? contract.building_work.worker_name: 'unkown',
+            building_begin: contract.building_work.building_begin? contract.building_work.plan_begin: 'unkonw',
+            building_end: contract.building_work.building_end? contract.building_work.plan_end: 'unkonw',
             current_value: invoice_status.current_value,
             sum_value: invoice_status.sum_value,
             comment:contract.comment,
-            is_finished: invoice_status.is_finished
+            status_finished: invoice_status.is_finished? 'finished' : 'unfinished'
         });
     }
     return contracts_status;
