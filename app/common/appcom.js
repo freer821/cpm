@@ -119,7 +119,7 @@ const calInvoicesStatus = function(invoices) {
 
 const calOFWStatus = function (ofw) {
   if (ofw) {
-      return ofw.status;
+      return ofw.ofw_status;
   }
 
   return 'no status';
@@ -143,8 +143,8 @@ const getStatusOfContracts = function(contracts) {
             invoice_status: invoice_status.finished_num+'/'+invoice_status.all_num,
             manager_name: contract.manager_name,
             worker_name: contract.building_work? contract.building_work.worker_name: 'unkown',
-            building_begin: contract.building_work? contract.building_work.begin: 'unkonw',
-            building_end: contract.building_work? contract.building_work.end: 'unkonw',
+            building_begin: contract.building_work? contract.building_work.plan_begin: 'unkonw',
+            building_end: contract.building_work? contract.building_work.plan_end: 'unkonw',
             current_value: invoice_status.current_value,
             sum_value: invoice_status.sum_value,
             comment:contract.comment,
