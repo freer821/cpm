@@ -138,13 +138,13 @@ const getStatusOfContracts = function(contracts) {
             cost_code: contract.cost_code,
             customer: contract.customer,
             permission_status: contract.is_building_permission_activ?calBuildingPermissionsStatus(contract.building_permission):'nicht benoetigt',
-            building_status: contract.building_work.status? contract.building_work.status: 'no building status',
+            building_status: getBulidungStatus(contract.building_work.status),
             ofw_status: contract.is_ofw_activ?calOFWStatus(contract.ofw):'nicht benoetigt',
             invoice_status: invoice_status.finished_num+'/'+invoice_status.all_num,
             manager_name: contract.manager_name,
             worker_name: contract.building_work.worker_name? contract.building_work.worker_name: 'unkown',
-            building_begin: contract.building_work.building_begin? contract.building_work.plan_begin: 'unkonw',
-            building_end: contract.building_work.building_end? contract.building_work.plan_end: 'unkonw',
+            building_begin: contract.building_work.plan_begin? moment(contract.building_work.plan_begin).format('DD-MM-YYYY'): 'unkonw',
+            building_end: contract.building_work.plan_end? moment(contract.building_work.plan_end).format('DD-MM-YYYY'): 'unkonw',
             current_value: invoice_status.current_value,
             sum_value: invoice_status.sum_value,
             comment:contract.comment,
@@ -154,7 +154,22 @@ const getStatusOfContracts = function(contracts) {
     return contracts_status;
 };
 
-
+function getBulidungStatus(status_code) {
+    switch (status_code) {
+        case '00':
+            return 'in der Vorbereitung';
+        case '01':
+            return 'vorbereiten zu bauen';
+        case '02':
+            return 'geplant in Bau';
+        case '03':
+            return 'fertig gebaut, Mappe abzug';
+        case '04':
+            return 'Tiefbau &amp; Montage erledigt';
+        default:
+            return 'no building status';
+    }
+}
 
 module.exports = {
     zeroPad: zeroPad,

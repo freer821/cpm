@@ -129,7 +129,7 @@ function updateContractBuilding(request, callback) {
         if (!request.invoice) {
             let invoice = {
                 contract_id: request.contract_id,
-                invoice_status: 0
+                invoice_status: '00'
             };
             updateContractFinancial(invoice, function (err) {
                 if (err) {
@@ -187,7 +187,7 @@ function updateContractOFW(request, callback) {
     if (request.is_acceptance_activ) {
         acceptance = {
             applied: common.getDate(request.applied),
-                granted: common.getDate(request.granted)
+            granted: common.getDate(request.granted)
         };
     }
     let contract = {
