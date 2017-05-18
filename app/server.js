@@ -68,6 +68,7 @@ app.use('/libs', express.static(__dirname + '/views/libs'));
 app.use('/scripts', express.static(__dirname + '/views/scripts'));
 app.use('/upload', express.static(__dirname + '/upload/icon'));
 app.use('/node_modules', express.static(__dirname + './../node_modules'));
+app.use('/download', express.static(__dirname + '/download'));
 
 // set routes
 initRoutes();
@@ -158,6 +159,7 @@ function initRoutes() {
     router.get('/contracts/edit/:id',contractmanager.editContract);
     router.post('/contracts/edit/:action',contractmanager.editContract);
     router.post('/contracts/edit/partial/:id',contractmanager.editContractPartial);
+    router.post('/contracts/print/:id', contractmanager.printContract);
 
     router.get('/contracts/:id/del/:action',contractmanager.delContract);
 

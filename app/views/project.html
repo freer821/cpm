@@ -420,6 +420,8 @@
 </div>
 
 
+<iframe id="file_tobe_printed" src="" hidden></iframe>
+
 <div id="del-user" class="modal" data-backdrop="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -571,7 +573,7 @@
             '<button type="submit" class="btn success">打开文件夹</button>'+
             '</div>'+
             '<div class="col-md-1">'+
-            '<button type="submit" class="btn success">打印模板</button>'+
+            '<button onclick="printTemplate(\''+d.id+'\')" type="submit" class="btn success">打印模板</button>'+
             '</div>'+
             '<div class="col-md-1">'+
             '<button type="submit" class="btn success">建立XXX</button>'+
@@ -770,6 +772,23 @@ function postContractEditPartial (id, data, callback){
   });
 }
 
+function printTemplate(id){
+  url = '/contracts/print/'+id;
+  var posting = $.post( url, {} );
+  posting.done(function( data ) { 
+    $('#file_tobe_printed').attr('src', data);
+    var iframe = document.getElementById('file_tobe_printed');
+    iframe.contentWindow.print();
+    //alert(data);
+    return;
+    if(data!='ok') {
+      let err = 'err';
+      callback(err);
+    }
+    else
+      callback(undefined);
+  });  
+}
 </script>
 <!-- ############ PAGE END-->
 {% endblock %}

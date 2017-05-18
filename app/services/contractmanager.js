@@ -439,10 +439,32 @@ const editContractPartial = function(req, res, next){
     });
 };
 
+const printContract = function(req, res, next){
+    let contract_id = req.params.id;
+
+    let PythonShell = require('python-shell');
+    let path = require('path');
+    let scriptPath = path.join(__dirname, '../scripts');
+    let options = {
+      mode: 'text',
+      pythonOptions: ['-u'],
+      scriptPath: scriptPath,
+      args: [contract_id]
+    };
+
+    PythonShell.run('genContractTPL.py', options, function (err, results) {
+      if (err) logger.error('python shell run error', err);
+      // results is an array consisting of messages collected during execution
+      console.log('results: %j', results);
+      res.send('/download/'+results[0]);
+    });
+};
+
 module.exports = {
     addContract:addContract,
     editContract:editContract,
     delContract:delContract,
     getContractByProjectID:getContractByProjectID,
-    editContractPartial:editContractPartial
+    editContractPartial:editContractPartial,
+    printContract:printContract
 };
