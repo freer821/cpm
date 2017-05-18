@@ -270,7 +270,7 @@ function updateContractFibu(request, callback) {
     let contract = {
         fibu:{
             price: request.price,
-            ordering_month: request.ordering_month,
+            ordering_month: common.getDate(request.ordering_month),
             status: request.status
         }
     };

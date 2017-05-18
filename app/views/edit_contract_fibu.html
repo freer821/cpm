@@ -38,7 +38,12 @@
     <div class="form-group row">
         <label class="col-md-3 form-control-label">Status</label>
         <div class="col-md-9">
-            <input type="text" class="form-control" name="status" value="{{contract.fibu.status}}">
+            <select class="form-control c-select" name="status">
+                <option disabled selected value> -- select an status -- </option>
+                <option value="NO_CHECK" {% if contract.fibu.status ==='NO_CHECK' %}selected{% endif %} >NO_CHECK</option>
+                <option value="CHECK_ERROR" {% if contract.fibu.status ==='CHECK_ERROR' %}selected{% endif %} >CHECK_ERROR</option>
+                <option value="CHECK_SUCCESS" {% if contract.fibu.status ==='CHECK_SUCCESS' %}selected{% endif %}>CHECK_SUCCESS</option>
+            </select>            
         </div>
     </div>
 
