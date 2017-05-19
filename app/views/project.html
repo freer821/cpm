@@ -778,8 +778,8 @@ function printTemplate(id){
   var posting = $.post( url, {} );
   posting.done(function( data ) { 
     $('#file_tobe_printed').attr('src', data);
-    var iframe = document.getElementById('file_tobe_printed');
-    iframe.contentWindow.print();
+    //var iframe = document.getElementById('file_tobe_printed');
+    //iframe.contentWindow.print();
     //alert(data);
     return;
     if(data!='ok') {
