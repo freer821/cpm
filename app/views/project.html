@@ -498,9 +498,11 @@
             '<input id="manager_name_input" onkeypress="handleEnter(event, 1)" class="form-control" type="text" data-contractid="'+d.id+'" value="'+d.manager_name+'" hidden/>'+
             '<a onclick="showInput(1)"> <i id="manager_name_edit_icon" class="material-icons md-24" hidden>&#xe3c9;</i></a>'+
             '</div> '+
-            '<div id="worker_name_d" class="form-group col-md-4">'+
-            '<input onmouseover="showEditState(this)" onmouseleave="howEditState(this)" class="form-control" type="text" value="'+d.worker_name+'" />'+
-            '</div> '+
+            '<div id="worker_name_d" class="form-group col-md-3" onmouseover="showEditState(worker_name_edit_icon)" onmouseleave="hideEditState(worker_name_edit_icon)">'+
+            '<div id="worker_name_text">'+d.worker_name+'</div>'+
+            '<input id="worker_name_input" onkeypress="handleEnter(event, 2)" class="form-control" type="text" data-contractid="'+d.id+'" value="'+d.worker_name+'" hidden/>'+
+            '<a onclick="showInput(2)"> <i id="worker_name_edit_icon" class="material-icons md-24" hidden>&#xe3c9;</i></a>'+
+            '</div> '+            
             '</div>'+
             '</div>'+
             '</li>'+
@@ -721,6 +723,11 @@ function showInput(type){
     $('#manager_name_d').removeAttr('onmouseleave');
     break;
   case 2:
+    $('#worker_name_text').attr('hidden','hidden');
+    $('#worker_name_input').removeAttr('hidden');
+    $('#worker_name_edit_icon').attr('hidden','hidden');
+    $('#worker_name_d').removeAttr('onmouseover');
+    $('#worker_name_d').removeAttr('onmouseleave');  
     break;
   }
 }
@@ -746,7 +753,7 @@ function handleEnter(e, type){
         if(err) bootbox.alert('update failed!');
         else{
           bootbox.alert('update ok!');
-          $('#manager_name_text').val(value);
+          $('#manager_name_text').text(value);
         }
       });
       $('#manager_name_text').removeAttr('hidden','hidden');
@@ -755,6 +762,19 @@ function handleEnter(e, type){
       $('#manager_name_d').attr('onmouseleave', 'hideEditState(manager_name_edit_icon)');
       break;
     case 2:
+      var id = $('#worker_name_input').data('contractid');
+      var value = $('#worker_name_input').val();
+      postContractEditPartial(id, {'building_work.worker_name':value}, function(err){
+        if(err) bootbox.alert('update failed!');
+        else{
+          bootbox.alert('update ok!');
+          $('#worker_name_text').text(value);
+        }
+      });
+      $('#worker_name_text').removeAttr('hidden','hidden');
+      $('#worker_name_input').attr('hidden', 'hidden');
+      $('#worker_name_d').attr('onmouseover', 'showEditState(worker_name_edit_icon)');
+      $('#worker_name_d').attr('onmouseleave', 'hideEditState(worker_name_edit_icon)');    
       break;
     } 
   }
