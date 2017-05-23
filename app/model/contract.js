@@ -19,6 +19,8 @@ const contractSchema = new Schema({
     contract_delivery: Date,  // contract delivery auftrag_uebergeb
     doc_delivery: Date, // documents delivery unterlage_uebergeb
     work_content: String, // arbeitsbemerkung
+    street: String,
+    housenr: String,
     contract_typ: {            // auftrag typ
         electric: Boolean,     // elektro
         water: Boolean,      // wasser
@@ -76,7 +78,6 @@ const contractSchema = new Schema({
     invoice: [         // abrechnung
         {
             rechnung_nr: String,   // number
-            current_value: Number,  // zeitwert, Euro
             sum: Number,  // summe, EURO
             aufmass_am: Date, // time to send Invocie
             bewert_aufmass: Date, // time to permit invocie
