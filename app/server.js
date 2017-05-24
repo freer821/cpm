@@ -142,6 +142,7 @@ function initRoutes() {
 
     router.post('/items/add',itemmanager.addItem);
     router.post('/items/edit',itemmanager.editItem);
+    router.post('/items/edit/status',itemmanager.editItemsStatus);
     router.get('/items/del/:id',itemmanager.delItem);
 
     router.get('/deps',depmanager.getAllDeps);

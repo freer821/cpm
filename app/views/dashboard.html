@@ -147,14 +147,14 @@
 		      <div class="box-tool">
 		        <ul class="nav">
 		          <li class="nav-item inline" style="padding-right: 5px">
-      		        <select class="input-sm form-control-sm inline v-middle">
+      		        <select id="item_edit_status_value" class="input-sm form-control-sm inline v-middle">
 						<option value="Open">Open</option>
 						<option value="Pause">Pause</option>
 						<option value="Closed">Closed</option>
 					</select>
 		          </li>
 		          <li class="nav-item inline" style="padding-right: 20px">
-		          	<button class="btn btn-sm white">Apply</button>
+		          	<button class="btn btn-sm white" onclick="modify_item_status()">Apply</button>
 	          	  </li>
 		          <li class="nav-item inline">
 		            <div class="input-group input-group-sm">
@@ -175,7 +175,7 @@
 		        <thead>
 		            <tr>
 	            	  <th style="width:20px;" data-sort-ignore="true"><label class="ui-check m-0">
-						<input class="has-value" checked="" type="checkbox">
+						<input class="has-value" type="checkbox" onclick="checkAll(this.checked)">
 						<i></i>
 						</label>
 					  </th>
@@ -189,9 +189,10 @@
 		          <tbody>
 		            {% for item in items %}
 		              {% set delurl = '/items/del/'+item._id %}
+		              {% set itemid = ''+item._id %}
 		              <tr {% if item.status === 'Pause' %}{% endif %}{% if item.status === 'Closed' %}style=""{% endif %}>
 		              	<td><label class="ui-check m-0">
-						<input class="has-value" checked="" type="checkbox">
+						<input name="check_row" class="has-value" type="checkbox" data-id="{{itemid}}">
 						<i></i>
 						</label></td>
 			            <td>{{item.title}}</td>
@@ -201,7 +202,7 @@
 		                  <a href="#" data-toggle="modal" data-target="#edit-item" data-item="{{item|json}}"><i class="material-icons md-24">&#xe3c9;</i></a>
 		                </td>
 		                <td>
-		                  <a href="#" data-href="{{delurl}}" data-toggle="modal" data-target="#del-item" data-item-tilte="{{item.title}}""><i class="material-icons md-24">&#xe872;</i></a>
+		                  <a href="#" data-href="{{delurl}}" data-toggle="modal" data-target="#del-item" data-item-tilte="{{item.title}}"><i class="material-icons md-24">&#xe872;</i></a>
 		                </td>
 		              </tr>
 		            {% endfor %}           
@@ -361,8 +362,10 @@
 
     });
 
-    $("#edit-item-form").on("submit", function(){
+    $("#edit-item-form").on("submit", function(event){
+    	event.preventDefault();
     	var item = {
+    		'_id': $(this).find('input[name="id"]').val(),
    			'title': $(this).find('input[name="title"]').val(),
    			'priority': $(this).find('select[name="priority"]').val(),
    			'status': $(this).find('select[name="status"]').val(),
@@ -378,8 +381,7 @@
 		    data: JSON.stringify(item),
 		    contentType: "application/json; charset=utf-8",
 		    dataType: "json",
-		    success: function(data){},
-		    failure: function(err) {}
+		    complete: function(XHR, TS){window.location.reload();}
 		});
     });
 
@@ -388,6 +390,40 @@
       $("#delitemtitle").html($(e.relatedTarget).data('item-tilte'));
       $(this).find('.danger').attr('href', $(e.relatedTarget).data('href'));
   });
+
+function modify_item_status(){
+	// get all checked items
+	id_array = [];
+	$('[name=check_row]:checked').each(function(index) {
+		id_array.push(this.dataset.id);
+	});
+	if(id_array.length > 0){
+		url = '/items/edit/status';
+		data = {
+			ids:id_array,
+			status:$('#item_edit_status_value').val()
+		}
+	}
+	$.ajax({
+		    type: "POST",
+		    url: url,
+		    // The key needs to match your method's input parameter (case-sensitive).
+		    data: JSON.stringify(data),
+		    contentType: "application/json; charset=utf-8",
+		    dataType: "json",
+		    complete: function(XHR, TS){window.location.reload();}
+	});
+}
+
+function checkAll(checked){
+	$('[name=check_row]').each(function(index) {
+		if(checked) 
+			this.checked = true;
+		else 
+			this.checked = false;
+	});
+}
+
 </script>
 
 <!-- ############ PAGE END-->

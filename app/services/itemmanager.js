@@ -4,6 +4,7 @@
 'use strict'
 const logger = require('../common/logger');
 const db = require('../common/database');
+var ObjectId = require('mongoose').Types.ObjectId;
 
 const addItem = function (req, res, next) {
     let item = req.body;
@@ -25,9 +26,10 @@ const editItem = function (req, res, next) {
             }
         });
     }
-    db.editItem({user_email:req.user.email},item);
-    res.redirect('/dashboard');
+    db.editItem({_id:item._id},item);
+    res.send('ok');
 };
+
 
 const delItem= function(req, res, next) {
     db.delItem(req.params.id);
@@ -35,10 +37,19 @@ const delItem= function(req, res, next) {
 };
 
 
+const editItemsStatus = function(req, res, next){
+    let data = req.body;
+    data.ids.forEach((id) => {
+        db.editItem({_id:new ObjectId(id)},{'status':data.status});
+    });
+    //db.editItem({_id:{$in:ids_obj}},{'status':data.status});
+    res.send('ok');
+};
 
 
 module.exports = {
     addItem: addItem,
     editItem:editItem,
-    delItem:delItem
+    delItem:delItem,
+    editItemsStatus:editItemsStatus
 };

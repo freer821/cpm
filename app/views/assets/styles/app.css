@@ -2590,10 +2590,10 @@ div.dataTables_filter label {
 
 div.dataTables_paginate ul.pagination {
   display: inline-block; }
-
+/*
 .footable-odd {
   background-color: rgba(0, 0, 0, 0.025) !important; }
-
+*/
 .note-editor {
   border-width: 0 !important;
   overflow: visible !important;
