@@ -5694,3 +5694,25 @@ td.details-control-sub {
 tr.shown td.details-control-sub {
     background: url('../images/details_close.png') no-repeat center center;
 }
+
+tr.pause{
+  background-color: rgba(0, 0, 0, 0.025);
+}
+
+table {
+    border-collapse: collapse;
+}
+
+td {
+    position: relative;
+    padding: 5px 10px;
+}
+
+tr.del td:before{
+    content: " ";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    border-bottom: 1px solid #111;
+    width: 100%;
+}

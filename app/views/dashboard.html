@@ -190,7 +190,7 @@
 		            {% for item in items %}
 		              {% set delurl = '/items/del/'+item._id %}
 		              {% set itemid = ''+item._id %}
-		              <tr {% if item.status === 'Pause' %}{% endif %}{% if item.status === 'Closed' %}style=""{% endif %}>
+		              <tr {% if item.status === 'Pause' %}class="pause"{% endif %}{% if item.status === 'Closed' %}class="pause del"{% endif %}>
 		              	<td><label class="ui-check m-0">
 						<input name="check_row" class="has-value" type="checkbox" data-id="{{itemid}}">
 						<i></i>
@@ -403,8 +403,7 @@ function modify_item_status(){
 			ids:id_array,
 			status:$('#item_edit_status_value').val()
 		}
-	}
-	$.ajax({
+		$.ajax({
 		    type: "POST",
 		    url: url,
 		    // The key needs to match your method's input parameter (case-sensitive).
@@ -412,7 +411,9 @@ function modify_item_status(){
 		    contentType: "application/json; charset=utf-8",
 		    dataType: "json",
 		    complete: function(XHR, TS){window.location.reload();}
-	});
+		});
+	}
+
 }
 
 function checkAll(checked){
