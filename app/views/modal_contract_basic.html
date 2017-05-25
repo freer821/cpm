@@ -1,7 +1,7 @@
 <div id="contract-basic-modal" class="modal" data-backdrop="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content light">
-            <form role="form" action="/contracts/edit/basic" method="post">
+            <form id="contract-basic-modal-form" role="form" action="/contracts/edit/basic" method="post">
                 <div class="modal-header dker _600">
                     <h5 id="contract-modal-title" class="modal-title">New Contract</h5>
                 </div>
@@ -11,7 +11,7 @@
                             <div class="form-group row">
                                 <label class="col-md-3 form-control-label">Customer</label>
                                 <div class="col-md-9">
-                                    <input type="text" class="form-control" name="customer">
+                                    <input type="text" class="form-control" name="customer" id="customer">
                                 </div>
                             </div>
                         </div>
@@ -19,7 +19,7 @@
                             <div class="form-group row">
                                 <label class="col-md-3 form-control-label">Partner Name</label>
                                 <div class="col-md-9">
-                                    <input type="text" class="form-control" name="partner_name">
+                                    <input type="text" class="form-control" name="partner_name" id="partner_name">
                                 </div>
                             </div>
                         </div>
@@ -28,9 +28,9 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group row">
-                                <label class="col-sm-3 form-control-label">Project Nr</label>
+                                <label class="col-sm-3 form-control-label">Street</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="project_nr">
+                                    <input type="text" class="form-control" name="contract_street" id="contract_street">
                                 </div>
                             </div>
                         </div>
@@ -38,7 +38,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 form-control-label">SAP Nr</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="sap_nr">
+                                    <input type="text" class="form-control" name="sap_nr" id="sap_nr">
                                 </div>
                             </div>
                         </div>
@@ -49,7 +49,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 form-control-label">Cost Code</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="cost_code">
+                                    <input type="text" class="form-control" name="cost_code" id="cost_code">
                                 </div>
                             </div>
                         </div>
@@ -57,7 +57,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 form-control-label">Manager Name</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="manager_name">
+                                    <input type="text" class="form-control" name="manager_name" id="manager_name">
                                 </div>
                             </div>
                         </div>
@@ -68,7 +68,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 form-control-label">Estimated Value</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="estimated_value">
+                                    <input type="text" class="form-control" name="estimated_value" id="estimated_value">
                                 </div>
                             </div>
                         </div>
@@ -76,7 +76,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 form-control-label">Work Content</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="work_content">
+                                    <input type="text" class="form-control" name="work_content" id="work_content">
                                 </div>
                             </div>
                         </div>
@@ -101,7 +101,7 @@
                                   close: 'fa fa-remove'
                                 }
                               }">
-                                    <input type='text' class="form-control" name="contract_delivery" >
+                                    <input type='text' class="form-control" name="contract_delivery" id="contract_delivery">
                                     <span class="input-group-addon">
                                 <span class="fa fa-calendar"></span>
                             </span>
@@ -125,7 +125,7 @@
                                   close: 'fa fa-remove'
                                 }
                               }">
-                                    <input type='text' class="form-control" name="doc_delivery">
+                                    <input type='text' class="form-control" name="doc_delivery" id="doc_delivery">
                                     <span class="input-group-addon">
                                 <span class="fa fa-calendar"></span>
                             </span>
@@ -139,32 +139,32 @@
                         <div class="col-sm-9">
                             <div class="form-group row">
                                 <label class="md-check col-sm-2 form-control-label">
-                                    <input type="checkbox" name="is_electric">
+                                    <input type="checkbox" name="is_electric" id="is_electric">
                                     <i class="red"></i>
                                     electric
                                 </label>
                                 <label class="md-check col-sm-2 form-control-label">
-                                    <input type="checkbox" name="is_water" >
+                                    <input type="checkbox" name="is_water" id="is_water">
                                     <i class="green"></i>
                                     water
                                 </label>
                                 <label class="md-check col-sm-2 form-control-label">
-                                    <input type="checkbox" name="is_gas" >
+                                    <input type="checkbox" name="is_gas" id="is_gas">
                                     <i class="yellow"></i>
                                     gas
                                 </label>
                                 <label class="md-check col-sm-2 form-control-label">
-                                    <input type="checkbox" name="is_telecom" >
+                                    <input type="checkbox" name="is_telecom" id="is_telecom">
                                     <i class="blue"></i>
                                     telecom
                                 </label>
                                 <label class="md-check col-sm-2 form-control-label">
-                                    <input type="checkbox" name="is_light" >
+                                    <input type="checkbox" name="is_light" id="is_light">
                                     <i class="orange"></i>
                                     light
                                 </label>
                                 <label class="md-check col-sm-2 form-control-label">
-                                    <input type="checkbox" name="is_others" >
+                                    <input type="checkbox" name="is_others" id="is_others">
                                     <i class="grey"></i>
                                     others
                                 </label>
@@ -177,7 +177,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 form-control-label">A-Elt Nr</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="electric_nr">
+                                    <input type="text" class="form-control" name="electric_nr" id="electric_nr">
                                 </div>
                             </div>
                         </div>
@@ -185,7 +185,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 form-control-label">A-W Nr</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="water_nr">
+                                    <input type="text" class="form-control" name="water_nr" id="water_nr">
                                 </div>
                             </div>
                         </div>
@@ -193,7 +193,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 form-control-label">A-G Nr</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="gas_nr" >
+                                    <input type="text" class="form-control" name="gas_nr" id="gas_nr">
                                 </div>
                             </div>
                         </div>
@@ -203,7 +203,7 @@
                         <label class="col-sm-3 form-control-label">Rot B</label>
                         <div class="col-sm-9">
                             <label class="ui-switch primary m-t-xs m-r">
-                                <input type="checkbox" name="rot_b">
+                                <input type="checkbox" name="rot_b" id="rot_b">
                                 <i></i>
                             </label>
                         </div>
@@ -213,7 +213,7 @@
                         <label class="col-sm-3 form-control-label">Bomb Existed</label>
                         <div class="col-sm-9">
                             <label class="ui-switch info m-t-xs m-r">
-                                <input type="checkbox" name="isBombExisted" >
+                                <input type="checkbox" name="isBombExisted" id="isBombExisted">
                                 <i></i>
                             </label>
                         </div>
@@ -223,7 +223,7 @@
                         <label class="col-sm-3 form-control-label">Building Permission Activ?</label>
                         <div class="col-sm-9">
                             <label class="ui-switch primary m-t-xs m-r">
-                                <input type="checkbox" name="is_building_permission_activ" >
+                                <input type="checkbox" name="is_building_permission_activ" id="is_building_permission_activ">
                                 <i></i>
                             </label>
                         </div>
@@ -233,7 +233,7 @@
                         <label class="col-sm-3 form-control-label">OFW Activ?</label>
                         <div class="col-sm-9">
                             <label class="ui-switch primary m-t-xs m-r">
-                                <input type="checkbox" name="is_ofw_activ">
+                                <input type="checkbox" name="is_ofw_activ" id="is_ofw_activ">
                                 <i></i>
                             </label>
                         </div>
@@ -245,25 +245,25 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 form-control-label">Person</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="person">
+                                    <input type="text" class="form-control" name="person" id="person">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-2 form-control-label">Reason</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="reason">
+                                    <input type="text" class="form-control" name="reason" id="reason">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Comment</label>
-                        <input type="text" class="form-control" name="comment">
+                        <input type="text" class="form-control" name="comment" id="comment">
                     </div>
                 </div>
                 <div class="modal-footer dker _600">
-                    <input type="hidden" name="contract_id">
-                    <input type="hidden" name="project_id">
+                    <input type="hidden" name="contract_id" id="contract_id">
+                    <input type="hidden" name="project_id" id="project_id">
                     <button type="submit" class="btn btn-info m-t">Update</button>
                 </div>
             </form>

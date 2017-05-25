@@ -152,12 +152,8 @@ function initRoutes() {
     router.get('/projects',projectmanager.getAllProjects);
     router.post('/projects/add',projectmanager.addProject);
     router.post('/projects/update/:id',projectmanager.updateProject);
+    router.get('/projects/:id/contracts',projectmanager.getContractByProjectID);
 
-    router.get('/contracts/add',contractmanager.addContract);
-    router.post('/contracts/add/:action',contractmanager.addContract);
-    router.get('/contracts/project',contractmanager.getContractByProjectID);
-
-    router.get('/contracts/edit/:id',contractmanager.editContract);
     router.post('/contracts/edit/:action',contractmanager.editContract);
     router.post('/contracts/edit/partial/:id',contractmanager.editContractPartial);
     router.post('/contracts/print/:id', contractmanager.printContract);

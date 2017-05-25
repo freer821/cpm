@@ -13,7 +13,7 @@
         </div>
       </div>
       <div class="table-responsive">
-        <table id="project" class="table table-striped b-t b-b dataTable no-footer" ui-jp="dataTable">
+        <table id="projects-overview" class="table table-striped b-t b-b dataTable no-footer" ui-jp="dataTable">
           <thead>
           <tr>
             <th></th>
@@ -38,7 +38,7 @@
             <td>{{project.zipcode}}</td>
             <td>{{project.types}}</td>
             <td>
-              <a href="#" data-toggle="modal" data-target="#contract-basic-modal" data-project_id="{{project.id}}"><i class="material-icons md-24">&#xe03b;</i></a>
+              <a href="#" data-toggle="modal" data-target="#contract-basic-modal" data-project="{{project|json}}"><i class="material-icons md-24">&#xe03b;</i></a>
             </td>
             <td>
               <a href="#" data-toggle="modal" data-target="#project-modal" data-project="{{project|json}}"><i class="material-icons md-24">&#xe3c9;</i></a>
@@ -84,6 +84,11 @@
 
 <!-- / .modal -->
 <!-- ############ PAGE END-->
+
+<!-- project scripts -->
+<script src="/scripts/app_project.js"></script>
+<script src="/scripts/app_contract.js"></script>
+
 <script type="text/javascript">
     //page gobal array
     var sub_datatable_opened = [];
@@ -108,200 +113,6 @@
             });
         });
     });
-
-    /* Formatting function for row details - modify as you need */
-    function contractOverview ( d ) {
-        // `d` is the original data object for the row
-        return '<table id="'+d[1]+'"class="table table-striped b-t b-b dataTable no-footer" cellpadding="5" ui-jp="dataTable" cellspacing="0" border="0" style="padding-left:50px;">'+
-            '</table>';
-    }
-
-    function contractDetail ( d ) {
-        // `d` is the original data object for the row
-        return '<div style="font-size:18px" class="box">'+
-            '<ul class="list inset m-0">'+
-            '<li class="list-item">'+
-            '<a href="/contracts/edit/'+d.id+'" class="list-left">'+
-            '<span class="w-40 circle accent">'+
-            '<i class="fa fa-envelope"></i>'+
-            '</span>'+
-            '</a>'+
-            '<div class="list-body">'+
-            '<div class="form-group row">'+
-            '<div class="col-md-4">'+
-            '<div style="font-size:22px">'+d.permission_status+'</div>'+
-            '</div>'+
-            '<div id="manager_name_d" class="form-group col-md-3" onmouseover="showEditState(manager_name_edit_icon)" onmouseleave="hideEditState(manager_name_edit_icon)">'+
-            '<div id="manager_name_text">'+d.manager_name+'</div>'+
-            '<input id="manager_name_input" onkeypress="handleEnter(event, 1)" class="form-control" type="text" data-contractid="'+d.id+'" value="'+d.manager_name+'" hidden/>'+
-            '<a onclick="showInput(1)"> <i id="manager_name_edit_icon" class="material-icons md-24" hidden>&#xe3c9;</i></a>'+
-            '</div> '+
-            '<div id="worker_name_d" class="form-group col-md-3" onmouseover="showEditState(worker_name_edit_icon)" onmouseleave="hideEditState(worker_name_edit_icon)">'+
-            '<div id="worker_name_text">'+d.worker_name+'</div>'+
-            '<input id="worker_name_input" onkeypress="handleEnter(event, 2)" class="form-control" type="text" data-contractid="'+d.id+'" value="'+d.worker_name+'" hidden/>'+
-            '<a onclick="showInput(2)"> <i id="worker_name_edit_icon" class="material-icons md-24" hidden>&#xe3c9;</i></a>'+
-            '</div> '+            
-            '</div>'+
-            '</div>'+
-            '</li>'+
-            '<li class="list-item">'+
-            '<a href="/contracts/edit/'+d.id+'" class="list-left">'+
-            '<span class="w-40 circle green">'+
-            '<i class="fa fa-smile-o"></i>'+
-            '</span>'+
-            '</a>'+
-            '<div class="list-body">'+
-            '<div class="form-group row">'+
-            '<div class="col-md-4">'+
-            '<div style="font-size:22px">'+d.building_status+'</div>'+
-            '</div>'+
-            '<div class="form-group col-md-3">'+
-            d.building_begin+
-            '</div> '+
-            '<div class="form-group col-md-4">'+
-            d.building_end+
-            '</div> '+
-            '</div>'+
-            '</div>'+
-            '</li>'+
-            '<li class="list-item">'+
-            '<a href="/contracts/edit/'+d.id+'" class="list-left">'+
-            '<span class="w-40 circle warn">'+
-            '<i class="fa fa-flash"></i>'+
-            '</span>'+
-            '</a>'+
-            '<div class="list-body">'+
-            '<div class="form-group row">'+
-            '<div class="col-md-4">'+
-            '<div style="font-size:22px">'+d.ofw_status+'</div>'+
-            '</div>'+
-            '<div class="form-group col-md-3">'+
-            d.sum_value+
-            '</div> '+
-            '<div class="form-group col-md-4">'+
-            d.current_value+
-            '</div> '+
-            '</div>'+
-            '</div>'+
-            '</li>'+
-            '<li class="list-item">'+
-            '<a href="/contracts/edit/'+d.id+'" class="list-left">'+
-            '<span class="w-40 circle danger">'+
-            '<i class="fa fa-database"></i>'+
-            '</span>'+
-            '</a>'+
-            '<div class="list-body">'+
-            '<div class="form-group row">'+
-            '<div class="col-md-4">'+
-            '<div style="font-size:22px">'+d.invoice_status+'</div>'+
-            '</div>'+
-            '<div class="form-group col-md-3">'+
-            d.cost_code+
-            '</div> '+
-            '</div>'+
-            '</div>'+
-            '</li>'+
-            '<li class="list-item">'+
-            '<div class="form-group">'+
-            '<textarea style="width:100%" class="form-control" rows="4" data-minwords="6" '+
-            'required="" placeholder="Kommentar">'+d.comment+'</textarea>'+
-            '</div>'+
-            '</li>'+
-            '<li class="list-item">'+
-            '<div class="form-group row">'+
-            '<div class="col-md-1">'+
-            '<button type="submit" class="btn success">打开文件夹</button>'+
-            '</div>'+
-            '<div class="col-md-1">'+
-            '<button onclick="printTemplate(\''+d.id+'\')" type="submit" class="btn success">打印模板</button>'+
-            '</div>'+
-            '<div class="col-md-1">'+
-            '<button type="submit" class="btn success">建立XXX</button>'+
-            '</div>'+
-            '<div class="col-md-2">'+
-            '</div>'+
-            '</div>'+
-            '</li>'+
-            '</ul>'+
-            '</div>';
-    }
-
-    $(document).ready(function() {
-        // Add event listener for opening and closing details
-        $('#project tbody').on('click', 'td.details-control', function () {
-            var table = $('#project').DataTable();
-            var tr = $(this).closest('tr');
-            var row = table.row( tr );
-            var id = row.data()[1];
-
-            if ( row.child.isShown() ) {
-                var index = sub_datatable_opened.indexOf(id);
-                if (index > -1) {
-                    sub_datatable_opened.splice(index, 1);
-                }
-
-                // This row is already open - close it
-                row.child.hide();
-                tr.removeClass('shown');
-            }
-            else {
-                var index = sub_datatable_opened.indexOf(id);
-                if (index < 0) {
-                    sub_datatable_opened.push(id);
-                }
-                // Open this row
-                row.child( contractOverview(row.data()) ).show();
-                // set subTableid,use project_id
-
-                var addr = row.data()[4] +', '+ row.data()[3]+ ', '+row.data()[2];
-                var subTable = $('#'+id).DataTable( {
-                    "info" : false,
-                    "paging": false,
-                    "ordering": false,
-                    "searching": false,
-                    "ajax": '/contracts/project?projectid=' + id,
-                    "columns": [
-                        {
-                            "className":      'details-control-sub',
-                            "orderable":      false,
-                            "data":           null,
-                            "defaultContent": ''
-                        },
-                        { "data": "id" },
-                        { "data": "addr" },
-                        { "data": "work_content" },
-                        { "data": "cost_code" },
-                        { "data": "customer" },
-                        { "data": "status_finished" },
-                        {
-                            "data": "id",
-                            "render": function ( data, type, full, meta ) {
-                                return '<a href="/contracts/edit/'+data+'?project_id='+id+'&project_adr='+addr+'" ><i class="material-icons md-24">&#xe3c9;</i></a>';
-                            }
-                        }
-                    ]
-                } );
-                $( subTable.table().header() ).remove();
-                tr.addClass('shown');
-
-                $('#'+id+' tbody').on('click', 'td.details-control-sub', function () {
-                    var tr = $(this).closest('tr');
-                    var row = subTable.row( tr );
-                    if ( row.child.isShown() ) {
-                        // This row is already open - close it
-                        row.child.hide();
-                        tr.removeClass('shown');
-                    } else {
-                        row.child( contractDetail(row.data()) ).show();
-                        tr.addClass('shown');
-                    }
-                });
-
-            }
-        } );
-
-        //triggered when modal is about to be shown
-    } );
 
 function showEditState(id){
   $(id).removeAttr('hidden');
