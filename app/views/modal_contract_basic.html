@@ -1,0 +1,272 @@
+<div id="add-contract-modal" class="modal" data-backdrop="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content light">
+            <form role="form" action="/contracts/edit/basic" method="post">
+                <div class="modal-header dker _600">
+                    <h5 id="add-contract-modal-title" class="modal-title">New Contract</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-3 form-control-label">Customer</label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" name="customer" value="{{contract.customer}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-3 form-control-label">Partner Name</label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" name="partner_name" value="{{contract.partner_name}}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 form-control-label">Project Nr</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="project_nr" value="{{contract.project_nr}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 form-control-label">SAP Nr</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="sap_nr" value="{{contract.sap_nr}}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 form-control-label">Cost Code</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="cost_code" value="{{contract.cost_code}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 form-control-label">Manager Name</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="manager_name" value="{{contract.manager_name}}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 form-control-label">Estimated Value</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="estimated_value" value="{{contract.estimated_value}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 form-control-label">Work Content</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="work_content" value="{{contract.work_content}}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 form-control-label">Contract Delivery</label>
+                                <div class='input-group date col-sm-9' ui-jp="datetimepicker" ui-options="{
+                                format: 'DD-MM-YYYY',
+                                icogit ns: {
+                                  time: 'fa fa-clock-o',
+                                  date: 'fa fa-calendar',
+                                  up: 'fa fa-chevron-up',
+                                  down: 'fa fa-chevron-down',
+                                  previous: 'fa fa-chevron-left',
+                                  next: 'fa fa-chevron-right',
+                                  today: 'fa fa-screenshot',
+                                  clear: 'fa fa-trash',
+                                  close: 'fa fa-remove'
+                                }
+                              }">
+                                    <input type='text' class="form-control" name="contract_delivery" value="{{contract.contract_delivery | date('d-m-Y')}}">
+                                    <span class="input-group-addon">
+                                <span class="fa fa-calendar"></span>
+                            </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 form-control-label">Doc Delivery</label>
+                                <div class='input-group date col-sm-9' ui-jp="datetimepicker" ui-options="{
+                                format: 'DD-MM-YYYY',
+                                icons: {
+                                  time: 'fa fa-clock-o',
+                                  date: 'fa fa-calendar',
+                                  up: 'fa fa-chevron-up',
+                                  down: 'fa fa-chevron-down',
+                                  previous: 'fa fa-chevron-left',
+                                  next: 'fa fa-chevron-right',
+                                  today: 'fa fa-screenshot',
+                                  clear: 'fa fa-trash',
+                                  close: 'fa fa-remove'
+                                }
+                              }">
+                                    <input type='text' class="form-control" name="doc_delivery" value="{{contract.doc_delivery | date('d-m-Y')}}">
+                                    <span class="input-group-addon">
+                                <span class="fa fa-calendar"></span>
+                            </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-3 form-control-label">Contract Type</label>
+                        <div class="col-sm-9">
+                            <div class="form-group row">
+                                <label class="md-check col-sm-2 form-control-label">
+                                    <input type="checkbox" name="is_electric" {% if contract.contract_typ.electric %}checked{% endif %}>
+                                    <i class="red"></i>
+                                    electric
+                                </label>
+                                <label class="md-check col-sm-2 form-control-label">
+                                    <input type="checkbox" name="is_water" {% if contract.contract_typ.water %}checked{% endif %}>
+                                    <i class="green"></i>
+                                    water
+                                </label>
+                                <label class="md-check col-sm-2 form-control-label">
+                                    <input type="checkbox" name="is_gas" {% if contract.contract_typ.gas %}checked{% endif %}>
+                                    <i class="yellow"></i>
+                                    gas
+                                </label>
+                                <label class="md-check col-sm-2 form-control-label">
+                                    <input type="checkbox" name="is_telecom" {% if contract.contract_typ.telecom %}checked{% endif %}>
+                                    <i class="blue"></i>
+                                    telecom
+                                </label>
+                                <label class="md-check col-sm-2 form-control-label">
+                                    <input type="checkbox" name="is_light" {% if contract.contract_typ.light %}checked{% endif %}>
+                                    <i class="orange"></i>
+                                    light
+                                </label>
+                                <label class="md-check col-sm-2 form-control-label">
+                                    <input type="checkbox" name="is_others" {% if contract.contract_typ.others %}checked{% endif %}>
+                                    <i class="grey"></i>
+                                    others
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group row">
+                                <label class="col-sm-2 form-control-label">A-Elt Nr</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="electric_nr" value="{{contract.electric_nr}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group row">
+                                <label class="col-sm-2 form-control-label">A-W Nr</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="water_nr" value="{{contract.water_nr}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group row">
+                                <label class="col-sm-2 form-control-label">A-G Nr</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="gas_nr" value="{{contract.gas_nr}}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-3 form-control-label">Rot B</label>
+                        <div class="col-sm-9">
+                            <label class="ui-switch primary m-t-xs m-r">
+                                <input type="checkbox" name="rot_b" {% if contract.rot_b %}checked{% endif %}>
+                                <i></i>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-3 form-control-label">Bomb Existed</label>
+                        <div class="col-sm-9">
+                            <label class="ui-switch info m-t-xs m-r">
+                                <input type="checkbox" name="isBombExisted" {% if contract.isBombExisted %}checked{% endif %}>
+                                <i></i>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-3 form-control-label">Building Permission Activ?</label>
+                        <div class="col-sm-9">
+                            <label class="ui-switch primary m-t-xs m-r">
+                                <input type="checkbox" onclick="set_building_permission_active_state(this.checked)" name="is_building_permission_activ" {% if contract.is_building_permission_activ %}checked{% endif %}>
+                                <i></i>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-3 form-control-label">OFW Activ?</label>
+                        <div class="col-sm-9">
+                            <label class="ui-switch primary m-t-xs m-r">
+                                <input type="checkbox" onclick="set_ofw_active_state(this.checked)" name="is_ofw_activ" {% if contract.is_ofw_activ %}checked{% endif %}>
+                                <i></i>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-3 form-control-label">Doc Location</label>
+                        <div class="col-sm-9">
+                            <div class="form-group row">
+                                <label class="col-sm-2 form-control-label">Person</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="person" value="{{contract.doc_location.person}}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 form-control-label">Reason</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="reason" value="{{contract.doc_location.reason}}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Comment</label>
+                        <input type="text" class="form-control" name="comment" value="{{contract.comment}}">
+                    </div>
+                </div>
+                <div class="modal-footer dker _600">
+                    <input type="hidden" name="contract_id" value="{{contract.id}}">
+                    <input type="hidden" name="project_id" value="{{project_id}}">
+                    <button type="submit" class="btn btn-info m-t">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
