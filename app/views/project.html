@@ -38,10 +38,10 @@
             <td>{{project.zipcode}}</td>
             <td>{{project.types}}</td>
             <td>
-              <a href="#" data-toggle="modal" data-target="#add-contract-modal" data-project_id="{{project.id}}""><i class="material-icons md-24">&#xe03b;</i></a>
+              <a href="#" data-toggle="modal" data-target="#contract-basic-modal" data-project_id="{{project.id}}"><i class="material-icons md-24">&#xe03b;</i></a>
             </td>
             <td>
-              <a href="#" data-toggle="modal" data-target="#project-modal" data-project="{{project|json}}""><i class="material-icons md-24">&#xe3c9;</i></a>
+              <a href="#" data-toggle="modal" data-target="#project-modal" data-project="{{project|json}}"><i class="material-icons md-24">&#xe3c9;</i></a>
             </td>
           </tr>
           {% endfor %}
@@ -53,6 +53,12 @@
 </div>
 
 <!-- large modal -->
+
+<!-- add and edit project modal -->
+{% include 'modal_project.html' %}
+
+<!-- add and edit contract basic modal -->
+{% include 'modal_contract_basic.html' %}
 
 <!-- add contract modal -->
 
@@ -81,11 +87,6 @@
 <script type="text/javascript">
     //page gobal array
     var sub_datatable_opened = [];
-
-    //add contract modal script
-    $('#add-contract-modal').on('show.bs.modal', function(e) {
-        $("#add_contract_modal_project_id").val($(e.relatedTarget).data('project_id'));
-    });
 
     // Attach a submit handler to the form
     $( "#add-contract-modal-form" ).submit(function( event ) {
@@ -184,7 +185,8 @@
             '</div>'+
             '</li>'+
             '<li class="list-item">'+
-            '<a href="/contracts/edit/'+d.id+'" class="list-left">'+
+            '<a href="#" data-toggle="modal" data-target="#contract-modal" class="list-left">'+
+//            '<a href="/contracts/edit/'+d.id+'" class="list-left">'+
             '<span class="w-40 circle danger">'+
             '<i class="fa fa-database"></i>'+
             '</span>'+
@@ -300,42 +302,6 @@
         } );
 
         //triggered when modal is about to be shown
-        $('#project-modal').on('show.bs.modal', function(e) {
-            var project = $(e.relatedTarget).data('project');
-            if(project){
-                //set title
-                $('#project-modal-title').text('Update Project');
-
-                //set form action
-                $('#project-modal-form').attr('action', '/projects/update/'+project.id);
-
-                //set content
-                $("#city").val(project.city);
-                $("#community").val(project.community);
-                $("#street").val(project.street);
-                $("#housenr").val(project.housenr);
-                $("#files_path").val(project.files_path);
-                $("#linesplan_files_path").val(project.linesplan_files_path);
-                $("#zipcode").val(project.zipcode);
-                $("#comment").val(project.comment);
-            } else {
-                //set title
-                $('#project-modal-title').text('Add Project');
-
-                //set form action
-                $('#project-modal-form').attr('action', '/projects/add');
-
-                //set content
-                $("#city").val('');
-                $("#community").val('');
-                $("#street").val('');
-                $("#housenr").val('');
-                $("#files_path").val('');
-                $("#linesplan_files_path").val('');
-                $("#zipcode").val('');
-                $("#comment").val('');
-            }
-        });
     } );
 
 function showEditState(id){
