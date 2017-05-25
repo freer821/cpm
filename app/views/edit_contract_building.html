@@ -91,14 +91,11 @@
             <div class="form-group row">
                 <label class="col-md-3 form-control-label">Procent</label>
                 <div class="col-md-9">
-                    <div id="procent_completion_pg" class="progress mt-2">
-                      <div class="progress-bar progress-bar-striped progress-bar-animated primary" style="width: {{contract.building_work.procent_completion}}%">{{contract.building_work.procent_completion}}%</div>
+                    <div class="progress slider">
+                      <div id="building_progress_bar" aria-valuemax="100" aria-valuemin="0" aria-valuenow="{{contract.building_work.procent_completion}}" role="progressbar" class="progress-bar progress-bar-striped progress-bar-animated primary">{{contract.building_work.procent_completion}}</div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-1">
-          <input class="form-control" type="number" name="procent_completion" id="procent_completion" min="10" max="100" hidden="true" value="{{contract.building_work.procent_completion}}" onchange="changeProgress(this.value)" />
         </div>
     </div> 
     <input type="hidden" name="contract_id" value="{{contract.id}}"/>

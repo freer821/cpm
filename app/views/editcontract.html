@@ -154,28 +154,20 @@ $('#del-item').on('show.bs.modal', function(e) {
 
 
 $("#building_status").on('change', function() {
+  var $p = $($(".progress")[0]); 
   switch(this.value) {
     case '00':
-      $("#procent_completion_pg").empty();
-      $("#procent_completion_pg").append('<div class="progress-bar progress-bar-striped progress-bar-animated primary" style="width: 0%">0%</div>');
-      $("#procent_completion").attr("hidden","hidden");
-      $("#procent_completion").attr("min","0");
-      $("#procent_completion").val(0);
-      break;
-    case '01':
-      $("#procent_completion").removeAttr("hidden");
-      break;
-    case '02':
-      $("#procent_completion").removeAttr("hidden");
-      break;
-    case '03':
-      $("#procent_completion").removeAttr("hidden");
+      alert('00');
+      $p.slider( "option", "now", 0.1 );
+      $p.slider( "option", "disabled", true );
       break;
     case '04':
-      $("#procent_completion_pg").empty();
-      $("#procent_completion_pg").append('<div class="progress-bar progress-bar-striped progress-bar-animated primary" style="width: 100%">100%</div>');
-      $("#procent_completion").attr("hidden","hidden");
-      $("#procent_completion").val(100);
+      alert('04');
+      $p.slider( "option", "now", 100 );
+      $p.slider( "option", "disabled", true );    
+      break;
+    default:
+      $p.slider( "option", "disabled", false );
       break;
   }
 });
@@ -194,10 +186,13 @@ $("#is_acceptance_activ").on('change', function() {
   }
 });
 
-function changeProgress(value){
-  $("#procent_completion_pg").empty();
-  $("#procent_completion_pg").append('<div class="progress-bar progress-bar-striped progress-bar-animated primary" style="width: '+value.toString()+'%">'+value.toString()+'%</div>');
-}
+$(function(){
+    var $p = $($(".progress")[0]);
+
+    $p.on( "sliderchange", function(e,result){
+      $('#building_progress_bar').html(result.value);
+    });
+});
 
 // trigger change event in date form
 $(".date").on('dp.change', function (ev) {
