@@ -154,7 +154,7 @@
 					</select>
 		          </li>
 		          <li class="nav-item inline" style="padding-right: 20px">
-		          	<button class="btn btn-sm white" onclick="modify_item_status()">Apply</button>
+		          	<button class="btn btn-sm white" onclick="onChangeItemsStatus()">Apply</button>
 	          	  </li>
 		          <li class="nav-item inline">
 		            <div class="input-group input-group-sm">
@@ -197,7 +197,7 @@
 						</label></td>
 			            <td>{{item.title}}</td>
 			            <td>{{item.priority}}</td>
-			            <td>{{item.status}}</td>
+			            <td><a onclick="changeStatusNext(this)"  data-id="{{itemid}}" data-status="{{item.status}}"><i class="material-icons md-24">{% if item.status === 'Open' %}&#xe1af;{% endif %}{% if item.status === 'Pause' %}&#xe035;{% endif %}{% if item.status === 'Closed' %}&#xe86c;{% endif %}</i></a></td>
 		                <td>
 		                  <a href="#" data-toggle="modal" data-target="#edit-item" data-item="{{item|json}}"><i class="material-icons md-24">&#xe3c9;</i></a>
 		                </td>
@@ -391,17 +391,26 @@
       $(this).find('.danger').attr('href', $(e.relatedTarget).data('href'));
   });
 
-function modify_item_status(){
+function onChangeItemsStatus(){
 	// get all checked items
-	id_array = [];
+	let id_array = [];
 	$('[name=check_row]:checked').each(function(index) {
 		id_array.push(this.dataset.id);
 	});
-	if(id_array.length > 0){
+	if(id_array.length <= 0){
+		bootbox.alert('Please choose at least one item!');
+		return;
+	}	
+	let status = $('#item_edit_status_value').val();
+	modify_item_status(id_array, status);
+}
+
+function modify_item_status(ids, status){
+	if(ids.length > 0){
 		url = '/items/edit/status';
 		data = {
-			ids:id_array,
-			status:$('#item_edit_status_value').val()
+			ids:ids,
+			status:status
 		}
 		$.ajax({
 		    type: "POST",
@@ -413,7 +422,6 @@ function modify_item_status(){
 		    complete: function(XHR, TS){window.location.reload();}
 		});
 	}
-
 }
 
 function checkAll(checked){
@@ -423,6 +431,22 @@ function checkAll(checked){
 		else 
 			this.checked = false;
 	});
+}
+
+function changeStatusNext(ele){
+	let ids = [];
+	ids.push(ele.dataset.id);
+	switch(ele.dataset.status) {
+		case 'Open':
+			modify_item_status(ids, 'Pause');
+			break;
+		case 'Pause':
+			modify_item_status(ids, 'Closed');
+			break;
+		case 'Closed':
+			modify_item_status(ids, 'Open');
+			break;
+	}
 }
 
 </script>
