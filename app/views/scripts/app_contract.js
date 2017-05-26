@@ -130,11 +130,12 @@ $(document).ready(function(){
         var contract = $(e.relatedTarget).data('contract');
         var invoices = contract.invoice;
         invoices.forEach((invoice) => {
-            var table_content = '<tr>'+'' +
+            var table_content = '<tr>'+
                 '<td>'+invoice.rechnung_nr+'</td>'+
                 '<td>'+invoice.sum+'</td>'+
                 '<td>'+getInvoiceStatus(invoice.invoice_status)+'</td>'+
                 '</tr>';
+            console.log(table_content);
             $('#invoices > tbody:last-child').append(table_content);
         });
     });
