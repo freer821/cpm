@@ -1,9 +1,16 @@
-<form role="form" action="/contracts/edit/building" class="p-a-md" method="post">
-    <div class="row">
-        <div class="col-sm-6">
-            <div class="form-group row">
-                <label class="col-sm-3 form-control-label">Plan Begin</label>
-                <div class='input-group date col-sm-9' ui-jp="datetimepicker" ui-options="{
+<div id="contract-building-modal" class="modal" data-backdrop="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content light">
+            <div class="modal-header dker _600">
+                <h5 class="modal-title">Update Building</h5>
+            </div>
+            <form role="form" action="/contracts/edit/building" method="post">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 form-control-label">Plan Begin</label>
+                                <div class='input-group date col-sm-9' ui-jp="datetimepicker" ui-options="{
                             format: 'DD-MM-YYYY',
                             icons: {
                               time: 'fa fa-clock-o',
@@ -17,17 +24,18 @@
                               close: 'fa fa-remove'
                             }
                           }">
-                    <input type='text' class="form-control" id="plan_begin" name="plan_begin" value="{{contract.building_work.plan_begin | date('d-m-Y')}}">
-                    <span class="input-group-addon">
+                                    <input type='text' class="form-control" id="plan_begin" name="plan_begin">
+                                    <span class="input-group-addon">
                             <span class="fa fa-calendar"></span>
                         </span>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="form-group row">
-                <label class="col-sm-3 form-control-label">Plan End</label>
-                <div id="plan_end_div" class='input-group date col-sm-9' ui-jp="datetimepicker" ui-options="{
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 form-control-label">Plan End</label>
+                                <div id="plan_end_div" class='input-group date col-sm-9' ui-jp="datetimepicker"
+                                     ui-options="{
                             format: 'DD-MM-YYYY',
                             icons: {
                               time: 'fa fa-clock-o',
@@ -41,67 +49,76 @@
                               close: 'fa fa-remove'
                             }
                           }">
-                    <input type='text' class="form-control" id="plan_end" name="plan_end" value="{{contract.building_work.plan_end | date('d-m-Y')}}">
-                    <span class="input-group-addon">
+                                    <input type='text' class="form-control" id="plan_end" name="plan_end">
+                                    <span class="input-group-addon">
                             <span class="fa fa-calendar"></span>
                         </span>
-                </div>
-            </div>
-        </div>
-    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-    <div class="row">
-        <div class="col-md-6">
-            <div class="form-group row">
-                <label class="col-md-3 form-control-label">Worker</label>
-                <div class="col-md-9">
-                    <input type="text" class="form-control" name="worker_name" value="{{contract.building_work.worker_name}}">
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group row">
-                <label class="col-md-3 form-control-label">Working Month</label>
-                <div class="col-md-9">
-                    <input type="text" class="form-control" name="working_months" value="{{contract.building_work.working_months}}">
-                </div>
-            </div>
-        </div>
-    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-3 form-control-label">Worker</label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" name="worker_name">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-3 form-control-label">Working Month</label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" name="working_months">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-    <div class="row">
-        <div class="col-md-6">
-            <div class="form-group row">
-                <label class="col-md-3 form-control-label">Status</label>
-                <div class="col-md-9">
-                    <select class="form-control c-select" id="building_status" name="status">
-                        <option disabled selected value> -- select an status -- </option>
-                        <option value="00" {% if contract.building_work.status ==='00' %}selected{% endif %} >00- in der Vorbereitung</option>
-                        <option value="01" {% if contract.building_work.status ==='01' %}selected{% endif %} >01- vorbereiten zu bauen</option>
-                        <option value="02" {% if contract.building_work.status ==='02' %}selected{% endif %}>02- geplant in Bau</option>
-                        <option value="03" {% if contract.building_work.status ==='03' %}selected{% endif %} >03- fertig gebaut, Mappe abzug</option>
-                        <option value="04" {% if contract.building_work.status ==='04' %}selected{% endif %} >04- Tiefbau &amp; Montage erledigt</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <div class="form-group row">
-                <label class="col-md-3 form-control-label">Procent</label>
-                <div class="col-md-9">
-                    <div id="procent_completion_pg" class="progress mt-2">
-                      <div class="progress-bar progress-bar-striped progress-bar-animated primary" style="width: {{contract.building_work.procent_completion}}%">{{contract.building_work.procent_completion}}%</div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-3 form-control-label">Status</label>
+                                <div class="col-md-9">
+                                    <select class="form-control c-select" id="building_status" name="status">
+                                        <option disabled selected value> -- select an status --</option>
+                                        <option value="00">00- in der Vorbereitung</option>
+                                        <option value="01">01- vorbereiten zu bauen</option>
+                                        <option value="02">02- geplant in Bau</option>
+                                        <option value="03">03- fertig gebaut, Mappe abzug</option>
+                                        <option value="04">04- Tiefbau &amp; Montage erledigt</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-3 form-control-label">Procent</label>
+                                <div class="col-md-9">
+                                    <div id="procent_completion_pg" class="progress mt-2">
+                                        <div class="progress-bar progress-bar-striped progress-bar-animated primary" ></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <input class="form-control" type="number" name="procent_completion" id="procent_completion"
+                                   min="10" max="100" hidden="true"
+                                   onchange="changeProgress(this.value)"/>
+                        </div>
                     </div>
                 </div>
-            </div>
+                <div class="modal-footer dker _600">
+                    <input type="hidden" name="contract_id"/>
+                    <input type="hidden" name="contract_invoice" />
+                    <button type="button" class="btn dark-white m-t" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-info m-t" >Update</button>
+                </div>
+            </form>
         </div>
-        <div class="col-md-1">
-          <input class="form-control" type="number" name="procent_completion" id="procent_completion" min="10" max="100" hidden="true" value="{{contract.building_work.procent_completion}}" onchange="changeProgress(this.value)" />
-        </div>
-    </div> 
-    <input type="hidden" name="contract_id" value="{{contract.id}}"/>
-    <input type="hidden" name="contract_invoice" value="{{contract.invoice | json}}"/>
-    <button type="submit" class="btn btn-info m-t">Update</button>
-</form>
+    </div>
+</div>

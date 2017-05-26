@@ -52,7 +52,6 @@
   </div>
 </div>
 
-<!-- large modal -->
 
 <!-- add and edit project modal -->
 {% include 'modal_project.html' %}
@@ -60,27 +59,20 @@
 <!-- add and edit contract basic modal -->
 {% include 'modal_contract_basic.html' %}
 
-<!-- add contract modal -->
+<!-- add and edit contract basic modal -->
+{% include 'modal_contract_building_permissions.html' %}
+
+<!-- add and edit contract basic modal -->
+{% include 'modal_contract_building.html' %}
+
+<!-- add and edit contract basic modal -->
+{% include 'modal_contract_ofw.html' %}
+
+<!-- add and edit contract basic modal -->
+{% include 'modal_contract_invoices.html' %}
 
 
 <iframe id="file_tobe_printed" src="" hidden></iframe>
-
-<div id="del-user" class="modal" data-backdrop="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Delete User</h5>
-      </div>
-      <div class="modal-body text-center p-lg">
-        <p>Are you sure to delete this user: <span id="delusername" style="font-weight:bold"></span>?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn dark-white p-x-md" data-dismiss="modal">No</button>
-        <a type="button" class="btn danger p-x-md">Yes</a>
-      </div>
-    </div><!-- /.modal-content -->
-  </div>
-</div>
 
 <!-- / .modal -->
 <!-- ############ PAGE END-->

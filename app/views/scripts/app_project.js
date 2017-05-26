@@ -75,7 +75,7 @@ $(document).ready(function(){
                     {"data": "status_finished"},
                     {
                         "data": function (row, type, full, meta) {
-                            return '<a href="#" data-toggle="modal" data-target="#contract-basic-modal" data-contract-baisc=\''+JSON.stringify(row)+'\'><i class="material-icons md-24">&#xe3c9;</i></a>';
+                            return '<a href="#" data-toggle="modal" data-target="#contract-basic-modal" data-contract=\''+JSON.stringify(row)+'\'><i class="material-icons md-24">&#xe3c9;</i></a>';
                         }
                     }
                 ]
@@ -107,7 +107,7 @@ function contractDetail(d) {
     return '<div style="font-size:18px" class="box">' +
         '<ul class="list inset m-0">' +
         '<li class="list-item">' +
-        '<a href="/contracts/edit/' + d.id + '" class="list-left">' +
+        '<a href="#" data-toggle="modal" data-target="#contract-permissions-modal" data-contract=\''+JSON.stringify(d)+'\' class="list-left">' +
         '<span class="w-40 circle accent">' +
         '<i class="fa fa-envelope"></i>' +
         '</span>' +
@@ -131,7 +131,7 @@ function contractDetail(d) {
         '</div>' +
         '</li>' +
         '<li class="list-item">' +
-        '<a href="/contracts/edit/' + d.id + '" class="list-left">' +
+        '<a href="#" data-toggle="modal" data-target="#contract-building-modal" data-contract-building=\''+JSON.stringify(d)+'\' class="list-left">' +
         '<span class="w-40 circle green">' +
         '<i class="fa fa-smile-o"></i>' +
         '</span>' +
@@ -151,7 +151,7 @@ function contractDetail(d) {
         '</div>' +
         '</li>' +
         '<li class="list-item">' +
-        '<a href="/contracts/edit/' + d.id + '" class="list-left">' +
+        '<a href="#" data-toggle="modal" data-target="#contract-ofw-modal" data-contract=\''+JSON.stringify(d)+'\' class="list-left">' +
         '<span class="w-40 circle warn">' +
         '<i class="fa fa-flash"></i>' +
         '</span>' +
@@ -171,7 +171,7 @@ function contractDetail(d) {
         '</div>' +
         '</li>' +
         '<li class="list-item">' +
-        '<a href="/contracts/edit/' + d.id + '" class="list-left">' +
+        '<a href="#" data-toggle="modal" data-target="#contract-invoices-modal" data-contract=\''+JSON.stringify(d)+'\' class="list-left">' +
         '<span class="w-40 circle danger">' +
         '<i class="fa fa-database"></i>' +
         '</span>' +
@@ -182,7 +182,10 @@ function contractDetail(d) {
         '<div style="font-size:22px">' + d.invoice_status + '</div>' +
         '</div>' +
         '<div class="form-group col-md-3">' +
-        d.cost_code +
+        d.doc_location.person +
+        '</div> ' +
+        '<div class="form-group col-md-4">' +
+        d.doc_location.reason +
         '</div> ' +
         '</div>' +
         '</div>' +
