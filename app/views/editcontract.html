@@ -1,72 +1,6 @@
 {% extends 'layout.html' %}
 {% block content %}
 <!-- ############ PAGE START-->
-<div class="padding">
-  <div class="box">
-    <div class="box-header">
-      <h3>{{project_id}}</h3>
-      <small>{{project_adr}}</small>
-    </div>
-    <div class="box-body">
-      <div class="row">
-        <div class="col-sm-3 col-lg-2">
-          <div class="p-y">
-            <div class="nav-active-border left b-primary">
-              <ul class="nav nav-sm flex-column">
-                <li class="nav-item">
-                  <a id="basic_info" class="nav-link block active" href data-toggle="tab" data-target="#tab-1">Basic Info</a>
-                </li>
-                <li class="nav-item">
-                  <a id="building" class="nav-link block" href data-toggle="tab" data-target="#tab-2">Building</a>
-                </li>
-                <li  class="nav-item">
-                  <a id="building_permission" class="nav-link block" href data-toggle="tab" data-target="#tab-3">Building Permission</a>
-                </li>
-                <li class="nav-item">
-                  <a id="ofw" class="nav-link block" href data-toggle="tab" data-target="#tab-4">OFW Status</a>
-                </li>
-                <li class="nav-item">
-                  <a id="financial" class="nav-link block" href data-toggle="tab" data-target="#tab-5">financial accounting</a>
-                </li>
-                <li class="nav-item">
-                  <a id="fibu" class="nav-link block" href data-toggle="tab" data-target="#tab-6">Fibu</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-9 col-lg-10 light lt" style="padding-left: 0px; padding-right: 0px">
-          <div class="tab-content pos-rlt">
-            <div class="tab-pane active"  id="tab-1">
-              <div class="p-a-md dker _600" >Basic Info</div>
-              {% include 'edit_contract_basic.html' %}
-            </div>
-            <div class="tab-pane" id="tab-2">
-              <div class="p-a-md dker _600">Buliding</div>
-              {% include 'edit_contract_building.html' %}
-            </div>
-            <div class="tab-pane" id="tab-3">
-              <div class="p-a-md dker _600">Building Permission</div>
-              {% include 'edit_contract_building_permission.html' %}
-            </div>
-            <div class="tab-pane" id="tab-4">
-              <div class="p-a-md dker _600">OFW Status</div>
-              {% include 'edit_contract_ofw.html' %}
-            </div>
-            <div class="tab-pane" id="tab-5">
-              <div class="p-a-md dker _600">Financial Accounting</div>
-              {% include 'edit_contract_financial.html' %}
-            </div>
-            <div class="tab-pane" id="tab-6">
-              <div class="p-a-md dker _600">Fibu</div>
-              {% include 'edit_contract_fibu.html' %}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 <!-- ############ PAGE END-->
 
 <!-- ############ Modal Begin-->
@@ -95,23 +29,6 @@
 
 <script type="text/javascript">
 
-// Attach a submit handler to the form
-$("form").submit(function( event ) {
-  // Get some values from elements on the page:
-  url = $(this).attr( "action" );
-  if (url != '/contracts/edit/permission' && url !='/contracts/edit/invocie'){
-    // Stop form from submitting normally
-    event.preventDefault();
-   
-    // Send the data using post
-    var posting = $.post( url, $(this).serialize() );
-   
-    // Put the results in a div
-    posting.done(function( data ) {
-      bootbox.alert(data);
-    });  
-  }
-});
 
 $('#edit-permission').on('show.bs.modal', function(e) {
     $(this).find('form')[0].reset();

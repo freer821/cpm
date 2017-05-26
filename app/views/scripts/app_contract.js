@@ -7,7 +7,6 @@ $(document).ready(function(){
         $(this).find('form')[0].reset();
         var contract = $(e.relatedTarget).data('contract-baisc');
         if(contract){
-            console.log(JSON.stringify(contract));
             //set title
             $('#contract-modal-title').text('Update Contract');
 
@@ -19,21 +18,41 @@ $(document).ready(function(){
             $("#manager_name").val(contract.manager_name);
             $("#estimated_value").val(contract.estimated_value);
             $("#work_content").val(contract.work_content);
-            $("#contract_delivery").val(contract.contract_delivery);
-            $("#doc_delivery").val(contract.doc_delivery);
-            $("#is_electric").val(contract.is_electric);
-            $("#is_water").val(contract.is_water);
-            $("#is_gas").val(contract.is_gas);
-            $("#is_telecom").val(contract.is_telecom);
-            $("#is_light").val(contract.is_light);
-            $("#is_others").val(contract.is_others);
+            $("#contract_delivery").val(formatDate(contract.contract_delivery));
+            $("#doc_delivery").val(formatDate(contract.doc_delivery));
+            if (contract.contract_typ.electric) {
+                $("#is_electric").attr('checked','checked');
+            }
+            if (contract.contract_typ.water){
+                $("#is_water").attr('checked','checked');
+            }
+            if (contract.contract_typ.gas){
+                $("#is_gas").attr('checked','checked');
+            }
+            if (contract.contract_typ.telecom){
+                $("#is_telecom").attr('checked','checked');
+            }
+            if (contract.contract_typ.light){
+                $("#is_light").attr('checked','checked');
+            }
+            if (contract.contract_typ.others){
+                $("#is_others").attr('checked','checked');
+            }
             $("#electric_nr").val(contract.electric_nr);
             $("#water_nr").val(contract.water_nr);
             $("#gas_nr").val(contract.gas_nr);
-            $("#rot_b").val(contract.rot_b);
-            $("#isBombExisted").val(contract.isBombExisted);
-            $("#is_building_permission_activ").val(contract.is_building_permission_activ);
-            $("#is_ofw_activ").val(contract.is_ofw_activ);
+            if (contract.rot_b){
+                $("#rot_b").attr('checked','checked');
+            }
+            if (contract.isBombExisted){
+                $("#isBombExisted").attr('checked','checked');
+            }
+            if (contract.is_building_permission_activ){
+                $("#is_building_permission_activ").attr('checked','checked');
+            }
+            if (contract.is_ofw_activ){
+                $("#is_ofw_activ").attr('checked','checked');
+            }
             $("#person").val(contract.person);
             $("#reason").val(contract.reason);
             $("#comment").val(contract.comment);
@@ -52,7 +71,30 @@ $(document).ready(function(){
 
         }
 
+    });
 
+    // Attach a submit handler to the form
+    $("form").submit(function( event ) {
+        // Get some values from elements on the page:
+        url = $(this).attr( "action" );
+        if (url != '/contracts/edit/permission' && url !='/contracts/edit/invocie'){
+            // Stop form from submitting normally
+            event.preventDefault();
+
+            // Send the data using post
+            var posting = $.post( url, $(this).serialize() );
+
+            // Put the results in a div
+            posting.done(function( data ) {
+                bootbox.alert(data);
+            });
+        }
+        $('.modal').modal('hide');
     });
 
 });
+
+
+function formatDate(time) {
+    return moment(time).format("DD-MM-YYYY");
+}
