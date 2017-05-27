@@ -94,7 +94,14 @@ const getContractByProjectID = function (req, res, next) {
 };
 
 function filterContractsByUser(user_cost_code, constracts) {
-    return constracts;
+    let cons = [];
+    constracts.forEach((contract) => {
+        let con = contract;
+        con._doc.status_finished = "unfinished";
+        cons.push(con);
+    });
+
+    return cons;
     /*
      if (user_cost_code) {
      if (Array.isArray(user_cost_code)){
