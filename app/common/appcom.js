@@ -154,6 +154,13 @@ const getStatusOfContracts = function(contracts) {
     return contracts_status;
 };
 
+const doJSONRespond = function (res, json, next) {
+    res.status(200);
+    res.json(json);
+    next();
+};
+
+
 function getBulidungStatus(status_code) {
     switch (status_code) {
         case '00':
@@ -176,5 +183,6 @@ module.exports = {
     getNumValue:getNumValue,
     getDate: getDate,
     getStatusOfContracts:getStatusOfContracts,
-    fullParallel:fullParallel
+    fullParallel:fullParallel,
+    doJSONRespond:doJSONRespond
 };

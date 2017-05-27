@@ -33,18 +33,6 @@ $(document).ready(function(){
         }
     });
 
-    // Attach a submit handler to the form
-    $("form").submit(function( event ) {
-        var url = $(this).attr( "action" );
-        // Stop form from submitting normally
-        event.preventDefault();
-
-        // Send the data using post
-        var posting = $.post( url, $(this).serialize() );
-        
-        $('.modal').modal('hide');
-    });
-
     var projects_table = $('#projects-overview').DataTable();
 
     // loading the contracts of a project
@@ -66,32 +54,8 @@ $(document).ready(function(){
             projects_table_row.child('<table id="' + project_id + '"class="table table-striped b-t b-b dataTable no-footer" cellpadding="5" ui-jp="dataTable" cellspacing="0" border="0" style="padding-left:50px;"></table>').show();
             // set subTableid,use project_id
 
-            var subTable = $('#' + project_id).DataTable({
-                "info": false,
-                "paging": false,
-                "ordering": false,
-                "searching": false,
-                "ajax": '/projects/'+project_id+'/contracts',
-                "columns": [
-                    {
-                        "className": 'details-control-sub',
-                        "orderable": false,
-                        "data": null,
-                        "defaultContent": ''
-                    },
-                    {"data": "id"},
-                    {"data": "contract_street"},
-                    {"data": "work_content"},
-                    {"data": "cost_code"},
-                    {"data": "customer"},
-                    {"data": "status_finished"},
-                    {
-                        "data": function (row, type, full, meta) {
-                            return '<a href="#" data-toggle="modal" data-target="#contract-basic-modal" data-contract=\''+JSON.stringify(row)+'\'><i class="material-icons md-24">&#xe3c9;</i></a>';
-                        }
-                    }
-                ]
-            });
+            var subTable = loadContractsOfProject(project_id);
+
             $(subTable.table().header()).remove();
             projects_tr.addClass('shown');
 
@@ -113,6 +77,34 @@ $(document).ready(function(){
 
 });
 
+function loadContractsOfProject(project_id) {
+    return $('#' + project_id).DataTable({
+        "info": false,
+        "paging": false,
+        "ordering": false,
+        "searching": false,
+        "ajax": '/projects/'+project_id+'/contracts',
+        "columns": [
+            {
+                "className": 'details-control-sub',
+                "orderable": false,
+                "data": null,
+                "defaultContent": ''
+            },
+            {"data": "id"},
+            {"data": "contract_street"},
+            {"data": "work_content"},
+            {"data": "cost_code"},
+            {"data": "customer"},
+            {"data": "status_finished"},
+            {
+                "data": function (row, type, full, meta) {
+                    return '<a href="#" data-toggle="modal" data-target="#contract-basic-modal" data-contract=\''+JSON.stringify(row)+'\'><i class="material-icons md-24">&#xe3c9;</i></a>';
+                }
+            }
+        ]
+    });
+}
 
 function contractDetail(d) {
     // `d` is the original data object for the row

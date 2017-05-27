@@ -49,7 +49,7 @@ function updateContractBasic(request, callback) {
             if(err){
                 callback(err);
             } else {
-                callback();
+                callback(undefined, request.project_id);
             }
         });
     } else {
@@ -64,7 +64,7 @@ function updateContractBasic(request, callback) {
                 if(err){
                     callback(err);
                 } else {
-                    callback();
+                    callback(undefined, request.project_id);
                 }
             });
 
@@ -261,10 +261,12 @@ const editContract = function (req, res, next) {
     let request = req.body;
 
     if(req.params.action === 'basic') {
-        updateContractBasic(request, function (err) {
-            let ret= 'update operation done!!';
-            if(err) ret = 'update operation failed!!';
-            res.send(ret);
+        updateContractBasic(request, function (err,project_id) {
+            if(err){
+                res.send('update operation failed!!');
+            } else {
+                common.doJSONRespond(res,{'action':'reload','project_id':project_id},next)
+            }
         });
     } else if(req.params.action === 'building') {
         updateContractBuilding(request, function (err) {

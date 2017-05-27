@@ -21,38 +21,67 @@ $(document).ready(function(){
             $("#contract_delivery").val(formatDate(contract.contract_delivery));
             $("#doc_delivery").val(formatDate(contract.doc_delivery));
             if (contract.contract_typ.electric) {
-                $("#is_electric").attr('checked','checked');
+                $("#is_electric").prop( "checked", true );
+            } else {
+                $("#is_electric").prop( "checked", false );
             }
+
             if (contract.contract_typ.water){
-                $("#is_water").attr('checked','checked');
+                $("#is_water").prop( "checked", true );
+            } else {
+                $("#is_water").prop( "checked", false );
             }
+
             if (contract.contract_typ.gas){
-                $("#is_gas").attr('checked','checked');
+                $("#is_gas").prop( "checked", true );
+            } else {
+                $("#is_gas").prop( "checked", false );
             }
+
             if (contract.contract_typ.telecom){
-                $("#is_telecom").attr('checked','checked');
+                $("#is_telecom").prop( "checked", true );
+            } else {
+                $("#is_telecom").prop( "checked", false );
             }
+
             if (contract.contract_typ.light){
-                $("#is_light").attr('checked','checked');
+                $("#is_light").prop( "checked", true );
+            } else {
+                $("#is_light").prop( "checked", false );
             }
             if (contract.contract_typ.others){
-                $("#is_others").attr('checked','checked');
+                $("#is_others").prop( "checked", true );
+            } else {
+                $("#is_others").prop( "checked", false );
             }
+
             $("#electric_nr").val(contract.electric_nr);
             $("#water_nr").val(contract.water_nr);
             $("#gas_nr").val(contract.gas_nr);
             if (contract.rot_b){
-                $("#rot_b").attr('checked','checked');
+                $("#rot_b").prop( "checked", true );
+            } else {
+                $("#rot_b").prop( "checked", false );
             }
+
             if (contract.isBombExisted){
-                $("#isBombExisted").attr('checked','checked');
+                $("#isBombExisted").prop( "checked", true );
+            } else {
+                $("#isBombExisted").prop( "checked", false );
             }
+
             if (contract.is_building_permission_activ){
-                $("#is_building_permission_activ").attr('checked','checked');
+                $("#is_building_permission_activ").prop( "checked", true );
+            } else {
+                $("#is_building_permission_activ").prop( "checked", false );
             }
+
             if (contract.is_ofw_activ){
-                $("#is_ofw_activ").attr('checked','checked');
+                $("#is_ofw_activ").prop( "checked", true );
+            } else {
+                $("#is_ofw_activ").prop( "checked", false );
             }
+
             $("#person").val(contract.person);
             $("#reason").val(contract.reason);
             $("#comment").val(contract.comment);
@@ -101,28 +130,50 @@ $(document).ready(function(){
         $("#ofw_estimated_value").val(contract.ofw.estimated_value);
         $("#ofw_status").val(contract.ofw.ofw_status);
         if (contract.ofw.typ.bausstr) {
-            $("#bausstr").attr('checked','checked');
+            $("#bausstr").prop( "checked", true );
+        } else {
+            $("#bausstr").prop( "checked", false );
         }
+
         if (contract.ofw.typ.fahrbahn){
-            $("#fahrbahn").attr('checked','checked');
+            $("#fahrbahn").prop( "checked", true );
+        } else {
+            $("#fahrbahn").prop( "checked", false );
         }
+
         if (contract.ofw.typ.fussweg){
-            $("#fussweg").attr('checked','checked');
+            $("#fussweg").prop( "checked", true );
+        } else {
+            $("#fussweg").prop( "checked", false );
         }
+
         if (contract.ofw.typ.bitu){
-            $("#bitu").attr('checked','checked');
+            $("#bitu").prop( "checked", true );
+        } else {
+            $("#bitu").prop( "checked", false );
         }
+
         if (contract.ofw.typ.pflaster){
-            $("#pflaster").attr('checked','checked');
+            $("#pflaster").prop( "checked", true );
+        } else {
+            $("#pflaster").prop( "checked", false );
         }
+
         if (contract.ofw.typ.beton){
-            $("#beton").attr('checked','checked');
+            $("#beton").prop( "checked", true );
+        } else {
+            $("#beton").prop( "checked", false );
         }
         if (contract.ofw.clean){
-            $("#clean").attr('checked','checked');
+            $("#clean").prop( "checked", true );
+        } else {
+            $("#clean").prop( "checked", false );
         }
+
         if (contract.ofw.is_acceptance_activ){
-            $("#is_acceptance_activ").attr('checked','checked');
+            $("#is_acceptance_activ").prop( "checked", true );
+        } else {
+            $("#is_acceptance_activ").prop( "checked", false );
         }
     });
 
@@ -138,26 +189,6 @@ $(document).ready(function(){
             console.log(table_content);
             $('#invoices > tbody:last-child').append(table_content);
         });
-    });
-
-
-    // Attach a submit handler to the form
-    $("form").submit(function( event ) {
-        // Get some values from elements on the page:
-        url = $(this).attr( "action" );
-        if (url != '/contracts/edit/permission' && url !='/contracts/edit/invocie'){
-            // Stop form from submitting normally
-            event.preventDefault();
-
-            // Send the data using post
-            var posting = $.post( url, $(this).serialize() );
-
-            // Put the results in a div
-            posting.done(function( data ) {
-                bootbox.alert(data);
-            });
-        }
-        $('.modal').modal('hide');
     });
 
 });
