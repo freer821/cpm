@@ -33,6 +33,18 @@ $(document).ready(function(){
         }
     });
 
+    // Attach a submit handler to the form
+    $("form").submit(function( event ) {
+        var url = $(this).attr( "action" );
+        // Stop form from submitting normally
+        event.preventDefault();
+
+        // Send the data using post
+        var posting = $.post( url, $(this).serialize() );
+        
+        $('.modal').modal('hide');
+    });
+
     var projects_table = $('#projects-overview').DataTable();
 
     // loading the contracts of a project

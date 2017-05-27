@@ -29,7 +29,8 @@ const addProject = function (req, res, next) {
             db.editProject({id: project.id}, project);
 
             let project_adr = project.street+', '+project.community+', '+project.zipcode+', '+project.city;
-            res.render('addcontract', {title:'Project Management', project_id: project.id, project_adr:project_adr,  user: req.user});
+            //res.render('addcontract', {title:'Project Management', project_id: project.id, project_adr:project_adr,  user: req.user});
+            res.redirect('/projects');
         }
     });
 };
