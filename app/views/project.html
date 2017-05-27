@@ -13,7 +13,7 @@
         </div>
       </div>
       <div class="table-responsive">
-        <table id="project" class="table table-striped b-t b-b dataTable no-footer" ui-jp="dataTable">
+        <table id="projects-overview" class="table table-striped b-t b-b dataTable no-footer" ui-jp="dataTable">
           <thead>
           <tr>
             <th></th>
@@ -38,10 +38,10 @@
             <td>{{project.zipcode}}</td>
             <td>{{project.types}}</td>
             <td>
-              <a href="#" data-toggle="modal" data-target="#add-contract-modal" data-project_id="{{project.id}}""><i class="material-icons md-24">&#xe03b;</i></a>
+              <a href="#" data-toggle="modal" data-target="#contract-basic-modal" data-project="{{project|json}}"><i class="material-icons md-24">&#xe03b;</i></a>
             </td>
             <td>
-              <a href="#" data-toggle="modal" data-target="#project-modal" data-project="{{project|json}}""><i class="material-icons md-24">&#xe3c9;</i></a>
+              <a href="#" data-toggle="modal" data-target="#project-modal" data-project="{{project|json}}"><i class="material-icons md-24">&#xe3c9;</i></a>
             </td>
           </tr>
           {% endfor %}
@@ -52,142 +52,38 @@
   </div>
 </div>
 
-<!-- large modal -->
-<div id="project-modal" class="modal" data-backdrop="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content light">
-      <form id="project-modal-form" action="/projects/add" method="post" >
-        <div class="modal-header dker _600">
-          <h5 id="project-modal-title" class="modal-title">New Project</h5>
-        </div>
-        <div class="modal-body">
-          <div class="row">
-            <div class="col-xs-14 col-md-10">
-              <div class="form-group row">
-                <label for="street" class="col-sm-4 form-control-label">Street</label>
-                <div class="col-sm-8">
-                  <input type="text" class="form-control" id="street" name="street" placeholder="Street" >
-                </div>
-              </div>
-            </div>
 
-            <div class="col-xs-4 col-md-2">
-              <div class="form-group row">
-                <label for="community" class="col-sm-4 form-control-label">Hause Nr.</label>
-                <div class="col-sm-8">
-                  <input type="text" class="form-control" id="housenr" name="housenr" placeholder="Hause Nr">
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-xs-7 col-md-5">
-              <div class="form-group row">
-                <label for="community" class="col-sm-4 form-control-label">Community</label>
-                <div class="col-sm-8">
-                  <input type="text" class="form-control" id="community" name="community" placeholder="Community">
-                </div>
-              </div>
-            </div>
+<!-- add and edit project modal -->
+{% include 'modal_project.html' %}
 
-            <div class="col-xs-4 col-md-2">
-              <div class="form-group row">
-                <label for="zipcode" class="col-sm-4 form-control-label">Zipcode</label>
-                <div class="col-sm-8">
-                  <input type="text" class="form-control" id="zipcode" name="zipcode" placeholder="zipcode">
-                </div>
-              </div>
-            </div>
+<!-- add and edit contract basic modal -->
+{% include 'modal_contract_basic.html' %}
 
-            <div class="col-xs-7 col-md-5">
-              <div class="form-group row">
-                <label for="city" class="col-sm-4 form-control-label">City</label>
-                <div class="col-sm-8">
-                  <input type="text" class="form-control" id="city" name="city" placeholder="City">
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-xs-18 col-md-12">
-              <div class="form-group row">
-                <label for="comment" class="col-sm-3 form-control-label">Comment</label>
-                <div class="col-sm-9">
-                  <input type="text" class="form-control" id="comment" name="comment" placeholder="Comment">
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-xs-18 col-md-12">
-              <div class="form-group row">
-                <label for="files_path" class="col-sm-3 form-control-label">Files Path</label>
-                <div class="col-sm-9">
-                  <input type="text" class="form-control" id="files_path" name="files_path" placeholder="Files Path" >
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-xs-18 col-md-12">
-              <div class="form-group row">
-                <label for="linesplan_files_path" class="col-sm-3 form-control-label">Line Plan Files Path</label>
-                <div class="col-sm-9">
-                  <input type="text" class="form-control" id="linesplan_files_path" name="linesplan_files_path" placeholder="Line Plan Files Path">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer dker _600">
-          <button type="button" class="btn dark-white p-x-md" data-dismiss="modal">Cancel</button>
-          <button type="submit" class="btn danger p-x-md">Submit</button>
-        </div>
-      </form>
-    </div><!-- /.modal-content -->
-  </div>
-</div>
+<!-- add and edit contract basic modal -->
+{% include 'modal_contract_building_permissions.html' %}
 
+<!-- add and edit contract basic modal -->
+{% include 'modal_contract_building.html' %}
 
-<!-- add contract modal -->
-<div id="add-contract-modal" class="modal" data-backdrop="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content light">
-      {% include 'edit_contract_basic.html' %}
-    </div><!-- /.modal-content -->
-  </div>
-</div>
+<!-- add and edit contract basic modal -->
+{% include 'modal_contract_ofw.html' %}
+
+<!-- add and edit contract basic modal -->
+{% include 'modal_contract_invoices.html' %}
 
 
 <iframe id="file_tobe_printed" src="" hidden></iframe>
 
-<div id="del-user" class="modal" data-backdrop="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Delete User</h5>
-      </div>
-      <div class="modal-body text-center p-lg">
-        <p>Are you sure to delete this user: <span id="delusername" style="font-weight:bold"></span>?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn dark-white p-x-md" data-dismiss="modal">No</button>
-        <a type="button" class="btn danger p-x-md">Yes</a>
-      </div>
-    </div><!-- /.modal-content -->
-  </div>
-</div>
-
 <!-- / .modal -->
 <!-- ############ PAGE END-->
+
+<!-- project scripts -->
+<script src="/scripts/app_project.js"></script>
+<script src="/scripts/app_contract.js"></script>
+
 <script type="text/javascript">
     //page gobal array
     var sub_datatable_opened = [];
-
-    //add contract modal script
-    $('#add-contract-modal').on('show.bs.modal', function(e) {
-        $("#add_contract_modal_project_id").val($(e.relatedTarget).data('project_id'));
-    });
 
     // Attach a submit handler to the form
     $( "#add-contract-modal-form" ).submit(function( event ) {
@@ -209,236 +105,6 @@
             });
         });
     });
-
-    /* Formatting function for row details - modify as you need */
-    function contractOverview ( d ) {
-        // `d` is the original data object for the row
-        return '<table id="'+d[1]+'"class="table table-striped b-t b-b dataTable no-footer" cellpadding="5" ui-jp="dataTable" cellspacing="0" border="0" style="padding-left:50px;">'+
-            '</table>';
-    }
-
-    function contractDetail ( d ) {
-        // `d` is the original data object for the row
-        return '<div style="font-size:18px" class="box">'+
-            '<ul class="list inset m-0">'+
-            '<li class="list-item">'+
-            '<a href="/contracts/edit/'+d.id+'" class="list-left">'+
-            '<span class="w-40 circle accent">'+
-            '<i class="fa fa-envelope"></i>'+
-            '</span>'+
-            '</a>'+
-            '<div class="list-body">'+
-            '<div class="form-group row">'+
-            '<div class="col-md-4">'+
-            '<div style="font-size:22px">'+d.permission_status+'</div>'+
-            '</div>'+
-            '<div id="manager_name_d" class="form-group col-md-3" onmouseover="showEditState(manager_name_edit_icon)" onmouseleave="hideEditState(manager_name_edit_icon)">'+
-            '<div id="manager_name_text">'+d.manager_name+'</div>'+
-            '<input id="manager_name_input" onkeypress="handleEnter(event, 1)" class="form-control" type="text" data-contractid="'+d.id+'" value="'+d.manager_name+'" hidden/>'+
-            '<a onclick="showInput(1)"> <i id="manager_name_edit_icon" class="material-icons md-24" hidden>&#xe3c9;</i></a>'+
-            '</div> '+
-            '<div id="worker_name_d" class="form-group col-md-3" onmouseover="showEditState(worker_name_edit_icon)" onmouseleave="hideEditState(worker_name_edit_icon)">'+
-            '<div id="worker_name_text">'+d.worker_name+'</div>'+
-            '<input id="worker_name_input" onkeypress="handleEnter(event, 2)" class="form-control" type="text" data-contractid="'+d.id+'" value="'+d.worker_name+'" hidden/>'+
-            '<a onclick="showInput(2)"> <i id="worker_name_edit_icon" class="material-icons md-24" hidden>&#xe3c9;</i></a>'+
-            '</div> '+            
-            '</div>'+
-            '</div>'+
-            '</li>'+
-            '<li class="list-item">'+
-            '<a href="/contracts/edit/'+d.id+'" class="list-left">'+
-            '<span class="w-40 circle green">'+
-            '<i class="fa fa-smile-o"></i>'+
-            '</span>'+
-            '</a>'+
-            '<div class="list-body">'+
-            '<div class="form-group row">'+
-            '<div class="col-md-4">'+
-            '<div style="font-size:22px">'+d.building_status+'</div>'+
-            '</div>'+
-            '<div class="form-group col-md-3">'+
-            d.building_begin+
-            '</div> '+
-            '<div class="form-group col-md-4">'+
-            d.building_end+
-            '</div> '+
-            '</div>'+
-            '</div>'+
-            '</li>'+
-            '<li class="list-item">'+
-            '<a href="/contracts/edit/'+d.id+'" class="list-left">'+
-            '<span class="w-40 circle warn">'+
-            '<i class="fa fa-flash"></i>'+
-            '</span>'+
-            '</a>'+
-            '<div class="list-body">'+
-            '<div class="form-group row">'+
-            '<div class="col-md-4">'+
-            '<div style="font-size:22px">'+d.ofw_status+'</div>'+
-            '</div>'+
-            '<div class="form-group col-md-3">'+
-            d.sum_value+
-            '</div> '+
-            '<div class="form-group col-md-4">'+
-            d.current_value+
-            '</div> '+
-            '</div>'+
-            '</div>'+
-            '</li>'+
-            '<li class="list-item">'+
-            '<a href="/contracts/edit/'+d.id+'" class="list-left">'+
-            '<span class="w-40 circle danger">'+
-            '<i class="fa fa-database"></i>'+
-            '</span>'+
-            '</a>'+
-            '<div class="list-body">'+
-            '<div class="form-group row">'+
-            '<div class="col-md-4">'+
-            '<div style="font-size:22px">'+d.invoice_status+'</div>'+
-            '</div>'+
-            '<div class="form-group col-md-3">'+
-            d.cost_code+
-            '</div> '+
-            '</div>'+
-            '</div>'+
-            '</li>'+
-            '<li class="list-item">'+
-            '<div class="form-group">'+
-            '<textarea style="width:100%" class="form-control" rows="4" data-minwords="6" '+
-            'required="" placeholder="Kommentar">'+d.comment+'</textarea>'+
-            '</div>'+
-            '</li>'+
-            '<li class="list-item">'+
-            '<div class="form-group row">'+
-            '<div class="col-md-1">'+
-            '<button type="submit" class="btn success">打开文件夹</button>'+
-            '</div>'+
-            '<div class="col-md-1">'+
-            '<button onclick="printTemplate(\''+d.id+'\')" type="submit" class="btn success">打印模板</button>'+
-            '</div>'+
-            '<div class="col-md-1">'+
-            '<button type="submit" class="btn success">建立XXX</button>'+
-            '</div>'+
-            '<div class="col-md-2">'+
-            '</div>'+
-            '</div>'+
-            '</li>'+
-            '</ul>'+
-            '</div>';
-    }
-
-    $(document).ready(function() {
-        // Add event listener for opening and closing details
-        $('#project tbody').on('click', 'td.details-control', function () {
-            var table = $('#project').DataTable();
-            var tr = $(this).closest('tr');
-            var row = table.row( tr );
-            var id = row.data()[1];
-
-            if ( row.child.isShown() ) {
-                var index = sub_datatable_opened.indexOf(id);
-                if (index > -1) {
-                    sub_datatable_opened.splice(index, 1);
-                }
-
-                // This row is already open - close it
-                row.child.hide();
-                tr.removeClass('shown');
-            }
-            else {
-                var index = sub_datatable_opened.indexOf(id);
-                if (index < 0) {
-                    sub_datatable_opened.push(id);
-                }
-                // Open this row
-                row.child( contractOverview(row.data()) ).show();
-                // set subTableid,use project_id
-
-                var addr = row.data()[4] +', '+ row.data()[3]+ ', '+row.data()[2];
-                var subTable = $('#'+id).DataTable( {
-                    "info" : false,
-                    "paging": false,
-                    "ordering": false,
-                    "searching": false,
-                    "ajax": '/contracts/project?projectid=' + id,
-                    "columns": [
-                        {
-                            "className":      'details-control-sub',
-                            "orderable":      false,
-                            "data":           null,
-                            "defaultContent": ''
-                        },
-                        { "data": "id" },
-                        { "data": "addr" },
-                        { "data": "work_content" },
-                        { "data": "cost_code" },
-                        { "data": "customer" },
-                        { "data": "status_finished" },
-                        {
-                            "data": "id",
-                            "render": function ( data, type, full, meta ) {
-                                return '<a href="/contracts/edit/'+data+'?project_id='+id+'&project_adr='+addr+'" ><i class="material-icons md-24">&#xe3c9;</i></a>';
-                            }
-                        }
-                    ]
-                } );
-                $( subTable.table().header() ).remove();
-                tr.addClass('shown');
-
-                $('#'+id+' tbody').on('click', 'td.details-control-sub', function () {
-                    var tr = $(this).closest('tr');
-                    var row = subTable.row( tr );
-                    if ( row.child.isShown() ) {
-                        // This row is already open - close it
-                        row.child.hide();
-                        tr.removeClass('shown');
-                    } else {
-                        row.child( contractDetail(row.data()) ).show();
-                        tr.addClass('shown');
-                    }
-                });
-
-            }
-        } );
-
-        //triggered when modal is about to be shown
-        $('#project-modal').on('show.bs.modal', function(e) {
-            var project = $(e.relatedTarget).data('project');
-            if(project){
-                //set title
-                $('#project-modal-title').text('Update Project');
-
-                //set form action
-                $('#project-modal-form').attr('action', '/projects/update/'+project.id);
-
-                //set content
-                $("#city").val(project.city);
-                $("#community").val(project.community);
-                $("#street").val(project.street);
-                $("#housenr").val(project.housenr);
-                $("#files_path").val(project.files_path);
-                $("#linesplan_files_path").val(project.linesplan_files_path);
-                $("#zipcode").val(project.zipcode);
-                $("#comment").val(project.comment);
-            } else {
-                //set title
-                $('#project-modal-title').text('Add Project');
-
-                //set form action
-                $('#project-modal-form').attr('action', '/projects/add');
-
-                //set content
-                $("#city").val('');
-                $("#community").val('');
-                $("#street").val('');
-                $("#housenr").val('');
-                $("#files_path").val('');
-                $("#linesplan_files_path").val('');
-                $("#zipcode").val('');
-                $("#comment").val('');
-            }
-        });
-    } );
 
 function showEditState(id){
   $(id).removeAttr('hidden');
