@@ -213,6 +213,14 @@ const editProject = function (condition, project, callback) {
         { // Updates
             $set: project,
             $setOnInsert: {
+                contract_types:{
+                    electric: 0,     // elektro
+                    water: 0,      // wasser
+                    gas: 0,         // gas
+                    telecom: 0,     // telekom
+                    light: 0,
+                    others: 0        // others
+                },
                 created: new Date()
             }
         },
@@ -321,6 +329,66 @@ const countContract = function (callback) {
     });
 };
 
+const updateProjectContractType = function(project_id, contract_types) {
+    Project.findOne({id: project_id}, function (err, project) {
+        if (contract_types.electric) {
+            project.contract_types.electric +=1;
+        } else {
+            if (project.contract_types.electric > 0) {
+                project.contract_types.electric -= 1;
+            }
+        }
+
+        if (contract_types.water) {
+            project.contract_types.water +=1;
+        } else {
+            if (project.contract_types.water > 0) {
+                project.contract_types.water -= 1;
+            }
+        }
+
+        if (contract_types.gas) {
+            project.contract_types.gas +=1;
+        } else {
+            if (project.contract_types.gas > 0) {
+                project.contract_types.gas -= 1;
+            }
+        }
+
+        if (contract_types.telecom) {
+            project.contract_types.telecom +=1;
+        } else {
+            if (project.contract_types.telecom > 0) {
+                project.contract_types.telecom -= 1;
+            }
+        }
+
+        if (contract_types.light) {
+            project.contract_types.light +=1;
+        } else {
+            if (project.contract_types.light > 0) {
+                project.contract_types.light -= 1;
+            }
+        }
+
+        if (contract_types.others) {
+            project.contract_types.others +=1;
+        } else {
+            if (project.contract_types.others > 0) {
+                project.contract_types.others -= 1;
+            }
+        }
+
+
+        project.save(function (err) {
+            if(err) {
+                logger.error('error to update the contract types of project', contract_types);
+            }
+        });
+
+    });
+};
+
 module.exports = {
     setup: setup,
     findUser:findUser,
@@ -341,5 +409,6 @@ module.exports = {
     editContract:editContract,
     editContractAddIntoArray: editContractAddIntoArray,
     editContractRemoveFromArray:editContractRemoveFromArray,
-    countContract:countContract
+    countContract:countContract,
+    updateProjectContractType:updateProjectContractType
 };
