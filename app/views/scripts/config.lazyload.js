@@ -68,5 +68,13 @@ var MODULE_CONFIG = {
     dropzone:       [
                       '/libs/js/dropzone/dist/min/dropzone.min.js',
                       '/libs/js/dropzone/dist/min/dropzone.min.css'
-                    ]
+                    ],
+    projects:       [
+                        '/libs/jquery/datatables/media/js/jquery.dataTables.min.js',
+                        '/libs/jquery/plugins/integration/bootstrap/3/dataTables.bootstrap.js',
+                        '/libs/jquery/plugins/integration/bootstrap/3/dataTables.bootstrap.css',
+                        '/scripts/app_project.js',
+                        '/scripts/app_contract.js',
+                        '/scripts/app_com.js'
+                    ],
   };

@@ -13,7 +13,7 @@
         </div>
       </div>
       <div class="table-responsive">
-        <table id="projects-overview" class="table table-striped b-t b-b dataTable no-footer" ui-jp="dataTable">
+        <table id="projects-overview" class="table table-striped b-t b-b dataTable no-footer" ui-jp="projects">
           <thead>
           <tr>
             <th></th>
@@ -37,24 +37,26 @@
             <td>{{project.housenr}}</td>
             <td>{{project.zipcode}}</td>
             <td>
-              <label class="md-check">
+              <div class="form-group row">
+              <label class="col-md-1 form-control-label md-check">
               <input type="checkbox" {% if project.contract_types.electric >0 %} checked {% endif %}><i class="red"></i>
               </label>
-              <label class="md-check">
+              <label class="col-md-1 form-control-label md-check">
               <input type="checkbox" {% if project.contract_types.water >0 %} checked {% endif %}><i class="green"></i>
               </label>
-              <label class="md-check">
+              <label class="col-md-1 form-control-label md-check">
               <input type="checkbox" {% if project.contract_types.light >0 %} checked {% endif %}><i class="blue"></i>
               </label>
-              <label class="md-check">
+              <label class="col-md-1 form-control-label md-check">
               <input type="checkbox" {% if project.contract_types.telecom >0 %} checked {% endif %}><i class="orange"></i>
               </label>
-              <label class="md-check">
+              <label class="col-md-1 form-control-label md-check">
               <input type="checkbox" {% if project.contract_types.gas >0 %} checked {% endif %}><i class="yellow"></i>
               </label>
-              <label class="md-check">
+              <label class="col-md-1 form-control-label md-check">
               <input type="checkbox" {% if project.contract_types.others >0 %} checked {% endif %}><i class="grey"></i>
               </label>
+              </div>
             </td>
             <td>
               <a href="#" data-toggle="modal" data-target="#contract-basic-modal" data-project="{{project|json}}"><i class="material-icons md-24">&#xe03b;</i></a>
@@ -96,36 +98,7 @@
 <!-- / .modal -->
 <!-- ############ PAGE END-->
 
-<!-- project scripts -->
-<script src="/scripts/app_project.js"></script>
-<script src="/scripts/app_contract.js"></script>
-<script src="/scripts/app_com.js"></script>
-
-
 <script type="text/javascript">
-    //page gobal array
-    var sub_datatable_opened = [];
-
-    // Attach a submit handler to the form
-    $( "#add-contract-modal-form" ).submit(function( event ) {
-
-        // Stop form from submitting normally
-        event.preventDefault();
-
-        // Get some values from elements on the page:
-        url = $( "#add-contract-modal-form" ).attr( "action" );
-
-        // Send the data using post
-        var posting = $.post( url, $( "#add-contract-modal-form" ).serialize() );
-
-        // Put the results in a div
-        posting.done(function( data ) {
-            $('#add-contract-modal').modal('hide');
-            sub_datatable_opened.forEach(function(sub_datatable_id) {
-                $('#'+sub_datatable_id).DataTable().ajax.reload();
-            });
-        });
-    });
 
 function showEditState(id){
   $(id).removeAttr('hidden');
