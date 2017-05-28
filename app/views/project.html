@@ -367,30 +367,6 @@ $(document).ready(function(){
 });
 
 
-//page gobal array
-var sub_datatable_opened = [];
-
-// Attach a submit handler to the form
-$( "#add-contract-modal-form" ).submit(function( event ) {
-
-    // Stop form from submitting normally
-    event.preventDefault();
-
-    // Get some values from elements on the page:
-    url = $( "#add-contract-modal-form" ).attr( "action" );
-
-    // Send the data using post
-    var posting = $.post( url, $( "#add-contract-modal-form" ).serialize() );
-
-    // Put the results in a div
-    posting.done(function( data ) {
-        $('#add-contract-modal').modal('hide');
-        sub_datatable_opened.forEach(function(sub_datatable_id) {
-            $('#'+sub_datatable_id).DataTable().ajax.reload();
-        });
-    });
-});
-
 function showEditState(id){
   $(id).removeAttr('hidden');
 }
