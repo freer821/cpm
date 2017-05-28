@@ -37,22 +37,22 @@
             <td>{{project.housenr}}</td>
             <td>{{project.zipcode}}</td>
             <td>
-              <label class="md-check" style="display: inline-block">
+              <label class="md-check">
               <input type="checkbox" {% if project.contract_types.electric >0 %} checked {% endif %}><i class="red"></i>
               </label>
-              <label class="md-check" style="display: inline-block">
+              <label class="md-check">
               <input type="checkbox" {% if project.contract_types.water >0 %} checked {% endif %}><i class="green"></i>
               </label>
-              <label class="md-check" style="display: inline-block">
+              <label class="md-check">
               <input type="checkbox" {% if project.contract_types.light >0 %} checked {% endif %}><i class="blue"></i>
               </label>
-              <label class="md-check" style="display: inline-block">
+              <label class="md-check">
               <input type="checkbox" {% if project.contract_types.telecom >0 %} checked {% endif %}><i class="orange"></i>
               </label>
-              <label class="md-check" style="display: inline-block">
+              <label class="md-check">
               <input type="checkbox" {% if project.contract_types.gas >0 %} checked {% endif %}><i class="yellow"></i>
               </label>
-              <label class="md-check" style="display: inline-block">
+              <label class="md-check">
               <input type="checkbox" {% if project.contract_types.others >0 %} checked {% endif %}><i class="grey"></i>
               </label>
             </td>
@@ -100,272 +100,32 @@
 <script src="/scripts/app_project.js"></script>
 <script src="/scripts/app_contract.js"></script>
 <script src="/scripts/app_com.js"></script>
+
+
 <script type="text/javascript">
-$(document).ready(function(){
-    //project event handler
-    // add and edit project
-    $('#project-modal').on('show.bs.modal', function (e) {
-        $(this).find('form')[0].reset();
-        var project = $(e.relatedTarget).data('project');
-        if (project) {
-            //set title
-            $('#project-modal-title').text('Update Project');
+    //page gobal array
+    var sub_datatable_opened = [];
 
-            //set form action
-            $('#project-modal-form').attr('action', '/projects/update/' + project.id);
+    // Attach a submit handler to the form
+    $( "#add-contract-modal-form" ).submit(function( event ) {
 
-            //set content
-            $("#city").val(project.city);
-            $("#community").val(project.community);
-            $("#street").val(project.street);
-            $("#housenr").val(project.housenr);
-            $("#files_path").val(project.files_path);
-            $("#linesplan_files_path").val(project.linesplan_files_path);
-            $("#zipcode").val(project.zipcode);
-            $("#comment").val(project.comment);
-        } else {
-            //set title
-            $('#project-modal-title').text('Add Project');
+        // Stop form from submitting normally
+        event.preventDefault();
 
-            //set form action
-            $('#project-modal-form').attr('action', '/projects/add');
+        // Get some values from elements on the page:
+        url = $( "#add-contract-modal-form" ).attr( "action" );
 
-        }
-    });
+        // Send the data using post
+        var posting = $.post( url, $( "#add-contract-modal-form" ).serialize() );
 
-    var projects_table = $('#projects-overview').DataTable();
-
-    // loading the contracts of a project
-    $('#projects-overview tbody').on('click', 'td.details-control', function (e) {
-        // Stop form submitting normally
-        e.preventDefault();
-
-        var projects_tr = $(this).closest('tr');
-        var projects_table_row = projects_table.row(projects_tr);
-        var project_id = projects_table_row.data()[1];
-
-        if (projects_table_row.child.isShown()) {
-            // This row is already open - close it
-            projects_table_row.child.hide();
-            projects_tr.removeClass('shown');
-        }
-        else {
-            // Open this row
-            projects_table_row.child('<table id="' + project_id + '"class="table table-striped b-t b-b dataTable no-footer" cellpadding="5" ui-jp="dataTable" cellspacing="0" border="0" style="padding-left:50px;"></table>').show();
-            // set subTableid,use project_id
-
-            var subTable = loadContractsOfProject(project_id);
-
-            $(subTable.table().header()).remove();
-            projects_tr.addClass('shown');
-
-            $('#' + project_id + ' tbody').on('click', 'td.details-control-sub', function () {
-                var tr = $(this).closest('tr');
-                var row = subTable.row(tr);
-                if (row.child.isShown()) {
-                    // This row is already open - close it
-                    row.child.hide();
-                    tr.removeClass('shown');
-                } else {
-                    row.child(contractDetail(row.data())).show();
-                    tr.addClass('shown');
-                }
+        // Put the results in a div
+        posting.done(function( data ) {
+            $('#add-contract-modal').modal('hide');
+            sub_datatable_opened.forEach(function(sub_datatable_id) {
+                $('#'+sub_datatable_id).DataTable().ajax.reload();
             });
-
-        }
-    });
-
-    //contract event handler
-    $('#contract-basic-modal').on('show.bs.modal', function(e) {
-        $(this).find('form')[0].reset();
-        var contract = $(e.relatedTarget).data('contract');
-        if(contract){
-            //set title
-            $('#contract-modal-title').text('Update Contract Basic');
-
-            //set content
-            $("#customer").val(contract.customer);
-            $("#partner_name").val(contract.partner_name);
-            $("#sap_nr").val(contract.sap_nr);
-            $("#cost_code").val(contract.cost_code);
-            $("#manager_name").val(contract.manager_name);
-            $("#estimated_value").val(contract.estimated_value);
-            $("#work_content").val(contract.work_content);
-            $("#contract_delivery").val(formatDate(contract.contract_delivery));
-            $("#doc_delivery").val(formatDate(contract.doc_delivery));
-            if (contract.contract_typ.electric) {
-                $("#is_electric").prop( "checked", true );
-            } else {
-                $("#is_electric").prop( "checked", false );
-            }
-
-            if (contract.contract_typ.water){
-                $("#is_water").prop( "checked", true );
-            } else {
-                $("#is_water").prop( "checked", false );
-            }
-
-            if (contract.contract_typ.gas){
-                $("#is_gas").prop( "checked", true );
-            } else {
-                $("#is_gas").prop( "checked", false );
-            }
-
-            if (contract.contract_typ.telecom){
-                $("#is_telecom").prop( "checked", true );
-            } else {
-                $("#is_telecom").prop( "checked", false );
-            }
-
-            if (contract.contract_typ.light){
-                $("#is_light").prop( "checked", true );
-            } else {
-                $("#is_light").prop( "checked", false );
-            }
-            if (contract.contract_typ.others){
-                $("#is_others").prop( "checked", true );
-            } else {
-                $("#is_others").prop( "checked", false );
-            }
-
-            $("#electric_nr").val(contract.electric_nr);
-            $("#water_nr").val(contract.water_nr);
-            $("#gas_nr").val(contract.gas_nr);
-            if (contract.rot_b){
-                $("#rot_b").prop( "checked", true );
-            } else {
-                $("#rot_b").prop( "checked", false );
-            }
-
-            if (contract.isBombExisted){
-                $("#isBombExisted").prop( "checked", true );
-            } else {
-                $("#isBombExisted").prop( "checked", false );
-            }
-
-            if (contract.is_building_permission_activ){
-                $("#is_building_permission_activ").prop( "checked", true );
-            } else {
-                $("#is_building_permission_activ").prop( "checked", false );
-            }
-
-            if (contract.is_ofw_activ){
-                $("#is_ofw_activ").prop( "checked", true );
-            } else {
-                $("#is_ofw_activ").prop( "checked", false );
-            }
-
-            $("#person").val(contract.person);
-            $("#reason").val(contract.reason);
-            $("#comment").val(contract.comment);
-            $("#contract_id").val(contract.id);
-            $("#project_id").val(contract.project_id);
-            $("#contract_street").val(contract.contract_street);
-
-        } else {
-            var project = $(e.relatedTarget).data('project');
-
-            if (project) {
-                $("#project_id").val(project.id);
-                $("#contract_street").val(project.street+' '+project.housenr);
-
-            }
-
-        }
-
-    });
-
-
-    $('#contract-permissions-modal').on('show.bs.modal', function(e) {
-        var contract = $(e.relatedTarget).data('contract');
-        var building_permission = contract.building_permission;
-        building_permission.forEach((permission) => {
-            var table_content = '<tr>'+'' +
-                '<td>'+permission.type+'</td>'+
-                '<td>'+permission.begin+'</td>'+
-                '<td>'+permission.end+'</td>'+
-                '<td>'+permission.cost+'</td>'+
-                '<td>'+permission.permission_status+'</td>'+
-                '</tr>';
-            $('#permissions > tbody:last-child').append(table_content);
         });
     });
-
-
-    $('#contract-ofw-modal').on('show.bs.modal', function(e) {
-        var contract = $(e.relatedTarget).data('contract');
-        //set content
-        $("#ofw_worker_name").val(contract.ofw.worker_name);
-        $("#ofw_permission_nr").val(contract.ofw.permission_nr);
-        $("#ofw_delivery").val(contract.ofw.delivery);
-        $("#ofw_completion_at").val(contract.ofw.completion_at);
-        $("#ofw_ueberdicken").val(contract.ofw.ueberdicken);
-        $("#ofw_estimated_value").val(contract.ofw.estimated_value);
-        $("#ofw_status").val(contract.ofw.ofw_status);
-        if (contract.ofw.typ.bausstr) {
-            $("#bausstr").prop( "checked", true );
-        } else {
-            $("#bausstr").prop( "checked", false );
-        }
-
-        if (contract.ofw.typ.fahrbahn){
-            $("#fahrbahn").prop( "checked", true );
-        } else {
-            $("#fahrbahn").prop( "checked", false );
-        }
-
-        if (contract.ofw.typ.fussweg){
-            $("#fussweg").prop( "checked", true );
-        } else {
-            $("#fussweg").prop( "checked", false );
-        }
-
-        if (contract.ofw.typ.bitu){
-            $("#bitu").prop( "checked", true );
-        } else {
-            $("#bitu").prop( "checked", false );
-        }
-
-        if (contract.ofw.typ.pflaster){
-            $("#pflaster").prop( "checked", true );
-        } else {
-            $("#pflaster").prop( "checked", false );
-        }
-
-        if (contract.ofw.typ.beton){
-            $("#beton").prop( "checked", true );
-        } else {
-            $("#beton").prop( "checked", false );
-        }
-        if (contract.ofw.clean){
-            $("#clean").prop( "checked", true );
-        } else {
-            $("#clean").prop( "checked", false );
-        }
-
-        if (contract.ofw.is_acceptance_activ){
-            $("#is_acceptance_activ").prop( "checked", true );
-        } else {
-            $("#is_acceptance_activ").prop( "checked", false );
-        }
-    });
-
-    $('#contract-invoices-modal').on('show.bs.modal', function(e) {
-        var contract = $(e.relatedTarget).data('contract');
-        var invoices = contract.invoice;
-        invoices.forEach((invoice) => {
-            var table_content = '<tr>'+
-                '<td>'+invoice.rechnung_nr+'</td>'+
-                '<td>'+invoice.sum+'</td>'+
-                '<td>'+getInvoiceStatus(invoice.invoice_status)+'</td>'+
-                '</tr>';
-            console.log(table_content);
-            $('#invoices > tbody:last-child').append(table_content);
-        });
-    });
-
-});
-
 
 function showEditState(id){
   $(id).removeAttr('hidden');

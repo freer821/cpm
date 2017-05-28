@@ -1,7 +1,6 @@
 /**
  * Created by Zhenyu on 25.05.2017.
  */
-/**
 $(document).ready(function(){
 
     $('#contract-basic-modal').on('show.bs.modal', function(e) {
@@ -194,7 +193,7 @@ $(document).ready(function(){
 
 });
 
-*/
+
 function formatDate(time) {
     return moment(time).format("DD-MM-YYYY");
 }
