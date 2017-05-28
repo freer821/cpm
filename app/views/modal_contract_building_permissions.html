@@ -1,8 +1,12 @@
 <div id="contract-permissions-modal" class="modal" data-backdrop="true">
     <div class="modal-dialog modal-lg">
-        <div class="modal-content light">
+        <div id="permissions-overview" class="modal-content light">
             <div class="modal-header dker _600">
                 <h5 class="modal-title">Update Permission</h5>
+                <button id="add-permission" onclick="addnewpermission()" class="btn btn-icon white">
+                    <i class="fa fa-plus"></i>
+                </button>
+
             </div>
             <div class="modal-body">
                 <div id="building_permission_not_activ" class="form-group">
@@ -27,6 +31,9 @@
             <div class="modal-footer">
                 <button type="button" class="btn dark-white p-x-md" data-dismiss="modal">Cancel</button>
             </div>
+        </div>
+        <div id="permission-detail" class="modal-content light">
+            {% include 'modal_contract_building_permission.html' %}
         </div>
     </div>
 </div>

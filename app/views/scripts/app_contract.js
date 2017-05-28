@@ -105,75 +105,98 @@ $(document).ready(function(){
 
     $('#contract-permissions-modal').on('show.bs.modal', function(e) {
         var contract = $(e.relatedTarget).data('contract');
-        var building_permission = contract.building_permission;
-        building_permission.forEach((permission) => {
-            var table_content = '<tr>'+'' +
-                '<td>'+permission.type+'</td>'+
-                '<td>'+permission.begin+'</td>'+
-                '<td>'+permission.end+'</td>'+
-                '<td>'+permission.cost+'</td>'+
-                '<td>'+permission.permission_status+'</td>'+
-                '</tr>';
-            $('#permissions > tbody:last-child').append(table_content);
-        });
+
+        if (contract.is_building_permission_activ) {
+            var building_permission = contract.building_permission;
+            building_permission.forEach((permission) => {
+                var table_content = '<tr>'+'' +
+                    '<td>'+permission.type+'</td>'+
+                    '<td>'+permission.begin+'</td>'+
+                    '<td>'+permission.end+'</td>'+
+                    '<td>'+permission.cost+'</td>'+
+                    '<td>'+permission.permission_status+'</td>'+
+                    '</tr>';
+                $('#permissions > tbody:last-child').append(table_content);
+            });
+            $('#permissions-overview').show();
+            $('#permission-detail').hide();
+            $('#building_permission_not_activ').hide();
+            $('#building_permission_activ').show();
+            $('#add-permission').prop('disabled', false);
+        } else {
+            $('#permissions-overview').show();
+            $('#permission-detail').hide();
+            $('#building_permission_not_activ').show();
+            $('#building_permission_activ').hide();
+            $('#add-permission').prop('disabled', true);
+        }
     });
 
 
     $('#contract-ofw-modal').on('show.bs.modal', function(e) {
         var contract = $(e.relatedTarget).data('contract');
-        //set content
-        $("#ofw_worker_name").val(contract.ofw.worker_name);
-        $("#ofw_permission_nr").val(contract.ofw.permission_nr);
-        $("#ofw_delivery").val(contract.ofw.delivery);
-        $("#ofw_completion_at").val(contract.ofw.completion_at);
-        $("#ofw_ueberdicken").val(contract.ofw.ueberdicken);
-        $("#ofw_estimated_value").val(contract.ofw.estimated_value);
-        $("#ofw_status").val(contract.ofw.ofw_status);
-        if (contract.ofw.typ.bausstr) {
-            $("#bausstr").prop( "checked", true );
-        } else {
-            $("#bausstr").prop( "checked", false );
-        }
+        if (contract.is_ofw_activ){
+            $('#ofw_activ').show();
+            $('#ofw_not_activ').hide();
+            //set content
+            if (contract.ofw) {
+                $("#ofw_worker_name").val(contract.ofw.worker_name);
+                $("#ofw_permission_nr").val(contract.ofw.permission_nr);
+                $("#ofw_delivery").val(contract.ofw.delivery);
+                $("#ofw_completion_at").val(contract.ofw.completion_at);
+                $("#ofw_ueberdicken").val(contract.ofw.ueberdicken);
+                $("#ofw_estimated_value").val(contract.ofw.estimated_value);
+                $("#ofw_status").val(contract.ofw.ofw_status);
+                if (contract.ofw.typ.bausstr) {
+                    $("#bausstr").prop( "checked", true );
+                } else {
+                    $("#bausstr").prop( "checked", false );
+                }
 
-        if (contract.ofw.typ.fahrbahn){
-            $("#fahrbahn").prop( "checked", true );
-        } else {
-            $("#fahrbahn").prop( "checked", false );
-        }
+                if (contract.ofw.typ.fahrbahn){
+                    $("#fahrbahn").prop( "checked", true );
+                } else {
+                    $("#fahrbahn").prop( "checked", false );
+                }
 
-        if (contract.ofw.typ.fussweg){
-            $("#fussweg").prop( "checked", true );
-        } else {
-            $("#fussweg").prop( "checked", false );
-        }
+                if (contract.ofw.typ.fussweg){
+                    $("#fussweg").prop( "checked", true );
+                } else {
+                    $("#fussweg").prop( "checked", false );
+                }
 
-        if (contract.ofw.typ.bitu){
-            $("#bitu").prop( "checked", true );
-        } else {
-            $("#bitu").prop( "checked", false );
-        }
+                if (contract.ofw.typ.bitu){
+                    $("#bitu").prop( "checked", true );
+                } else {
+                    $("#bitu").prop( "checked", false );
+                }
 
-        if (contract.ofw.typ.pflaster){
-            $("#pflaster").prop( "checked", true );
-        } else {
-            $("#pflaster").prop( "checked", false );
-        }
+                if (contract.ofw.typ.pflaster){
+                    $("#pflaster").prop( "checked", true );
+                } else {
+                    $("#pflaster").prop( "checked", false );
+                }
 
-        if (contract.ofw.typ.beton){
-            $("#beton").prop( "checked", true );
-        } else {
-            $("#beton").prop( "checked", false );
-        }
-        if (contract.ofw.clean){
-            $("#clean").prop( "checked", true );
-        } else {
-            $("#clean").prop( "checked", false );
-        }
+                if (contract.ofw.typ.beton){
+                    $("#beton").prop( "checked", true );
+                } else {
+                    $("#beton").prop( "checked", false );
+                }
+                if (contract.ofw.clean){
+                    $("#clean").prop( "checked", true );
+                } else {
+                    $("#clean").prop( "checked", false );
+                }
 
-        if (contract.ofw.is_acceptance_activ){
-            $("#is_acceptance_activ").prop( "checked", true );
+                if (contract.ofw.is_acceptance_activ){
+                    $("#is_acceptance_activ").prop( "checked", true );
+                } else {
+                    $("#is_acceptance_activ").prop( "checked", false );
+                }
+            }
         } else {
-            $("#is_acceptance_activ").prop( "checked", false );
+            $('#ofw_activ').hide();
+            $('#ofw_not_activ').show();
         }
     });
 
@@ -189,6 +212,8 @@ $(document).ready(function(){
             console.log(table_content);
             $('#invoices > tbody:last-child').append(table_content);
         });
+        $('#invoices-overview').show();
+        $('#invoice-detail').hide();
     });
 
 });
@@ -218,4 +243,14 @@ function getInvoiceStatus(code) {
         default:
             return 'unknown status';
     }
+}
+
+function addnewinvoice() {
+    $('#invoice-detail').show();
+    $('#invoices-overview').hide();
+}
+
+function addnewpermission() {
+    $('#permission-detail').show();
+    $('#permissions-overview').hide();
 }
