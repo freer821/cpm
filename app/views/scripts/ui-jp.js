@@ -14,7 +14,9 @@
 			}
 
 			uiLoad.load(MODULE_CONFIG[self.attr('ui-jp')]).then( function(){
-				self[self.attr('ui-jp')].apply(self, options);
+				if (self.attr('ui-jp') !== 'projects') {
+                    self[self.attr('ui-jp')].apply(self, options);
+                }
 			});
         });
 
