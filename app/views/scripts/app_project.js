@@ -1,6 +1,12 @@
 /**
  * Created by Zhenyu on 25.05.2017.
  */
+ /*
+ $(document).ready(function(){
+  alert('project page loaded from .js!');
+});
+*/
+ /*
 $(document).ready(function(){
 
     // add and edit project
@@ -76,7 +82,7 @@ $(document).ready(function(){
     });
 
 });
-
+*/
 function loadContractsOfProject(project_id) {
     return $('#' + project_id).DataTable({
         "info": false,
