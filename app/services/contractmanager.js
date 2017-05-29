@@ -7,6 +7,7 @@ const logger = require('../common/logger');
 const db = require('../common/database');
 const common = require('../common/appcom');
 var ObjectId = require('mongoose').Types.ObjectId;
+const com = require('../common/appcom');
 
 function updateContractBasic(request, callback) {
 
@@ -282,14 +283,17 @@ const editContract = function (req, res, next) {
             db.getContracts({'id':request.contract_id}, function (err, contracts) {
                 if(err || last_err) {
                     logger.error('contract id not exits: ', request.contract_id);
-                    res.redirect('/projects');
+                    //res.redirect('/projects');
+                    com.doJSONRespond(res,{'action':'refresh'},next);
                     return;
                 }
                 if(last_err){
-                    res.render('editcontract', {title:'Contract Management', project_id: request.project_id, project_adr:request.project_adr, contract: contracts[0],  user: req.user, jump_building_permission:'1', err:'err'});
+                    //res.render('editcontract', {title:'Contract Management', project_id: request.project_id, project_adr:request.project_adr, contract: contracts[0],  user: req.user, jump_building_permission:'1', err:'err'});
+                    com.doJSONRespond(res,{'action':'refresh'},next);
                     return;
                 }
-                res.render('editcontract', {title:'Contract Management', project_id: request.project_id, project_adr:request.project_adr, contract: contracts[0],  user: req.user, jump_building_permission:'1'});
+                //res.render('editcontract', {title:'Contract Management', project_id: request.project_id, project_adr:request.project_adr, contract: contracts[0],  user: req.user, jump_building_permission:'1'});
+                com.doJSONRespond(res,{'action':'refresh'},next);
             });
         });
     } else if(req.params.action === 'ofw') {

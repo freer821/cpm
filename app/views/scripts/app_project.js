@@ -2,7 +2,6 @@
  * Created by Zhenyu on 25.05.2017.
  */
 $(document).ready(function(){
-
     // add and edit project
     $('#project-modal').on('show.bs.modal', function (e) {
         $(this).find('form')[0].reset();
@@ -127,7 +126,7 @@ function contractDetail(d) {
         '<a onclick="showInput(1)"> <i id="manager_name_edit_icon" class="material-icons md-24" hidden>&#xe3c9;</i></a>' +
         '</div> ' +
         '<div id="worker_name_d" class="form-group col-md-3" onmouseover="showEditState(worker_name_edit_icon)" onmouseleave="hideEditState(worker_name_edit_icon)">' +
-        '<div id="worker_name_text">' + d.worker_name + '</div>' +
+        '<div id="worker_name_text">' + d.building_work.worker_name + '</div>' +
         '<input id="worker_name_input" onkeypress="handleEnter(event, 2)" class="form-control" type="text" data-contractid="' + d.id + '" value="' + d.worker_name + '" hidden/>' +
         '<a onclick="showInput(2)"> <i id="worker_name_edit_icon" class="material-icons md-24" hidden>&#xe3c9;</i></a>' +
         '</div> ' +

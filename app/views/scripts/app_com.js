@@ -36,7 +36,6 @@ function doAction(response) {
                 $('#' + response.project_id).DataTable().ajax.reload();
                 break;
             default:
-                bootbox.alert(json_response);
                 break;
         }
     } else {

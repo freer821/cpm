@@ -100,6 +100,15 @@
 
 <script type="text/javascript">
 
+$(document).ready(function(){
+  //contract building permission modal event
+  $('#contract-permissions-modal').on('show.bs.modal', function (e) {
+    $(this).find('form')[0].reset();
+    var contract = $(e.relatedTarget).data('contract');
+    $(this).find("#contract_id").val(contract.id);
+  });
+});
+
 function showEditState(id){
   $(id).removeAttr('hidden');
 }
