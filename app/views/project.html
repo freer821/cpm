@@ -13,7 +13,7 @@
         </div>
       </div>
       <div class="table-responsive">
-        <table id="projects-overview" class="table table-striped b-t b-b dataTable no-footer" ui-jp="projects">
+        <table id="projects-overview" class="table table-striped b-t b-b dataTable no-footer" ui-jp="dataTable">
           <thead>
           <tr>
             <th></th>
@@ -99,91 +99,15 @@
 <!-- ############ PAGE END-->
 
 <script type="text/javascript">
-
-$(document).ready(function(){
-  //contract building permission modal event
-  $('#contract-permissions-modal').on('show.bs.modal', function (e) {
-    $(this).find('form')[0].reset();
-    var contract = $(e.relatedTarget).data('contract');
-    $(this).find("#contract_id").val(contract.id);
-  });
-});
-
-function showEditState(id){
-  $(id).removeAttr('hidden');
-}
-
-function hideEditState(id){
-  $(id).attr('hidden', 'hidden');
-}
-
-function showInput(type){
-  switch(type)
-  {
-  case 1://manager_name
-    $('#manager_name_text').attr('hidden','hidden');
-    $('#manager_name_input').removeAttr('hidden');
-    $('#manager_name_edit_icon').attr('hidden','hidden');
-    $('#manager_name_d').removeAttr('onmouseover');
-    $('#manager_name_d').removeAttr('onmouseleave');
-    break;
-  case 2:
-    $('#worker_name_text').attr('hidden','hidden');
-    $('#worker_name_input').removeAttr('hidden');
-    $('#worker_name_edit_icon').attr('hidden','hidden');
-    $('#worker_name_d').removeAttr('onmouseover');
-    $('#worker_name_d').removeAttr('onmouseleave');  
-    break;
-  }
-}
-
-function handleEnter(e, type){
-  let keynum = 0;
-  if(window.event) // IE
-  {
-    keynum = e.keyCode;
-  }
-  else if(e.which) // Netscape/Firefox/Opera
-  {
-    keynum = e.which;
-  }
-  if(keynum == 13) //enter press
-  {
-    switch(type)
-    {
-    case 1://manager_name
-      var id = $('#manager_name_input').data('contractid');
-      var value = $('#manager_name_input').val();
-      postContractEditPartial(id, {'manager_name':value}, function(err){
-        if(err) bootbox.alert('update failed!');
-        else{
-          bootbox.alert('update ok!');
-          $('#manager_name_text').text(value);
-        }
-      });
-      $('#manager_name_text').removeAttr('hidden','hidden');
-      $('#manager_name_input').attr('hidden', 'hidden');
-      $('#manager_name_d').attr('onmouseover', 'showEditState(manager_name_edit_icon)');
-      $('#manager_name_d').attr('onmouseleave', 'hideEditState(manager_name_edit_icon)');
-      break;
-    case 2:
-      var id = $('#worker_name_input').data('contractid');
-      var value = $('#worker_name_input').val();
-      postContractEditPartial(id, {'building_work.worker_name':value}, function(err){
-        if(err) bootbox.alert('update failed!');
-        else{
-          bootbox.alert('update ok!');
-          $('#worker_name_text').text(value);
-        }
-      });
-      $('#worker_name_text').removeAttr('hidden','hidden');
-      $('#worker_name_input').attr('hidden', 'hidden');
-      $('#worker_name_d').attr('onmouseover', 'showEditState(worker_name_edit_icon)');
-      $('#worker_name_d').attr('onmouseleave', 'hideEditState(worker_name_edit_icon)');    
-      break;
-    } 
-  }
-}
+    $.getScript(  '/scripts/app_project.js', function() {
+        console.log('laod app_project');
+    });
+    $.getScript(  '/scripts/app_contract.js', function() {
+        console.log('laod app_contract');
+    });
+    $.getScript(  '/scripts/app_com.js', function() {
+        console.log('laod app_com');
+    });
 
 function postContractEditPartial (id, data, callback){
   url = '/contracts/edit/partial/'+id;

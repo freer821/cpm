@@ -105,6 +105,7 @@ $(document).ready(function(){
 
     $('#contract-permissions-modal').on('show.bs.modal', function(e) {
         var contract = $(e.relatedTarget).data('contract');
+        $("#contract_id").val(contract.id);
 
         if (contract.is_building_permission_activ) {
             var building_permission = contract.building_permission;
