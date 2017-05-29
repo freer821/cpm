@@ -108,6 +108,7 @@ $(document).ready(function(){
 
         if (contract.is_building_permission_activ) {
             var building_permission = contract.building_permission;
+            $('#permissions > tbody:last-child').empty();
             building_permission.forEach((permission) => {
                 var table_content = '<tr>'+'' +
                     '<td>'+permission.type+'</td>'+
