@@ -116,6 +116,7 @@ $(document).ready(function(){
                     '<td>'+permission.end+'</td>'+
                     '<td>'+permission.cost+'</td>'+
                     '<td>'+permission.permission_status+'</td>'+
+                    '<td>'+'<a onclick="editPermission(this)" data-permission=\''+JSON.stringify(permission)+'\'><i class="material-icons md-24">&#xe3c9;</i></a>'+'</td>'+
                     '</tr>';
                 $('#permissions > tbody:last-child').append(table_content);
             });
@@ -252,6 +253,20 @@ function addnewinvoice() {
 }
 
 function addnewpermission() {
+    $('#building_permission_form')[0].reset();
+    $('#permission-detail').show();
+    $('#permissions-overview').hide();
+}
+
+function editPermission(element){
+    var permission = element.dataset.permission;
+    var permission = eval('(' + permission + ')');
+    $('#permission_id').val(permission._id);
+    $('#permission_tpye').val(permission.type);
+    $('#bp_doc_delivery').val(formatDate(permission.doc_delivery));
+    $('#begin').val(formatDate(permission.begin));
+    $('#end').val(formatDate(permission.end));
+    $('#permission_cost').val(permission.cost);
     $('#permission-detail').show();
     $('#permissions-overview').hide();
 }
