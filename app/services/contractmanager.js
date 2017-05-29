@@ -91,11 +91,12 @@ function updateContractBuilding(request, callback) {
         if(err){
             callback(err);
         } else {
-            callback();
+            callback(undefined, request.project_id);
         }
     });
 
     // create invoice
+    /**
     if (request.status === '03') {
         if (!request.invoice) {
             let invoice = {
@@ -111,6 +112,7 @@ function updateContractBuilding(request, callback) {
             });
         }
     }
+     */
 }
 
 function updateContractPermission(request, callback) {
@@ -129,7 +131,7 @@ function updateContractPermission(request, callback) {
             if(err){
                 callback(err);
             } else {
-                callback();
+                callback(undefined, request.project_id);
             }
         });
     } else {
@@ -146,7 +148,7 @@ function updateContractPermission(request, callback) {
             if(err){
                 callback(err);
             } else {
-                callback();
+                callback(undefined, request.project_id);
             }
         });    
     }
@@ -186,7 +188,7 @@ function updateContractOFW(request, callback) {
         if(err){
             callback(err);
         } else {
-            callback();
+            callback(undefined, request.project_id);
         }
     });
 }
@@ -210,7 +212,7 @@ function updateContractFinancial(request, callback) {
             if(err){
                 callback(err.message);
             } else {
-                callback();
+                callback(undefined, request.project_id);
             }
         });  
     } else {
@@ -230,7 +232,7 @@ function updateContractFinancial(request, callback) {
             if(err){
                 callback(err.message);
             } else {
-                callback();
+                callback(undefined, request.project_id);
             }
         });
     }
@@ -249,7 +251,7 @@ function updateContractFibu(request, callback) {
         if(err){
             callback(err);
         } else {
-            callback();
+            callback(undefined, request.project_id);
         }
     });
 }
@@ -271,57 +273,44 @@ const editContract = function (req, res, next) {
             }
         });
     } else if(req.params.action === 'building') {
-        updateContractBuilding(request, function (err) {
-            let ret= 'update operation done!!';
-            if(err) ret = 'update operation failed!!';
-            res.send(ret);
+        updateContractBuilding(request, function (err,project_id) {
+            if(err){
+                res.send('update operation failed!!');
+            } else {
+                common.doJSONRespond(res,{'action':'reload','project_id':project_id},next)
+            }
         });
     } else if(req.params.action === 'permission') {
-        updateContractPermission(request, function (err) {
-            let last_err = err;
-            db.getContracts({'id':request.contract_id}, function (err, contracts) {
-                if(err || last_err) {
-                    logger.error('contract id not exist: ', request.contract_id);
-                    //res.redirect('/projects');
-                    res.send('contract id not exist');
-                    return;
-                }
-                if(last_err){
-                    //res.render('editcontract', {title:'Contract Management', project_id: request.project_id, project_adr:request.project_adr, contract: contracts[0],  user: req.user, jump_building_permission:'1', err:'err'});
-                    res.send('err');
-                    return;
-                }
-                //res.render('editcontract', {title:'Contract Management', project_id: request.project_id, project_adr:request.project_adr, contract: contracts[0],  user: req.user, jump_building_permission:'1'});
-                common.doJSONRespond(res,{'action':'reload','project_id':contracts[0].project_id},next)
-            });
+        updateContractPermission(request, function (err, project_id) {
+            if (err) {
+                res.send('update operation failed!!');
+            } else {
+                common.doJSONRespond(res,{'action':'reload','project_id':project_id},next)
+            }
         });
     } else if(req.params.action === 'ofw') {
-        updateContractOFW(request, function (err) {
-            let ret= 'update operation done!!';
-            if(err) ret = 'update operation failed!!';
-            res.send(ret);
+        updateContractOFW(request, function (err, project_id) {
+            if (err) {
+                res.send('update operation failed!!');
+            } else {
+                common.doJSONRespond(res,{'action':'reload','project_id':project_id},next)
+            }
         });
     } else if(req.params.action === 'invocie') {
-        updateContractFinancial(request, function (err) {
-            let last_err = err;
-            db.getContracts({'id':request.contract_id}, function (err, contracts) {
-                if(err) {
-                    logger.error('contract id not exits: ', request.contract_id);
-                    res.redirect('/projects');
-                    return;
-                }
-                if(last_err){
-                    res.render('editcontract', {title:'Contract Management', project_id: request.project_id, project_adr:request.project_adr, contract: contracts[0],  user: req.user, jump_financial:'1', err:'err'});
-                    return;
-                }
-                res.render('editcontract', {title:'Contract Management', project_id: request.project_id, project_adr:request.project_adr, contract: contracts[0],  user: req.user, jump_financial:'1'});
-            });
+        updateContractFinancial(request, function (err, project_id) {
+            if (err) {
+                res.send('update operation failed!!');
+            } else {
+                common.doJSONRespond(res,{'action':'reload','project_id':project_id},next)
+            }
         });
     } else if(req.params.action === 'fibu') {
-        updateContractFibu(request, function (err) {
-            let ret= 'update operation done!!';
-            if(err) ret = 'update operation failed!!';
-            res.send(ret);
+        updateContractFibu(request, function (err, project_id) {
+            if (err) {
+                res.send('update operation failed!!');
+            } else {
+                common.doJSONRespond(res,{'action':'reload','project_id':project_id},next)
+            }
         });
     }
 };

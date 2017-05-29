@@ -134,7 +134,7 @@ function contractDetail(d) {
         '</div>' +
         '</li>' +
         '<li class="list-item">' +
-        '<a href="#" data-toggle="modal" data-target="#contract-building-modal" data-contract-building=\''+JSON.stringify(d)+'\' class="list-left">' +
+        '<a href="#" data-toggle="modal" data-target="#contract-building-modal" data-contract=\''+JSON.stringify(d)+'\' class="list-left">' +
         '<span class="w-40 circle green">' +
         '<i class="fa fa-smile-o"></i>' +
         '</span>' +
@@ -220,7 +220,7 @@ function contractDetail(d) {
 
 function formatData(obj, key){
     if(obj)
-        return obj.get(key);
+        return obj[key];
     else
         return 'undefined';
 }

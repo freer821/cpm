@@ -85,15 +85,15 @@ $(document).ready(function(){
             $("#person").val(contract.person);
             $("#reason").val(contract.reason);
             $("#comment").val(contract.comment);
-            $("#contract_id").val(contract.id);
-            $("#project_id").val(contract.project_id);
+            $("#basic_contract_id").val(contract.id);
+            $("#basic_project_id").val(contract.project_id);
             $("#contract_street").val(contract.contract_street);
 
         } else {
             var project = $(e.relatedTarget).data('project');
 
             if (project) {
-                $("#project_id").val(project.id);
+                $("#basic_project_id").val(contract.project_id);
                 $("#contract_street").val(project.street+' '+project.housenr);
 
             }
@@ -105,7 +105,23 @@ $(document).ready(function(){
 
     $('#contract-permissions-modal').on('show.bs.modal', function(e) {
         var contract = $(e.relatedTarget).data('contract');
-        $("#contract_id").val(contract.id);
+        $("#permission_contract_id").val(contract.id);
+        $("#permission_project_id").val(contract.project_id);
+
+        if (contract.customer === 'STW') {
+            $('#permission_tpye').append($('<option>', {
+                value: 'VAZ',
+                text: 'VAZ'
+            }));
+            $('#permission_tpye').append($('<option>', {
+                value: 'VBA',
+                text: 'VBA'
+            }));
+            $('#permission_tpye').append($('<option>', {
+                value: 'BAZVAZ',
+                text: 'BAZ & VAZ'
+            }));
+        }
 
         if (contract.is_building_permission_activ) {
             var building_permission = contract.building_permission;
@@ -205,6 +221,8 @@ $(document).ready(function(){
 
     $('#contract-invoices-modal').on('show.bs.modal', function(e) {
         var contract = $(e.relatedTarget).data('contract');
+        $("#invoice_contract_id").val(contract.id);
+        $("#invoice_project_id").val(contract.project_id);
         var invoices = contract.invoice;
         invoices.forEach((invoice) => {
             var table_content = '<tr>'+
@@ -219,6 +237,21 @@ $(document).ready(function(){
         $('#invoice-detail').hide();
     });
 
+    $('#contract-building-modal').on('show.bs.modal', function(e) {
+
+        $(this).find('form')[0].reset();
+        var contract = $(e.relatedTarget).data('contract');
+        $("#building_contract_id").val(contract.id);
+        $("#building_project_id").val(contract.project_id);
+
+        if (contract.building_work) {
+            $("#plan_begin").val(formatDate(contract.building_work.plan_begin));
+            $("#plan_end").val(formatDate(contract.building_work.plan_end));
+            $("#building_worker_name").val(contract.building_work.worker_name);
+            $("#building_working_months").val(contract.building_work.working_months);
+        }
+
+    });
 });
 
 
@@ -255,8 +288,8 @@ function addnewinvoice() {
 
 function addnewpermission() {
     $('#building_permission_form')[0].reset();
-    $('#permission-detail').show();
     $('#permissions-overview').hide();
+    $('#permission-detail').show();
 }
 
 function editPermission(element){

@@ -63,7 +63,7 @@
                             <div class="form-group row">
                                 <label class="col-md-3 form-control-label">Worker</label>
                                 <div class="col-md-9">
-                                    <input type="text" class="form-control" name="worker_name">
+                                    <input type="text" class="form-control" name="worker_name" id="building_worker_name">
                                 </div>
                             </div>
                         </div>
@@ -71,7 +71,7 @@
                             <div class="form-group row">
                                 <label class="col-md-3 form-control-label">Working Month</label>
                                 <div class="col-md-9">
-                                    <input type="text" class="form-control" name="working_months">
+                                    <input type="text" class="form-control" name="working_months" id="building_working_months">
                                 </div>
                             </div>
                         </div>
@@ -113,7 +113,8 @@
                     </div>
                 </div>
                 <div class="modal-footer dker _600">
-                    <input type="hidden" name="contract_id"/>
+                    <input type="hidden" name="contract_id" id="building_contract_id">
+                    <input type="hidden" name="project_id" id="building_project_id">
                     <input type="hidden" name="contract_invoice" />
                     <button type="button" class="btn dark-white m-t" data-dismiss="modal">Cancel</button>
                     <button type="submit" class="btn btn-info m-t" >Update</button>
