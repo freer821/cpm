@@ -107,8 +107,14 @@ $(document).ready(function(){
         var contract = $(e.relatedTarget).data('contract');
         $("#permission_contract_id").val(contract.id);
         $("#permission_project_id").val(contract.project_id);
+        $('#permission_tpye').empty();
 
         if (contract.customer === 'STW') {
+            $('#permission_tpye').append($('<option>', {
+                value: 'BAZ',
+                text: 'BAZ'
+            }));
+
             $('#permission_tpye').append($('<option>', {
                 value: 'VAZ',
                 text: 'VAZ'
@@ -120,6 +126,11 @@ $(document).ready(function(){
             $('#permission_tpye').append($('<option>', {
                 value: 'BAZVAZ',
                 text: 'BAZ & VAZ'
+            }));
+        } else {
+            $('#permission_tpye').append($('<option>', {
+                value: 'BAZ',
+                text: 'BAZ'
             }));
         }
 
@@ -291,29 +302,29 @@ function getInvoiceStatus(code) {
     }
 }
 
-function addnewinvoice() {
-    $('#invoice_form')[0].reset();
-    $('#invoice_id').val('');
-    $('#invoice-detail').show();
-    $('#invoices-overview').hide();
-}
-
 function editInvoice(element){
-    //init data
-    var invoice = element.dataset.invoice;
-    invoice = eval('(' + invoice + ')');
-    $('#invoice_id').val(invoice._id);
-    $('#sum').val(invoice.sum);
-    $('#aufmass_am').val(formatDate(invoice.aufmass_am));
-    $('#bewert_aufmass').val(formatDate(invoice.bewert_aufmass));
-    $('#rechnung_nr').val(invoice.rechnung_nr);
-    $('#guts_datum').val(formatDate(invoice.guts_datum));
-    $('#booking_month').val(invoice.booking_month);
-    if(invoice.correction_needed) 
-        $('#correction_needed').attr('checked','checked');
-    else 
-        $('#correction_needed').removeAttr('checked');
-    $('#invoice_status').val(invoice.invoice_status);
+    $('#invoice_form')[0].reset();
+
+    if (element) {
+        //init data
+        var invoice = element.dataset.invoice;
+        invoice = eval('(' + invoice + ')');
+        $('#invoice_id').val(invoice._id);
+        $('#sum').val(invoice.sum);
+        $('#aufmass_am').val(formatDate(invoice.aufmass_am));
+        $('#bewert_aufmass').val(formatDate(invoice.bewert_aufmass));
+        $('#rechnung_nr').val(invoice.rechnung_nr);
+        $('#guts_datum').val(formatDate(invoice.guts_datum));
+        $('#booking_month').val(invoice.booking_month);
+        if(invoice.correction_needed) {
+            $('#correction_needed').attr('checked','checked');
+        } else {
+            $('#correction_needed').removeAttr('checked');
+        }
+        $('#invoice_status').val(invoice.invoice_status);
+    } else {
+        $('#invoice_id').val('');
+    }
     //show detail and hide overview
     $('#invoice-detail').show();
     $('#invoices-overview').hide();
@@ -330,22 +341,22 @@ function delInvoice(element){
     }    
 }
 
-function addnewpermission() {
-    $('#building_permission_form')[0].reset();
-    $('#permission_id').val('');
-    $('#permissions-overview').hide();
-    $('#permission-detail').show();
-}
-
 function editPermission(element){
-    var permission = element.dataset.permission;
-    permission = eval('(' + permission + ')');
-    $('#permission_id').val(permission._id);
-    $('#permission_tpye').val(permission.type);
-    $('#bp_doc_delivery').val(formatDate(permission.doc_delivery));
-    $('#begin').val(formatDate(permission.begin));
-    $('#end').val(formatDate(permission.end));
-    $('#permission_cost').val(permission.cost);
+    $('#building_permission_form')[0].reset();
+
+    if (element) {
+        var permission = element.dataset.permission;
+        permission = eval('(' + permission + ')');
+        $('#permission_id').val(permission._id);
+        $('#permission_tpye').val(permission.type);
+        $('#bp_doc_delivery').val(formatDate(permission.doc_delivery));
+        $('#begin').val(formatDate(permission.begin));
+        $('#end').val(formatDate(permission.end));
+        $('#permission_cost').val(permission.cost);
+    } else {
+        $('#permission_id').val('');
+    }
+
     $('#permission-detail').show();
     $('#permissions-overview').hide();
 }
