@@ -127,6 +127,7 @@ function contractDetail(d) {
         '</div>' +
         '<div class="form-group col-md-3">' +
         '<div id="manager_name_text">' + d.manager_name + '</div>' +
+        '</div>' +
         '<div id="worker_name_d" class="form-group col-md-3" >' +
         '<div id="worker_name_text">' + formatData(d.building_work,"worker_name") + '</div>' +
         '</div> ' +

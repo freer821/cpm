@@ -50,3 +50,40 @@ function doAction(response) {
         bootbox.alert(response);
     }
 }
+
+// -1 : status not defined
+// 0 : before begin
+// 1 : between begin and end
+// 2 : after end
+function calStatusOfTime(t_begin, t_end) {
+    var now = moment();
+    if ( moment(t_begin, "DD-MM-YYYY", true).isValid()  ||  moment(t_end, "DD-MM-YYYY", true).isValid() ) {
+        if (now.isAfter(moment(t_begin,"DD-MM-YYYY")) && moment(t_end,"DD-MM-YYYY").isAfter(now)) {
+            return 1;
+        } else if (moment(t_begin,"DD-MM-YYYY").isAfter(now)) {
+            return 0;
+        } else if (now.isAfter(moment(t_end,"DD-MM-YYYY"))) {
+            return 2;
+        } else {
+            return -1;
+        }
+    } else {
+        return -1;
+    }
+}
+
+
+// cal the status of Building
+function calStatusOfBuilding() {
+    console.log("calStatusOfBuilding: "+ calStatusOfTime($("#plan_begin").val(), $("#plan_end").val()));
+    switch (calStatusOfTime($("#plan_begin").val(), $("#plan_end").val())) {
+        case 1:
+            $("#building_status").val('02');
+            break;
+        case 2:
+            $("#building_status").val('03');
+            break;
+        default:
+            break;
+    }
+}

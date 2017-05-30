@@ -140,8 +140,8 @@ $(document).ready(function(){
             building_permission.forEach((permission) => {
                 var table_content = '<tr>'+'' +
                     '<td>'+permission.type+'</td>'+
-                    '<td>'+permission.begin+'</td>'+
-                    '<td>'+permission.end+'</td>'+
+                    '<td>'+formatDate(permission.begin)+'</td>'+
+                    '<td>'+formatDate(permission.end)+'</td>'+
                     '<td>'+permission.cost+'</td>'+
                     '<td>'+permission.permission_status+'</td>'+
                     '<td>'+'<a onclick="editPermission(this)" data-permission=\''+JSON.stringify(permission)+'\'><i class="material-icons md-24">&#xe3c9;</i></a>'+'</td>'+
@@ -270,15 +270,25 @@ $(document).ready(function(){
             $("#plan_end").val(formatDate(contract.building_work.plan_end));
             $("#building_worker_name").val(contract.building_work.worker_name);
             $("#building_working_months").val(contract.building_work.working_months);
+            $("#building_status").val(contract.building_work.status);
         }
 
     });
+
+
+    // date change events
+    // check the status when the date is changed
+    $(".date").on('dp.change', function (ev) {
+        calStatusOfBuilding();
+    });
+
 });
 
 
 function formatDate(time) {
     return moment(time).format("DD-MM-YYYY");
 }
+
 
 function getInvoiceStatus(code) {
 
