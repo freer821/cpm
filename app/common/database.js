@@ -58,6 +58,42 @@ function initCPMSchema() {
     Contract = cpmDB.model('contract', contractSchema, config.mongodb.collection_contract);
 }
 
+//------------
+//all collections operation use unify method
+
+//get collection by name
+function getCollectionByName(name){
+    switch (name) {
+        case 'user':
+            return User;
+        case 'department':
+            return Department;
+        case 'item':
+            return Item;
+        case 'project':
+            return Project;
+        case 'contract':
+            return Contract; 
+        default:
+            logger.error('get collection by name error, collection = ' + name);
+            return null;          
+    }
+}
+
+//del one itme by id from specify collection
+const delByID = function(collectionName, id, callback){
+    let collection = getCollectionByName(collectionName);
+    if(collection){
+        collection.findOneAndRemove({'_id': id}, function (err) {
+            if (err) {
+                logger.error('del by id error, collection = ' + collectionName, err.message);
+            }
+            callback(err);
+        });
+    }
+};
+//------------
+
 const findUser = function (condition, callback) {
     User.findOne(condition, function (err, user) {
         if (err) {
@@ -100,7 +136,6 @@ const saveUser = function (user) {
     );
 };
 
-
 function getShortname(frt,sec) {
     let first = frt? frt.substring(0,1):'';
     let second = sec? sec.substring(0,2):'';
@@ -127,7 +162,6 @@ const findDeps = function (condition, callback) {
         }
     });
 };
-
 
 const saveDep = function (dep) {
     Department.create(dep, function (err, dept) {
@@ -159,7 +193,6 @@ const addItem = function (item) {
     });
 };
 
-
 const editItem = function (condition, item) {
     Item.update(condition, // Query
         { // Updates
@@ -176,15 +209,11 @@ const editItem = function (condition, item) {
     );
 };
 
-const delItem = function (id) {
-    Item.findOneAndRemove({'_id': id}, function (err) {
-        if (err) {
-            logger.error('error to del item', err.message);
-        }
-        // saved!
-    })
+const delItem = function (id, callback) {
+    delByID('item', id, function(err){
+        allback(err);
+    });
 };
-
 
 const getItems = function (condition, callback) {
     Item.find(condition, function (err, items) {
@@ -237,7 +266,6 @@ const editProject = function (condition, project, callback) {
     );
 };
 
-
 const getProjects = function (condition, callback) {
     Project.find(condition, function (err, prjects) {
         if (err) {
@@ -248,6 +276,12 @@ const getProjects = function (condition, callback) {
         }
     });
 };
+
+const delProject = function (id){
+    delByID('project', id, function(err){
+        callback(err);
+    });
+}
 
 const getContracts = function (condition, callback) {
     Contract.find(condition, function (err, contracts) {
@@ -299,7 +333,6 @@ const editContractAddIntoArray = function (condition, arrayItem, callback) {
     );
 };
 
-
 const editContractRemoveFromArray = function (condition, arrayItem, callback) {
     Contract.update(condition, // Query
         { // Updates
@@ -316,7 +349,6 @@ const editContractRemoveFromArray = function (condition, arrayItem, callback) {
         }
     );
 };
-
 
 const countContract = function (callback) {
     Contract.count({}, function (err, count) {
@@ -389,6 +421,12 @@ const updateProjectContractType = function(project_id, contract_types) {
     });
 };
 
+const delContract = function (id, callback){
+    delByID('contract', id, function(err){
+        callback(err);
+    });
+}
+
 module.exports = {
     setup: setup,
     findUser:findUser,
@@ -405,8 +443,10 @@ module.exports = {
     getProjects:getProjects,
     countProject:countProject,
     editProject:editProject,
+    delProject:delProject,
     getContracts:getContracts,
     editContract:editContract,
+    delContract:delContract,
     editContractAddIntoArray: editContractAddIntoArray,
     editContractRemoveFromArray:editContractRemoveFromArray,
     countContract:countContract,

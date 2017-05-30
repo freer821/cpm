@@ -25,6 +25,13 @@
 
 })(jQuery);
 
+function ajaxPost(url, data){
+    var posting = $.post( url, data);
+    posting.done(function( json_response ) {
+        doAction(json_response);
+    });
+}
+
 function doAction(response) {
     if (response.action) {
         switch (response.action) {

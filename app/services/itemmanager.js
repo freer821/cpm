@@ -32,8 +32,9 @@ const editItem = function (req, res, next) {
 
 
 const delItem= function(req, res, next) {
-    db.delItem(req.params.id);
-    res.redirect('/dashboard');
+    db.delItem(req.params.id, function(err){
+        res.redirect('/dashboard');
+    });
 };
 
 

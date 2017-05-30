@@ -348,6 +348,10 @@ const delContract = function (req, res, next) {
                 res.render('editcontract', {title:'Contract Management', project_id: req.query.project_id, project_adr:req.query.project_adr, contract: contracts[0],  user: req.user, jump_financial:'1'});
             });  
         })
+    } else {
+        db.delContract(req.params.id, function(err){
+            common.doJSONRespond(res,{'action':'refresh'},next);
+        });
     }
 };
 

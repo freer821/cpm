@@ -100,7 +100,12 @@ function loadContractsOfProject(project_id) {
                 "data": function (row, type, full, meta) {
                     return '<a href="#" data-toggle="modal" data-target="#contract-basic-modal" data-contract=\''+JSON.stringify(row)+'\'><i class="material-icons md-24">&#xe3c9;</i></a>';
                 }
-            }
+            },
+            {
+                "data": function (row, type, full, meta) {
+                    return '<a onclick="delContract(this)" data-contract=\''+JSON.stringify(row)+'\'><i class="material-icons md-24">&#xe872;</i></a>';
+                }
+            }            
         ]
     });
 }
@@ -216,6 +221,20 @@ function contractDetail(d) {
         '</li>' +
         '</ul>' +
         '</div>';
+}
+
+function delContract(element){
+    var contract = element.dataset.contract;
+    contract = eval('(' + contract + ')');
+    if(contract){
+        bootbox.confirm("are you sure to delete contract: "+contract.id+"?", function(result){ 
+            if(result){
+                let url = "/contracts/"+contract._id+"/del/item";
+                //let project_id = contract.project_id;
+                ajaxPost(url,{'project_id':''});
+            }
+        });
+    }
 }
 
 function formatData(obj, key){

@@ -93,7 +93,7 @@ $(document).ready(function(){
             var project = $(e.relatedTarget).data('project');
 
             if (project) {
-                $("#basic_project_id").val(contract.project_id);
+                $("#basic_project_id").val(project.id);
                 $("#contract_street").val(project.street+' '+project.housenr);
 
             }
@@ -294,7 +294,7 @@ function addnewpermission() {
 
 function editPermission(element){
     var permission = element.dataset.permission;
-    var permission = eval('(' + permission + ')');
+    permission = eval('(' + permission + ')');
     $('#permission_id').val(permission._id);
     $('#permission_tpye').val(permission.type);
     $('#bp_doc_delivery').val(formatDate(permission.doc_delivery));
