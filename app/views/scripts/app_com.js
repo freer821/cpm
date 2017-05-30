@@ -29,6 +29,7 @@ function ajaxPost(url, data){
     var posting = $.post( url, data);
     posting.done(function( json_response ) {
         doAction(json_response);
+        $('.modal').modal('hide');
     });
 }
 

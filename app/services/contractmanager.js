@@ -195,10 +195,9 @@ function updateContractOFW(request, callback) {
 
 function updateContractFinancial(request, callback) {
 
-    if (request.invocie_id) {
+    if (request.invoice_id) {
         let invoice = {
             "invoice.$.rechnung_nr": request.rechnung_nr,
-            "invoice.$.current_value": request.current_value,
             "invoice.$.sum": request.sum,
             "invoice.$.aufmass_am": common.getDate(request.aufmass_am),
             "invoice.$.bewert_aufmass": common.getDate(request.bewert_aufmass),
@@ -208,7 +207,7 @@ function updateContractFinancial(request, callback) {
             "invoice.$.invoice_status": request.invoice_status
         };
 
-        db.editContract({id: request.contract_id, invoice: {$elemMatch: {_id : request.invocie_id}}},invoice,function (err) {
+        db.editContract({id: request.contract_id, invoice: {$elemMatch: {_id : request.invoice_id}}},invoice,function (err) {
             if(err){
                 callback(err.message);
             } else {
@@ -296,7 +295,7 @@ const editContract = function (req, res, next) {
                 common.doJSONRespond(res,{'action':'reload','project_id':project_id},next)
             }
         });
-    } else if(req.params.action === 'invocie') {
+    } else if(req.params.action === 'invoice') {
         updateContractFinancial(request, function (err, project_id) {
             if (err) {
                 res.send('update operation failed!!');
@@ -318,35 +317,11 @@ const editContract = function (req, res, next) {
 const delContract = function (req, res, next) {
     if(req.params.action === 'permission') {
         db.editContractRemoveFromArray({'id':req.params.id},{building_permission: {_id: new ObjectId(req.query.id)}}, function (err) {
-            let last_err = err;
-            db.getContracts({'id':req.params.id}, function (err, contracts) {
-                if(err) {
-                    logger.error('contract id not exits: ', req.params.id);
-                    res.redirect('/projects');
-                    return;
-                }
-                if(last_err){
-                    res.render('editcontract', {title:'Contract Management', project_id: req.query.project_id, project_adr:req.query.project_adr, contract: contracts[0],  user: req.user, jump_building_permission:'1', err:'err'});
-                    return;
-                }
-                res.render('editcontract', {title:'Contract Management', project_id: req.query.project_id, project_adr:req.query.project_adr, contract: contracts[0],  user: req.user, jump_building_permission:'1'});
-            });            
+            common.doJSONRespond(res,{'action':'reload','project_id':req.body.project_id},next);         
         })
     } else if(req.params.action === 'invoice') {
         db.editContractRemoveFromArray({'id':req.params.id},{invoice: {_id: new ObjectId(req.query.id)}}, function (err) {
-            let last_err = err;
-            db.getContracts({'id':req.params.id}, function (err, contracts) {
-                if(err) {
-                    logger.error('contract id not exits: ', req.params.id);
-                    res.redirect('/projects');
-                    return;
-                }
-                if(last_err){
-                    res.render('editcontract', {title:'Contract Management', project_id: req.query.project_id, project_adr:req.query.project_adr, contract: contracts[0],  user: req.user, jump_financial:'1', err:'err'});
-                    return;
-                }
-                res.render('editcontract', {title:'Contract Management', project_id: req.query.project_id, project_adr:req.query.project_adr, contract: contracts[0],  user: req.user, jump_financial:'1'});
-            });  
+            common.doJSONRespond(res,{'action':'reload','project_id':req.body.project_id},next);
         })
     } else {
         db.delContract(req.params.id, function(err){

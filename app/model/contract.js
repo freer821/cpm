@@ -79,8 +79,8 @@ const contractSchema = new Schema({
         {
             rechnung_nr: String,   // number
             sum: Number,  // summe, EURO
-            aufmass_am: Date, // time to send Invocie
-            bewert_aufmass: Date, // time to permit invocie
+            aufmass_am: Date, // time to send invoice
+            bewert_aufmass: Date, // time to permit invoice
             guts_datum: Date, // time to get money
             correction_needed: Boolean,
             booking_month: String,

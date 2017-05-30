@@ -134,6 +134,7 @@ $(document).ready(function(){
                     '<td>'+permission.cost+'</td>'+
                     '<td>'+permission.permission_status+'</td>'+
                     '<td>'+'<a onclick="editPermission(this)" data-permission=\''+JSON.stringify(permission)+'\'><i class="material-icons md-24">&#xe3c9;</i></a>'+'</td>'+
+                    '<td>'+'<a onclick="delPermission(this)" data-contract=\''+JSON.stringify(contract)+'\' data-permission=\''+JSON.stringify(permission)+'\'><i class="material-icons md-24">&#xe872;</i></a>'+'</td>'+
                     '</tr>';
                 $('#permissions > tbody:last-child').append(table_content);
             });
@@ -154,6 +155,9 @@ $(document).ready(function(){
 
     $('#contract-ofw-modal').on('show.bs.modal', function(e) {
         var contract = $(e.relatedTarget).data('contract');
+        $(this).find('form')[0].reset();
+        $("#ofw_contract_id").val(contract.id);
+        $("#ofw_project_id").val(contract.project_id);
         if (contract.is_ofw_activ){
             $('#ofw_activ').show();
             $('#ofw_not_activ').hide();
@@ -161,10 +165,13 @@ $(document).ready(function(){
             if (contract.ofw) {
                 $("#ofw_worker_name").val(contract.ofw.worker_name);
                 $("#ofw_permission_nr").val(contract.ofw.permission_nr);
-                $("#ofw_delivery").val(contract.ofw.delivery);
-                $("#ofw_completion_at").val(contract.ofw.completion_at);
+                $("#ofw_delivery").val(formatDate(contract.ofw.delivery));
+                $("#ofw_completion_at").val(formatDate(contract.ofw.completion_at));
                 $("#ofw_ueberdicken").val(contract.ofw.ueberdicken);
                 $("#ofw_estimated_value").val(contract.ofw.estimated_value);
+                $("#ofw_ueberdicken").val(contract.ofw.ueberdicken);
+                $("#ofw_applied").val(formatDate(contract.ofw.applied));
+                $("#ofw_granted").val(formatDate(contract.ofw.applied));
                 $("#ofw_status").val(contract.ofw.ofw_status);
                 if (contract.ofw.typ.bausstr) {
                     $("#bausstr").prop( "checked", true );
@@ -221,6 +228,7 @@ $(document).ready(function(){
 
     $('#contract-invoices-modal').on('show.bs.modal', function(e) {
         var contract = $(e.relatedTarget).data('contract');
+        $('#invoices > tbody:last-child').empty();
         $("#invoice_contract_id").val(contract.id);
         $("#invoice_project_id").val(contract.project_id);
         var invoices = contract.invoice;
@@ -229,6 +237,8 @@ $(document).ready(function(){
                 '<td>'+invoice.rechnung_nr+'</td>'+
                 '<td>'+invoice.sum+'</td>'+
                 '<td>'+getInvoiceStatus(invoice.invoice_status)+'</td>'+
+                '<td>'+'<a onclick="editInvoice(this)" data-invoice=\''+JSON.stringify(invoice)+'\'><i class="material-icons md-24">&#xe3c9;</i></a>'+'</td>'+
+                '<td>'+'<a onclick="delInvoice(this)" data-contract=\''+JSON.stringify(contract)+'\' data-invoice=\''+JSON.stringify(invoice)+'\'><i class="material-icons md-24">&#xe872;</i></a>'+'</td>'+
                 '</tr>';
             console.log(table_content);
             $('#invoices > tbody:last-child').append(table_content);
@@ -282,12 +292,47 @@ function getInvoiceStatus(code) {
 }
 
 function addnewinvoice() {
+    $('#invoice_form')[0].reset();
+    $('#invoice_id').val('');
     $('#invoice-detail').show();
     $('#invoices-overview').hide();
 }
 
+function editInvoice(element){
+    //init data
+    var invoice = element.dataset.invoice;
+    invoice = eval('(' + invoice + ')');
+    $('#invoice_id').val(invoice._id);
+    $('#sum').val(invoice.sum);
+    $('#aufmass_am').val(formatDate(invoice.aufmass_am));
+    $('#bewert_aufmass').val(formatDate(invoice.bewert_aufmass));
+    $('#rechnung_nr').val(invoice.rechnung_nr);
+    $('#guts_datum').val(formatDate(invoice.guts_datum));
+    $('#booking_month').val(invoice.booking_month);
+    if(invoice.correction_needed) 
+        $('#correction_needed').attr('checked','checked');
+    else 
+        $('#correction_needed').removeAttr('checked');
+    $('#invoice_status').val(invoice.invoice_status);
+    //show detail and hide overview
+    $('#invoice-detail').show();
+    $('#invoices-overview').hide();
+}
+
+function delInvoice(element){
+    var invoice = element.dataset.invoice;
+    var contract = element.dataset.contract;
+    invoice = eval('(' + invoice + ')');
+    contract = eval('(' + contract + ')');
+    if(invoice && contract){
+        let url = "/contracts/"+contract.id+"/del/invoice?id="+invoice._id;
+        ajaxPost(url,{project_id:contract.project_id});
+    }    
+}
+
 function addnewpermission() {
     $('#building_permission_form')[0].reset();
+    $('#permission_id').val('');
     $('#permissions-overview').hide();
     $('#permission-detail').show();
 }
@@ -303,4 +348,15 @@ function editPermission(element){
     $('#permission_cost').val(permission.cost);
     $('#permission-detail').show();
     $('#permissions-overview').hide();
+}
+
+function delPermission(element){
+    var permission = element.dataset.permission;
+    var contract = element.dataset.contract;
+    permission = eval('(' + permission + ')');
+    contract = eval('(' + contract + ')');
+    if(permission && contract){
+        let url = "/contracts/"+contract.id+"/del/permission?id="+permission._id;
+        ajaxPost(url,{project_id:contract.project_id});
+    }    
 }

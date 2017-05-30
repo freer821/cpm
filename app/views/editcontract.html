@@ -45,22 +45,22 @@ $('#edit-permission').on('show.bs.modal', function(e) {
     calPermissionStatus();
 });
 
-$('#edit-invocie').on('show.bs.modal', function(e) {
+$('#edit-invoice').on('show.bs.modal', function(e) {
     $(this).find('form')[0].reset();
-    var invocie = $(e.relatedTarget).data('invocie');
-    if (invocie) {
-      $("#rechnung_nr").val(invocie.rechnung_nr);
-      $("#current_value").val(invocie.current_value);
-      $("#sum").val(invocie.sum);
-      if(invocie.aufmass_am){
-        $("#aufmass_am").val(moment(invocie.aufmass_am).format("DD-MM-YYYY"));
+    var invoice = $(e.relatedTarget).data('invoice');
+    if (invoice) {
+      $("#rechnung_nr").val(invoice.rechnung_nr);
+      $("#current_value").val(invoice.current_value);
+      $("#sum").val(invoice.sum);
+      if(invoice.aufmass_am){
+        $("#aufmass_am").val(moment(invoice.aufmass_am).format("DD-MM-YYYY"));
       }
-      $("#bewert_aufmass").val(moment(invocie.bewert_aufmass).format("DD-MM-YYYY"));
-      if (invocie.guts_datum) {
-        $("#guts_datum").val(moment(invocie.guts_datum).format("DD-MM-YYYY"));
+      $("#bewert_aufmass").val(moment(invoice.bewert_aufmass).format("DD-MM-YYYY"));
+      if (invoice.guts_datum) {
+        $("#guts_datum").val(moment(invoice.guts_datum).format("DD-MM-YYYY"));
       }
-      $("#invoice_status").val(invocie.invoice_status).change();
-      $("#invocie_id").val(invocie._id);
+      $("#invoice_status").val(invoice.invoice_status).change();
+      $("#invoice_id").val(invoice._id);
     }
   });
 
@@ -337,13 +337,13 @@ $(document).ready(function() {
   {% endif %}
 
   {% if jump_financial %}
-    var msg = 'update invocie done!';
+    var msg = 'update invoice done!';
     {% if err %}
-      msg = 'update invocie failed!';
+      msg = 'update invoice failed!';
     {% endif %}      
     bootbox.alert(msg);
     $('#financial')[0].click();
-    window.history.pushState("invocie", "Contract Management", document.referrer);
+    window.history.pushState("invoice", "Contract Management", document.referrer);
   {% endif %}
 
   {% if !contract.is_building_permission_activ %}

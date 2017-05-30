@@ -125,15 +125,10 @@ function contractDetail(d) {
         '<div class="col-md-4">' +
         '<div style="font-size:22px">' + d.permission_status + '</div>' +
         '</div>' +
-        '<div id="manager_name_d" class="form-group col-md-3" onmouseover="showEditState(manager_name_edit_icon)" onmouseleave="hideEditState(manager_name_edit_icon)">' +
+        '<div class="form-group col-md-3">' +
         '<div id="manager_name_text">' + d.manager_name + '</div>' +
-        '<input id="manager_name_input" onkeypress="handleEnter(event, 1)" class="form-control" type="text" data-contractid="' + d.id + '" value="' + d.manager_name + '" hidden/>' +
-        '<a onclick="showInput(1)"> <i id="manager_name_edit_icon" class="material-icons md-24" hidden>&#xe3c9;</i></a>' +
-        '</div> ' +
-        '<div id="worker_name_d" class="form-group col-md-3" onmouseover="showEditState(worker_name_edit_icon)" onmouseleave="hideEditState(worker_name_edit_icon)">' +
+        '<div id="worker_name_d" class="form-group col-md-3" >' +
         '<div id="worker_name_text">' + formatData(d.building_work,"worker_name") + '</div>' +
-        '<input id="worker_name_input" onkeypress="handleEnter(event, 2)" class="form-control" type="text" data-contractid="' + d.id + '" value="' + d.worker_name + '" hidden/>' +
-        '<a onclick="showInput(2)"> <i id="worker_name_edit_icon" class="material-icons md-24" hidden>&#xe3c9;</i></a>' +
         '</div> ' +
         '</div>' +
         '</div>' +
