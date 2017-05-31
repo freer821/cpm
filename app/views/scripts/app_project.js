@@ -112,92 +112,117 @@ function loadContractsOfProject(project_id) {
 
 function contractDetail(d) {
     // `d` is the original data object for the row
-    return '<div style="font-size:18px" class="box">' +
-        '<ul class="list inset m-0">' +
-        '<li class="list-item">' +
+    return '<div style="font-size:18px">' +
+
+        '<div class="row row-sm">'+
+        '<div class="col-sm-3">'+
+        '<div class="md-form-group" style="padding: 12px 16px;">'+
         '<a href="#" data-toggle="modal" data-target="#contract-permissions-modal" data-contract=\''+JSON.stringify(d)+'\' class="list-left">' +
         '<span class="w-40 circle accent">' +
         '<i class="fa fa-envelope"></i>' +
         '</span>' +
         '</a>' +
-        '<div class="list-body">' +
-        '<div class="form-group row">' +
-        '<div class="col-md-4">' +
-        '<div style="font-size:22px">' + d.permission_status + '</div>' +
-        '</div>' +
-        '<div class="form-group col-md-3">' +
-        '<div id="manager_name_text">' + d.manager_name + '</div>' +
-        '</div>' +
-        '<div id="worker_name_d" class="form-group col-md-3" >' +
-        '<div id="worker_name_text">' + formatData(d.building_work,"worker_name") + '</div>' +
-        '</div> ' +
-        '</div>' +
-        '</div>' +
-        '</li>' +
-        '<li class="list-item">' +
+        '<div style="font-size:22px">' + d.permission_status + '</div>'+
+        '</div>'+
+        '</div>'+
+        '<div class="col-sm-4">'+
+        '<div class="md-form-group">'+
+        '<input class="md-input" value="'+d.manager_name+'">'+
+        '<label>Manager Name</label>'+
+        '</div>'+
+        '</div>'+ 
+        '<div class="col-sm-4">'+
+        '<div class="md-form-group">'+
+        '<input class="md-input" value="'+formatData(d.building_work,"worker_name")+'">'+
+        '<label>Worker Name</label>'+
+        '</div>'+
+        '</div>'+
+        '</div>'+
+
+        '<div class="row row-sm">'+
+        '<div class="col-sm-3">'+
+        '<div class="md-form-group" style="padding: 12px 16px;">'+
         '<a href="#" data-toggle="modal" data-target="#contract-building-modal" data-contract=\''+JSON.stringify(d)+'\' class="list-left">' +
         '<span class="w-40 circle green">' +
         '<i class="fa fa-smile-o"></i>' +
         '</span>' +
         '</a>' +
-        '<div class="list-body">' +
-        '<div class="form-group row">' +
-        '<div class="col-md-4">' +
-        '<div style="font-size:22px">' + d.building_status + '</div>' +
-        '</div>' +
-        '<div class="form-group col-md-3">' +
-        d.building_begin +
-        '</div> ' +
-        '<div class="form-group col-md-4">' +
-        d.building_end +
-        '</div> ' +
-        '</div>' +
-        '</div>' +
-        '</li>' +
-        '<li class="list-item">' +
+        '<div style="font-size:22px">' + formatData(d.building_work,"status") + '</div>'+
+        '</div>'+
+        '</div>'+
+        '<div class="col-sm-4">'+
+        '<div class="md-form-group">'+
+        '<input class="md-input" value="'+formatDate(formatData(d.building_work,"plan_begin"))+'">'+
+        '<label>Building Begin</label>'+
+        '</div>'+
+        '</div>'+ 
+        '<div class="col-sm-4">'+
+        '<div class="md-form-group">'+
+        '<input class="md-input" value="'+formatDate(formatData(d.building_work,"plan_end"))+'">'+
+        '<label>Building End</label>'+
+        '</div>'+
+        '</div>'+
+        '</div>'+
+
+        '<div class="row row-sm">'+
+        '<div class="col-sm-3">'+
+        '<div class="md-form-group" style="padding: 12px 16px;">'+
         '<a href="#" data-toggle="modal" data-target="#contract-ofw-modal" data-contract=\''+JSON.stringify(d)+'\' class="list-left">' +
         '<span class="w-40 circle warn">' +
         '<i class="fa fa-flash"></i>' +
         '</span>' +
         '</a>' +
-        '<div class="list-body">' +
-        '<div class="form-group row">' +
-        '<div class="col-md-4">' +
-        '<div style="font-size:22px">' + d.ofw_status + '</div>' +
-        '</div>' +
-        '<div class="form-group col-md-3">' +
-        d.sum_value +
-        '</div> ' +
-        '<div class="form-group col-md-4">' +
-        d.current_value +
-        '</div> ' +
-        '</div>' +
-        '</div>' +
-        '</li>' +
-        '<li class="list-item">' +
+        '<div style="font-size:22px">' + formatData(d.ofw, "ofw_status") + '</div>'+
+        '</div>'+
+        '</div>'+
+        '<div class="col-sm-4">'+
+        '<div class="md-form-group">'+
+        '<input class="md-input" value="'+d.sum_value+'">'+
+        '<label>Sum Value</label>'+
+        '</div>'+
+        '</div>'+ 
+        '<div class="col-sm-4">'+
+        '<div class="md-form-group">'+
+        '<input class="md-input" value="'+d.current_value+'">'+
+        '<label>Current Value</label>'+
+        '</div>'+
+        '</div>'+
+        '</div>'+
+
+        '<div class="row row-sm">'+
+        '<div class="col-sm-3">'+
+        '<div class="md-form-group" style="padding: 12px 16px;">'+
         '<a href="#" data-toggle="modal" data-target="#contract-invoices-modal" data-contract=\''+JSON.stringify(d)+'\' class="list-left">' +
         '<span class="w-40 circle danger">' +
         '<i class="fa fa-database"></i>' +
         '</span>' +
         '</a>' +
-        '<div class="list-body">' +
-        '<div class="form-group row">' +
-        '<div class="col-md-4">' +
-        '<div style="font-size:22px">' + d.invoice_status + '</div>' +
-        '</div>' +
-        '<div class="form-group col-md-3">' +
-        d.doc_location.person +
-        '</div> ' +
-        '<div class="form-group col-md-4">' +
-        d.doc_location.reason +
-        '</div> ' +
-        '</div>' +
-        '</div>' +
-        '</li>' +
+        '<div style="font-size:22px">' + d.invoice_status + '</div>'+
+        '</div>'+
+        '</div>'+
+        '<div class="col-sm-4">'+
+        '<div class="md-form-group">'+
+        '<input class="md-input" value="'+d.doc_location.person+'">'+
+        '<label>Doc location Person</label>'+
+        '</div>'+
+        '</div>'+ 
+        '<div class="col-sm-4">'+
+        '<div class="md-form-group">'+
+        '<input class="md-input" value="'+d.doc_location.reason+'">'+
+        '<label>Doc location Reason</label>'+
+        '</div>'+
+        '</div>'+
+        '</div>'+
+
+
+
+        '<ul class="list inset m-0">' +
+
         '<li class="list-item">' +
-        '<div class="form-group">' +
-        '<textarea style="width:100%" class="form-control" rows="4" data-minwords="6" ' +
-        'required="" placeholder="Kommentar">' + d.comment + '</textarea>' +
+        '<div class="md-form-group">' +
+        '<textarea class="md-input" rows="3" data-minwords="6" ' +
+        'required="">' + d.comment + '</textarea>' +
+        '<label>Kommentar</label>'+
         '</div>' +
         '</li>' +
         '<li class="list-item">' +
