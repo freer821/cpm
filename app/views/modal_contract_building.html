@@ -1,3 +1,4 @@
+
 <div id="contract-building-modal" class="modal" data-backdrop="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content light">
@@ -99,18 +100,12 @@
                             <div class="form-group row">
                                 <label class="col-md-3 form-control-label">Procent</label>
                                 <div class="col-md-9">
-                                    <div id="procent_completion_pg" class="progress mt-2">
-                                        <div class="progress-bar progress-bar-striped progress-bar-animated primary" ></div>
-                                    </div>
+                                    <input id="procent_completion" name="procent_completion" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="100" data-slider-step="1" />
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-1">
-                            <input class="form-control" type="number" name="procent_completion" id="procent_completion"
-                                   min="10" max="100" hidden="true"
-                                   onchange="changeProgress(this.value)"/>
-                        </div>
                     </div>
+
                 </div>
                 <div class="modal-footer dker _600">
                     <input type="hidden" name="contract_id" id="building_contract_id">
@@ -120,6 +115,7 @@
                     <button type="submit" class="btn btn-info m-t" >Update</button>
                 </div>
             </form>
+            
         </div>
     </div>
 </div>

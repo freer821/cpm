@@ -109,6 +109,14 @@
         console.log('laod app_contract');
     });
 
+    $(function(){
+        var $p = $($(".progress")[0]);
+        $p.on( "sliderchange", function(e,result){
+            $('#building_progress_bar').html(result.value);
+            alert('111');
+        });
+    });
+
 function postContractEditPartial (id, data, callback){
   url = '/contracts/edit/partial/'+id;
   var posting = $.post( url, data );

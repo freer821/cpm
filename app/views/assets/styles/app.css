@@ -5716,3 +5716,11 @@ tr.del td:before{
     border-bottom: 1px solid #111;
     width: 100%;
 }
+
+#ex1Slider {
+  margin-top: 7px;
+}
+
+#ex1Slider .slider-selection {
+  background: #BABABA;
+}
