@@ -115,23 +115,28 @@ function contractDetail(d) {
     return '<div style="font-size:18px">' +
 
         '<div class="row row-sm">'+
-        '<div class="col-sm-3">'+
+        '<div class="col-sm-1">'+
         '<div class="md-form-group" style="padding: 12px 16px;">'+
         '<a href="#" data-toggle="modal" data-target="#contract-permissions-modal" data-contract=\''+JSON.stringify(d)+'\' class="list-left">' +
         '<span class="w-40 circle accent">' +
         '<i class="fa fa-envelope"></i>' +
         '</span>' +
         '</a>' +
-        '<div style="font-size:22px">' + formatData(d, 'permission_status' ) + '</div>'+
         '</div>'+
         '</div>'+
         '<div class="col-sm-4">'+
+        '<div class="md-form-group">'+
+        '<input class="md-input" value="'+formatData(d, 'permission_status' ) +'" readonly>'+
+        '<label>Permission Status</label>'+
+        '</div>'+
+        '</div>'+         
+        '<div class="col-sm-3">'+
         '<div class="md-form-group">'+
         '<input class="md-input" value="'+formatData(d, 'manager_name' ) +'">'+
         '<label>Manager Name</label>'+
         '</div>'+
         '</div>'+ 
-        '<div class="col-sm-4">'+
+        '<div class="col-sm-3">'+
         '<div class="md-form-group">'+
         '<input class="md-input" value="'+formatData(d.building_work,"worker_name")+'">'+
         '<label>Worker Name</label>'+
@@ -140,23 +145,28 @@ function contractDetail(d) {
         '</div>'+
 
         '<div class="row row-sm">'+
-        '<div class="col-sm-3">'+
+        '<div class="col-sm-1">'+
         '<div class="md-form-group" style="padding: 12px 16px;">'+
         '<a href="#" data-toggle="modal" data-target="#contract-building-modal" data-contract=\''+JSON.stringify(d)+'\' class="list-left">' +
         '<span class="w-40 circle green">' +
         '<i class="fa fa-smile-o"></i>' +
         '</span>' +
         '</a>' +
-        '<div style="font-size:22px">' + getBuildingStatus((d.building_work,"status")) + '</div>'+
         '</div>'+
         '</div>'+
         '<div class="col-sm-4">'+
+        '<div class="md-form-group">'+
+        '<input class="md-input" value="'+getBuildingStatus((d.building_work,"status")) +'" readonly>'+
+        '<label>Building Status</label>'+
+        '</div>'+
+        '</div>'+           
+        '<div class="col-sm-3">'+
         '<div class="md-form-group">'+
         '<input class="md-input" value="'+formatDate(formatData(d.building_work,"plan_begin"))+'">'+
         '<label>Building Begin</label>'+
         '</div>'+
         '</div>'+ 
-        '<div class="col-sm-4">'+
+        '<div class="col-sm-3">'+
         '<div class="md-form-group">'+
         '<input class="md-input" value="'+formatDate(formatData(d.building_work,"plan_end"))+'">'+
         '<label>Building End</label>'+
@@ -165,23 +175,28 @@ function contractDetail(d) {
         '</div>'+
 
         '<div class="row row-sm">'+
-        '<div class="col-sm-3">'+
+        '<div class="col-sm-1">'+
         '<div class="md-form-group" style="padding: 12px 16px;">'+
         '<a href="#" data-toggle="modal" data-target="#contract-ofw-modal" data-contract=\''+JSON.stringify(d)+'\' class="list-left">' +
         '<span class="w-40 circle warn">' +
         '<i class="fa fa-flash"></i>' +
         '</span>' +
         '</a>' +
-        '<div style="font-size:22px">' + formatData(d.ofw, "ofw_status") + '</div>'+
         '</div>'+
         '</div>'+
         '<div class="col-sm-4">'+
+        '<div class="md-form-group">'+
+        '<input class="md-input" value="'+formatData(d.ofw, "ofw_status") +'" readonly>'+
+        '<label>OFW Status</label>'+
+        '</div>'+
+        '</div>'+          
+        '<div class="col-sm-3">'+
         '<div class="md-form-group">'+
         '<input class="md-input" value="'+d.sum_value+'">'+
         '<label>Sum Value</label>'+
         '</div>'+
         '</div>'+ 
-        '<div class="col-sm-4">'+
+        '<div class="col-sm-3">'+
         '<div class="md-form-group">'+
         '<input class="md-input" value="'+d.current_value+'">'+
         '<label>Current Value</label>'+
@@ -190,23 +205,28 @@ function contractDetail(d) {
         '</div>'+
 
         '<div class="row row-sm">'+
-        '<div class="col-sm-3">'+
+        '<div class="col-sm-1">'+
         '<div class="md-form-group" style="padding: 12px 16px;">'+
         '<a href="#" data-toggle="modal" data-target="#contract-invoices-modal" data-contract=\''+JSON.stringify(d)+'\' class="list-left">' +
         '<span class="w-40 circle danger">' +
         '<i class="fa fa-database"></i>' +
         '</span>' +
         '</a>' +
-        '<div style="font-size:22px">' + d.invoice_status + '</div>'+
         '</div>'+
         '</div>'+
         '<div class="col-sm-4">'+
+        '<div class="md-form-group">'+
+        '<input class="md-input" value="'+d.invoice_status +'" readonly>'+
+        '<label>Invoice Status</label>'+
+        '</div>'+
+        '</div>'+         
+        '<div class="col-sm-3">'+
         '<div class="md-form-group">'+
         '<input class="md-input" value="'+d.doc_location.person+'">'+
         '<label>Doc location Person</label>'+
         '</div>'+
         '</div>'+ 
-        '<div class="col-sm-4">'+
+        '<div class="col-sm-3">'+
         '<div class="md-form-group">'+
         '<input class="md-input" value="'+d.doc_location.reason+'">'+
         '<label>Doc location Reason</label>'+
