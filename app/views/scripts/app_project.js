@@ -122,12 +122,12 @@ function contractDetail(d) {
         '<i class="fa fa-envelope"></i>' +
         '</span>' +
         '</a>' +
-        '<div style="font-size:22px">' + d.permission_status + '</div>'+
+        '<div style="font-size:22px">' + formatData(d, 'permission_status' ) + '</div>'+
         '</div>'+
         '</div>'+
         '<div class="col-sm-4">'+
         '<div class="md-form-group">'+
-        '<input class="md-input" value="'+d.manager_name+'">'+
+        '<input class="md-input" value="'+formatData(d, 'manager_name' ) +'">'+
         '<label>Manager Name</label>'+
         '</div>'+
         '</div>'+ 
@@ -147,7 +147,7 @@ function contractDetail(d) {
         '<i class="fa fa-smile-o"></i>' +
         '</span>' +
         '</a>' +
-        '<div style="font-size:22px">' + formatData(d.building_work,"status") + '</div>'+
+        '<div style="font-size:22px">' + getBuildingStatus((d.building_work,"status")) + '</div>'+
         '</div>'+
         '</div>'+
         '<div class="col-sm-4">'+
@@ -262,5 +262,5 @@ function formatData(obj, key){
     if(obj)
         return obj[key];
     else
-        return 'undefined';
+        return 'no value';
 }

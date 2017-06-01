@@ -75,7 +75,7 @@ function calStatusOfTime(t_begin, t_end) {
 
 // cal the status of Building
 function calStatusOfBuilding() {
-    console.log("calStatusOfBuilding: "+ calStatusOfTime($("#plan_begin").val(), $("#plan_end").val()));
+
     switch (calStatusOfTime($("#plan_begin").val(), $("#plan_end").val())) {
         case 1:
             $("#building_status").val('02');
@@ -85,5 +85,22 @@ function calStatusOfBuilding() {
             break;
         default:
             break;
+    }
+}
+
+
+function getBuildingStatus(code) {
+
+    switch (code){
+        case '00':
+            return 'in der Vorbereitung';
+        case '01':
+            return 'vorbereiten zu bauen';
+        case '02':
+            return 'geplant in Bau';
+        case '03':
+            return 'Tiefbau &amp; Montage erledigt';
+        default:
+            return 'unknown building status';
     }
 }
