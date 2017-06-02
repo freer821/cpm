@@ -156,7 +156,7 @@ function contractDetail(d) {
         '</div>'+
         '<div class="col-sm-4">'+
         '<div class="md-form-group">'+
-        '<input class="md-input" value="'+getBuildingStatus((d.building_work,"status")) +'" readonly>'+
+        '<input class="md-input" value="'+getBuildingStatus(formatData(d.building_work,"status")) +'" readonly>'+
         '<label>Building Status</label>'+
         '</div>'+
         '</div>'+           
