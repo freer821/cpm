@@ -126,7 +126,7 @@ function contractDetail(d) {
         '</div>'+
         '<div class="col-sm-4">'+
         '<div class="md-form-group">'+
-        '<input class="md-input" value="'+formatData(d, 'permission_status' ) +'" readonly>'+
+        '<input class="md-input" value="'+formatData(d, 'permissions_status' ) +'" readonly>'+
         '<label>Permission Status</label>'+
         '</div>'+
         '</div>'+         

@@ -124,7 +124,7 @@ function updateContractPermission(request, callback) {
             "building_permission.$.begin": common.getDate(request.begin),
             "building_permission.$.end": common.getDate(request.end),
             "building_permission.$.cost": request.cost,
-            status: request.status
+            "building_permission.$.permission_status": request.permission_status
         };
 
         db.editContract({id: request.contract_id, building_permission: {$elemMatch: {_id : request.permission_id}}},permission,function (err) {
@@ -141,7 +141,7 @@ function updateContractPermission(request, callback) {
             begin: common.getDate(request.begin),
             end: common.getDate(request.end),
             cost: request.cost,
-            status: request.status
+            permission_status: request.permission_status
         };
 
         db.editContractAddIntoArray({id: request.contract_id},{building_permission: permission},function (err) {

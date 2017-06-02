@@ -51,13 +51,21 @@ function doAction(response) {
     }
 }
 
+function isEmpty(str) {
+    return (!str || 0 === str.length);
+}
+
+function isDateValid(time) {
+    return moment(time, "DD-MM-YYYY", true).isValid();
+}
+
 // -1 : status not defined
 // 0 : before begin
 // 1 : between begin and end
 // 2 : after end
 function calStatusOfTime(t_begin, t_end) {
     var now = moment();
-    if ( moment(t_begin, "DD-MM-YYYY", true).isValid()  ||  moment(t_end, "DD-MM-YYYY", true).isValid() ) {
+    if ( isDateValid(t_begin)  ||  isDateValid(t_end) ) {
         if (now.isAfter(moment(t_begin,"DD-MM-YYYY")) && moment(t_end,"DD-MM-YYYY").isAfter(now)) {
             return 1;
         } else if (moment(t_begin,"DD-MM-YYYY").isAfter(now)) {
@@ -104,3 +112,40 @@ function getBuildingStatus(code) {
             return 'unknown building status';
     }
 }
+
+
+// cal the status of Permission
+function calStatusOfPermission() {
+    var permission_license = 'zu bestimmen';
+    var permission_license_1 = '';
+    var permission_license_2 = '';
+
+
+    if (isEmpty($("#permission_tpye").val())) {
+        return $("#permission_status").val(permission_license);
+    } else {
+        permission_license = 'zu beantragen';
+    }
+
+    if (isDateValid($("#bp_doc_delivery").val())) {
+        permission_license_1 = 'beantragt am '+$("#bp_doc_delivery").val();
+    }
+
+    if (isDateValid($("#begin").val()) && isDateValid($("#end").val())) {
+        if ($("#permission_tpye").val() === 'VBA') {
+            permission_license_1 = $("#begin").val() +' bis '+ $("#end").val();
+        } else {
+            permission_license_1 = 'Beginn ab ' +  $("#begin").val();
+        }
+    }
+
+    if ( !isEmpty($("#permission_cost").val())) {
+        permission_license_2 = ' - '+ $("#permission_cost").val() +' €';
+    }
+
+    permission_license = permission_license_1 + ' ' + permission_license_2;
+
+    return $("#permission_status").val(permission_license);
+}
+
+

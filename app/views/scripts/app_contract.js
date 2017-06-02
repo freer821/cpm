@@ -109,6 +109,11 @@ $(document).ready(function(){
         $("#permission_project_id").val(contract.project_id);
         $('#permission_tpye').empty();
 
+        $('#permission_tpye').append($('<option>', {
+            value: '',
+            text: '-- select an status --'
+        }));
+
         if (contract.customer === 'STW') {
             $('#permission_tpye').append($('<option>', {
                 value: 'BAZ',
@@ -286,6 +291,7 @@ $(document).ready(function(){
     // check the status when the date is changed
     $(".date").on('dp.change', function (ev) {
         calStatusOfBuilding();
+        calStatusOfPermission();
     });
 
 });
@@ -369,6 +375,7 @@ function editPermission(element){
         $('#begin').val(formatDate(permission.begin));
         $('#end').val(formatDate(permission.end));
         $('#permission_cost').val(permission.cost);
+        $('#permission_status').val(permission.permission_status);
     } else {
         $('#permission_id').val('');
     }
