@@ -286,12 +286,6 @@ function calInvoiceStatus() {
     }
 }
 
-function getNumValue(value){
-    if (isNaN(parseFloat(value))) {
-        return 0;
-    }
-    return parseFloat(value);
-}
 
 function isFieldEmpty(field_id) {
     if($('#'+field_id).val().trim().length > 0) {

@@ -56,8 +56,10 @@ function filterContractsByUser(user_cost_code, constracts) {
     let cons = [];
     constracts.forEach((contract) => {
         let con = contract;
-        con._doc.status_finished = "unfinished";
-        con._doc.permissions_status =  getTotalStatusOfPermissions(contract);
+        con._doc.permissions_status =  common.calTotalStatusOfPermissions(contract);
+        let invoices_status = common.calInvoicesStatus(contract);
+        con._doc.status_finished = invoices_status.is_finished? 'finished' : 'unfinished';
+        con._doc.invoices_status= invoices_status.descrip;
         cons.push(con);
     });
 
@@ -79,47 +81,6 @@ function filterContractsByUser(user_cost_code, constracts) {
      */
 }
 
-function getTotalStatusOfPermissions(contract) {
-    if (contract.is_building_permission_activ) {
-        let isVBAExisted = false;
-        let last_permission_end = moment("2000-01-01");
-        if (contract.building_permission) {
-            for (var i = 0; i < contract.building_permission.length; i++) {
-                let permission = contract.building_permission[i];
-
-                if (permission.permission_status === 'zu bestimmen' || permission.permission_status === 'zu beantragen') {
-                    return 'zu bestaetigen';
-                }
-
-                if (permission.type === 'VBA') {
-                    isVBAExisted = true;
-                }
-
-                if (last_permission_end.isBefore(permission.end)) {
-                    last_permission_end = moment(permission.end);
-                }
-            }
-
-            if (isVBAExisted) {
-                return 'bestaegigt';
-            }
-
-            if (contract.building_work) {
-                if (last_permission_end.isBefore(contract.building_work.plan_end)) {
-                    return 'bitte VBA verlaengen';
-                } else {
-                    return 'bestaegigt';
-                }
-            }
-
-        } else {
-            return 'no permissions'
-        }
-
-    } else {
-        return 'nicht benoetigt';
-    }
-}
 
 
 module.exports = {

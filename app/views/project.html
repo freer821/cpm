@@ -59,7 +59,7 @@
               </div>
             </td>
             <td>
-              <a href="#" data-toggle="modal" data-target="#contract-basic-modal" data-project="{{project|json}}"><i class="material-icons md-24">&#xe03b;</i></a>
+              <a href="#" data-toggle="modal" data-target="#contract-basic-modal" data-project="{{project|json}}"><i class="material-icons md-24">&#xe146;</i></a>
             </td>
             <td>
               <a href="#" data-toggle="modal" data-target="#project-modal" data-project="{{project|json}}"><i class="material-icons md-24">&#xe3c9;</i></a>
@@ -99,12 +99,14 @@
 <!-- ############ PAGE END-->
 
 <script type="text/javascript">
-    $.getScript(  '/scripts/app_project.js', function() {
-        console.log('laod app_project');
-    });
     $.getScript(  '/scripts/app_com.js', function() {
         console.log('laod app_com');
     });
+
+    $.getScript(  '/scripts/app_project.js', function() {
+        console.log('laod app_project');
+    });
+
     $.getScript(  '/scripts/app_contract.js', function() {
         console.log('laod app_contract');
     });

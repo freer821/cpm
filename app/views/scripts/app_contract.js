@@ -174,9 +174,12 @@ $(document).ready(function(){
         $(this).find('form')[0].reset();
         $("#ofw_contract_id").val(contract.id);
         $("#ofw_project_id").val(contract.project_id);
+        $("#ofw_contract_customer").val(contract.contract_customers);
+
         if (contract.is_ofw_activ){
             $('#ofw_activ').show();
             $('#ofw_not_activ').hide();
+            $("#add_acceptance").hide();
             //set content
             if (contract.ofw) {
                 $("#ofw_worker_name").val(contract.ofw.worker_name);
@@ -232,6 +235,7 @@ $(document).ready(function(){
 
                 if (contract.ofw.is_acceptance_activ){
                     $("#is_acceptance_activ").prop( "checked", true );
+                    $("#add_acceptance").show();
                 } else {
                     $("#is_acceptance_activ").prop( "checked", false );
                 }
@@ -239,6 +243,7 @@ $(document).ready(function(){
         } else {
             $('#ofw_activ').hide();
             $('#ofw_not_activ').show();
+            $("#add_acceptance").hide();
         }
     });
 
@@ -256,7 +261,6 @@ $(document).ready(function(){
                 '<td>'+'<a onclick="editInvoice(this)" data-invoice=\''+JSON.stringify(invoice)+'\'><i class="material-icons md-24">&#xe3c9;</i></a>'+'</td>'+
                 '<td>'+'<a onclick="delInvoice(this)" data-contract=\''+JSON.stringify(contract)+'\' data-invoice=\''+JSON.stringify(invoice)+'\'><i class="material-icons md-24">&#xe872;</i></a>'+'</td>'+
                 '</tr>';
-            console.log(table_content);
             $('#invoices > tbody:last-child').append(table_content);
         });
         $('#invoices-overview').show();
@@ -287,12 +291,31 @@ $(document).ready(function(){
     });
 
 
-    // date change events
-    // check the status when the date is changed
-    $(".date").on('dp.change', function (ev) {
-        calStatusOfBuilding();
+    $('#building_permission_form input, select').change(function() {
+        console.log('calStatusOfPermission');
         calStatusOfPermission();
     });
+
+    $('#contract-building-modal input').change(function() {
+        console.log('calStatusOfBuilding');
+        calStatusOfBuilding();
+    });
+
+    $('#contract-ofw-modal input').change(function() {
+        console.log('calStatusOfOFW');
+        if ($("#is_acceptance_activ").is(':checked')){
+            $("#add_acceptance").show();
+        } else {
+            $("#add_acceptance").hide();
+        }
+        calStatusOfOFW();
+    });
+
+    $('#invoice_form input').change(function() {
+        console.log('invoice_form');
+        calInvoiceStatus();
+    });
+
 
 });
 
@@ -301,28 +324,6 @@ function formatDate(time) {
     return moment(time).format("DD-MM-YYYY");
 }
 
-
-function getInvoiceStatus(code) {
-
-    switch (code){
-        case '00':
-            return 'Warten auf Unterlagen';
-        case '01':
-            return 'bereit abzurechnen';
-        case '02':
-            return 'abgerechnet';
-        case '03':
-            return 'WaG, gesendet';
-        case '04':
-            return 'WaG, genehmigt';
-        case '05':
-            return 'Gutschrift vorhanden';
-        case '06':
-            return 'Ueberzubearbeiten';
-        default:
-            return 'unknown status';
-    }
-}
 
 function editInvoice(element){
     $('#invoice_form')[0].reset();

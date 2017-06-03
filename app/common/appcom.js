@@ -37,95 +37,7 @@ const fullParallel = function (callbacks, last) {
     });
 };
 
-const calBuildingPermissionsStatus = function(permissions, build_finished_time) {
-
-    if (permissions) {
-        return 'no prermission';
-    }
-
-    let is_tpy_vba= false, last_permission_date = moment("2000-01-01");
-
-    for (var i = 0; i < permissions.length; i++ ) {
-        let permission = permissions[i];
-        if (permission.status.includes('includes') || permission.status.includes('includes') ) {
-            return 'zu bestaetigen';
-        }
-
-        if (permission.type === 'VBA') {
-            is_tpy_vba = true;
-        }
-
-        if (last_permission_date.isBefore(permissions.end)) {
-            last_permission_date = moment(permission.end);
-        }
-
-    }
-
-
-    if (is_tpy_vba) {
-        return 'bestaegigt';
-    }
-
-    if (build_finished_time) {
-        if (last_permission_date.isAfter(build_finished_time)) {
-            return 'bitte VBA verlaengen';
-        } else {
-            return 'bestaegigt';
-        }
-    }
-
-    return 'not defined status';
-
-
-};
-
-const calInvoicesStatus = function(invoices) {
-
-    let status = {
-        is_finished: false,
-        all_num: 0,
-        finished_num: 0,
-        current_value:0,
-        sum_value:0
-    };
-
-    if (invoices) {
-
-        status.all_num = invoices.length;
-        for( var i = 0; i < invoices.length; i ++){
-            let invoice = invoices[i];
-            if (invoice.guts_datum) {
-                status.finished_num +=1;
-            }
-
-            if (invoice.current_value) {
-                status.current_value = invoice.current_value;
-            }
-
-            if (invoice.sum) {
-                status.sum_value = invoice.sum;
-            }
-        }
-
-        if (status.finished_num === status.all_num &&  status.all_num > 0) {
-            status.is_finished = true;
-        }
-
-    }
-
-    return status;
-
-};
-
-const calOFWStatus = function (ofw) {
-  if (ofw.ofw_status) {
-      return ofw.ofw_status;
-  }
-
-  return 'no OFW status';
-};
-
-
+/**
 const getStatusOfContracts = function(contracts) {
     let contracts_status = [];
     for (var i = 0; i < contracts.length; i++) {
@@ -154,12 +66,13 @@ const getStatusOfContracts = function(contracts) {
     return contracts_status;
 };
 
+ */
+
 const doJSONRespond = function (res, json, next) {
     res.status(200);
     res.json(json);
     next();
 };
-
 
 function getBulidungStatus(status_code) {
     switch (status_code) {
@@ -178,11 +91,93 @@ function getBulidungStatus(status_code) {
     }
 }
 
+function calTotalStatusOfPermissions(contract) {
+    if (contract.is_building_permission_activ) {
+        let isVBAExisted = false;
+        let last_permission_end = moment("2000-01-01");
+        if (contract.building_permission) {
+            for (var i = 0; i < contract.building_permission.length; i++) {
+                let permission = contract.building_permission[i];
+
+                if (permission.permission_status === 'zu bestimmen' || permission.permission_status === 'zu beantragen') {
+                    return 'zu bestaetigen';
+                }
+
+                if (permission.type === 'VBA') {
+                    isVBAExisted = true;
+                }
+
+                if (last_permission_end.isBefore(permission.end)) {
+                    last_permission_end = moment(permission.end);
+                }
+            }
+
+            if (isVBAExisted) {
+                return 'bestaegigt';
+            }
+
+            if (contract.building_work) {
+                if (last_permission_end.isBefore(contract.building_work.plan_end)) {
+                    return 'bitte VBA verlaengen';
+                } else {
+                    return 'bestaegigt';
+                }
+            }
+
+        } else {
+            return 'no permissions'
+        }
+
+    } else {
+        return 'nicht benoetigt';
+    }
+}
+
+const calInvoicesStatus = function(contract) {
+
+    let invoices = contract.invoice;
+    let current_paid_value = 0, sum_value = 0;
+    let status = {
+        is_finished: false,
+        descrip: 'no invoices'
+    };
+
+    if (invoices) {
+
+        if (invoices.length > 0) {
+            for( var i = 0; i < invoices.length; i ++){
+                let invoice = invoices[i];
+                if (invoice.guts_datum) {
+                    current_paid_value +=invoice.guts_datum;
+                }
+
+                if (invoice.sum) {
+                    sum_value += invoice.sum;
+                }
+            }
+        }
+
+        if (status.current_paid_value === status.sum_value) {
+            status.is_finished = true;
+        }
+
+        if (invoices.length === 1) {
+            status.descrip = invoices[0].invoice_status;
+        } else {
+            status.descrip =current_paid_value + ' / ' + sum_value;
+        }
+    }
+
+    return status;
+
+};
+
 module.exports = {
     zeroPad: zeroPad,
     getNumValue:getNumValue,
     getDate: getDate,
-    getStatusOfContracts:getStatusOfContracts,
     fullParallel:fullParallel,
-    doJSONRespond:doJSONRespond
+    doJSONRespond:doJSONRespond,
+    calTotalStatusOfPermissions:calTotalStatusOfPermissions,
+    calInvoicesStatus:calInvoicesStatus
 };

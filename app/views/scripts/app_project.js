@@ -216,7 +216,7 @@ function contractDetail(d) {
         '</div>'+
         '<div class="col-sm-4">'+
         '<div class="md-form-group">'+
-        '<input class="md-input" value="'+d.invoice_status +'" readonly>'+
+        '<input class="md-input" value="'+getInvoiceStatus(d.invoices_status) +'" readonly>'+
         '<label>Invoice Status</label>'+
         '</div>'+
         '</div>'+         
