@@ -274,20 +274,21 @@ $(document).ready(function(){
         $("#building_contract_id").val(contract.id);
         $("#building_project_id").val(contract.project_id);
 
+        $('#procent_completion').slider({
+            formatter: function(value) {
+                return value+'%';
+            }
+        });
+        
         if (contract.building_work) {
             $("#plan_begin").val(formatDate(contract.building_work.plan_begin));
             $("#plan_end").val(formatDate(contract.building_work.plan_end));
             $("#building_worker_name").val(contract.building_work.worker_name);
             $("#building_working_months").val(contract.building_work.working_months);
             $("#building_status").val(contract.building_work.status);
-            $('#procent_completion').slider({
-                formatter: function(value) {
-                    return value+'%';
-                }
-            });
+
             $('#procent_completion').slider('setValue',contract.building_work.procent_completion);
         }
-
     });
 
 
