@@ -12,7 +12,7 @@ const itemSchema = require('./../model/item');
 const projectSchema = require('./../model/project');
 const contractSchema = require('./../model/contract');
 
-const com = require('./appcom');
+const com = require('./common');
 
 var cpmDB;
 var User;

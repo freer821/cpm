@@ -5,7 +5,7 @@
 const moment = require('moment');
 const logger = require('../common/logger');
 const db = require('../common/database');
-const common = require('../common/appcom');
+const common = require('../common/common');
 var ObjectId = require('mongoose').Types.ObjectId;
 
 function updateContractBasic(request, callback) {

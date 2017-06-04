@@ -5,7 +5,7 @@
 const moment = require('moment');
 const logger = require('../common/logger');
 const db = require('../common/database');
-const common = require('../common/appcom');
+const common = require('../common/common');
 
 const getAllProjects = function(req, res, next) {
     db.getProjects({}, function (err, pros) {
