@@ -22,6 +22,7 @@ const projectSchema = new Schema({
         light: Number,
         others: Number        // others
     },
+    constracts_status: String,
     ts: Date,
     created: Date
 },{ versionKey: false });

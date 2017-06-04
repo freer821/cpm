@@ -250,6 +250,7 @@ const editProject = function (condition, project, callback) {
                     light: 0,
                     others: 0        // others
                 },
+                constracts_status: '0/0',
                 created: new Date()
             }
         },
@@ -361,7 +362,18 @@ const countContract = function (callback) {
     });
 };
 
-const updateProjectContractType = function(project_id, contract_types) {
+const updateProjectAfterContractUpdate = function(project_id) {
+
+    getContracts({'project_id':project_id}, function (err, contracts) {
+        if (err) {
+            logger.error('error to update the project types ', project_id);
+        } else {
+            let finished_contracts_num = 0;
+            if (contracts.length > 0) {
+
+            }
+        }
+    });
     Project.findOne({id: project_id}, function (err, project) {
         if (contract_types.electric) {
             project.contract_types.electric +=1;

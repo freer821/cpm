@@ -50,7 +50,7 @@ function updateContractBasic(request, callback) {
                 callback(err);
             } else {
                 callback(undefined, request.project_id);
-                db.updateProjectContractType(request.project_id,contract.contract_typ);
+                //db.updateProjectContractType(request.project_id,contract.contract_typ);
             }
         });
     } else {
@@ -66,7 +66,7 @@ function updateContractBasic(request, callback) {
                     callback(err);
                 } else {
                     callback(undefined, request.project_id);
-                    db.updateProjectContractType(request.project_id,contract.contract_typ);
+                    //db.updateProjectContractType(request.project_id,contract.contract_typ);
                 }
             });
 
