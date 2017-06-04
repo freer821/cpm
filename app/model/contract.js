@@ -7,6 +7,7 @@ const Schema = mongoose.Schema;
 
 const contractSchema = new Schema({
     id: String,
+    contract_extern_id: String,
     contract_street: String,
     customer: String, // auftraggeber
     cost_code: String,          // kst

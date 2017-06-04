@@ -12,6 +12,7 @@ $(document).ready(function(){
 
             //set content
             $("#customer").val(contract.customer);
+            $("#contract_extern_id").val(contract.contract_extern_id);
             $("#partner_name").val(contract.partner_name);
             $("#sap_nr").val(contract.sap_nr);
             $("#cost_code").val(contract.cost_code);

@@ -35,26 +35,26 @@
             <td>{{project.community}}</td>
             <td>{{project.street}}</td>
             <td>{{project.housenr}}</td>
-            <td>{{project.constracts_status}}</td>
+            <td>{{project.contracts_status}}</td>
             <td>
               <div class="row">
               <label class="col-md-1 md-check">
-              <input type="checkbox" {% if project.contract_types.electric >0 %} checked {% endif %}><i class="red"></i>
+              <input type="checkbox" {% if project.contract_types.electric %} checked {% endif %}><i class="red"></i>
               </label>
               <label class="col-md-1 md-check">
-              <input type="checkbox" {% if project.contract_types.water >0 %} checked {% endif %}><i class="green"></i>
+              <input type="checkbox" {% if project.contract_types.water %} checked {% endif %}><i class="green"></i>
               </label>
               <label class="col-md-1 md-check">
-              <input type="checkbox" {% if project.contract_types.light >0 %} checked {% endif %}><i class="blue"></i>
+              <input type="checkbox" {% if project.contract_types.light %} checked {% endif %}><i class="blue"></i>
               </label>
               <label class="col-md-1 md-check">
-              <input type="checkbox" {% if project.contract_types.telecom >0 %} checked {% endif %}><i class="orange"></i>
+              <input type="checkbox" {% if project.contract_types.telecom %} checked {% endif %}><i class="orange"></i>
               </label>
               <label class="col-md-1 md-check">
-              <input type="checkbox" {% if project.contract_types.gas >0 %} checked {% endif %}><i class="yellow"></i>
+              <input type="checkbox" {% if project.contract_types.gas %} checked {% endif %}><i class="yellow"></i>
               </label>
               <label class="col-md-1 md-check">
-              <input type="checkbox" {% if project.contract_types.others >0 %} checked {% endif %}><i class="grey"></i>
+              <input type="checkbox" {% if project.contract_types.others %} checked {% endif %}><i class="grey"></i>
               </label>
               </div>
             </td>

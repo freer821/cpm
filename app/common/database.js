@@ -243,12 +243,12 @@ const editProject = function (condition, project, callback) {
             $set: project,
             $setOnInsert: {
                 contract_types:{
-                    electric: 0,     // elektro
-                    water: 0,      // wasser
-                    gas: 0,         // gas
-                    telecom: 0,     // telekom
-                    light: 0,
-                    others: 0        // others
+                    electric: Boolean,     // elektro
+                    water: Boolean,      // wasser
+                    gas: Boolean,         // gas
+                    telecom: Boolean,     // telekom
+                    light: Boolean,
+                    others: Boolean        // others
                 },
                 constracts_status: '0/0',
                 created: new Date()
@@ -369,67 +369,56 @@ const updateProjectAfterContractUpdate = function(project_id) {
             logger.error('error to update the project types ', project_id);
         } else {
             let finished_contracts_num = 0;
+            let project = {
+                contract_types: {
+                    electric: false,     // elektro
+                    water: false,      // wasser
+                    gas: false,         // gas
+                    telecom: false,     // telekom
+                    light: false,
+                    others: false        // others
+                },
+                contracts_status: '0/0'
+            };
             if (contracts.length > 0) {
+                contracts.forEach((contract) => {
+                    let invoices_status = com.calInvoicesStatus(contract);
+                    if (invoices_status.is_finished) {
+                        finished_contracts_num++;
+                    }
+                    if (contract.contract_typ.electric) {
+                        project.contract_types.electric =true;
+                    }
 
+                    if (contract.contract_typ.water) {
+                        project.contract_types.water = true;
+                    }
+
+                    if (contract.contract_typ.gas) {
+                        project.contract_types.gas = true;
+                    }
+
+                    if (contract.contract_typ.telecom) {
+                        project.contract_types.telecom = true;
+                    }
+
+                    if (contract.contract_typ.light) {
+                        project.contract_types.light = true;
+                    }
+
+                    if (contract.contract_typ.others) {
+                        project.contract_types.others = true;
+                    }
+
+                });
+
+                project.contracts_status = finished_contracts_num +' / '+ contracts.length;
+
+                editProject({id: project_id}, project, function () {
+                    // TODO
+                });
             }
         }
-    });
-    Project.findOne({id: project_id}, function (err, project) {
-        if (contract_types.electric) {
-            project.contract_types.electric +=1;
-        } else {
-            if (project.contract_types.electric > 0) {
-                project.contract_types.electric -= 1;
-            }
-        }
-
-        if (contract_types.water) {
-            project.contract_types.water +=1;
-        } else {
-            if (project.contract_types.water > 0) {
-                project.contract_types.water -= 1;
-            }
-        }
-
-        if (contract_types.gas) {
-            project.contract_types.gas +=1;
-        } else {
-            if (project.contract_types.gas > 0) {
-                project.contract_types.gas -= 1;
-            }
-        }
-
-        if (contract_types.telecom) {
-            project.contract_types.telecom +=1;
-        } else {
-            if (project.contract_types.telecom > 0) {
-                project.contract_types.telecom -= 1;
-            }
-        }
-
-        if (contract_types.light) {
-            project.contract_types.light +=1;
-        } else {
-            if (project.contract_types.light > 0) {
-                project.contract_types.light -= 1;
-            }
-        }
-
-        if (contract_types.others) {
-            project.contract_types.others +=1;
-        } else {
-            if (project.contract_types.others > 0) {
-                project.contract_types.others -= 1;
-            }
-        }
-
-
-        project.save(function (err) {
-            if(err) {
-                logger.error('error to update the contract types of project', contract_types);
-            }
-        });
-
     });
 };
 
@@ -462,5 +451,5 @@ module.exports = {
     editContractAddIntoArray: editContractAddIntoArray,
     editContractRemoveFromArray:editContractRemoveFromArray,
     countContract:countContract,
-    updateProjectContractType:updateProjectContractType
+    updateProjectAfterContractUpdate:updateProjectAfterContractUpdate
 };

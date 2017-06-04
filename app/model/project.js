@@ -15,14 +15,14 @@ const projectSchema = new Schema({
     files_path: String, // network file path
     linesplan_files_path: String,   // for fremdleitungsplan
     contract_types: {
-        electric: Number,     // elektro
-        water: Number,      // wasser
-        gas: Number,         // gas
-        telecom: Number,     // telekom
-        light: Number,
-        others: Number        // others
+        electric: Boolean,     // elektro
+        water: Boolean,      // wasser
+        gas: Boolean,         // gas
+        telecom: Boolean,     // telekom
+        light: Boolean,
+        others: Boolean        // others
     },
-    constracts_status: String,
+    contracts_status: String,
     ts: Date,
     created: Date
 },{ versionKey: false });

@@ -145,20 +145,21 @@ const calInvoicesStatus = function(contract) {
     if (invoices) {
 
         if (invoices.length > 0) {
-            for( var i = 0; i < invoices.length; i ++){
+            for (var i = 0; i < invoices.length; i++) {
                 let invoice = invoices[i];
                 if (invoice.guts_datum) {
-                    current_paid_value +=invoice.guts_datum;
+                    current_paid_value += invoice.sum;
                 }
 
                 if (invoice.sum) {
                     sum_value += invoice.sum;
                 }
             }
-        }
 
-        if (status.current_paid_value === status.sum_value) {
-            status.is_finished = true;
+
+            if (current_paid_value === sum_value) {
+                status.is_finished = true;
+            }
         }
 
         if (invoices.length === 1) {

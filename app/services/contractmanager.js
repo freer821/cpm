@@ -12,6 +12,7 @@ function updateContractBasic(request, callback) {
 
     let contract = {
         customer: request.customer,
+        contract_extern_id: request.contract_extern_id,
         cost_code: request.cost_code,          // kst
         contract_street: request.contract_street,
         project_id: request.project_id,  // vom auftraggeber
@@ -50,7 +51,7 @@ function updateContractBasic(request, callback) {
                 callback(err);
             } else {
                 callback(undefined, request.project_id);
-                //db.updateProjectContractType(request.project_id,contract.contract_typ);
+                db.updateProjectAfterContractUpdate(request.project_id);
             }
         });
     } else {
@@ -66,7 +67,7 @@ function updateContractBasic(request, callback) {
                     callback(err);
                 } else {
                     callback(undefined, request.project_id);
-                    //db.updateProjectContractType(request.project_id,contract.contract_typ);
+                    db.updateProjectAfterContractUpdate(request.project_id);
                 }
             });
 
