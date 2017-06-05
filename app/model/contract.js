@@ -20,8 +20,9 @@ const contractSchema = new Schema({
     contract_delivery: Date,  // contract delivery auftrag_uebergeb
     doc_delivery: Date, // documents delivery unterlage_uebergeb
     work_content: String, // arbeitsbemerkung
-    street: String,
-    housenr: String,
+    permissions_status: String,
+    invoices_status:String,
+    total_status:{type: String, enum: ['UNFINISHED', 'FINISHED', 'DEAKTIV']},
     contract_typ: {            // auftrag typ
         electric: Boolean,     // elektro
         water: Boolean,      // wasser

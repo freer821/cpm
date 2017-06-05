@@ -243,12 +243,12 @@ const editProject = function (condition, project, callback) {
             $set: project,
             $setOnInsert: {
                 contract_types:{
-                    electric: Boolean,     // elektro
-                    water: Boolean,      // wasser
-                    gas: Boolean,         // gas
-                    telecom: Boolean,     // telekom
-                    light: Boolean,
-                    others: Boolean        // others
+                    electric: false,     // elektro
+                    water: false,      // wasser
+                    gas: false,         // gas
+                    telecom: false,     // telekom
+                    light: false,
+                    others: false        // others
                 },
                 constracts_status: '0/0',
                 created: new Date()
@@ -300,6 +300,7 @@ const editContract = function (condition, contract, callback) {
         { // Updates
             $set: contract,
             $setOnInsert: {
+                total_status: 'UNFINISHED',
                 created: new Date()
             }
         },
@@ -385,7 +386,17 @@ const updateProjectAfterContractUpdate = function(project_id) {
                     let invoices_status = com.calInvoicesStatus(contract);
                     if (invoices_status.is_finished) {
                         finished_contracts_num++;
+                        contract.total_status = 'FINISHED'
                     }
+
+                    contract.invoices_status = invoices_status.descrip;
+
+                    contract.permissions_status = com.calTotalStatusOfPermissions(contract);
+
+                    contract.save(function (err) {
+                        logger.error('error to update the contract status', contract);
+                    });
+
                     if (contract.contract_typ.electric) {
                         project.contract_types.electric =true;
                     }

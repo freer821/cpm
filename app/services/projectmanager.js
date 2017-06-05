@@ -53,6 +53,8 @@ const getContractByProjectID = function (req, res, next) {
 };
 
 function filterContractsByUser(user_cost_code, constracts) {
+    return constracts;
+    /*
     let cons = [];
     constracts.forEach((contract) => {
         let con = contract;
@@ -64,7 +66,7 @@ function filterContractsByUser(user_cost_code, constracts) {
     });
 
     return cons;
-    /*
+
      if (user_cost_code) {
      if (Array.isArray(user_cost_code)){
      return constracts.filter(function (constract) {

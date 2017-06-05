@@ -95,7 +95,7 @@ function loadContractsOfProject(project_id) {
             {"data": "work_content"},
             {"data": "cost_code"},
             {"data": "customer"},
-            {"data": "status_finished"},
+            {"data": "total_status"},
             {
                 "data": function (row, type, full, meta) {
                     return '<a href="#" data-toggle="modal" data-target="#contract-basic-modal" data-contract=\''+JSON.stringify(row)+'\'><i class="material-icons md-24">&#xe3c9;</i></a>';

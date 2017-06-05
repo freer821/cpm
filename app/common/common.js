@@ -95,7 +95,7 @@ function calTotalStatusOfPermissions(contract) {
     if (contract.is_building_permission_activ) {
         let isVBAExisted = false;
         let last_permission_end = moment("2000-01-01");
-        if (contract.building_permission) {
+        if (contract.building_permission && contract.building_permission.length > 0) {
             for (var i = 0; i < contract.building_permission.length; i++) {
                 let permission = contract.building_permission[i];
 
