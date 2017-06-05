@@ -7,6 +7,7 @@ const logger = require('../common/logger');
 const db = require('../common/database');
 const common = require('../common/common');
 var ObjectId = require('mongoose').Types.ObjectId;
+const uuidV4 = require('uuid/v4');
 
 function updateContractBasic(request, callback) {
 
@@ -345,24 +346,54 @@ const editContractPartial = function(req, res, next){
 
 const printContract = function(req, res, next){
     let contract_id = req.params.id;
+    db.getContracts({'id':contract_id}, function (err, contracts) {
+        if(err) {
+            logger.error('error to find contract in db', err.message);
+        }
+        if(contracts){
+            let contract = contracts[0];
 
+            db.getProjects({'id':contract.project_id}, function(err, projects){
+                if(projects){
+                    let project = projects[0];
+
+                    let fs = require('fs');
+                    let path = require('path');
+                    let filepath = path.join(__dirname, '../scripts/');
+                    let filename = uuidV4()+'.json';
+
+                    let data ={
+                        contract: contract,
+                        project: project
+                    }
+
+                    fs.writeFile(filepath+filename, JSON.stringify(data));
+
+                    callPythonShellScript(filepath, 'genContractTPL.py', filename, res);                    
+                }        
+            });
+        }
+    });
+
+};
+
+function callPythonShellScript(path, scriptFile, argsFile, res){
     let PythonShell = require('python-shell');
-    let path = require('path');
-    let scriptPath = path.join(__dirname, '../scripts');
+    console.log(argsFile);
     let options = {
       mode: 'text',
       pythonOptions: ['-u'],
-      scriptPath: scriptPath,
-      args: [contract_id]
+      scriptPath: path,
+      args: [argsFile]
     };
 
-    PythonShell.run('genContractTPL.py', options, function (err, results) {
+    PythonShell.run(scriptFile, options, function (err, results) {
       if (err) logger.error('python shell run error', err);
       // results is an array consisting of messages collected during execution
-      console.log('results: %j', results);
+      //console.log('results: %j', results);
       res.send('/download/'+results[0]);
     });
-};
+}
 
 module.exports = {
     editContract:editContract,
