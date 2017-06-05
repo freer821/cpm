@@ -28,18 +28,32 @@ const addProject = function (req, res, next) {
             let project = req.body;
             project.ts = new Date();
             project.id = 'H'+common.zeroPad(count, 6);
+            project.files_path = config.files.root_path+project.id;
+            project.linesplan_files_path = config.files.root_path+project.id+'/fremdleitungplan'
             db.editProject({id: project.id}, project);
 
-            mkdirp(config.files.root_path+project.id, function(err) {
+            mkdirp(project.files_path, function(err) {
 
                 if (err) {
-                    logger.error('error to create root path: '+project.id, err.message);
+                    logger.error('error to create root path: '+project.files_path, err.message);
                 } else {
-                    logger.trace('success to create root path: '+project.id);
+                    logger.trace('success to create root path: '+project.files_path);
                 }
                 // path exists unless there was an error
 
             });
+
+            mkdirp(project.linesplan_files_path, function(err) {
+
+                if (err) {
+                    logger.error('error to create root path: '+project.linesplan_files_path, err.message);
+                } else {
+                    logger.trace('success to create root path: '+project.linesplan_files_path);
+                }
+                // path exists unless there was an error
+
+            });
+
             common.doJSONRespond(res,{'action':'add_con','project':project},next);
         }
     });
