@@ -3,9 +3,12 @@
  */
 'use strict';
 const moment = require('moment');
+const mkdirp = require('mkdirp');
 const logger = require('../common/logger');
+const config = require('../common/config');
 const db = require('../common/database');
 const common = require('../common/common');
+
 
 const getAllProjects = function(req, res, next) {
     db.getProjects({}, function (err, pros) {
@@ -29,7 +32,17 @@ const addProject = function (req, res, next) {
 
             let project_adr = project.street+', '+project.community+', '+project.zipcode+', '+project.city;
             //res.render('addcontract', {title:'Project Management', project_id: project.id, project_adr:project_adr,  user: req.user});
-            common.doJSONRespond(res,{'action':'refresh'},next);
+            mkdirp(config.files.root_path+project.id, function(err) {
+
+                if (err) {
+                    logger.error('error to create root path: '+project.id, err.message);
+                } else {
+                    logger.trace('success to create root path: '+project.id);
+                }
+                // path exists unless there was an error
+
+            });
+            common.doJSONRespond(res,{'action':'refresh', 'project':project},next);
         }
     });
 };

@@ -44,10 +44,15 @@ function doAction(response) {
     if (response.action) {
         switch (response.action) {
             case 'refresh':
-                location.reload();
+                if (response.project) {
+                    $('#contract-basic-modal').modal('show');
+                    $("#basic_project_id").val(response.project.id);
+                    $("#contract_street").val(response.project.street+' '+response.project.housenr);
+                } else {
+                    location.reload();
+                }
                 break;
             case 'reload':
-                console.log(response.project_id);
                 $('#' + response.project_id).DataTable().ajax.reload();
                 break;
             default:

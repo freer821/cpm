@@ -22,4 +22,4 @@ default:
   upload:
     icon: './app/upload/icon'
   files:
-    root_path: 'E:\doc\cpms'
+    root_path: 'E:\doc\cpms\'
