@@ -30,8 +30,6 @@ const addProject = function (req, res, next) {
             project.id = 'H'+common.zeroPad(count, 6);
             db.editProject({id: project.id}, project);
 
-            let project_adr = project.street+', '+project.community+', '+project.zipcode+', '+project.city;
-            //res.render('addcontract', {title:'Project Management', project_id: project.id, project_adr:project_adr,  user: req.user});
             mkdirp(config.files.root_path+project.id, function(err) {
 
                 if (err) {
@@ -42,7 +40,7 @@ const addProject = function (req, res, next) {
                 // path exists unless there was an error
 
             });
-            common.doJSONRespond(res,{'action':'refresh', 'project':project},next);
+            common.doJSONRespond(res,{'action':'add_con','project':project},next);
         }
     });
 };
