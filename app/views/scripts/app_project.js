@@ -98,7 +98,7 @@ function loadContractsOfProject(project_id) {
             {"data": "total_status"},
             {
                 "data": function (row, type, full, meta) {
-                    return '<a href="#" data-toggle="modal" data-target="#contract-basic-modal" data-contract=\''+JSON.stringify(row)+'\'><i class="material-icons md-24">&#xe3c9;</i></a>';
+                    return '<a href="#" data-toggle="modal" data-target="#contract-basic-modal" data-contract=\''+JSON.stringify(row)+'\' data-backdrop="static"><i class="material-icons md-24">&#xe3c9;</i></a>';
                 }
             },
             {
@@ -117,7 +117,7 @@ function contractDetail(d) {
         '<div class="row row-sm">'+
         '<div class="col-sm-1">'+
         '<div class="md-form-group" style="padding: 12px 16px;">'+
-        '<a href="#" data-toggle="modal" data-target="#contract-permissions-modal" data-contract=\''+JSON.stringify(d)+'\' class="list-left">' +
+        '<a href="#" data-toggle="modal" data-target="#contract-permissions-modal" data-contract=\''+JSON.stringify(d)+'\' data-backdrop="static" class="list-left">' +
         '<span class="w-40 circle accent">' +
         '<i class="fa fa-envelope"></i>' +
         '</span>' +
@@ -147,7 +147,7 @@ function contractDetail(d) {
         '<div class="row row-sm">'+
         '<div class="col-sm-1">'+
         '<div class="md-form-group" style="padding: 12px 16px;">'+
-        '<a href="#" data-toggle="modal" data-target="#contract-building-modal" data-contract=\''+JSON.stringify(d)+'\' class="list-left">' +
+        '<a href="#" data-toggle="modal" data-target="#contract-building-modal" data-contract=\''+JSON.stringify(d)+'\' data-backdrop="static" class="list-left">' +
         '<span class="w-40 circle green">' +
         '<i class="fa fa-smile-o"></i>' +
         '</span>' +
@@ -177,7 +177,7 @@ function contractDetail(d) {
         '<div class="row row-sm">'+
         '<div class="col-sm-1">'+
         '<div class="md-form-group" style="padding: 12px 16px;">'+
-        '<a href="#" data-toggle="modal" data-target="#contract-ofw-modal" data-contract=\''+JSON.stringify(d)+'\' class="list-left">' +
+        '<a href="#" data-toggle="modal" data-target="#contract-ofw-modal" data-contract=\''+JSON.stringify(d)+'\' data-backdrop="static" class="list-left">' +
         '<span class="w-40 circle warn">' +
         '<i class="fa fa-flash"></i>' +
         '</span>' +
@@ -207,7 +207,7 @@ function contractDetail(d) {
         '<div class="row row-sm">'+
         '<div class="col-sm-1">'+
         '<div class="md-form-group" style="padding: 12px 16px;">'+
-        '<a href="#" data-toggle="modal" data-target="#contract-invoices-modal" data-contract=\''+JSON.stringify(d)+'\' class="list-left">' +
+        '<a href="#" data-toggle="modal" data-target="#contract-invoices-modal" data-contract=\''+JSON.stringify(d)+'\' data-backdrop="static" class="list-left">' +
         '<span class="w-40 circle danger">' +
         '<i class="fa fa-database"></i>' +
         '</span>' +
