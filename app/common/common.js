@@ -173,6 +173,107 @@ const calInvoicesStatus = function(contract) {
 
 };
 
+const filterContractsForDashboard = function (contracts) {
+    let overview_status = {
+        new_contracts_num_in_last_days: 0,
+        contracts_num_with_building_plan: 0,
+        contracts_num_with_building_plan_in_last_month: 0,
+        contracts_num_with_permissions: 0,
+        contracts_num_with_building_plan_update: 0,
+        contracts_num_with_ofw: 0,
+        contracts_num_with_ofw_delivery: 0,
+        contracts_num_with_ofw_check_completion: 0,
+        contracts_num_with_ofw_acceptance: 0,
+        contracts_num_with_vba_extend: 0
+    };
+};
+
+function compare_time_point_in_future(num) {
+    return moment().add(num, 'days');
+}
+
+function compare_time_point_in_past(num) {
+    return moment().subtract(num, 'days');
+}
+
+
+function is_new_contract_in_last_days(contract) {
+
+    if (moment(contract.contract_delivery).isAfter(compare_time_point_in_past(10))) {
+        return true;
+    }
+
+    return false;
+}
+
+function is_contract_with_building_plan(contract) {
+    if (contract.building_work) {
+        if (moment(contract.building_work.plan_begin).isValid() || moment(contract.building_work.plan_end).isValid()) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+function is_contract_with_building_plan_in_last_month(contract) {
+    if (contract.building_work) {
+        if (moment(contract.building_work.plan_begin).isAfter(moment())&&moment(contract.building_work.plan_begin).isBefore(compare_time_point_in_future(28))) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+function is_contract_with_permissions(contract) {
+
+}
+
+function is_contract_with_building_plan_update(contract) {
+    if (contract.building_work) {
+        if (moment(contract.building_work.plan_end).isBefore(moment())&& contract.building_work.procent_completion < 100 ) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+function is_contract_with_ofw(contract) {
+
+}
+
+function is_contract_with_ofw_delivery(contract) {
+
+}
+
+function is_contract_with_ofw_check_completion(contract) {
+
+    if (contract.is_ofw_activ && contract.ofw) {
+        if (moment().isAfter(contract.ofw.completion_at) && !contract.ofw.clean) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+function is_contract_with_ofw_acceptance(contract) {
+
+}
+
+function is_contract_with_vba_extend(contract) {
+
+    if (contract.permissions_status === 'bitte VBA verlaengen') {
+        return true;
+    }
+
+    return false;
+}
+
+
+
 module.exports = {
     zeroPad: zeroPad,
     getNumValue:getNumValue,
@@ -180,5 +281,6 @@ module.exports = {
     fullParallel:fullParallel,
     doJSONRespond:doJSONRespond,
     calTotalStatusOfPermissions:calTotalStatusOfPermissions,
-    calInvoicesStatus:calInvoicesStatus
+    calInvoicesStatus:calInvoicesStatus,
+    filterContractsForDashboard:filterContractsForDashboard
 };

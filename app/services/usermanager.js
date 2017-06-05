@@ -155,7 +155,15 @@ const getDashInfo = function (req, res, next) {
                     logger.error('error to find user in db', err.message);
                     res.render('dashboard',{title:'Main', user:req.user});
                 } else {
-                    res.render('dashboard',{title:'Main', user:req.user , items: items});
+                    let items_emergencies_num = 0;
+                    if (items) {
+                        items.forEach((item) => {
+                            if (item.priority === 'Emergency') {
+                                items_emergencies_num++;
+                            }
+                        });
+                    }
+                    res.render('dashboard',{title:'Main', user:req.user ,items_num:items.length, items_emergencies_num:items_emergencies_num, items: items});
                 }
             });            
         }
