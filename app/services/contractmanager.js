@@ -52,7 +52,6 @@ function updateContractBasic(request, callback) {
                 callback(err);
             } else {
                 callback(undefined, request.project_id);
-                db.updateProjectAfterContractUpdate(request.project_id);
             }
         });
     } else {
@@ -68,7 +67,6 @@ function updateContractBasic(request, callback) {
                     callback(err);
                 } else {
                     callback(undefined, request.project_id);
-                    db.updateProjectAfterContractUpdate(request.project_id);
                 }
             });
 
@@ -270,6 +268,7 @@ const editContract = function (req, res, next) {
             if(err){
                 res.send('update operation failed!!');
             } else {
+                db.updateProjectAfterContractUpdate(project_id);
                 common.doJSONRespond(res,{'action':'reload','project_id':project_id},next)
             }
         });
@@ -286,6 +285,7 @@ const editContract = function (req, res, next) {
             if (err) {
                 res.send('update operation failed!!');
             } else {
+                db.updateProjectAfterContractUpdate(project_id);
                 common.doJSONRespond(res,{'action':'reload','project_id':project_id},next)
             }
         });
@@ -302,6 +302,7 @@ const editContract = function (req, res, next) {
             if (err) {
                 res.send('update operation failed!!');
             } else {
+                db.updateProjectAfterContractUpdate(project_id);
                 common.doJSONRespond(res,{'action':'reload','project_id':project_id},next)
             }
         });
