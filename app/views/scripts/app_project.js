@@ -22,10 +22,12 @@ $(document).ready(function(){
             $("#linesplan_files_path").val(project.linesplan_files_path);
             $("#zipcode").val(project.zipcode);
             $("#comment").val(project.comment);
-            $("#files_path").attr("href", 'file:///'+project.files_path);
-            $("#files_path").html(project.files_path);
-            $("#linesplan_files_path").attr("href", 'file:///'+project.linesplan_files_path);
-            $("#linesplan_files_path").html(project.linesplan_files_path);
+            if (project.is_linesplan_files_exist) {
+                $("#is_linesplan_files_exist").prop( "checked", true );
+            } else {
+                $("#is_linesplan_files_exist").prop( "checked", false );
+            }
+            $("#files_path").val(project.files_path);
         } else {
             //set title
             $('#project-modal-title').text('Add Project');

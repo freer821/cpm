@@ -64,7 +64,7 @@
                             <div class="form-group row">
                                 <label for="files_path" class="col-sm-2 form-control-label">Files Path</label>
                                 <div class="col-sm-10">
-                                    <a href="#" id="files_path" name="files_path" class="form-control-label" target="_blank"></a>
+                                    <input type="text" class="form-control" id="files_path" readonly>
                                 </div>
                             </div>
                         </div>
@@ -72,9 +72,12 @@
                     <div class="row">
                         <div class="col-xs-18 col-md-12">
                             <div class="form-group row">
-                                <label for="linesplan_files_path" class="col-sm-2 form-control-label">Line Plan Files Path</label>
+                                <label for="is_linesplan_files_exist" class="col-sm-2 form-control-label">Line Plan Files Path</label>
                                 <div class="col-sm-10">
-                                    <a href="#" id="linesplan_files_path" name="linesplan_files_path" class="form-control-label" target="_blank"></a>
+                                    <label class="ui-switch primary m-t-xs m-r">
+                                        <input type="checkbox" name="is_linesplan_files_exist" id="is_linesplan_files_exist">
+                                        <i></i>
+                                    </label>
                                 </div>
                             </div>
                         </div>

@@ -29,7 +29,6 @@ const addProject = function (req, res, next) {
             project.ts = new Date();
             project.id = 'H'+common.zeroPad(count, 6);
             project.files_path = config.files.root_path+project.id;
-            project.linesplan_files_path = config.files.root_path+project.id+'/fremdleitungplan'
             db.editProject({id: project.id}, project);
 
             mkdirp(project.files_path, function(err) {
@@ -43,12 +42,12 @@ const addProject = function (req, res, next) {
 
             });
 
-            mkdirp(project.linesplan_files_path, function(err) {
+            mkdirp(project.files_path+'/fremdleitungplan', function(err) {
 
                 if (err) {
-                    logger.error('error to create root path: '+project.linesplan_files_path, err.message);
+                    logger.error('error to create fremdleitungplan path: '+project.files_path+'/fremdleitungplan', err.message);
                 } else {
-                    logger.trace('success to create root path: '+project.linesplan_files_path);
+                    logger.trace('success to create fremdleitungplan path: '+project.files_path+'/fremdleitungplan');
                 }
                 // path exists unless there was an error
 
