@@ -13,7 +13,7 @@ const projectSchema = new Schema({
     city: String,
     comment: String,
     files_path: String, // network file path
-    linesplan_files_path: String,   // for fremdleitungsplan
+    is_linesplan_files_exist: Boolean,   // for fremdleitungsplan
     contract_types: {
         electric: Boolean,     // elektro
         water: Boolean,      // wasser

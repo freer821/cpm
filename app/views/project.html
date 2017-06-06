@@ -38,24 +38,41 @@
             <td>{{project.contracts_status}}</td>
             <td>
               <div class="row">
-              <label class="col-md-1 md-check">
-              <input type="checkbox" {% if project.contract_types.electric %} checked {% endif %}><i class="red"></i>
-              </label>
-              <label class="col-md-1 md-check">
-              <input type="checkbox" {% if project.contract_types.water %} checked {% endif %}><i class="green"></i>
-              </label>
-              <label class="col-md-1 md-check">
-              <input type="checkbox" {% if project.contract_types.light %} checked {% endif %}><i class="blue"></i>
-              </label>
-              <label class="col-md-1 md-check">
-              <input type="checkbox" {% if project.contract_types.telecom %} checked {% endif %}><i class="orange"></i>
-              </label>
-              <label class="col-md-1 md-check">
-              <input type="checkbox" {% if project.contract_types.gas %} checked {% endif %}><i class="yellow"></i>
-              </label>
-              <label class="col-md-1 md-check">
-              <input type="checkbox" {% if project.contract_types.others %} checked {% endif %}><i class="grey"></i>
-              </label>
+                {% if project.contract_types.electric %}
+                <span class="col-md-1 label label-lg red-500" style="border-style: solid">E</span>
+                {% else %}
+                <span class="col-md-1 label label-lg" style="border-style: solid">E</span>
+                {% endif %}
+
+                {% if project.contract_types.water %}
+                <span class="col-md-1 label label-lg green-500" style="border-style: solid">W</span>
+                {% else %}
+                  <span class="col-md-1 label label-lg" style="border-style: solid">W</span>
+                {% endif %}
+
+                {% if project.contract_types.light %}
+                  <span class="col-md-1 label label-lg blue-500" style="border-style: solid">B</span>
+                {% else %}
+                  <span class="col-md-1 label label-lg" style="border-style: solid">B</span>
+                {% endif %}
+
+                {% if project.contract_types.telecom %}
+                <span class="col-md-1 label label-lg orange-500" style="border-style: solid">T</span>
+                {% else %}
+                <span class="col-md-1 label label-lg" style="border-style: solid">T</span>
+                {% endif %}
+
+                {% if project.contract_types.gas %}
+                 <span class="col-md-1 label label-lg yellow-500" style="border-style: solid">G</span>
+                {% else %}
+                  <span class="col-md-1 label label-lg" style="border-style: solid">G</span>
+                {% endif %}
+
+                {% if project.contract_types.others %}
+                 <span class="col-md-1 label label-lg blue-grey-500" style="border-style: solid">S</span>
+                {% else %}
+                  <span class="col-md-1 label label-lg" style="border-style: solid">S</span>
+                {% endif %}
               </div>
             </td>
             <td>
