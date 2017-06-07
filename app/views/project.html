@@ -37,39 +37,41 @@
             <td class="td-va-c">{{project.housenr}}</td>
             <td class="td-va-c">{{project.contracts_status}}</td>
             <td>
-              <div class="row" >
+              <div class="row" style="margin-left: -5px">
                 {% if project.contract_types.electric %}
-                <span class="bd_s_w col-md-1 label label-lg red-500">E</span>
+                <span class="bd_s_w col-md-1 label label-lg red-900">E</span>
                 {% else %}
                 <span class="bd_s_w col-md-1 label label-lg">E</span>
                 {% endif %}
 
+                {% if project.contract_types.gas %}
+                 <span class="bd_s_w col-md-1 label label-lg amber-A400" >G</span>
+                {% else %}
+                  <span class="bd_s_w col-md-1 label label-lg">G</span>
+                {% endif %}
+
                 {% if project.contract_types.water %}
-                <span class="bd_s_w col-md-1 label label-lg green-500" >W</span>
+                <span class="bd_s_w col-md-1 label label-lg cyan-900" >W</span>
                 {% else %}
                   <span class="bd_s_w col-md-1 label label-lg">W</span>
                 {% endif %}
 
                 {% if project.contract_types.light %}
-                  <span class="bd_s_w col-md-1 label label-lg blue-500" >B</span>
+                  <span class="bd_s_w col-md-1 label label-lg teal-300" >B</span>
                 {% else %}
                   <span class="bd_s_w col-md-1 label label-lg">B</span>
                 {% endif %}
 
                 {% if project.contract_types.telecom %}
-                <span class="bd_s_w col-md-1 label label-lg orange-500" >T</span>
+                <span class="bd_s_w col-md-1 label label-lg pink-A100" >T</span>
                 {% else %}
                 <span class="bd_s_w col-md-1 label label-lg">T</span>
                 {% endif %}
 
-                {% if project.contract_types.gas %}
-                 <span class="bd_s_w col-md-1 label label-lg yellow-500" >G</span>
-                {% else %}
-                  <span class="bd_s_w col-md-1 label label-lg">G</span>
-                {% endif %}
+
 
                 {% if project.contract_types.others %}
-                 <span class="bd_s_w col-md-1 label label-lg blue-grey-500">S</span>
+                 <span class="bd_s_w col-md-1 label label-lg blue-grey-900">S</span>
                 {% else %}
                   <span class="bd_s_w col-md-1 label label-lg">S</span>
                 {% endif %}

@@ -5718,10 +5718,13 @@ tr.del td:before{
 }
 
 .bd_s_w {
-  padding-left: 3px !important;
-  padding-right: 3px !important;
-  padding: 8px 3px;
-  line-height: 0.5;
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+  font-size: 1rem !important;
+  border-radius: .4rem !important;
+  padding: 8px 1px;
+  margin-left: 5px !important;
+  line-height: 0.1;
   border-style: solid;
   color: rgb(255, 255, 255);
 }
