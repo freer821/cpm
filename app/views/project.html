@@ -29,56 +29,56 @@
           </thead>
           <tbody>
           {% for project in projects %}
-          <tr>
+          <tr style>
             <td class="details-control"></td>
-            <td>{{project.id}}</td>
-            <td>{{project.community}}</td>
-            <td>{{project.street}}</td>
-            <td>{{project.housenr}}</td>
-            <td>{{project.contracts_status}}</td>
+            <td class="td-va-c">{{project.id}}</td>
+            <td class="td-va-c">{{project.community}}</td>
+            <td class="td-va-c">{{project.street}}</td>
+            <td class="td-va-c">{{project.housenr}}</td>
+            <td class="td-va-c">{{project.contracts_status}}</td>
             <td>
-              <div class="row">
+              <div class="row" >
                 {% if project.contract_types.electric %}
-                <span class="col-md-1 label label-lg red-500" style="border-style: solid">E</span>
+                <span class="bd_s_w col-md-1 label label-lg red-500">E</span>
                 {% else %}
-                <span class="col-md-1 label label-lg" style="border-style: solid">E</span>
+                <span class="bd_s_w col-md-1 label label-lg">E</span>
                 {% endif %}
 
                 {% if project.contract_types.water %}
-                <span class="col-md-1 label label-lg green-500" style="border-style: solid">W</span>
+                <span class="bd_s_w col-md-1 label label-lg green-500" >W</span>
                 {% else %}
-                  <span class="col-md-1 label label-lg" style="border-style: solid">W</span>
+                  <span class="bd_s_w col-md-1 label label-lg">W</span>
                 {% endif %}
 
                 {% if project.contract_types.light %}
-                  <span class="col-md-1 label label-lg blue-500" style="border-style: solid">B</span>
+                  <span class="bd_s_w col-md-1 label label-lg blue-500" >B</span>
                 {% else %}
-                  <span class="col-md-1 label label-lg" style="border-style: solid">B</span>
+                  <span class="bd_s_w col-md-1 label label-lg">B</span>
                 {% endif %}
 
                 {% if project.contract_types.telecom %}
-                <span class="col-md-1 label label-lg orange-500" style="border-style: solid">T</span>
+                <span class="bd_s_w col-md-1 label label-lg orange-500" >T</span>
                 {% else %}
-                <span class="col-md-1 label label-lg" style="border-style: solid">T</span>
+                <span class="bd_s_w col-md-1 label label-lg">T</span>
                 {% endif %}
 
                 {% if project.contract_types.gas %}
-                 <span class="col-md-1 label label-lg yellow-500" style="border-style: solid">G</span>
+                 <span class="bd_s_w col-md-1 label label-lg yellow-500" >G</span>
                 {% else %}
-                  <span class="col-md-1 label label-lg" style="border-style: solid">G</span>
+                  <span class="bd_s_w col-md-1 label label-lg">G</span>
                 {% endif %}
 
                 {% if project.contract_types.others %}
-                 <span class="col-md-1 label label-lg blue-grey-500" style="border-style: solid">S</span>
+                 <span class="bd_s_w col-md-1 label label-lg blue-grey-500">S</span>
                 {% else %}
-                  <span class="col-md-1 label label-lg" style="border-style: solid">S</span>
+                  <span class="bd_s_w col-md-1 label label-lg">S</span>
                 {% endif %}
               </div>
             </td>
-            <td>
+            <td class="td-va-c">
               <a href="#" data-toggle="modal" data-target="#contract-basic-modal" data-project="{{project|json}}"><i class="material-icons md-24">&#xe146;</i></a>
             </td>
-            <td>
+            <td class="td-va-c">
               <a href="#" data-toggle="modal" data-target="#project-modal" data-project="{{project|json}}"><i class="material-icons md-24">&#xe3c9;</i></a>
             </td>
           </tr>

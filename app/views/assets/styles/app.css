@@ -5717,6 +5717,19 @@ tr.del td:before{
     width: 100%;
 }
 
+.bd_s_w {
+  padding-left: 3px !important;
+  padding-right: 3px !important;
+  padding: 8px 3px;
+  line-height: 0.5;
+  border-style: solid;
+  color: rgb(255, 255, 255);
+}
+
+.td-va-c{
+  vertical-align: middle !important;
+}
+
 #ex1Slider {
   margin-top: 7px;
 }
