@@ -257,7 +257,7 @@ function contractDetail(d) {
         '<button type="submit" class="btn success">打开文件夹</button>' +
         '</div>' +
         '<div class="col-md-1">' +
-        '<button onclick="printTemplate(\'' + d.id + '\')" type="submit" class="btn success">打印模板</button>' +
+        '<button data-toggle="modal" data-target="#contract-print-modal" data-backdrop="static" class="btn success">打印模板</button>' +
         '</div>' +
         '<div class="col-md-1">' +
         '<button type="submit" class="btn success">建立XXX</button>' +

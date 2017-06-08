@@ -1,0 +1,137 @@
+
+<div id="contract-print-modal" class="modal" data-backdrop="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content light">
+            <div class="modal-header dker _600">
+                <h5 class="modal-title">Contract Print</h5>
+            </div>
+            <form role="form" action="/contracts/print" method="post">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                      <div class="form-group">
+                            <label for="single">Select Printer</label>
+                            <select style="width: 100%" id="single" class="form-control select2" ui-jp="select2" ui-options="{theme: 'bootstrap'}">
+                              <optgroup label="HP">
+                                <option value="hp1000">HP 1000</option>
+                                <option value="hp2000">HP 2000</option>
+                                <option value="hp3000">HP 3000</option>
+                              </optgroup>
+                              <optgroup label="Cannon">
+                                <option value="Cannon1000">Cannon 1000</option>
+                                <option value="Cannon2000">Cannon 2000</option>
+                                <option value="Cannon3000">Cannon 3000</option>
+                              </optgroup>                              
+                            </select>
+                      </div>
+                        </div>
+                    </div>
+                    <p>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <p>
+                              <label class="md-check">
+                                01-Deckblatt
+                                <input type="checkbox">
+                                <i class="indigo"></i>
+                              </label>
+                            </p>
+                            <p>
+                              <label class="md-check">
+                                02-Baustelle Checklist
+                                <input type="checkbox">
+                                <i class="indigo"></i>
+                              </label>
+                            </p>
+                            <p>
+                              <label class="md-check">
+                                03-Tagesbericht
+                                <input type="checkbox">
+                                <i class="indigo"></i>
+                              </label>
+                            </p>
+                            <p>
+                              <label class="md-check">
+                                04-STW Projectblatt HA
+                                <input type="checkbox">
+                                <i class="indigo"></i>
+                              </label>
+                            </p>
+                            <p>
+                              <label class="md-check">
+                                05-STW Aufmab
+                                <input type="checkbox">
+                                <i class="indigo"></i>
+                              </label>
+                            </p>
+                        </div>
+                        <div class="col-sm-4">
+                            <p>
+                              <label class="md-check">
+                                06-STW Kreuzungspunkt
+                                <input type="checkbox">
+                                <i class="indigo"></i>
+                              </label>
+                            </p>
+                            <p>
+                              <label class="md-check">
+                                07-STW Schweibprotokell
+                                <input type="checkbox">
+                                <i class="indigo"></i>
+                              </label>
+                            </p>
+                            <p>
+                              <label class="md-check">
+                                08-STW Mat.Schein
+                                <input type="checkbox">
+                                <i class="indigo"></i>
+                              </label>
+                            </p>
+                            <p>
+                              <label class="md-check">
+                                09-STW Kampfmittel
+                                <input type="checkbox">
+                                <i class="indigo"></i>
+                              </label>
+                            </p>
+                            <p>
+                              <label class="md-check">
+                                10-STW Zustandsdaten
+                                <input type="checkbox">
+                                <i class="indigo"></i>
+                              </label>
+                            </p>
+                        </div>
+                        <div class="col-sm-4">
+                            <p>
+                              <label class="md-check">
+                                11-Abrechnung Checklist
+                                <input type="checkbox">
+                                <i class="indigo"></i>
+                              </label>
+                            </p>
+                            <p>
+                              <label class="md-check">
+                                12-Abnahmeprotokoll
+                                <input disabled="" type="checkbox">
+                                <i class="indigo"></i>
+                              </label>
+                            </p>
+                            <p>
+                              <label class="md-check">
+                                13-VAZ
+                                <input disabled="" type="checkbox">
+                                <i class="indigo"></i>
+                              </label>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer dker _600">
+                    <button type="button" class="btn dark-white m-t" data-dismiss="modal">Cancel</button>
+                    <button type="button" dismiss="modal" class="btn btn-info m-t" >Print</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
