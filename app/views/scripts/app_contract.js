@@ -274,13 +274,13 @@ $(document).ready(function(){
         var contract = $(e.relatedTarget).data('contract');
         $("#building_contract_id").val(contract.id);
         $("#building_project_id").val(contract.project_id);
-
         $('#procent_completion').slider({
             formatter: function(value) {
                 return value+'%';
             }
         });
-        
+        setBuildingPercent("00");
+
         if (contract.building_work) {
             $("#plan_begin").val(formatDate(contract.building_work.plan_begin));
             $("#plan_end").val(formatDate(contract.building_work.plan_end));
@@ -288,8 +288,13 @@ $(document).ready(function(){
             $("#building_working_months").val(contract.building_work.working_months);
             $("#building_status").val(contract.building_work.status);
 
+            setBuildingPercent(contract.building_work.status);
             $('#procent_completion').slider('setValue',contract.building_work.procent_completion);
         }
+
+        $("#building_status").change(function () {
+            setBuildingPercent(this.value);
+        });
     });
 
 
@@ -300,7 +305,10 @@ $(document).ready(function(){
 
     $('#contract-building-modal input').change(function() {
         console.log('calStatusOfBuilding');
-        calStatusOfBuilding();
+
+        if ($(this).attr("id") === 'plan_begin' || $(this).attr("id") === 'plan_end') {
+            calStatusOfBuilding();
+        }
     });
 
     $('#contract-ofw-modal input').change(function() {
