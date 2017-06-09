@@ -108,6 +108,7 @@ $(document).ready(function(){
         var contract = $(e.relatedTarget).data('contract');
         $("#permission_contract_id").val(contract.id);
         $("#permission_project_id").val(contract.project_id);
+        $("#permission_cost_code").val(contract.cost_code);
         $('#permission_tpye').empty();
 
         $('#permission_tpye').append($('<option>', {
@@ -175,6 +176,7 @@ $(document).ready(function(){
         $(this).find('form')[0].reset();
         $("#ofw_contract_id").val(contract.id);
         $("#ofw_project_id").val(contract.project_id);
+        $("#ofw_cost_code").val(contract.cost_code);
         $("#ofw_contract_customer").val(contract.contract_customers);
 
         if (contract.is_ofw_activ){
@@ -185,13 +187,23 @@ $(document).ready(function(){
             if (contract.ofw) {
                 $("#ofw_worker_name").val(contract.ofw.worker_name);
                 $("#ofw_permission_nr").val(contract.ofw.permission_nr);
-                $("#ofw_delivery").val(formatDate(contract.ofw.delivery));
-                $("#ofw_completion_at").val(formatDate(contract.ofw.completion_at));
+                if (contract.ofw.delivery) {
+                    $("#ofw_delivery").val(formatDate(contract.ofw.delivery));
+                }
+                if (contract.ofw.completion_at) {
+                    $("#ofw_completion_at").val(formatDate(contract.ofw.completion_at));
+                }
+
                 $("#ofw_ueberdicken").val(contract.ofw.ueberdicken);
                 $("#ofw_estimated_value").val(contract.ofw.estimated_value);
-                $("#ofw_ueberdicken").val(contract.ofw.ueberdicken);
-                $("#ofw_applied").val(formatDate(contract.ofw.applied));
-                $("#ofw_granted").val(formatDate(contract.ofw.applied));
+
+                if (contract.ofw.applied) {
+                    $("#ofw_applied").val(formatDate(contract.ofw.applied));
+                }
+                if (contract.ofw.granted) {
+                    $("#ofw_granted").val(formatDate(contract.ofw.granted));
+                }
+
                 $("#ofw_status").val(contract.ofw.ofw_status);
                 if (contract.ofw.typ.bausstr) {
                     $("#bausstr").prop( "checked", true );
@@ -253,6 +265,7 @@ $(document).ready(function(){
         $('#invoices > tbody:last-child').empty();
         $("#invoice_contract_id").val(contract.id);
         $("#invoice_project_id").val(contract.project_id);
+        $("#invoice_cost_code").val(contract.cost_code);
         var invoices = contract.invoice;
         invoices.forEach((invoice) => {
             var table_content = '<tr>'+
@@ -274,6 +287,7 @@ $(document).ready(function(){
         var contract = $(e.relatedTarget).data('contract');
         $("#building_contract_id").val(contract.id);
         $("#building_project_id").val(contract.project_id);
+        $("#building_cost_code").val(contract.cost_code);
         $('#procent_completion').slider({
             formatter: function(value) {
                 return value+'%';

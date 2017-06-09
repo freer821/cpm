@@ -81,6 +81,11 @@ function isDateValid(time) {
     return moment(time, "DD-MM-YYYY", true).isValid();
 }
 
+function getMonthDate(time) {
+    return moment(time, "DD-MM-YYYY").format("MM-YYYY");
+}
+
+
 // -1 : status not defined
 // when t_begin and t_end exist
 // 0 : before begin
@@ -136,11 +141,15 @@ function calStatusOfBuilding() {
         }
     }
 
+    // auto set Booking month
+    if (isDateValid($("#plan_end").val()) && isEmpty($("#building_working_months").val())) {
+        $("#building_working_months").val(getMonthDate($("#plan_end").val()));
+    }
+
     setBuildingPercent($("#building_status").val());
 }
 
 function setBuildingPercent(status_value) {
-    console.log('hallo:'+status_value);
     switch (status_value){
         case "" :
         case '00':
@@ -300,6 +309,11 @@ function calInvoiceStatus() {
         } else if (!isFieldEmpty('rechnung_nr') && isDateValid('guts_datum')) {
             $('#invoice_status').val('06').change();
         }
+    }
+
+    // auto set Booking month
+    if (isDateValid($("#guts_datum").val()) && isEmpty($("#booking_month").val())) {
+        $("#booking_month").val(getMonthDate($("#guts_datum").val()));
     }
 }
 

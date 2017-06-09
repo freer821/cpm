@@ -12,7 +12,7 @@ const zeroPad = function(num, places) {
 
 const getNumValue = function(value){
     if (isNaN(parseFloat(value))) {
-        return undefined;
+        return 0;
     }
     return parseFloat(value);
 };
@@ -272,6 +272,20 @@ function is_contract_with_vba_extend(contract) {
     return false;
 }
 
+const isUserPermitted = function (user_cost_code_array, request_cost_code) {
+
+    if (user_cost_code_array) {
+        for (var i = 0; i < user_cost_code_array.length; i++ ) {
+            let user_cost_code = user_cost_code_array[i];
+            if (request_cost_code.includes(user_cost_code)) {
+                return true;
+            }
+        }
+    }
+
+    return false;
+
+};
 
 
 module.exports = {
@@ -282,5 +296,6 @@ module.exports = {
     doJSONRespond:doJSONRespond,
     calTotalStatusOfPermissions:calTotalStatusOfPermissions,
     calInvoicesStatus:calInvoicesStatus,
-    filterContractsForDashboard:filterContractsForDashboard
+    filterContractsForDashboard:filterContractsForDashboard,
+    isUserPermitted:isUserPermitted
 };

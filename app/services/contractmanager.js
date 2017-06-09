@@ -263,6 +263,10 @@ function getContractID(count) {
 const editContract = function (req, res, next) {
     let request = req.body;
 
+    if (!common.isUserPermitted(req.user.cost_code, request.cost_code)) {
+        res.send('user is not permitted to edit this contract!!');
+        return;
+    }
     if(req.params.action === 'basic') {
         updateContractBasic(request, function (err,project_id) {
             if(err){
