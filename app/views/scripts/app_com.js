@@ -300,11 +300,11 @@ function calInvoiceStatus() {
     if ($('#correction_needed').is(":checked")) {
         $('#invoice_status').val('06').change();
     } else if (getNumValue($('#sum').val())> 0) {
-        if ( !isDateValid('aufmass_am') && !isDateValid('bewert_aufmass') && isFieldEmpty('rechnung_nr') && !isDateValid('guts_datum')) {
+        if ( !isDateValid($('#aufmass_am').val()) && !isDateValid($('#bewert_aufmass').val()) && isFieldEmpty('rechnung_nr') && !isDateValid('guts_datum')) {
             $('#invoice_status').val('03').change();
-        } else if (isDateValid('aufmass_am') && !isDateValid('bewert_aufmass') && isFieldEmpty('rechnung_nr') && !isDateValid('guts_datum')) {
+        } else if (isDateValid($('#aufmass_am').val()) && !isDateValid($('#bewert_aufmass').val()) && isFieldEmpty('rechnung_nr') && !isDateValid('guts_datum')) {
             $('#invoice_status').val('04').change();
-        } else if (isDateValid('aufmass_am') && isDateValid('bewert_aufmass') && isFieldEmpty('rechnung_nr') && !isDateValid('guts_datum')) {
+        } else if (isDateValid($('#aufmass_am').val()) && isDateValid($('#bewert_aufmass').val()) && isFieldEmpty('rechnung_nr') && !isDateValid('guts_datum')) {
             $('#invoice_status').val('05').change();
         } else if (!isFieldEmpty('rechnung_nr') && isDateValid('guts_datum')) {
             $('#invoice_status').val('06').change();
