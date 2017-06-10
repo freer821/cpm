@@ -83,8 +83,10 @@ $(document).ready(function(){
                 $("#is_ofw_activ").prop( "checked", false );
             }
 
-            $("#person").val(contract.person);
-            $("#reason").val(contract.reason);
+            if (contract.doc_location){
+                $("#person").val(contract.doc_location.person);
+                $("#reason").val(contract.doc_location.reason);
+            }
             $("#comment").val(contract.comment);
             $("#basic_contract_id").val(contract.id);
             $("#basic_project_id").val(contract.project_id);

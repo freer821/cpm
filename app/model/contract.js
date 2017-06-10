@@ -47,7 +47,8 @@ const contractSchema = new Schema({
         worker_name: String,         // kolonnen
         working_months: String,  // leistungsmonate MM-YYYY
         status: String,      //  4 zustände
-        procent_completion: Number // the procent of completion auto_fertigstellung
+        procent_completion: Number, // the procent of completion auto_fertigstellung
+        messing_doc_delivery: Date
     },
     is_ofw_activ: Boolean,
     ofw :{

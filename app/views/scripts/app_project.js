@@ -199,7 +199,7 @@ function contractDetail(d) {
         '<div class="col-sm-3">'+
         '<div class="md-form-group">'+
         '<input class="md-input" value="'+d.sum_value+'">'+
-        '<label>Sum Value</label>'+
+        '<label>Estimated Value</label>'+
         '</div>'+
         '</div>'+ 
         '<div class="col-sm-3">'+
