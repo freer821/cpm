@@ -4,6 +4,8 @@
 'use strict';
 
 const moment = require('moment');
+const mkdirp = require('mkdirp');
+
 
 const zeroPad = function(num, places) {
     var zero = places - num.toString().length + 1;
@@ -287,6 +289,27 @@ const isUserPermitted = function (user_cost_code_array, request_cost_code) {
 
 };
 
+function uploadUserFile(file,file_path, callback){
+
+    mkdirp(file_path, function(err) {
+        if (err) {
+            logger.error('failed to create folder', err.message);
+            callback(err);
+        } else {
+            file.mv(file_path+'/'+file.name, function (err) {
+                if (err) {
+                    logger.error('failed to save file ', err.message);
+                    callback(err);
+                } else {
+                    callback();
+                }
+            });
+        }
+
+    });
+}
+
+
 
 module.exports = {
     zeroPad: zeroPad,
@@ -297,5 +320,6 @@ module.exports = {
     calTotalStatusOfPermissions:calTotalStatusOfPermissions,
     calInvoicesStatus:calInvoicesStatus,
     filterContractsForDashboard:filterContractsForDashboard,
-    isUserPermitted:isUserPermitted
+    isUserPermitted:isUserPermitted,
+    uploadUserFile:uploadUserFile
 };

@@ -2,10 +2,10 @@
  * Created by Zhenyu on 11.04.2017.
  */
 'use strict'
-const mkdirp = require('mkdirp');
 const logger = require('../common/logger');
 const db = require('../common/database');
 const config = require('../common/config');
+const common = require('../common/common');
 
 const adduser = function (req, res, next) { 
 
@@ -36,41 +36,6 @@ const adduser = function (req, res, next) {
     }
 
 };
-
-function saveUser(req,user) {
-    user.ts = new Date();
-    if (user.cost_code) {
-        let cost_code = user.cost_code;
-        user.cost_code = cost_code.toString().split(",");
-    }
-    db.saveUser(user);
-    req.flash('message', 'user saved!');
-}
-
-function saveUserHeadIcon(req,res,user){
-    if (!req.files) return false;
-    if (!req.files.icon) return false;
-
-    let iconfile = req.files.icon;
-
-    mkdirp(config.upload.icon+'/'+user.email, function(err) {
-        if (err) {
-            logger.error('failed to create folder', err.message);
-            return false;
-        }
-
-        iconfile.mv(config.upload.icon+'/'+user.email+'/'+iconfile.name, function (err) {
-            if (err) {
-                logger.error('failed to save icon ', err.message);
-                return false;
-            }
-            user.icon = '/upload'+'/'+user.email+'/'+iconfile.name;
-            db.saveUser(user);
-            res.redirect('/profile');
-            return true;
-        });
-    });
-}
 
 const getAllUser = function(req, res, next) {
     db.findUsers(function (err, users) {
@@ -110,7 +75,7 @@ const editUser = function(req, res, next) {
         });
     } else {
         let user = req.body;
-        saveUser(req,user);
+        saveUser(user);
         res.redirect('/users');
     }
 };
@@ -130,20 +95,45 @@ const getCurrentUser = function(req, res, next) {
 };
 
 const updateCurrentUserProfile = function(req, res, next) {
-    if (req.method === "POST") {
-        let user = req.body;
-        saveUser(req,user);
-        if (saveUserHeadIcon(req,res,req.user) == false);
-            res.redirect('/profile');
+    let user = req.body;
+    if (req.files && req.files.icon) {
+        let icon_path = config.upload.icon+'/'+user.email;
+        common.uploadUserFile(req.files.icon, icon_path, function (isOK) {
+            if (isOK) {
+                common.doJSONRespond(res, {'text':'User update sucess'},next);
+                user.icon = icon_path+'/'+req.files.icon.name;
+                saveUser(user);
+            } else {
+                common.doJSONRespond(res, {'text':'User update failed'},next);
+            }
+        });
+    } else {
+        saveUser(user);
+        common.doJSONRespond(res, {'text':'User update sucess'},next);
     }
 };
 
-//not used yet
-const updateCurrentUserHeadIcon = function(req, res, next) {
-    if (req.method === "POST") {
-        saveUserHeadIcon(req,res,req.user);
-    }
+const updateCurrentUserPassw = function(req, res, next) {
+    let user_passw = req.body;
+
+    db.findUser({'email': req.user.email}, function (err, user) {
+        if (err) {
+            common.doJSONRespond(res, {'text':'Password update failed'},next);
+        } else {
+            if (user.password === user_passw.old_passw) {
+                user.password = user_passw.new_passw;
+                user.save();
+                common.doJSONRespond(res, {'text':'Password update sucess'},next);
+            } else {
+                common.doJSONRespond(res, {'text':'Old Password not correct, Password update failed'},next);
+            }
+        }
+
+    });
+
 };
+
+
 
 const getDashInfo = function (req, res, next) {
     db.findUser({email:req.user.email}, function (err, user) {
@@ -170,6 +160,14 @@ const getDashInfo = function (req, res, next) {
     });     
 };
 
+function saveUser(user) {
+    user.ts = new Date();
+    if (user.cost_code) {
+        let cost_code = user.cost_code;
+        user.cost_code = cost_code.toString().split(",");
+    }
+    db.saveUser(user);
+}
 
 module.exports = {
     adduser:adduser,
@@ -178,6 +176,6 @@ module.exports = {
     editUser:editUser,
     getCurrentUser: getCurrentUser,
     updateCurrentUserProfile: updateCurrentUserProfile,
-    updateCurrentUserHeadIcon: updateCurrentUserHeadIcon,
+    updateCurrentUserPassw:updateCurrentUserPassw,
     getDashInfo: getDashInfo
 };

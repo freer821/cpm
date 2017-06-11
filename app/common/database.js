@@ -116,7 +116,7 @@ const findUsers = function (callback) {
     });
 };
 
-const saveUser = function (user) {
+const saveUser = function (user, callback) {
     User.update({email: user.email}, // Query
         { // Updates
             $set: user,
@@ -129,6 +129,7 @@ const saveUser = function (user) {
         function (err) {
             if (err) {
                 logger.error('Failed to save user in MongoDB', user,err);
+                callback(err);
             } else {
                 logger.trace('added user in MongoDB', user);
             }

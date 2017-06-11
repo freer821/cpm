@@ -8,12 +8,11 @@
 
 // Attach a submit handler to the form
     $("form").submit(function( event ) {
-        var url = $(this).attr( "action" );
         // Stop form from submitting normally
         event.preventDefault();
 
         // Send the data using post
-        var posting = $.post( url, $(this).serialize() );
+        var posting = $.post( $(this).attr( "action" ), $(this).serialize() );
 
         // Put the results in a div
         posting.done(function( json_response ) {
@@ -57,7 +56,9 @@ function doAction(response) {
             default:
                 break;
         }
-    } else {
+    } if (response.text) {
+        bootbox.alert(response.text);
+    }else{
         bootbox.alert(response);
     }
 }

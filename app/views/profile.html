@@ -34,7 +34,10 @@
         <div class="p-y-md clearfix nav-active-primary">
           <ul class="nav nav-pills nav-sm">
             <li class="nav-item active">
-              <a class="nav-link" id="update" href="#">Update</a>
+              <a class="nav-link" href data-toggle="tab" data-target="#tab_1">Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href data-toggle="tab" data-target="#tab_2">Password</a>
             </li>
           </ul>
         </div>
@@ -46,83 +49,114 @@
       <div class="col-sm-8 col-lg-9">
         <div class="tab-content">      
           <div class="tab-pane p-v-sm active" id="tab_1">
-            <form ui-jp="parsley" id="form" action="{{action}}" method="post" encType="multipart/form-data">
-              <div class="row m-b">
-                <div class="col-xs-6">
-                  <small class="text-muted">Initialen</small>
-                  <input style="display: none;" type="text" class="form-control" name="shortname" value="{{currentUser.shortname}}">
-                  <div class="_500">{{currentUser.shortname}}</div>
+            <form id="form" action="/profile/edit/profile" method="post" encType="multipart/form-data">
+              <div class="box">
+                <div class="box-header">
+                  <h2>Update Profile</h2>
                 </div>
-                <div class="col-xs-6">
-                  <small class="text-muted">Email</small>
-                  <input style="display: none;" type="text" class="form-control" name="email" value="{{currentUser.email}}" readonly="true">
-                  <div class="_500">{{currentUser.email}}</div>
-                </div>
-              </div>
+                <div class="box-body">
+                  <p class="text-muted"></p>
+                  <div class="row m-b">
+                    <div class="col-sm-6">
+                      <small class="text-muted">Initialen</small>
+                      <input  type="text" class="form-control" name="shortname" value="{{currentUser.shortname}}">
+                    </div>
+                    <div class="col-sm-6">
+                      <small class="text-muted">Email</small>
+                      <input  type="text" class="form-control" name="email" value="{{currentUser.email}}" readonly="true">
+                    </div>
+                  </div>
 
-              <div class="row m-b">
-                <div class="col-xs-6">
-                  <small class="text-muted">Position</small>
-                  <input style="display: none;" type="text" class="form-control" name="position" value="{{currentUser.position}}">
-                  <div class="_500">{{currentUser.position}}</div>
-                </div>
-                <div class="col-xs-6">
-                  <small class="text-muted">Telefon</small>
-                  <input style="display: none;" type="text" class="form-control" name="tel" value="{{currentUser.tel}}">
-                  <div class="_500">{{currentUser.tel}}</div>
-                </div>
-              </div>
+                  <div class="row m-b">
+                    <div class="col-sm-6">
+                      <small class="text-muted">Position</small>
+                      <input  type="text" class="form-control" name="position" value="{{currentUser.position}}">
+                    </div>
+                    <div class="col-sm-6">
+                      <small class="text-muted">Telefon</small>
+                      <input  type="text" class="form-control" name="tel" value="{{currentUser.tel}}">
+                    </div>
+                  </div>
 
-              <div class="row m-b">
-                <div class="col-xs-6">
-                  <small class="text-muted">Abteilung</small>
-                  <input style="display: none;" type="text" class="form-control" name="department" value="{{currentUser.department}}" readonly="true">
-                  <div class="_500">{{currentUser.department}}</div>
-                </div>
-                <div class="col-xs-6">
-                  <small class="text-muted">Firma</small>
-                  <input style="display: none;" type="text" class="form-control" name="company" value="{{currentUser.company}}" readonly="true">
-                  <div class="_500">{{currentUser.company}}</div>
-                </div>
-              </div>
+                  <div class="row m-b">
+                    <div class="col-sm-6">
+                      <small class="text-muted">Abteilung</small>
+                      <input  type="text" class="form-control" name="department" value="{{currentUser.department}}" readonly="true">
+                    </div>
+                    <div class="col-sm-6">
+                      <small class="text-muted">Firma</small>
+                      <input  type="text" class="form-control" name="company" value="{{currentUser.company}}" readonly="true">
+                    </div>
+                  </div>
 
-              <div class="row m-b">
-                <div class="col-xs-6">
-                  <small class="text-muted">Strasse</small>
-                  <input style="display: none;" type="text" class="form-control" name="addr" value="{{currentUser.addr}}">
-                  <div class="_500">{{currentUser.addr}}</div>
+                  <div class="row m-b">
+                    <div class="col-sm-12">
+                      <small class="text-muted">Strasse</small>
+                      <input  type="text" class="form-control" name="addr" value="{{currentUser.addr}}">
+                    </div>
+                  </div>
+
+                  <div class="row m-b">
+                    <div class="col-sm-4">
+                      <small class="text-muted">PLZ</small>
+                      <input  type="number" class="form-control" name="plz" value="{{currentUser.plz}}">
+                    </div>
+                    <div class="col-sm-8">
+                      <small class="text-muted">Stadt</small>
+                      <input  type="text" class="form-control" name="city" value="{{currentUser.city}}">
+                    </div>
+                  </div>
+                  <div class="row m-b">
+                    <div id="iconDiv"  class="col-sm-6">
+                      <small class="text-muted">Icon</small>
+                      <input  type="file" name="icon" class="form-control"></input>
+                    </div>
+                    <div class="col-sm-6">
+                      <small class="text-muted">Cost Code</small>
+                      <input  type="text" class="form-control" name="cost_code" value="{{currentUser.cost_code}}" readonly="true">
+                    </div>
+                  </div>
                 </div>
-                <div class="col-xs-6">
-                  <small class="text-muted">PLZ</small>
-                  <input style="display: none;" type="number" class="form-control" name="plz" value="{{currentUser.plz}}">
-                  <div class="_500">{{currentUser.plz}}</div>
-                </div>
-                <div class="col-xs-6">
-                  <small class="text-muted">Stadt</small>
-                  <input style="display: none;" type="text" class="form-control" name="city" value="{{currentUser.city}}">
-                  <div class="_500">{{currentUser.city}}</div>
+                <div class="dker p-a text-right">
+                  <button type="submit" class="btn info">Submit</button>
                 </div>
               </div>
-              <div class="row m-b">
-                <div id="iconDiv" style="display: none;" class="col-xs-6">
-                  <small class="text-muted">Icon</small>
-                  <input style="display: none;" type="file" name="icon" class="form-control"></input>
-                </div>                 
-              </div>                
-              <div class="row m-b">
-                <div class="col-xs-6">
-                  <small class="text-muted">Cost Code</small>
-                  <input style="display: none;" type="text" class="form-control" name="cost_code" value="{{currentUser.cost_code}}" readonly="true">
-                  <div class="_500">{{currentUser.cost_code}}</div>
-                </div>                 
-              </div>              
-              <div class="row m-b">
-                <div class="col-xs-6" id="editButtons" style="display: none;">
-                  <a href="#" id="cancel" type="button" class="btn white">Cancel</a>
-                  <button style="cursor: pointer" type="submit" class="btn info">Submit</button>
-                </div> 
+            </form>
+          </div>
+
+
+          <div class="tab-pane p-v-sm" id="tab_2">
+            <form action="/profile/edit/passw" method="post" >
+              <div class="box">
+                <div class="box-header">
+                  <h2>Update Password</h2>
+                </div>
+                <div class="box-body">
+                  <p class="text-muted"></p>
+                  <div class="form-group">
+                    <div class="col-sm-6">
+                      <label>Enter old password</label>
+                      <input type="password" class="form-control" name="old_passw" required>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-6">
+                      <label>Enter password</label>
+                      <input type="password" class="form-control" name="new_passw" required id="pwd">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-6">
+                      <label>Confirm password</label>
+                      <input type="password" class="form-control" data-parsley-equalto="#pwd" required>
+                    </div>
+                  </div>
+                </div>
+                <div class="dker p-a text-right">
+                  <button type="submit" class="btn info">Submit</button>
+                </div>
               </div>
-            </form>  
+            </form>
           </div>
         </div>
       </div>
@@ -150,21 +184,6 @@
 </div>
 
 <script type="text/javascript">
-$('#update').on('click', function(e) {
-  changeEditState();
-});
-
-$('#cancel').on('click', function(e) {
-  changeEditState();
-});
-
-function changeEditState(){
-  $('.col-xs-6 input').toggle();
-  $('.col-xs-6 div').toggle();
-  $('#editButtons').toggle();
-  $('#iconDiv').toggle();
-}
-
 function openWindow(){
   window.open("ftp://ftp.topsec.com.cn");
 }

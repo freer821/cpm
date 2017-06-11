@@ -127,8 +127,9 @@ function initRoutes() {
     router.get('/dashboard', usermanager.getDashInfo);
 
     router.get('/profile',usermanager.getCurrentUser);
-    router.post('/profile/edit',usermanager.updateCurrentUserProfile);
-    router.post('/user/icon/edit',usermanager.updateCurrentUserHeadIcon);
+    router.post('/profile/edit/profile',usermanager.updateCurrentUserProfile);
+    router.post('/profile/edit/passw',usermanager.updateCurrentUserPassw);
+
 
     router.get('/users',usermanager.getAllUser);
 
