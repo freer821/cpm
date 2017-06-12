@@ -11,15 +11,7 @@
         // Stop form from submitting normally
         event.preventDefault();
 
-        // Send the data using post
-        var posting = $.post( $(this).attr( "action" ), $(this).serialize() );
-
-        // Put the results in a div
-        posting.done(function( json_response ) {
-            doAction(json_response);
-        });
-
-        $('.modal').modal('hide');
+        ajaxPost($(this).attr( "action" ), $(this).serialize());
     });
 
     // date change events
@@ -32,11 +24,15 @@
 })(jQuery);
 
 function ajaxPost(url, data){
-    var posting = $.post( url, data);
+    // Send the data using post
+    var posting = $.post( url, data );
+
+    // working on the response
     posting.done(function( json_response ) {
         doAction(json_response);
-        $('.modal').modal('hide');
     });
+
+    $('.modal').modal('hide');
 }
 
 function doAction(response) {
@@ -56,7 +52,7 @@ function doAction(response) {
             default:
                 break;
         }
-    } if (response.text) {
+    } else if (response.text) {
         bootbox.alert(response.text);
     }else{
         bootbox.alert(response);

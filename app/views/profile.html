@@ -184,8 +184,13 @@
 </div>
 
 <script type="text/javascript">
-function openWindow(){
-  window.open("ftp://ftp.topsec.com.cn");
-}
+    $.getScript(  '/scripts/app_com.js', function() {
+        console.log('laod app_com');
+    });
+
+    function openWindow(){
+        window.open("ftp://ftp.topsec.com.cn");
+    }
+
 </script>
 {% endblock %}
