@@ -109,7 +109,7 @@
 		          </li>
 		        </ul>
 		      </div>
-		      <table class="table m-b-none b-t" ui-jp="footable" data-filter="#filter" data-page-size="5">
+		      <table class="table m-b-none b-t" id="items-table" data-filter="#filter" data-paging-limit="5" data-show-toggle="false">
 		        <thead>
 		            <tr>
 	            	  <th style="width:20px;" data-sort-ignore="true"><label class="ui-check m-0">
@@ -122,6 +122,7 @@
 		              <th>Status</th>
 		              <th style="width:20px;" data-sort-ignore="true"></th>
 		              <th style="width:20px;" data-sort-ignore="true"></th>
+                        <th data-breakpoints="all" data-title="TODOs">Content Of Todos</th>
 		            </tr>
 		          </thead>
 		          <tbody>
@@ -142,6 +143,11 @@
 		                <td>
 		                  <a href="#" data-href="{{delurl}}" data-toggle="modal" data-target="#del-item" data-item-tilte="{{item.title}}"><i class="material-icons md-24">&#xe872;</i></a>
 		                </td>
+                        <td class="pause">
+                            {% for note in item.note %}
+                            <p>{{note.content}}</p>
+                            {% endfor %}
+                        </td>
 		              </tr>
 		            {% endfor %}           
 		          </tbody>
@@ -258,6 +264,10 @@
 </div>
 
 <script type="text/javascript">
+    $.getScript(  '/scripts/plugins/footable.min.js', function() {
+        $('#items-table').footable();
+    });
+
   //triggered when modal is about to be shown
   $('#edit-item').on('show.bs.modal', function(e) {
     var item = $(e.relatedTarget).data('item');
