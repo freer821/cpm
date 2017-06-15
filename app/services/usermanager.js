@@ -19,7 +19,6 @@ const adduser = function (req, res, next) {
                 logger.error('error to find deps in db', err.message);
             } 
             res.render('addandedituser', {title:'User Management', action: '/users/add', subtitle:'Add User', user: req.user, deps:[]});
-            return;
         });
     } else {
         let new_user = req.body;
@@ -29,7 +28,7 @@ const adduser = function (req, res, next) {
             } else if (user) {
                 req.flash('message', 'email is aready used, pls try other email!');
             } else {
-                saveUser(req,new_user);
+                saveUser(user);
             }
             res.redirect('/users');
         });
@@ -69,8 +68,7 @@ const editUser = function(req, res, next) {
                         logger.error('error to find deps in db', err.message);
                     } 
                     res.render('addandedituser', {title:'User Management',action: '/users/edit', subtitle:'Edit User', user: req.user ,currentUser:user, deps:[]});
-                    return;
-                });                
+                });
             }
         });
     } else {
@@ -88,7 +86,7 @@ const getCurrentUser = function(req, res, next) {
             } else {
                 // user: session user, only 4 attributes
                 // currentUser: all user attributes
-                res.render('profile',{title:'Profile', action: '/profile/edit', user:req.user, currentUser:user});
+                res.render('profile',{title:'Profile', action: '/profile/edit', user:common.getSessionUser(user), currentUser:user});
             }
         });        
     }
@@ -97,19 +95,16 @@ const getCurrentUser = function(req, res, next) {
 const updateCurrentUserProfile = function(req, res, next) {
     let user = req.body;
     if (req.files && req.files.icon) {
-        let icon_path = config.upload.icon+'/'+user.email;
-        common.uploadUserFile(req.files.icon, icon_path, function (isOK) {
-            if (isOK) {
-                common.doJSONRespond(res, {'text':'User update sucess'},next);
-                user.icon = icon_path+'/'+req.files.icon.name;
-                saveUser(user);
+        common.uploadUserFile(req.files.icon, config.upload.icon+'/'+user.email, function (err) {
+            if (err) {
+                res.render('404');
             } else {
-                common.doJSONRespond(res, {'text':'User update failed'},next);
+                user.icon = '/upload/'+user.email+'/'+req.files.icon.name;
+                saveUser(user,res);
             }
         });
     } else {
-        saveUser(user);
-        common.doJSONRespond(res, {'text':'User update sucess'},next);
+        saveUser(user,res);
     }
 };
 
@@ -160,13 +155,22 @@ const getDashInfo = function (req, res, next) {
     });     
 };
 
-function saveUser(user) {
+function saveUser(user, res) {
     user.ts = new Date();
     if (user.cost_code) {
         let cost_code = user.cost_code;
         user.cost_code = cost_code.toString().split(",");
     }
-    db.saveUser(user);
+    db.saveUser(user, function (err, saved_user) {
+
+        if (res) {
+            if (err) {
+                res.render('404');
+            } else {
+                res.redirect('/profile');;
+            }
+        }
+    });
 }
 
 module.exports = {

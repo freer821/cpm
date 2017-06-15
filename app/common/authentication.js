@@ -5,6 +5,7 @@
 const LocalStrategy = require('passport-local').Strategy;
 const db = require('./database');
 const logger = require('./logger');
+const com = require('./common');
 
 function initPassport (passport) {
 
@@ -29,15 +30,14 @@ function initPassport (passport) {
                 let user = {email: 'admin@admin.com',name: 'admin', role: 'admin'};
                 return done (null, user);
             } else {
-                db.findUser({'email': email}, function (err, userInfo) {
+                db.findUser({'email': email}, function (err, user) {
                     if (err) {
                         logger.trace('user not logged in ', email );
                         return done(err);
                     }
-                    if (userInfo && password === userInfo.password ) {
-                        let user = {email:userInfo.email, name: userInfo.firstname + ' ' + userInfo.secondname, role: userInfo.role, icon: userInfo.icon, cost_code: userInfo.cost_code};
-                        logger.trace('user logged in ', user);
-                        return done(null, user);
+                    if (user && password === user.password ) {
+                        logger.trace('user logged in ', com.getSessionUser(user));
+                        return done(null, com.getSessionUser(user));
                     } else {
                         logger.trace('user not logged in ', email );
                         return done(null, false);

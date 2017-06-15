@@ -126,12 +126,13 @@ const saveUser = function (user, callback) {
             }
         },
         {upsert: true},
-        function (err) {
+        function (err, user_db) {
             if (err) {
                 logger.error('Failed to save user in MongoDB', user,err);
                 callback(err);
             } else {
-                logger.trace('added user in MongoDB', user);
+                logger.trace('added user in MongoDB', user_db);
+                callback(undefined, user_db);
             }
         }
     );

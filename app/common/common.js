@@ -309,7 +309,10 @@ function uploadUserFile(file,file_path, callback){
     });
 }
 
-
+const getSessionUser= function (user) {
+    let session_user = {email:user.email, name: user.firstname + ' ' + user.secondname, role: user.role, icon: user.icon, cost_code: user.cost_code};
+    return session_user;
+}
 
 module.exports = {
     zeroPad: zeroPad,
@@ -321,5 +324,6 @@ module.exports = {
     calInvoicesStatus:calInvoicesStatus,
     filterContractsForDashboard:filterContractsForDashboard,
     isUserPermitted:isUserPermitted,
-    uploadUserFile:uploadUserFile
+    uploadUserFile:uploadUserFile,
+    getSessionUser:getSessionUser
 };
