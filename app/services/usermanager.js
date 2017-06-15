@@ -113,14 +113,16 @@ const updateCurrentUserPassw = function(req, res, next) {
 
     db.findUser({'email': req.user.email}, function (err, user) {
         if (err) {
-            common.doJSONRespond(res, {'text':'Password update failed'},next);
+            res.render('404');
         } else {
             if (user.password === user_passw.old_passw) {
                 user.password = user_passw.new_passw;
                 user.save();
-                common.doJSONRespond(res, {'text':'Password update sucess'},next);
+                req.session.destroy(function (err) {
+                    res.redirect('/'); //Inside a callback… bulletproof!
+                });
             } else {
-                common.doJSONRespond(res, {'text':'Old Password not correct, Password update failed'},next);
+                res.render('404');
             }
         }
 
@@ -138,7 +140,7 @@ const getDashInfo = function (req, res, next) {
             db.getItems({user_email:req.user.email}, function (err, items) {
                 if(err) {
                     logger.error('error to find user in db', err.message);
-                    res.render('dashboard',{title:'Main', user:req.user});
+                    res.render('dashboard',{title:'Main', user:common.getSessionUser(user)});
                 } else {
                     let items_emergencies_num = 0;
                     if (items) {
@@ -148,7 +150,7 @@ const getDashInfo = function (req, res, next) {
                             }
                         });
                     }
-                    res.render('dashboard',{title:'Main', user:req.user ,items_num:items.length, items_emergencies_num:items_emergencies_num, items: items});
+                    res.render('dashboard',{title:'Main', user:common.getSessionUser(user) ,items_num:items.length, items_emergencies_num:items_emergencies_num, items: items});
                 }
             });            
         }
