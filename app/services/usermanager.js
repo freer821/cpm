@@ -28,7 +28,7 @@ const adduser = function (req, res, next) {
             } else if (user) {
                 req.flash('message', 'email is aready used, pls try other email!');
             } else {
-                saveUser(user);
+                saveUser(new_user);
             }
             res.redirect('/users');
         });
