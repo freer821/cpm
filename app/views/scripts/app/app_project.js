@@ -2,6 +2,12 @@
  * Created by Zhenyu on 25.05.2017.
  */
 $(document).ready(function(){
+    $.getScript(  '/scripts/plugins/footable.min.js', function() {
+        $('#projects-overview').on("expand.ft.row",function (e, ft, row) {
+            console.log(row);
+        }).footable();
+    });
+
     // add and edit project
     $('#project-modal').on('show.bs.modal', function (e) {
         $(this).find('form')[0].reset();
@@ -34,48 +40,6 @@ $(document).ready(function(){
 
             //set form action
             $('#project-modal-form').attr('action', '/projects/add');
-
-        }
-    });
-
-    var projects_table = $('#projects-overview').DataTable();
-
-    // loading the contracts of a project
-    $('#projects-overview tbody').on('click', 'td.details-control', function (e) {
-        // Stop form submitting normally
-        e.preventDefault();
-
-        var projects_tr = $(this).closest('tr');
-        var projects_table_row = projects_table.row(projects_tr);
-        var project_id = projects_table_row.data()[1];
-
-        if (projects_table_row.child.isShown()) {
-            // This row is already open - close it
-            projects_table_row.child.hide();
-            projects_tr.removeClass('shown');
-        }
-        else {
-            // Open this row
-            projects_table_row.child('<table id="' + project_id + '"class="table table-striped b-t b-b dataTable no-footer" cellpadding="5" ui-jp="dataTable" cellspacing="0" border="0" style="padding-left:50px;"></table>').show();
-            // set subTableid,use project_id
-
-            var subTable = loadContractsOfProject(project_id);
-
-            $(subTable.table().header()).remove();
-            projects_tr.addClass('shown');
-
-            $('#' + project_id + ' tbody').on('click', 'td.details-control-sub', function () {
-                var tr = $(this).closest('tr');
-                var row = subTable.row(tr);
-                if (row.child.isShown()) {
-                    // This row is already open - close it
-                    row.child.hide();
-                    tr.removeClass('shown');
-                } else {
-                    row.child(contractDetail(row.data())).show();
-                    tr.addClass('shown');
-                }
-            });
 
         }
     });

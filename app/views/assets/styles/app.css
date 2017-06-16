@@ -5678,14 +5678,22 @@ textarea.md-input {
   -webkit-animation: fadeOutDown 0.5s;
   animation: fadeOutDown 0.5s; }
 
+/* for project show begin */
+td.details-control i.glyphicon-expand{
+  display: inline;
+}
+td.details-control i.glyphicon-collapse-down{
+  display: none;
+}
 
-td.details-control {
-    background: url('../images/details_open.png') no-repeat center center;
-    cursor: pointer;
+tr.shown td.details-control i.glyphicon-expand{
+  display: none;
 }
-tr.shown td.details-control {
-    background: url('../images/details_close.png') no-repeat center center;
+
+tr.shown td.details-control i.glyphicon-collapse-down{
+  display: inline;
 }
+/* for project show end */
 
 td.details-control-sub {
     background: url('../images/details_open.png') no-repeat center center;

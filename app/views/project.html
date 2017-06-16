@@ -13,75 +13,71 @@
         </div>
       </div>
       <div class="table-responsive">
-        <table id="projects-overview" class="table table-striped b-t b-b" ui-jp="dataTable">
+        <table id="projects-overview" class="table table-striped b-t b-b">
           <thead>
           <tr>
-            <th style="width:20px;" data-sort-ignore="true"></th>
-            <th>Project Nr</th>
-            <th>Community</th>
-            <th>Street</th>
-            <th>House Nr</th>
-            <th>Finished/All</th>
-            <th data-sort-ignore="true">Project Types</th>
-            <th style="width:20px;" data-sort-ignore="true"></th>
-            <th style="width:20px;" data-sort-ignore="true"></th>
+            <th style="width:52px;"> </th>
+            <th style="min-width:100px;">Project Nr.</th>
+            <th style="width:140px;">Community </th>
+            <th style="min-width:190px;">Street </th>
+            <th style="min-width:60px;">HsNr. </th>
+            <th style="min-width:80px;max-width:80px;">finisched /All </th>
+            <th style="max-width:175px;min-width:175px;width:175px;">Project Type </th>
+            <th style="width:52px;"> </th>
+            <th style="width:52px;"> </th>
           </tr>
           </thead>
           <tbody>
           {% for project in projects %}
-          <tr style>
-            <td class="details-control"></td>
-            <td class="td-va-c">{{project.id}}</td>
-            <td class="td-va-c">{{project.community}}</td>
-            <td class="td-va-c">{{project.street}}</td>
-            <td class="td-va-c">{{project.housenr}}</td>
-            <td class="td-va-c">{{project.contracts_status}}</td>
-            <td>
-              <div class="row" style="margin-left: -5px">
+          <tr>
+            <td class="details-control" style="width:52px;height:43px;min-width:52px;max-height:40px;max-width:52px;">
+              <i class="glyphicon glyphicon-expand" style="font-size:19px;color:rgb(89,89,89);"></i>
+              <i class="glyphicon glyphicon-collapse-down" style="font-size:19px;color:rgb(89,89,89);"></i>
+            </td>
+            <td class="projectSchema.id" style="height:43px;min-width:100px;">{{project.id}} </td>
+            <td class="projectSchema.community" style="min-width:140px;height:43px;">{{project.community}} </td>
+            <td class="projectSchema.street" style="min-width:190px;height:43px;">{{project.street}} </td>
+            <td class="projectSchema.housenr" style="min-width:60px;height:43px;padding-left:14px;">{{project.housenr}} </td>
+            <td class="finished_overview" style="min-width:80px;padding-left:2%;max-width:80px;">{{project.contracts_status}}</td>
+            <td class="projectSchema.contract_types" style="max-height:43px;background-position:top;background-size:contain;background-repeat:no-repeat;max-width:175px;min-width:175px;width:175px;">
+              <div style="max-width:175px;min-width:175px;">
                 {% if project.contract_types.electric %}
-                <span class="bd_s_w col-md-1 label label-lg red-900">E</span>
+                <i class="fa fa-square projectSchema.contract_types.electric_true" style="width:21px;height:21px;font-size:21px;margin-right:6px;color:#b53f45;"></i>
                 {% else %}
-                <span class="bd_s_w col-md-1 label label-lg">E</span>
+                <i class="fa fa-square-o projectSchema.contract_types.electric_false" style="width:21px;height:21px;font-size:21px;margin-right:6px;color:#b53f45;"></i>
                 {% endif %}
-
                 {% if project.contract_types.gas %}
-                 <span class="bd_s_w col-md-1 label label-lg amber-A400" >G</span>
+                <i class="fa fa-square projectSchema.contract_types.gas_true" style="width:21px;height:21px;font-size:21px;margin-right:4px;color:#ffd000;"></i>
                 {% else %}
-                  <span class="bd_s_w col-md-1 label label-lg">G</span>
+                <i class="fa fa-square-o projectSchema.contract_types.gas_false" style="width:21px;height:21px;font-size:21px;margin-right:4px;color:#ffd000;"></i>
                 {% endif %}
-
                 {% if project.contract_types.water %}
-                <span class="bd_s_w col-md-1 label label-lg cyan-900" >W</span>
+                <i class="fa fa-square projectSchema.contract_types.water_true" style="width:21px;height:21px;font-size:21px;margin-right:6px;color:#3e6b7e;"></i>
                 {% else %}
-                  <span class="bd_s_w col-md-1 label label-lg">W</span>
+                <i class="fa fa-square-o projectSchema.contract_types.water_false" style="width:21px;height:21px;font-size:21px;margin-right:6px;color:#3e6b7e;"></i>
                 {% endif %}
-
                 {% if project.contract_types.light %}
-                  <span class="bd_s_w col-md-1 label label-lg teal-300" >B</span>
+                <i class="fa fa-square projectSchema.contract_types.light_true" style="width:21px;height:21px;font-size:21px;margin-right:6px;color:#91c0ab;"></i>
                 {% else %}
-                  <span class="bd_s_w col-md-1 label label-lg">B</span>
+                <i class="fa fa-square-o projectSchema.contract_types.light_false" style="width:21px;height:21px;font-size:21px;margin-right:6px;color:#91c0ab;"></i>
                 {% endif %}
-
                 {% if project.contract_types.telecom %}
-                <span class="bd_s_w col-md-1 label label-lg pink-A100" >T</span>
+                <i class="fa fa-square projectSchema.contract_types.telecom_true" style="width:21px;height:21px;font-size:21px;margin-right:4px;color:rgb(248,126,123);"></i>
                 {% else %}
-                <span class="bd_s_w col-md-1 label label-lg">T</span>
+                <i class="fa fa-square-o projectSchema.contract_types.telecom_false" style="width:21px;height:21px;font-size:21px;margin-right:4px;color:rgb(248,126,123);"></i>
                 {% endif %}
-
-
-
                 {% if project.contract_types.others %}
-                 <span class="bd_s_w col-md-1 label label-lg blue-grey-900">S</span>
+                <i class="fa fa-square projectSchema.contract_types.others_true" style="width:21px;height:21px;font-size:21px;margin-right:0px;"></i>
                 {% else %}
-                  <span class="bd_s_w col-md-1 label label-lg">S</span>
+                <i class="fa fa-square-o projectSchema.contract_types.others_false" style="width:21px;height:21px;font-size:21px;margin-right:0px;"></i>
                 {% endif %}
               </div>
             </td>
-            <td class="td-va-c">
-              <a href="#" data-toggle="modal" data-target="#contract-basic-modal" data-project="{{project|json}}"><i class="material-icons md-24">&#xe146;</i></a>
+            <td class="edit_project" style="min-width:52px;max-width:52px;">
+              <a href="#" data-toggle="modal" data-target="#project-modal" data-project="{{project|json}}"><i class="fa fa-pencil-square-o" style="font-size:22px;margin-left:4px;color:rgb(89,89,89);min-width:22px;"></i></a>
             </td>
-            <td class="td-va-c">
-              <a href="#" data-toggle="modal" data-target="#project-modal" data-project="{{project|json}}"><i class="material-icons md-24">&#xe3c9;</i></a>
+            <td class="add_new_contract" style="min-width:52px;max-width:52px;">
+              <a href="#" data-toggle="modal" data-target="#contract-basic-modal" data-project="{{project|json}}"><i class="fa fa-plus-square" style="font-size:21px;margin-left:6px;color:rgb(89,89,89);"></i></a>
             </td>
           </tr>
           {% endfor %}
