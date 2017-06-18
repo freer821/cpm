@@ -359,14 +359,10 @@ function contractDetail(contract) {
         '<div class="row" style="padding-left:34px;padding-top:14px;"><i class="fa fa-line-chart ContractReport_userform" style="font-size:25px;"></i></div>'+
         '</div>'+
         '</div>'+
-        '<div class="container" style="padding-left:53px;padding-top:15px;margin-top:8px;">'+
-        '<div class="col-lg-6 col-md-6 col-sm-6" style="padding-left:39px;">'+
-        '<div class="row">'+
+        '<div class="container row" style="padding-left:70px;padding-top:15px;margin-top:8px;">'+
+        '<div class="col-lg-8 col-md-8 col-sm-8" style="padding-left:0px;">'+
         '<label>Comment</label>'+
-        '</div>'+
-        '<div class="row">'+
-        '<textarea class="contractSchema.comment" style="width:99%;" readonly>'+contract.comment+'</textarea>'+
-        '</div>'+
+        '<textarea class="contractSchema.comment" style="width:99%;">'+contract.comment+'</textarea>'+
         '</div>'+
         '</div>'+
         '</div>';
