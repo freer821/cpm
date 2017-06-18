@@ -50,11 +50,14 @@ function showContracts(project_id) {
     $.get( '/projects/'+project_id+'/contracts', function( data ) {
         if (data.contracts && data.contracts.length > 0) {
             $('#'+project_id).after("<tr><td id=\'"+project_id+"_contracts\' colspan='9'></td></tr>");
+            var contacts_html = '<table>';
             data.contracts.forEach((contract) => {
-                $('#'+project_id+'_contracts').append(contractDetail(contract));
+                contacts_html+=contractRow(contract);
             });
+            contacts_html +='</div>'
+            $('#'+project_id+'_contracts').append(contacts_html);
         } else {
-            console.log("no data");
+            $('#'+project_id).after("<tr><td id=\'"+project_id+"_contracts\' colspan='9'>no data</td></tr>");
         }
     });
 }
@@ -62,6 +65,42 @@ function showContracts(project_id) {
 function hideContracts(project_id) {
     $('#'+project_id).removeClass("shown");
     $('#'+project_id+'_contracts').parent().remove();
+}
+
+function contractRow(contract) {
+    return '<tr class="contract_not_opened">'+
+        '<td style="margin-left:0px;width:40px;min-width:40px;max-width:40px;">'+'<i class="fa fa-chevron-circle-right" style="font-size:18px;">'+'</i>'+'</td>'+
+        '<td style="margin-left:0px;width:32px;min-width:32px;max-width:32px;">'+'<i class="fa fa-spinner" style="font-size:20px;">'+'</i>'+'</td>'+
+        '<td class="contractSchema.id" style="width:150px;min-width:150px;max-width:150px;">'+contract.id+'</td>'+
+    '<td class="contractSchema.street&amp;contractSchema.housenr" style="min-width:150px;">'+contract.id+'</td>'+
+    '<td class="contractSchema.work_content" style="min-width:150px;">'+contract.id+'</td>'+
+    '<td class="contractSchema.cost_code" style="min-width:80px;">'+contract.id+ '</td>'+
+    '<td class="contractSchema.customer" style="width:70px;">'+contract.id+ '</td>'+
+    '<td class="contractSchema.contract_id">'+contract.id+ '</td>'+
+    '<td class="contract_edit">'+'<i class="fa fa-pencil-square-o" style="font-size:22px;margin-left:4px;color:rgb(89,89,89);min-width:22px;">'+'</i>'+'</td>'+
+    '<td class="contract_types&amp;lock" style="padding:0px;">'+
+    '<div>'+
+    '<div style="height:42px;min-height:0px;font-size:0px;">'+
+    '<table class="table">'+
+    '<thead>'+
+    '<tr>'+'</tr>'+
+    '</thead>'+
+    '<tbody style="height:42px;">'+
+    '<tr style="height:15%;">'+
+    '<td rowspan="0" class="contract_lock" style="width:40%;padding-top:10%;padding-left:10%;padding-bottom:10%;padding-right:0%;height:42px;">'+'<i class="fa fa-unlock-alt contract_lock_false" style="font-size:22px;margin-left:4px;color:rgb(89,89,89);min-width:22px;">'+'</i>'+'</td>'+
+    '<td rowspan="0" class="projectSchema.contract_types.electric" style="width:5%;padding:0;background-color:#b53f45;">1</td>'+
+    '<td rowspan="0" class="projectSchema.contract_types.gas" style="width:5%;padding:0;background-color:#ffd000;">1</td>'+
+    '<td rowspan="0" class="projectSchema.contract_types.water" style="width:5%;padding:0;height:42px;background-color:#ffffff;">1</td>'+
+    '<td rowspan="0" class="projectSchema.contract_types.light" style="width:5%;padding:0;background-color:#ffffff;">1</td>'+
+    '<td rowspan="0" class="projectSchema.contract_types.telecom" style="width:5%;padding:0;background-color:#ffffff;">1</td>'+
+    '<td rowspan="0" class="projectSchema.contract_types.others" style="width:5%;padding:0;background-color:#ffffff;">1</td>'+
+    '</tr>'+
+    '</tbody>'+
+    '</table>'+
+    '</div>'+
+    '</div>'+
+    '</td>'+
+    '</tr>';
 }
 
 function contractDetail(contract) {
