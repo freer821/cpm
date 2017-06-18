@@ -5695,14 +5695,6 @@ tr.shown td.details-control i.glyphicon-collapse-down{
 }
 /* for project show end */
 
-td.details-control-sub {
-    background: url('../images/details_open.png') no-repeat center center;
-    cursor: pointer;
-}
-tr.shown td.details-control-sub {
-    background: url('../images/details_close.png') no-repeat center center;
-}
-
 tr.pause{
   background-color: rgba(0, 0, 0, 0.025);
 }
@@ -5716,8 +5708,8 @@ td {
     padding: 5px 10px;
 }
 
-.opened_project {
-  font-weight:800;
+.open_contract {
+  font-weight:600;
 }
 
 

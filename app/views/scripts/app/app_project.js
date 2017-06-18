@@ -42,13 +42,14 @@ $(document).ready(function(){
 
 function showContracts(project_id) {
     $('#'+project_id).addClass("shown");
+    $('#'+project_id).css("font-weight", "800");
     $.get( '/projects/'+project_id+'/contracts', function( data ) {
         if (data.contracts && data.contracts.length > 0) {
             $('#'+project_id).after("<tr><td id=\'"+project_id+"_contracts\' colspan='9'></td></tr>");
             var contacts_html = '<table class="table"><tbody>';
             data.contracts.forEach((contract) => {
                 contacts_html+=contractOverview(contract);
-                contacts_html+='<tr><td colspan="11">'+contractDetail(contract)+'</td></tr>';
+                contacts_html+='<tr><td colspan="10">'+contractDetail(contract)+'</td></tr>';
             });
             contacts_html +='</tbody></table>';
             $('#'+project_id+'_contracts').append(contacts_html);
@@ -61,6 +62,7 @@ function showContracts(project_id) {
 function hideContracts(project_id) {
     $('#'+project_id).removeClass("shown");
     $('#'+project_id+'_contracts').parent().remove();
+    $('#'+project_id).css("font-weight", "");
 }
 
 function contractOverview (contract) {
@@ -98,12 +100,15 @@ function openContractDetail(contract_id) {
     $('#'+contract_id+'_details').show();
     $('#'+contract_id+' i.fa-chevron-circle-right').hide();
     $('#'+contract_id+' i.fa-chevron-circle-down').show();
+    $('#'+contract_id).css("font-weight", "600");
 }
 
 function closeContractDetail(contract_id) {
     $('#'+contract_id+'_details').hide();
     $('#'+contract_id+' i.fa-chevron-circle-right').show();
     $('#'+contract_id+' i.fa-chevron-circle-down').hide();
+    $('#'+contract_id).css("font-weight", "");
+
 }
 
 function formatContractType(contract) {
@@ -360,7 +365,7 @@ function contractDetail(contract) {
         '<label>Comment</label>'+
         '</div>'+
         '<div class="row">'+
-        '<textarea class="contractSchema.comment" style="width:99%;" '+contract.comment+'></textarea>'+
+        '<textarea class="contractSchema.comment" style="width:99%;" readonly>'+contract.comment+'</textarea>'+
         '</div>'+
         '</div>'+
         '</div>'+
