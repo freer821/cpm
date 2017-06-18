@@ -49,9 +49,9 @@ function showContracts(project_id) {
     $('#'+project_id).addClass("shown");
     $.get( '/projects/'+project_id+'/contracts', function( data ) {
         if (data.contracts && data.contracts.length > 0) {
-            $('#'+project_id).after("<tr><td id=\'"+project_id+"_contracts\' colspan='9'></td></tr>");
+            $('#'+project_id).after("<tr><td colspan='9'><table class='table'><tbody id=\'"+project_id+"_contracts\'></tbody></table></td></tr>");
             data.contracts.forEach((contract) => {
-                $('#'+project_id+'_contracts').append(contractDetail(contract));
+                $('#'+project_id+'_contracts').append(contractOverview(contract));
             });
         } else {
             console.log("no data");
@@ -96,6 +96,53 @@ function loadContractsOfProject(project_id) {
             }            
         ]
     });
+}
+
+function contractOverview (d) {
+    // generate contract overview
+        return formatContractStatus('') +
+                        '<td class="2nd_unfold" style="margin-left:0px;width:40px;min-width:40px;max-width:40px;"><i class="fa fa-chevron-circle-right" style="font-size:18px;"></i></td>'+
+                        '<td class="2nd_unfold" style="margin-left:0px;min-width:32px;max-width:32px;width:32px;"><i class="fa fa-check-square-o" style="font-size:20px;color:rgb(131,175,155);"></i></td>'+
+                        '<td class="contractSchema.id" style="width:150px;min-width:150px;max-width:150px;">H00002-17-44-0001 </td>'+
+                        '<td class="contractSchema.street&amp;contractSchema.housenr" style="min-width:150px;">Muster str. 1</td>'+
+                        '<td class="contractSchema.work_content" style="min-width:150px;">all typen</td>'+
+                        '<td class="contractSchema.cost_code" style="min-width:80px;">734044 </td>'+
+                        '<td class="contractSchema.customer" style="min-width:70px;">STW </td>'+
+                        '<td class="contractSchema.contract_id" style="min-width:110px;">450003971 </td>'+
+                        '<td class="contract_edit" style="min-width:45px;max-width:45px;"><i class="fa fa-pencil-square-o" style="font-size:22px;margin-left:4px;color:rgba(131,175,155,0.8);min-width:22px;"></i></td>'+
+                        '<td class="contract_types&amp;lock" style="height:42px;padding:0px;min-width:92px;width:92px;max-width:92px;">'+
+                            '<div style="padding:0px;height:40px;">'+
+                                '<div style="height:42px;min-height:0px;font-size:0px;">'+
+                                    '<table class="table">'+
+                                        '<thead>'+
+                                            '<tr></tr>'+
+                                        '</thead>'+
+                                        '<tbody style="height:42px;">'+ 
+                                            '<tr style="height:15%;">'+
+                                                '<td rowspan="0" style="width:40%;padding-top:10%;padding-left:10%;padding-bottom:10%;padding-right:0%;height:42px;"><i class="fa fa-unlock-alt contract_lock_false" style="font-size:22px;margin-left:4px;color:rgba(131,175,155,0.8);min-width:22px;"></i></td>'+
+                                                '<td rowspan="0" class="projectSchema.contract_types.electric" style="width:5%;padding:0;background-color:#b53f45;">1</td>'+
+                                                '<td rowspan="0" class="projectSchema.contract_types.gas" style="width:5%;padding:0;background-color:#ffd000;">1</td>'+
+                                                '<td rowspan="0" class="projectSchema.contract_types.water" style="width:5%;padding:0;height:42px;background-color:#3e6b7e;">1</td>'+
+                                                '<td rowspan="0" class="projectSchema.contract_types.light" style="width:5%;padding:0;background-color:#91c0ab;">1</td>'+
+                                                '<td rowspan="0" class="projectSchema.contract_types.telecom" style="width:5%;padding:0;background-color:#f87e7b;">1</td>'+
+                                                '<td rowspan="0" class="projectSchema.contract_types.others" style="width:5%;padding:0;background-color:#333333;">1</td>'+
+                                            '</tr>'+
+                                        '</tbody>'+
+                                    '</table>'+
+                                '</div>'+
+                            '</div>'+
+                        '</td>'+
+                    '</tr>';
+}
+
+function formatContractStatus(status){
+    switch (status) {
+        case 'finished':
+            return;
+        default:
+            return '<tr class="contract_finished" style="color:rgba(131,175,155,0.8);">';
+    }
+    
 }
 
 function contractDetail(d) {
