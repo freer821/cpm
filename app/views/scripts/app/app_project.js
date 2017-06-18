@@ -76,9 +76,7 @@ function displayContractDetail(contract_id) {
 
 function contractOverview (contract) {
     // generate contract overview
-        return formatContractStatus('') +
-                        '<td class="2nd_unfold" style="margin-left:0px;width:40px;min-width:40px;max-width:40px;"><i onclick="displayContractDetail(\''+contract.id+'\')" class="fa fa-chevron-circle-right" style="font-size:18px;"></i></td>'+
-                        '<td class="2nd_unfold" style="margin-left:0px;min-width:32px;max-width:32px;width:32px;"><i class="fa fa-check-square-o" style="font-size:20px;color:rgb(131,175,155);"></i></td>'+
+        return formatContractStatus(contract) +
                         '<td class="contractSchema.id" style="width:150px;min-width:150px;max-width:150px;">H00002-17-44-0001 </td>'+
                         '<td class="contractSchema.street&amp;contractSchema.housenr" style="min-width:150px;">Muster str. 1</td>'+
                         '<td class="contractSchema.work_content" style="min-width:150px;">all typen</td>'+
@@ -111,14 +109,25 @@ function contractOverview (contract) {
                     '</tr>';
 }
 
-function formatContractStatus(status){
-    switch (status) {
-        case 'finished':
-            return;
+function formatContractStatus(contract){
+    switch (contract.total_status) {
+        case 'UNFINISHED':
+            return '<tr class="contract_not_opened"><td class="2nd_unfold" style="margin-left:0px;width:40px;min-width:40px;max-width:40px;"><i onclick="displayContractDetail(\''+contract.id+'\')" class="fa fa-chevron-circle-right" style="font-size:18px;"></i></td>'+
+                '<td class="2nd_unfold" style="margin-left:0px;min-width:32px;max-width:32px;width:32px;"><i class="fa fa-spinner" style="font-size:20px;color:rgb(131,175,155);"></i></td>';
+            break;
+        case 'FINISHED':
+            return '<tr class="contract_finished" style="color:rgba(131,175,155,0.8);"><td class="2nd_unfold" style="margin-left:0px;width:40px;min-width:40px;max-width:40px;"><i onclick="displayContractDetail(\''+contract.id+'\')" class="fa fa-chevron-circle-right" style="font-size:18px;"></i></td>'+
+                '<td class="2nd_unfold" style="margin-left:0px;min-width:32px;max-width:32px;width:32px;"><i class="fa fa-check-square-o" style="font-size:20px;color:rgb(131,175,155);"></i></td>';
+            break;
+        case 'DEAKTIV':
+            return '<tr class="contract_deaktiv" style="color:rgb(182,182,182);"><td class="2nd_unfold" style="margin-left:0px;width:40px;min-width:40px;max-width:40px;"><i onclick="displayContractDetail(\''+contract.id+'\')" class="fa fa-chevron-circle-right" style="font-size:18px;"></i></td>'+
+                '<td class="2nd_unfold" style="margin-left:0px;min-width:32px;max-width:32px;width:32px;"><i class="fa fa-hand-stop-o" style="font-size:20px;color:rgb(131,175,155);"></i></td>';
+            break;
         default:
-            return '<tr class="contract_finished" style="color:rgba(131,175,155,0.8);">';
+            return '<tr class="contract_not_opened"><td class="2nd_unfold" style="margin-left:0px;width:40px;min-width:40px;max-width:40px;"><i onclick="displayContractDetail(\''+contract.id+'\')" class="fa fa-chevron-circle-right" style="font-size:18px;"></i></td>'+
+                '<td class="2nd_unfold" style="margin-left:0px;min-width:32px;max-width:32px;width:32px;"><i class="fa fa-check-square-o" style="font-size:20px;color:rgb(131,175,155);"></i></td>';
+            break;
     }
-    
 }
 
 function contractDetail(contract) {
