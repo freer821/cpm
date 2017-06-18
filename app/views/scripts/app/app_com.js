@@ -12,6 +12,8 @@
         event.preventDefault();
 
         ajaxPost($(this).attr( "action" ), $(this).serialize());
+
+        $('.modal').modal('hide');
     });
 
     // date change events
@@ -32,7 +34,6 @@ function ajaxPost(url, data){
         doAction(json_response);
     });
 
-    $('.modal').modal('hide');
 }
 
 function doAction(response) {

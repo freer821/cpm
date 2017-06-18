@@ -85,7 +85,8 @@ function contractOverview (contract) {
                                         '<tbody style="height:42px;">'+ 
                                             '<tr style="height:15%;">'+
                                                 '<td rowspan="0" style="width:40%;padding-top:10%;padding-left:10%;padding-bottom:10%;padding-right:0%;height:42px;">'+
-                                                '<i class="fa fa-unlock-alt contract_lock_false" style="font-size:22px;margin-left:4px;color:rgba(131,175,155,0.8);min-width:22px;"></i></td>'+
+                                                    formatContractLockandUnlock(contract)+
+                                                '</td>'+
                                                 formatContractType(contract)+
                                             '</tr>'+
                                         '</tbody>'+
@@ -95,6 +96,32 @@ function contractOverview (contract) {
                         '</td>'+
                     '</tr>';
 }
+
+function formatContractLockandUnlock(contract) {
+    if (contract.is_contract_ative) {
+        return '<i onclick="deactivAndActivContract(\''+contract.id+'\',\''+contract.project_id+'\',\''+ contract.cost_code+'\',\'true\')" class="fa fa-unlock-alt" style="font-size:22px;margin-left:4px;color:rgba(131,175,155,0.8);min-width:22px;"></i>';
+    } else {
+        return '<i onclick="deactivAndActivContract(\''+contract.id+'\',\''+contract.project_id+'\',\''+ contract.cost_code+'\')" class="fa fa-lock" style="font-size:22px;margin-left:4px;color:rgba(131,175,155,0.8);min-width:22px;"></i>';
+    }
+}
+
+function deactivAndActivContract(contract_id, project_id,cost_code,is_contract_ative){
+    let url = "/contracts/edit/unlockAndlock";
+    if(! is_contract_ative){
+        bootbox.confirm("are you sure to active contract: "+contract_id+"?", function(result){
+            if(result){
+                ajaxPost(url,{'contract_id':contract_id, 'project_id':project_id, 'action':'unlock', 'cost_code':cost_code});
+            }
+        });
+    } else {
+        bootbox.confirm("are you sure to deactive contract: "+contract.id+"?", function(result){
+            if(result){
+                ajaxPost(url,{'contract_id':contract_id, 'project_id':project_id, 'action':'lock', 'cost_code':cost_code});
+            }
+        });
+    }
+}
+
 
 function openContractDetail(contract_id) {
     $('#'+contract_id+'_details').show();
@@ -151,7 +178,6 @@ function formatContractType(contract) {
 
     return contract_types;
 }
-
 
 function formatContractStatus(contract){
     switch (contract.total_status) {
@@ -367,20 +393,6 @@ function contractDetail(contract) {
         '</div>'+
         '</div>';
 
-}
-
-function delContract(element){
-    var contract = element.dataset.contract;
-    contract = eval('(' + contract + ')');
-    if(contract){
-        bootbox.confirm("are you sure to delete contract: "+contract.id+"?", function(result){ 
-            if(result){
-                let url = "/contracts/"+contract._id+"/del/item";
-                //let project_id = contract.project_id;
-                ajaxPost(url,{'project_id':''});
-            }
-        });
-    }
 }
 
 function formatData(obj, key){

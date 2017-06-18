@@ -303,6 +303,7 @@ const editContract = function (condition, contract, callback) {
             $set: contract,
             $setOnInsert: {
                 total_status: 'UNFINISHED',
+                is_contract_ative: true,
                 created: new Date()
             }
         },

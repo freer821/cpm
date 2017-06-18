@@ -22,7 +22,7 @@ const contractSchema = new Schema({
     work_content: String, // arbeitsbemerkung
     permissions_status: String,
     invoices_status:String,
-    total_status:{type: String, enum: ['UNFINISHED', 'FINISHED', 'DEAKTIV']},
+    total_status:{type: String, enum: ['UNFINISHED', 'FINISHED']},
     contract_typ: {            // auftrag typ
         electric: Boolean,     // elektro
         water: Boolean,      // wasser
@@ -101,6 +101,7 @@ const contractSchema = new Schema({
             permission_status: String // status, auto to cal
         }
     ],
+    is_contract_ative: Boolean,
     ts: Date,
     created: Date
 });

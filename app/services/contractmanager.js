@@ -318,7 +318,37 @@ const editContract = function (req, res, next) {
                 common.doJSONRespond(res,{'action':'reload','project_id':project_id},next)
             }
         });
+    } else if(req.params.action === 'unlockAndlock') {
+        unlockAndlockContract(request, function (err, project_id) {
+            if (err) {
+                res.send('unlockAndlock operation failed!!');
+            } else {
+                common.doJSONRespond(res,{'action':'reload','project_id':project_id},next)
+            }
+        });
     }
+};
+
+const unlockAndlockContract = function (request, callback) {
+    let contract;
+
+    if (request.action === 'lock') {
+        contract = {
+            is_contract_ative: false
+        };
+    } else {
+        contract = {
+            is_contract_ative: true
+        };
+    }
+    db.editContract({id: request.contract_id},contract,function (err) {
+        if(err){
+            callback(err);
+        } else {
+            callback(undefined, request.project_id);
+        }
+    });
+
 };
 
 const delContract = function (req, res, next) {

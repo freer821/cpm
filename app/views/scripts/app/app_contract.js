@@ -387,6 +387,7 @@ function delInvoice(element){
     if(invoice && contract){
         let url = "/contracts/"+contract.id+"/del/invoice?id="+invoice._id;
         ajaxPost(url,{project_id:contract.project_id});
+        $('.modal').modal('hide');
     }    
 }
 
@@ -419,5 +420,6 @@ function delPermission(element){
     if(permission && contract){
         let url = "/contracts/"+contract.id+"/del/permission?id="+permission._id;
         ajaxPost(url,{project_id:contract.project_id});
+        $('.modal').modal('hide');
     }    
 }
