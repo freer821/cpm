@@ -5716,6 +5716,15 @@ td {
     padding: 5px 10px;
 }
 
+.opened_project {
+  font-weight:800;
+}
+
+.open_contract {
+  font-weight:600;
+}
+
+
 tr.del td:before{
     content: " ";
     position: absolute;

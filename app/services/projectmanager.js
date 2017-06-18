@@ -72,7 +72,7 @@ const getContractByProjectID = function (req, res, next) {
             logger.error('error to find contract in db', err.message);
         }
         res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify({'data':filterContractsByUser(req.user.cost_code, contracts)}));
+        res.send(JSON.stringify({'contracts':filterContractsByUser(req.user.cost_code, contracts)}));
     });
 };
 

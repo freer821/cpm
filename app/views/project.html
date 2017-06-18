@@ -17,7 +17,7 @@
           <thead>
           <tr>
             <th style="width:52px;"> </th>
-            <th style="min-width:100px;">Project Nr.</th>
+            <th style="min-width:100px;" data-toggle="true">Project Nr.</th>
             <th style="width:140px;">Community </th>
             <th style="min-width:190px;">Street </th>
             <th style="min-width:60px;">HsNr. </th>
@@ -29,10 +29,10 @@
           </thead>
           <tbody>
           {% for project in projects %}
-          <tr>
+          <tr id="{{project.id}}">
             <td class="details-control" style="width:52px;height:43px;min-width:52px;max-height:40px;max-width:52px;">
-              <i class="glyphicon glyphicon-expand" style="font-size:19px;color:rgb(89,89,89);"></i>
-              <i class="glyphicon glyphicon-collapse-down" style="font-size:19px;color:rgb(89,89,89);"></i>
+              <i class="glyphicon glyphicon-expand" style="font-size:19px;color:rgb(89,89,89);" onclick="showContracts('{{project.id}}')"></i>
+              <i class="glyphicon glyphicon-collapse-down" style="font-size:19px;color:rgb(89,89,89);" onclick="hideContracts('{{project.id}}')"></i>
             </td>
             <td class="projectSchema.id" style="height:43px;min-width:100px;">{{project.id}} </td>
             <td class="projectSchema.community" style="min-width:140px;height:43px;">{{project.community}} </td>
@@ -78,6 +78,342 @@
             </td>
             <td class="add_new_contract" style="min-width:52px;max-width:52px;">
               <a href="#" data-toggle="modal" data-target="#contract-basic-modal" data-project="{{project|json}}"><i class="fa fa-plus-square" style="font-size:21px;margin-left:6px;color:rgb(89,89,89);"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td id="{{project.id}}_contracts" colspan="9">
+              <div style="padding-right:15px;">
+                <div class="table-responsive" style="padding-left:18px;">
+                  <table class="table">
+                    <thead>
+                    <tr></tr>
+                    </thead>
+                    <tbody>
+                    <tr class="contract_finished" style="color:rgba(131,175,155,0.8);">
+                      <td class="2nd_unfold" style="margin-left:0px;width:40px;min-width:40px;max-width:40px;"><i class="fa fa-chevron-circle-right" style="font-size:18px;"></i></td>
+                      <td class="2nd_unfold" style="margin-left:0px;min-width:32px;max-width:32px;width:32px;"><i class="fa fa-check-square-o" style="font-size:20px;color:rgb(131,175,155);"></i></td>
+                      <td class="contractSchema.id" style="width:150px;min-width:150px;max-width:150px;">H00002-17-44-0001 </td>
+                      <td class="contractSchema.street&amp;contractSchema.housenr" style="min-width:150px;">Muster str. 1</td>
+                      <td class="contractSchema.work_content" style="min-width:150px;">all typen</td>
+                      <td class="contractSchema.cost_code" style="min-width:80px;">734044 </td>
+                      <td class="contractSchema.customer" style="min-width:70px;">STW </td>
+                      <td class="contractSchema.contract_id" style="min-width:110px;">450003971 </td>
+                      <td class="contract_edit" style="min-width:45px;max-width:45px;"><i class="fa fa-pencil-square-o" style="font-size:22px;margin-left:4px;color:rgba(131,175,155,0.8);min-width:22px;"></i></td>
+                      <td class="contract_types&amp;lock" style="height:42px;padding:0px;min-width:92px;width:92px;max-width:92px;">
+                        <div style="padding:0px;height:40px;">
+                          <div style="height:42px;min-height:0px;font-size:0px;">
+                            <table class="table">
+                              <thead>
+                              <tr></tr>
+                              </thead>
+                              <tbody style="height:42px;">
+                              <tr style="height:15%;">
+                                <td rowspan="0" style="width:40%;padding-top:10%;padding-left:10%;padding-bottom:10%;padding-right:0%;height:42px;"><i class="fa fa-unlock-alt contract_lock_false" style="font-size:22px;margin-left:4px;color:rgba(131,175,155,0.8);min-width:22px;"></i></td>
+                                <td rowspan="0" class="projectSchema.contract_types.electric" style="width:5%;padding:0;background-color:#b53f45;">1</td>
+                                <td rowspan="0" class="projectSchema.contract_types.gas" style="width:5%;padding:0;background-color:#ffd000;">1</td>
+                                <td rowspan="0" class="projectSchema.contract_types.water" style="width:5%;padding:0;height:42px;background-color:#3e6b7e;">1</td>
+                                <td rowspan="0" class="projectSchema.contract_types.light" style="width:5%;padding:0;background-color:#91c0ab;">1</td>
+                                <td rowspan="0" class="projectSchema.contract_types.telecom" style="width:5%;padding:0;background-color:#f87e7b;">1</td>
+                                <td rowspan="0" class="projectSchema.contract_types.others" style="width:5%;padding:0;background-color:#333333;">1</td>
+                              </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="contract_deaktiv" style="color:rgb(182,182,182);">
+                      <td style="margin-left:0px;width:40px;min-width:40px;max-width:40px;"><i class="fa fa-chevron-circle-right" style="font-size:18px;"></i></td>
+                      <td style="margin-left:0px;min-width:32px;max-width:32px;width:32px;"><i class="fa fa-hand-stop-o" style="font-size:20px;"></i></td>
+                      <td class="contractSchema.id" style="width:150px;min-width:150px;max-width:150px;">H00002-17-44-0002 </td>
+                      <td class="contractSchema.street&amp;contractSchema.housenr" style="min-width:150px;">Muster str. 1</td>
+                      <td class="contractSchema.work_content" style="min-width:150px;">BA Strom + Wasser</td>
+                      <td class="contractSchema.cost_code" style="min-width:80px;">734044 </td>
+                      <td class="contractSchema.customer" style="width:70px;">Avacon </td>
+                      <td class="contractSchema.contract_id">450003971 </td>
+                      <td class="contract_edit"><i class="fa fa-pencil-square-o" style="font-size:22px;margin-left:4px;color:rgb(182,182,182);min-width:22px;"></i></td>
+                      <td class="contract_types&amp;lock" style="padding:0px;">
+                        <div>
+                          <div style="height:42px;min-height:0px;font-size:0px;padding-bottom:4%;">
+                            <table class="table">
+                              <tbody style="height:42px;">
+                              <tr style="height:15%;">
+                                <td rowspan="0" class="contract_lock" style="width:40%;padding-left:10%;padding-bottom:10%;padding-right:0%;padding-top:10%;"><i class="fa fa-lock contract_lock_true" style="font-size:22px;margin-left:4px;color:rgb(89,89,89);min-width:22px;"></i></td>
+                                <td rowspan="0" class="projectSchema.contract_types.electric" style="width:5%;padding:0;background-color:#b53f45;">1</td>
+                                <td rowspan="0" class="projectSchema.contract_types.gas" style="width:5%;padding:0;background-color:#ffffff;">1</td>
+                                <td rowspan="0" class="projectSchema.contract_types.water" style="width:5%;padding:0;height:42px;background-color:#3e6b7e;">1</td>
+                                <td rowspan="0" class="projectSchema.contract_types.light" style="width:5%;padding:0;background-color:#ffffff;">1</td>
+                                <td rowspan="0" class="projectSchema.contract_types.telecom" style="width:5%;padding:0;background-color:#ffffff;">1</td>
+                                <td rowspan="0" class="projectSchema.contract_types.others" style="width:5%;padding:0;background-color:#ffffff;">1</td>
+                              </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="contract_not_opened">
+                      <td style="margin-left:0px;width:40px;min-width:40px;max-width:40px;"><i class="fa fa-chevron-circle-right" style="font-size:18px;"></i></td>
+                      <td style="margin-left:0px;width:32px;min-width:32px;max-width:32px;"><i class="fa fa-spinner" style="font-size:20px;"></i></td>
+                      <td class="contractSchema.id" style="width:150px;min-width:150px;max-width:150px;">H00002-17-44-0003 </td>
+                      <td class="contractSchema.street&amp;contractSchema.housenr" style="min-width:150px;">Muster str. 1</td>
+                      <td class="contractSchema.work_content" style="min-width:150px;">Strom + Gas</td>
+                      <td class="contractSchema.cost_code" style="min-width:80px;">734044 </td>
+                      <td class="contractSchema.customer" style="width:70px;">Fremd </td>
+                      <td class="contractSchema.contract_id">450003971 </td>
+                      <td class="contract_edit"><i class="fa fa-pencil-square-o" style="font-size:22px;margin-left:4px;color:rgb(89,89,89);min-width:22px;"></i></td>
+                      <td class="contract_types&amp;lock" style="padding:0px;">
+                        <div>
+                          <div style="height:42px;min-height:0px;font-size:0px;">
+                            <table class="table">
+                              <thead>
+                              <tr></tr>
+                              </thead>
+                              <tbody style="height:42px;">
+                              <tr style="height:15%;">
+                                <td rowspan="0" class="contract_lock" style="width:40%;padding-top:10%;padding-left:10%;padding-bottom:10%;padding-right:0%;height:42px;"><i class="fa fa-unlock-alt contract_lock_false" style="font-size:22px;margin-left:4px;color:rgb(89,89,89);min-width:22px;"></i></td>
+                                <td rowspan="0" class="projectSchema.contract_types.electric" style="width:5%;padding:0;background-color:#b53f45;">1</td>
+                                <td rowspan="0" class="projectSchema.contract_types.gas" style="width:5%;padding:0;background-color:#ffd000;">1</td>
+                                <td rowspan="0" class="projectSchema.contract_types.water" style="width:5%;padding:0;height:42px;background-color:#ffffff;">1</td>
+                                <td rowspan="0" class="projectSchema.contract_types.light" style="width:5%;padding:0;background-color:#ffffff;">1</td>
+                                <td rowspan="0" class="projectSchema.contract_types.telecom" style="width:5%;padding:0;background-color:#ffffff;">1</td>
+                                <td rowspan="0" class="projectSchema.contract_types.others" style="width:5%;padding:0;background-color:#ffffff;">1</td>
+                              </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr></tr>
+                    <tr class="open_contract">
+                      <td style="margin-left:0px;width:40px;min-width:40px;max-width:40px;"><i class="fa fa-chevron-circle-down" style="font-size:18px;"></i></td>
+                      <td style="margin-left:0px;width:32px;min-width:32px;max-width:32px;"><i class="fa fa-spinner" style="font-size:20px;"></i></td>
+                      <td class="contractSchema.id" style="width:150px;min-width:150px;max-width:150px;">H00002-17-44-0004 </td>
+                      <td class="contractSchema.street&amp;contractSchema.housenr" style="min-width:150px;">Muster str. 1</td>
+                      <td class="contractSchema.work_content" style="min-width:150px;">Strom + Gas</td>
+                      <td class="contractSchema.cost_code" style="min-width:80px;">734044 </td>
+                      <td class="contractSchema.customer" style="width:70px;">Fremd </td>
+                      <td class="contractSchema.contract_id">450003971 </td>
+                      <td class="contract_edit"><i class="fa fa-pencil-square-o" style="font-size:22px;margin-left:4px;color:rgb(89,89,89);min-width:22px;"></i></td>
+                      <td class="contract_types&amp;lock" style="padding:0px;">
+                        <div>
+                          <div style="height:42px;min-height:0px;font-size:0px;">
+                            <table class="table">
+                              <thead>
+                              <tr></tr>
+                              </thead>
+                              <tbody style="height:42px;">
+                              <tr style="height:15%;">
+                                <td rowspan="0" class="contract_lock" style="width:40%;padding-top:10%;padding-left:10%;padding-bottom:10%;padding-right:0%;height:42px;"><i class="fa fa-unlock-alt contract_lock_false" style="font-size:22px;margin-left:4px;color:rgb(89,89,89);min-width:22px;"></i></td>
+                                <td rowspan="0" class="projectSchema.contract_types.electric" style="width:5%;padding:0;background-color:#b53f45;">1</td>
+                                <td rowspan="0" class="projectSchema.contract_types.gas" style="width:5%;padding:0;background-color:#ffd000;">1</td>
+                                <td rowspan="0" class="projectSchema.contract_types.water" style="width:5%;padding:0;height:42px;background-color:#ffffff;">1</td>
+                                <td rowspan="0" class="projectSchema.contract_types.light" style="width:5%;padding:0;background-color:#ffffff;">1</td>
+                                <td rowspan="0" class="projectSchema.contract_types.telecom" style="width:5%;padding:0;background-color:#ffffff;">1</td>
+                                <td rowspan="0" class="projectSchema.contract_types.others" style="width:5%;padding:0;background-color:#ffffff;">1</td>
+                              </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="row" style="padding-left:50px;padding-right:0px;">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                  <div class="row">
+                    <div class="col-lg-2 col-md-2 col-sm-2" style="padding-left:26px;margin-top:15px;"><i class="fa fa-thumbs-o-up" style="font-size:30px;"></i></div>
+                    <div class="col-lg-10 col-md-10 col-sm-10">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <label style="color:rgb(123,120,120);font-size:10px;">Genehmigungen </label>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <input type="text" class="contractSchema.building_permission.permission_status" style="padding-top:0;margin-top:0px;font-size:14px;width:100%;">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-2 col-md-2 col-sm-2" style="padding:0px;padding-top:0;padding-left:26px;margin-top:10px;"><i class="icon ion-android-calendar" style="font-size:30px;"></i></div>
+                    <div class="col-lg-10 col-md-10 col-sm-10">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <label style="color:rgb(123,120,120);font-size:10px;">Tiefbau &amp; Montage Zustand</label>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <input type="text" class="contractSchema.building_work.status" style="padding-top:0;margin-top:0px;font-size:14px;width:100%;">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-2 col-md-2 col-sm-2" style="padding-left:22px;margin-top:14px;"><i class="fa fa-road" style="font-size:30px;"></i></div>
+                    <div class="col-lg-10 col-md-10 col-sm-10">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <label style="color:rgb(123,120,120);font-size:10px;">OFW Zustand</label>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <input type="text" class="OFW_status" style="padding-top:0;margin-top:0px;font-size:14px;width:100%;">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-2 col-md-2 col-sm-2" style="padding-left:24px;margin-top:14px;"><i class="fa fa-credit-card" style="font-size:30px;"></i></div>
+                    <div class="col-lg-10 col-md-10 col-sm-10">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <label style="color:rgb(123,120,120);font-size:10px;">Abrechnungszusatnd</label>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <input type="text" class="contractSchema.invoice.invoice_status" style="padding-top:0;margin-top:0px;font-size:14px;width:100%;">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-5 col-sm-offset-0">
+                  <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <label style="color:rgb(123,120,120);font-size:10px;">Bauleiter </label>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12" style="height:25px;">
+                          <label class="contractSchema.manager_name">Micheal Fölsche</label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <label style="color:rgb(123,120,120);font-size:10px;">Kolonne </label>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12" style="height:25px;padding-right:opx;">
+                          <label class="contractSchema.building_work.worker_name">Neubert </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <label style="color:rgb(123,120,120);font-size:10px;">geplanter Baubeginn</label>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12" style="height:25px;">
+                          <label class="contractSchema.building_work.plan_begin">05-06-2017 </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <label style="color:rgb(123,120,120);font-size:10px;">geplantes Bauende</label>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12" style="height:25px;">
+                          <label class="contractSchema.building_work.plan_end">16-06-2017 </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <label style="color:rgb(123,120,120);font-size:10px;">Schätzwert </label>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12" style="height:25px;">
+                          <label class="contractSchema.manager_name">600,00€ </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <label style="color:rgb(123,120,120);font-size:10px;">Zeitwert </label>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12" style="height:25px;">
+                          <label class="contractSchema.manager_name">832,63€ </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <label style="color:rgb(123,120,120);font-size:10px;">Unterlagen bei</label>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12" style="height:25px;">
+                          <label class="contractSchema.manager_name">Micheal Fölsche</label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <label style="color:rgb(123,120,120);font-size:10px;">Unterlagen Zustand</label>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12" style="height:25px;">
+                          <label class="contractSchema.manager_name">weiter zu bearbeiten</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-1 col-lg-offset-0 col-md-1 col-md-offset-0 col-sm-1 col-sm-offset-0">
+                  <div class="row">
+                    <div class="col-md-12" style="padding-top:8px;padding-left:30px;padding-right:0px;"><i class="fa fa-print print_userform" style="font-size:25px;"></i></div>
+                  </div>
+                  <div class="row" style="padding-top:12px;padding-left:30px;"><i class="fa fa-folder-open-o openfolde_userform" style="font-size:25px;"></i></div>
+                  <div class="row" style="padding-top:10px;padding-left:30px;"><i class="material-icons Material_userform" style="font-size:29px;">local_grocery_store</i></div>
+                  <div class="row" style="padding-left:34px;padding-top:10px;"><i class="fa fa-calculator Aufmass_userform" style="font-size:25px;"></i></div>
+                  <div class="row" style="padding-left:34px;padding-top:14px;"><i class="fa fa-line-chart ContractReport_userform" style="font-size:25px;"></i></div>
+                </div>
+              </div>
+              <div class="container" style="padding-left:53px;padding-top:15px;margin-top:8px;">
+                <div class="col-lg-6 col-md-6 col-sm-6" style="padding-left:39px;">
+                  <div class="row">
+                    <label>Comment </label>
+                  </div>
+                  <div class="row">
+                    <textarea class="contractSchema.comment" style="width:99%;"></textarea>
+                  </div>
+                </div>
+              </div>
+
+
             </td>
           </tr>
           {% endfor %}

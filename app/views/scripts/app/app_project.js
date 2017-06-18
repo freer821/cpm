@@ -2,11 +2,6 @@
  * Created by Zhenyu on 25.05.2017.
  */
 $(document).ready(function(){
-    $.getScript(  '/scripts/plugins/footable.min.js', function() {
-        $('#projects-overview').on("expand.ft.row",function (e, ft, row) {
-            console.log(row);
-        }).footable();
-    });
 
     // add and edit project
     $('#project-modal').on('show.bs.modal', function (e) {
@@ -33,7 +28,6 @@ $(document).ready(function(){
             } else {
                 $("#is_linesplan_files_exist").prop( "checked", false );
             }
-            $("#files_path").val(project.files_path);
         } else {
             //set title
             $('#project-modal-title').text('Add Project');
@@ -44,7 +38,31 @@ $(document).ready(function(){
         }
     });
 
+    $('#projects-overview tbody').on('click', 'td.details-control', function (e) {
+        var row = $(this).closest('tr');
+
+    });
+
 });
+
+function showContracts(project_id) {
+    $('#'+project_id).addClass("shown");
+    $.get( '/projects/'+project_id+'/contracts', function( data ) {
+        if (data.contracts && data.contracts.length > 0) {
+            $('#'+project_id).after("<tr><td id=\'"+project_id+"_contracts\' colspan='9'></td></tr>");
+            data.contracts.forEach((contract) => {
+                $('#'+project_id+'_contracts').append(contractDetail(contract));
+            });
+        } else {
+            console.log("no data");
+        }
+    });
+}
+
+function hideContracts(project_id) {
+    $('#'+project_id).removeClass("shown");
+    $('#'+project_id+'_contracts').parent().remove();
+}
 
 function loadContractsOfProject(project_id) {
     return $('#' + project_id).DataTable({
