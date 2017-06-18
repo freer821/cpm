@@ -5720,8 +5720,12 @@ td {
   font-weight:800;
 }
 
-.open_contract {
-  font-weight:600;
+.opened_contract {
+  display: inline;
+}
+
+.closed_contract {
+  display: none;
 }
 
 
