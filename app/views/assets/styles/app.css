@@ -5720,14 +5720,6 @@ td {
   font-weight:800;
 }
 
-.opened_contract {
-  display: inline;
-}
-
-.closed_contract {
-  display: none;
-}
-
 
 tr.del td:before{
     content: " ";
