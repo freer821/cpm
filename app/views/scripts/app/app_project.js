@@ -58,7 +58,7 @@ function showContracts(project_id) {
             contacts_html +='</tbody></table>';
             $('#'+project_id+'_contracts').append(contacts_html);
         } else {
-            $('#'+project_id).after("<tr><td id=\'"+project_id+"_contracts\' colspan='9'>no data</td></tr>");
+            $('#'+project_id).after("<tr><td id=\'"+project_id+"_contracts\' colspan='9'><table class='table'><tbody><tr><td style='background-color: rgba(0, 0, 0, 0.025)'>no contract data</td></tr></tbody><table></td></tr>");
         }
     });
 }
@@ -294,7 +294,7 @@ function contractDetail(contract) {
         '</div>'+
         '<div class="col-lg-1 col-lg-offset-0 col-md-1 col-md-offset-0 col-sm-1 col-sm-offset-0">'+
         '<div class="row">'+
-        '<div class="col-md-12" style="padding-top:8px;padding-left:30px;padding-right:0px;"><i class="fa fa-print print_userform" style="font-size:25px;"></i></div>'+
+        '<div class="col-md-12" style="padding-top:8px;padding-left:30px;padding-right:0px;"><a href="#" data-toggle="modal" data-target="#contract-print-modal" data-contract=\''+JSON.stringify(contract)+'\' data-backdrop="static"><i class="fa fa-print print_userform" style="font-size:25px;"></i></a></div>'+
         '</div>'+
         '<div class="row" style="padding-top:12px;padding-left:30px;"><i class="fa fa-folder-open-o openfolde_userform" style="font-size:25px;"></i></div>'+
         '<div class="row" style="padding-top:10px;padding-left:30px;"><i class="material-icons Material_userform" style="font-size:29px;">local_grocery_store</i></div>'+
