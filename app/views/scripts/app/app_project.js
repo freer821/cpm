@@ -53,6 +53,7 @@ function showContracts(project_id) {
             var contacts_html = '<table>';
             data.contracts.forEach((contract) => {
                 contacts_html+=contractRow(contract);
+                contacts_html+='<tr><td colspan="7">'+contractDetail(contract)+'</td></tr>';
             });
             contacts_html +='</div>'
             $('#'+project_id+'_contracts').append(contacts_html);
@@ -67,21 +68,27 @@ function hideContracts(project_id) {
     $('#'+project_id+'_contracts').parent().remove();
 }
 
+function displayContractDetail(contract_id) {
+    $('#'+contract_id).removeClass("closed_contract");
+    //$('#'+contract_id).addClass("opened_contract");
+
+}
+
 function contractRow(contract) {
-    return '<tr class="contract_not_opened">'+
-        '<td style="margin-left:0px;width:40px;min-width:40px;max-width:40px;">'+'<i class="fa fa-chevron-circle-right" style="font-size:18px;">'+'</i>'+'</td>'+
-        '<td style="margin-left:0px;width:32px;min-width:32px;max-width:32px;">'+'<i class="fa fa-spinner" style="font-size:20px;">'+'</i>'+'</td>'+
+    return '<tr>'+
+        '<td style="margin-left:0px;width:40px;min-width:40px;max-width:40px;"><i onclick="displayContractDetail(\''+contract.id+'\')" class="fa fa-chevron-circle-right" style="font-size:18px;"></i></td>'+
+        '<td style="margin-left:0px;width:32px;min-width:32px;max-width:32px;"><i class="fa fa-spinner" style="font-size:20px;">'+'</i>'+'</td>'+
         '<td class="contractSchema.id" style="width:150px;min-width:150px;max-width:150px;">'+contract.id+'</td>'+
-    '<td class="contractSchema.street&amp;contractSchema.housenr" style="min-width:150px;">'+contract.id+'</td>'+
-    '<td class="contractSchema.work_content" style="min-width:150px;">'+contract.id+'</td>'+
-    '<td class="contractSchema.cost_code" style="min-width:80px;">'+contract.id+ '</td>'+
-    '<td class="contractSchema.customer" style="width:70px;">'+contract.id+ '</td>'+
-    '<td class="contractSchema.contract_id">'+contract.id+ '</td>'+
-    '<td class="contract_edit">'+'<i class="fa fa-pencil-square-o" style="font-size:22px;margin-left:4px;color:rgb(89,89,89);min-width:22px;">'+'</i>'+'</td>'+
-    '<td class="contract_types&amp;lock" style="padding:0px;">'+
+    '<td style="min-width:150px;">'+contract.id+'</td>'+
+    '<td  style="min-width:150px;">'+contract.id+'</td>'+
+    '<td style="min-width:80px;">'+contract.id+ '</td>'+
+    '<td style="width:70px;">'+contract.id+ '</td>'+
+    '<td>'+contract.id+ '</td>'+
+    '<td><i class="fa fa-pencil-square-o" style="font-size:22px;margin-left:4px;color:rgb(89,89,89);min-width:22px;"></i></td>'+
+    '<td style="padding:0px;">'+
     '<div>'+
     '<div style="height:42px;min-height:0px;font-size:0px;">'+
-    '<table class="table">'+
+    '<table>'+
     '<thead>'+
     '<tr>'+'</tr>'+
     '</thead>'+
@@ -105,7 +112,7 @@ function contractRow(contract) {
 
 function contractDetail(contract) {
     // `d` is the original data object for the row
-    return '<div class="row" style="padding-left:50px;padding-right:0px;">'+
+    return '<div id="'+contract.id+'" class="closed_contract"><div class="row" style="padding-left:50px;padding-right:0px;">'+
         '<div class="col-lg-6 col-md-6 col-sm-6">'+
         '<div class="row">'+
         '<div class="col-lg-2 col-md-2 col-sm-2" style="padding-left:26px;margin-top:15px;"><a href="#" data-toggle="modal" data-target="#contract-permissions-modal" data-contract=\''+JSON.stringify(contract)+'\' data-backdrop="static" class="list-left"><i class="fa fa-thumbs-o-up" style="font-size:30px;"></i></a></div>'+
@@ -291,6 +298,7 @@ function contractDetail(contract) {
         '</div>'+
         '<div class="row">'+
         '<textarea class="contractSchema.comment" style="width:99%;">'+'</textarea>'+
+        '</div>'+
         '</div>'+
         '</div>'+
         '</div>';
