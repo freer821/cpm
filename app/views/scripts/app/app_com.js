@@ -42,7 +42,8 @@ function doAction(response) {
                 location.reload();
                 break;
             case 'reload':
-                $('#' + response.project_id).DataTable().ajax.reload();
+                hideContracts(response.project_id);
+                showContracts(response.project_id);
                 break;
             case 'add_con':
                 $('#contract-basic-modal').modal('show');
