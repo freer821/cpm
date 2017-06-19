@@ -74,7 +74,7 @@ function contractOverview (contract) {
                         '<td class="contractSchema.cost_code" style="min-width:80px;">'+contract.cost_code+' </td>'+
                         '<td class="contractSchema.customer" style="min-width:70px;">'+contract.customer+' </td>'+
                         '<td class="contractSchema.contract_id" style="min-width:110px;">'+contract.contract_id+' </td>'+
-                        '<td class="contract_edit" style="min-width:45px;max-width:45px;"><a href="#" data-toggle="modal" data-target="#contract-basic-modal" data-contract=\''+JSON.stringify(contract)+'\' data-backdrop="static"><i class="fa fa-pencil-square-o" style="font-size:22px;margin-left:4px;color:rgba(131,175,155,0.8);min-width:22px;"></i></a></td>'+
+                        '<td class="contract_edit" style="min-width:45px;max-width:45px;"><a href="#" data-toggle="modal" data-target="#contract-basic-modal" data-contract=\''+JSON.stringify(contract)+'\' data-backdrop="static"><i class="fa fa-pencil-square-o" style="font-size:22px;margin-left:4px;min-width:22px;"></i></a></td>'+
                         '<td class="contract_types&amp;lock" style="height:42px;padding:0px;min-width:92px;width:92px;max-width:92px;">'+
                             '<div style="padding:0px;height:40px;">'+
                                 '<div style="height:42px;min-height:0px;font-size:0px;">'+
@@ -99,9 +99,9 @@ function contractOverview (contract) {
 
 function formatContractLockandUnlock(contract) {
     if (contract.is_contract_ative) {
-        return '<i onclick="deactivAndActivContract(\''+contract.id+'\',\''+contract.project_id+'\',\''+ contract.cost_code+'\',\'true\')" class="fa fa-unlock-alt" style="font-size:22px;margin-left:4px;color:rgba(131,175,155,0.8);min-width:22px;"></i>';
+        return '<i onclick="deactivAndActivContract(\''+contract.id+'\',\''+contract.project_id+'\',\''+ contract.cost_code+'\',\'true\')" class="fa fa-unlock-alt" style="font-size:22px;margin-left:4px;min-width:22px;"></i>';
     } else {
-        return '<i onclick="deactivAndActivContract(\''+contract.id+'\',\''+contract.project_id+'\',\''+ contract.cost_code+'\')" class="fa fa-lock" style="font-size:22px;margin-left:4px;color:rgba(131,175,155,0.8);min-width:22px;"></i>';
+        return '<i onclick="deactivAndActivContract(\''+contract.id+'\',\''+contract.project_id+'\',\''+ contract.cost_code+'\')" class="fa fa-lock" style="font-size:22px;margin-left:4px;min-width:22px;"></i>';
     }
 }
 
@@ -184,22 +184,22 @@ function formatContractStatus(contract){
         case 'UNFINISHED':
             return '<tr id="'+contract.id+'" class="contract_not_opened"><td class="2nd_unfold" style="margin-left:0px;width:40px;min-width:40px;max-width:40px;">'+
                 '<i onclick="openContractDetail(\''+contract.id+'\')" class="fa fa-chevron-circle-right" style="font-size:18px;"></i><i onclick="closeContractDetail(\''+contract.id+'\')" class="fa fa-chevron-circle-down" style="display:none;font-size:18px;"></i></td>'+
-                '<td class="2nd_unfold" style="margin-left:0px;min-width:32px;max-width:32px;width:32px;"><i class="fa fa-spinner" style="font-size:20px;color:rgb(131,175,155);"></i></td>';
+                '<td class="2nd_unfold" style="margin-left:0px;min-width:32px;max-width:32px;width:32px;"><i class="fa fa-spinner" style="font-size:20px;"></i></td>';
             break;
         case 'FINISHED':
             return '<tr id="'+contract.id+'" class="contract_finished" style="color:rgba(131,175,155,0.8);"><td class="2nd_unfold" style="margin-left:0px;width:40px;min-width:40px;max-width:40px;">'+
                 '<i onclick="openContractDetail(\''+contract.id+'\')" class="fa fa-chevron-circle-right" style="font-size:18px;"></i><i onclick="closeContractDetail(\''+contract.id+'\')" class="fa fa-chevron-circle-down" style="display:none;font-size:18px;"></i></td>'+
-                '<td class="2nd_unfold" style="margin-left:0px;min-width:32px;max-width:32px;width:32px;"><i class="fa fa-check-square-o" style="font-size:20px;color:rgb(131,175,155);"></i></td>';
+                '<td class="2nd_unfold" style="margin-left:0px;min-width:32px;max-width:32px;width:32px;"><i class="fa fa-check-square-o" style="font-size:20px;"></i></td>';
             break;
         case 'DEAKTIV':
             return '<tr id="'+contract.id+'" class="contract_deaktiv" style="color:rgb(182,182,182);"><td class="2nd_unfold" style="margin-left:0px;width:40px;min-width:40px;max-width:40px;">'+
                 '<i onclick="openContractDetail(\''+contract.id+'\')" class="fa fa-chevron-circle-right" style="font-size:18px;"></i><i onclick="closeContractDetail(\''+contract.id+'\')" class="fa fa-chevron-circle-down" style="display:none;font-size:18px;"></i></td>'+
-                '<td class="2nd_unfold" style="margin-left:0px;min-width:32px;max-width:32px;width:32px;"><i class="fa fa-hand-stop-o" style="font-size:20px;color:rgb(131,175,155);"></i></td>';
+                '<td class="2nd_unfold" style="margin-left:0px;min-width:32px;max-width:32px;width:32px;"><i class="fa fa-hand-stop-o" style="font-size:20px;"></i></td>';
             break;
         default:
             return '<tr id="'+contract.id+'" class="contract_not_opened"><td class="2nd_unfold" style="margin-left:0px;width:40px;min-width:40px;max-width:40px;">'+
                 '<i onclick="openContractDetail(\''+contract.id+'\')" class="fa fa-chevron-circle-right" style="font-size:18px;"></i><i onclick="closeContractDetail(\''+contract.id+'\')" class="fa fa-chevron-circle-down" style="display:none;font-size:18px;"></i></td>'+
-                '<td class="2nd_unfold" style="margin-left:0px;min-width:32px;max-width:32px;width:32px;"><i class="fa fa-check-square-o" style="font-size:20px;color:rgb(131,175,155);"></i></td>';
+                '<td class="2nd_unfold" style="margin-left:0px;min-width:32px;max-width:32px;width:32px;"><i class="fa fa-check-square-o" style="font-size:20px;"></i></td>';
             break;
     }
 }
