@@ -49,7 +49,7 @@ function showContracts(project_id) {
             var contacts_html = '<table class="table"><tbody>';
             data.contracts.forEach((contract) => {
                 contacts_html+=contractOverview(contract);
-                contacts_html+='<tr><td colspan="10">'+contractDetail(contract)+'</td></tr>';
+                contacts_html+='<tr id="'+contract.id+'_details" style="display:none"><td colspan="10">'+contractDetail(contract)+'</td></tr>';
             });
             contacts_html +='</tbody></table>';
             $('#'+project_id+'_contracts').append(contacts_html);
@@ -114,7 +114,7 @@ function deactivAndActivContract(contract_id, project_id,cost_code,is_contract_a
             }
         });
     } else {
-        bootbox.confirm("are you sure to deactive contract: "+contract.id+"?", function(result){
+        bootbox.confirm("are you sure to deactive contract: "+contract_id+"?", function(result){
             if(result){
                 ajaxPost(url,{'contract_id':contract_id, 'project_id':project_id, 'action':'lock', 'cost_code':cost_code});
             }
@@ -180,6 +180,12 @@ function formatContractType(contract) {
 }
 
 function formatContractStatus(contract){
+    if (!contract.is_contract_ative) {
+        return '<tr id="'+contract.id+'" class="contract_deaktiv" style="color:rgb(182,182,182);"><td class="2nd_unfold" style="margin-left:0px;width:40px;min-width:40px;max-width:40px;">'+
+            '<i onclick="openContractDetail(\''+contract.id+'\')" class="fa fa-chevron-circle-right" style="font-size:18px;"></i><i onclick="closeContractDetail(\''+contract.id+'\')" class="fa fa-chevron-circle-down" style="display:none;font-size:18px;"></i></td>'+
+            '<td class="2nd_unfold" style="margin-left:0px;min-width:32px;max-width:32px;width:32px;"><i class="fa fa-hand-stop-o" style="font-size:20px;"></i></td>';
+    }
+
     switch (contract.total_status) {
         case 'UNFINISHED':
             return '<tr id="'+contract.id+'" class="contract_not_opened"><td class="2nd_unfold" style="margin-left:0px;width:40px;min-width:40px;max-width:40px;">'+
@@ -191,11 +197,6 @@ function formatContractStatus(contract){
                 '<i onclick="openContractDetail(\''+contract.id+'\')" class="fa fa-chevron-circle-right" style="font-size:18px;"></i><i onclick="closeContractDetail(\''+contract.id+'\')" class="fa fa-chevron-circle-down" style="display:none;font-size:18px;"></i></td>'+
                 '<td class="2nd_unfold" style="margin-left:0px;min-width:32px;max-width:32px;width:32px;"><i class="fa fa-check-square-o" style="font-size:20px;"></i></td>';
             break;
-        case 'DEAKTIV':
-            return '<tr id="'+contract.id+'" class="contract_deaktiv" style="color:rgb(182,182,182);"><td class="2nd_unfold" style="margin-left:0px;width:40px;min-width:40px;max-width:40px;">'+
-                '<i onclick="openContractDetail(\''+contract.id+'\')" class="fa fa-chevron-circle-right" style="font-size:18px;"></i><i onclick="closeContractDetail(\''+contract.id+'\')" class="fa fa-chevron-circle-down" style="display:none;font-size:18px;"></i></td>'+
-                '<td class="2nd_unfold" style="margin-left:0px;min-width:32px;max-width:32px;width:32px;"><i class="fa fa-hand-stop-o" style="font-size:20px;"></i></td>';
-            break;
         default:
             return '<tr id="'+contract.id+'" class="contract_not_opened"><td class="2nd_unfold" style="margin-left:0px;width:40px;min-width:40px;max-width:40px;">'+
                 '<i onclick="openContractDetail(\''+contract.id+'\')" class="fa fa-chevron-circle-right" style="font-size:18px;"></i><i onclick="closeContractDetail(\''+contract.id+'\')" class="fa fa-chevron-circle-down" style="display:none;font-size:18px;"></i></td>'+
@@ -206,7 +207,7 @@ function formatContractStatus(contract){
 
 function contractDetail(contract) {
     // `d` is the original data object for the row
-    return '<div id="'+contract.id+'_details" style="display:none"><div class="row" style="padding-left:50px;padding-right:0px;">'+
+    return '<div class="row" style="padding-left:50px;padding-right:0px;">'+
         '<div class="col-lg-6 col-md-6 col-sm-6">'+
         '<div class="row">'+
         '<div class="col-lg-2 col-md-2 col-sm-2" style="padding-left:26px;margin-top:15px;"><a href="#" data-toggle="modal" data-target="#contract-permissions-modal" data-contract=\''+JSON.stringify(contract)+'\' data-backdrop="static" class="list-left"><i class="fa fa-thumbs-o-up" style="font-size:30px;"></i></a></div>'+
@@ -389,7 +390,6 @@ function contractDetail(contract) {
         '<div class="col-lg-7 col-md-7 col-sm-7" style="padding-left:0px;">'+
         '<label>Comment</label>'+
         '<textarea class="contractSchema.comment" style="width:90%;">'+contract.comment+'</textarea>'+
-        '</div>'+
         '</div>'+
         '</div>';
 
