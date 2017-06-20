@@ -3,16 +3,19 @@
         <div id="permissions-overview" class="modal-content light">
             <div class="modal-header dker _600">
                 <h5 class="modal-title">Update Permission</h5>
-                <button id="add-permission" onclick="editPermission()" class="btn btn-icon white">
-                    <i class="fa fa-plus"></i>
-                </button>
-
+                <label class="ui-switch primary m-t-xs m-r">
+                    <input type="checkbox" name="is_building_permission_activ" id="is_building_permission_activ">
+                    <i></i>
+                </label>
             </div>
             <div class="modal-body">
                 <div id="building_permission_not_activ" class="form-group">
                     <label>No Need Building Permission</label>
                 </div>
                 <div id="building_permission_activ">
+                    <button id="add-permission" onclick="editPermission()" class="btn white">
+                        <i class="fa fa-plus"></i> Add new Permission
+                    </button>
                     <table id="permissions" class="table m-b-none b-t" ui-jp="footable" data-filter="#filter" data-page-size="5">
                         <thead>
                         <tr>

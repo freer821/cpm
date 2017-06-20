@@ -71,18 +71,6 @@ $(document).ready(function(){
                 $("#isBombExisted").prop( "checked", false );
             }
 
-            if (contract.is_building_permission_activ){
-                $("#is_building_permission_activ").prop( "checked", true );
-            } else {
-                $("#is_building_permission_activ").prop( "checked", false );
-            }
-
-            if (contract.is_ofw_activ){
-                $("#is_ofw_activ").prop( "checked", true );
-            } else {
-                $("#is_ofw_activ").prop( "checked", false );
-            }
-
             if (contract.doc_location){
                 $("#person").val(contract.doc_location.person);
                 $("#reason").val(contract.doc_location.reason);
@@ -314,9 +302,16 @@ $(document).ready(function(){
     });
 
 
-    $('#building_permission_form input, select').change(function() {
+    $('#contract-permissions-modal input, select').change(function() {
         console.log('calStatusOfPermission');
-        calStatusOfPermission();
+        if ($('#is_building_permission_activ').is(':checked')){
+            $("#building_permission_activ").show();
+            $("#building_permission_not_activ").hide();
+            calStatusOfPermission();
+        } else {
+            $("#building_permission_activ").hide();
+            $("#building_permission_not_activ").show();
+        }
     });
 
     $('#contract-building-modal input').change(function() {
@@ -329,12 +324,14 @@ $(document).ready(function(){
 
     $('#contract-ofw-modal input').change(function() {
         console.log('calStatusOfOFW');
-        if ($("#is_acceptance_activ").is(':checked')){
-            $("#add_acceptance").show();
+        if ($("#is_ofw_activ").is(':checked')){
+            $("#ofw_activ").show();
+            $("#ofw_not_activ").hide();
+            calStatusOfOFW();
         } else {
-            $("#add_acceptance").hide();
+            $("#ofw_activ").hide();
+            $("#ofw_not_activ").show();
         }
-        calStatusOfOFW();
     });
 
     $('#invoice_form input').change(function() {

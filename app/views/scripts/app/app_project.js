@@ -206,7 +206,7 @@ function formatContractStatus(contract){
 }
 
 function contractDetail(contract) {
-    // `d` is the original data object for the row
+
     return '<div class="row" style="padding-left:50px;padding-right:0px;">'+
         '<div class="col-lg-6 col-md-6 col-sm-6">'+
         '<div class="row">'+
