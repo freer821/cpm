@@ -225,7 +225,7 @@ function contractDetail(contract) {
         '</div>'+
         '</div>'+
         '<div class="row">'+
-        '<div class="col-lg-2 col-md-2 col-sm-2" style="padding:0px;padding-top:0;padding-left:26px;margin-top:10px;"><a href="#" data-toggle="modal" data-target="#contract-building-modal" data-contract=\''+JSON.stringify(contract)+'\' data-backdrop="static" class="list-left"><i class="fa fa-calendar" style="font-size:30px;"></i></a></div>'+
+        '<div class="col-lg-2 col-md-2 col-sm-2" style="padding:0px;padding-top:0;padding-left:25px;margin-top:15px;"><a href="#" data-toggle="modal" data-target="#contract-building-modal" data-contract=\''+JSON.stringify(contract)+'\' data-backdrop="static" class="list-left"><i class="fa fa-calendar" style="font-size:30px;"></i></a></div>'+
         '<div class="col-lg-10 col-md-10 col-sm-10">'+
         '<div class="row">'+
         '<div class="col-md-12">'+
@@ -240,7 +240,7 @@ function contractDetail(contract) {
         '</div>'+
         '</div>'+
         '<div class="row">'+
-        '<div class="col-lg-2 col-md-2 col-sm-2" style="padding-left:22px;margin-top:14px;"><a href="#" data-toggle="modal" data-target="#contract-ofw-modal" data-contract=\''+JSON.stringify(contract)+'\' data-backdrop="static" class="list-left"><i class="fa fa-road" style="font-size:30px;"></i></a></div>'+
+        '<div class="col-lg-2 col-md-2 col-sm-2" style="padding-left:24px;margin-top:14px;"><a href="#" data-toggle="modal" data-target="#contract-ofw-modal" data-contract=\''+JSON.stringify(contract)+'\' data-backdrop="static" class="list-left"><i class="fa fa-road" style="font-size:30px;"></i></a></div>'+
         '<div class="col-lg-10 col-md-10 col-sm-10">'+
         '<div class="row">'+
         '<div class="col-md-12">'+
@@ -270,7 +270,7 @@ function contractDetail(contract) {
         '</div>'+
         '</div>'+
         '</div>'+
-        '<div class="col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-5 col-sm-offset-0">'+
+        '<div class="col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-5 col-sm-offset-0"  style="margin-left:7%">'+
         '<div class="row">'+
         '<div class="col-lg-6 col-md-6 col-sm-6">'+
         '<div class="row">'+

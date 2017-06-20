@@ -129,7 +129,7 @@
 		            {% for item in items %}
 		              {% set delurl = '/items/del/'+item._id %}
 		              {% set itemid = ''+item._id %}
-		              <tr {% if item.status === 'Pause' %}class="pause"{% endif %}{% if item.status === 'Closed' %}class="pause del"{% endif %}>
+		              <tr {% if item.status === 'Pause' %}class="pause"{% endif %}{% if item.status === 'Closed' %}class="del"{% endif %}>
 		              	<td><label class="ui-check m-0">
 						<input name="check_row" class="has-value" type="checkbox" data-id="{{itemid}}">
 						<i></i>

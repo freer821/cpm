@@ -5699,6 +5699,10 @@ tr.pause{
   background-color: rgba(0, 0, 0, 0.025);
 }
 
+tr.del{
+  background-color: #91c0ab;
+}
+/*
 table {
     border-collapse: collapse;
 }
@@ -5721,7 +5725,7 @@ tr.del td:before{
     border-bottom: 1px solid #111;
     width: 100%;
 }
-
+*/
 .bd_s_w {
   padding-left: 0px !important;
   padding-right: 0px !important;
