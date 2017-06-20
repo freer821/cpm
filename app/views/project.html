@@ -22,9 +22,9 @@
             <th style="min-width:190px;">Street </th>
             <th style="min-width:60px;">HsNr. </th>
             <th style="min-width:80px;max-width:80px;">finisched /All </th>
-            <th style="max-width:175px;min-width:175px;width:175px;">Project Type </th>
-            <th style="width:52px;"> </th>
-            <th style="width:52px;"> </th>
+            <th style="max-width:185px;min-width:185px;width:185px;">Project Type </th>
+            <th style="width:60px;"> </th>
+            <th style="width:45px;"> </th>
           </tr>
           </thead>
           <tbody>
@@ -39,8 +39,8 @@
             <td class="projectSchema.street" style="min-width:190px;height:43px;">{{project.street}} </td>
             <td class="projectSchema.housenr" style="min-width:60px;height:43px;padding-left:14px;">{{project.housenr}} </td>
             <td class="finished_overview" style="min-width:80px;padding-left:2%;max-width:80px;">{{project.contracts_status}}</td>
-            <td class="projectSchema.contract_types" style="max-height:43px;background-position:top;background-size:contain;background-repeat:no-repeat;max-width:175px;min-width:175px;width:175px;">
-              <div style="max-width:175px;min-width:175px;">
+            <td class="projectSchema.contract_types" style="max-height:43px;background-position:top;background-size:contain;background-repeat:no-repeat;max-width:185px;min-width:185px;width:185px;">
+              <div style="max-width:185px;min-width:185px;">
                 {% if project.contract_types.electric %}
                 <i class="fa fa-square projectSchema.contract_types.electric_true" style="width:21px;height:21px;font-size:21px;margin-right:6px;color:#b53f45;"></i>
                 {% else %}
@@ -73,10 +73,10 @@
                 {% endif %}
               </div>
             </td>
-            <td class="edit_project" style="min-width:52px;max-width:52px;">
+            <td class="edit_project" style="min-width:30px;max-width:30px;padding-left:35px;">
               <a href="#" data-toggle="modal" data-target="#project-modal" data-project="{{project|json}}"><i class="fa fa-pencil-square-o" style="font-size:22px;margin-left:4px;color:rgb(89,89,89);min-width:22px;"></i></a>
             </td>
-            <td class="add_new_contract" style="min-width:52px;max-width:52px;">
+            <td class="add_new_contract" style="min-width:30px;max-width:30px;">
               <a href="#" data-toggle="modal" data-target="#contract-basic-modal" data-project="{{project|json}}"><i class="fa fa-plus-square" style="font-size:21px;margin-left:6px;color:rgb(89,89,89);"></i></a>
             </td>
           </tr>
