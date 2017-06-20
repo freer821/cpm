@@ -1,39 +1,37 @@
 <div id="contract-ofw-modal" class="modal" data-backdrop="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content light">
-            <div class="modal-header dker _600">
-                <h5 class="modal-title">Update OFW</h5>
-                <label class="ui-switch primary m-t-xs m-r">
-                    <input type="checkbox" name="is_ofw_activ" id="is_ofw_activ">
-                    <i></i>
-                </label>
-            </div>
-            <div id="ofw_not_activ">
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label>No Need OFW</label>
+            <form role="form" action="/contracts/edit/ofw" method="post">
+                <div class="modal-header dker _600">
+                    <h5 class="modal-title">Update OFW</h5>
+                    <label class="ui-switch primary m-t-xs m-r">
+                        <input type="checkbox" name="is_ofw_activ" id="is_ofw_activ">
+                        <i></i>
+                    </label>
+                </div>
+                <div id="ofw_not_activ">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>No Need OFW</label>
+                        </div>
                     </div>
                 </div>
-                <div class="modal-footer dker _600">
-                    <button type="button" class="btn dark-white m-t" data-dismiss="modal">Cancel</button>
-                </div>
-            </div>
-            <form id="ofw_activ" role="form" action="/contracts/edit/ofw" method="post">
-                <div class="modal-body">
-                    <div class="row">
-                                <label class="col-sm-2 form-control-label">Worker Name</label>
-                                <div class="col-sm-4">
-                                    <input type="text" class="form-control" name="worker_name" id="ofw_worker_name">
-                                </div>
-                                <label class="col-sm-2 form-control-label">Permission Number</label>
-                                <div class="col-sm-4">
-                                    <input type="text" class="form-control" id="ofw_permission_nr" name="permission_nr">
-                                </div>
-                    </div>
+                <div id="ofw_activ">
+                    <div class="modal-body">
+                        <div class="row">
+                            <label class="col-sm-2 form-control-label">Worker Name</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" name="worker_name" id="ofw_worker_name">
+                            </div>
+                            <label class="col-sm-2 form-control-label">Permission Number</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="ofw_permission_nr" name="permission_nr">
+                            </div>
+                        </div>
 
-                    <div class="row">
-                                <label class="col-sm-2 form-control-label">Delivery at</label>
-                                <div class='input-group date col-sm-4' ui-jp="datetimepicker" ui-options="{
+                        <div class="row">
+                            <label class="col-sm-2 form-control-label">Delivery at</label>
+                            <div class='input-group date col-sm-4' ui-jp="datetimepicker" ui-options="{
                                     format: 'DD-MM-YYYY',
                                     icons: {
                                       time: 'fa fa-clock-o',
@@ -47,13 +45,13 @@
                                       close: 'fa fa-remove'
                                     }
                                   }">
-                                    <input type='text' class="form-control" id="ofw_delivery" name="delivery">
-                                    <span class="input-group-addon">
+                                <input type='text' class="form-control" id="ofw_delivery" name="delivery">
+                                <span class="input-group-addon">
                                         <span class="fa fa-calendar"></span>
                                     </span>
-                                </div>
-                                <label class="col-sm-2 form-control-label">Finished at</label>
-                                <div class='input-group date col-sm-4' ui-jp="datetimepicker" ui-options="{
+                            </div>
+                            <label class="col-sm-2 form-control-label">Finished at</label>
+                            <div class='input-group date col-sm-4' ui-jp="datetimepicker" ui-options="{
                             format: 'DD-MM-YYYY',
                             icons: {
                               time: 'fa fa-clock-o',
@@ -67,81 +65,81 @@
                               close: 'fa fa-remove'
                             }
                           }">
-                                    <input type='text' class="form-control" id="ofw_completion_at" name="completion_at">
-                                    <span class="input-group-addon">
+                                <input type='text' class="form-control" id="ofw_completion_at" name="completion_at">
+                                <span class="input-group-addon">
                                         <span class="fa fa-calendar"></span>
                                      </span>
-                                </div>
-                    </div>
+                            </div>
+                        </div>
 
-                    <div class="form-group row" style="margin-top:3%">
-                        <label class="col-sm-2 form-control-label">OFW Type</label>
-                        <div class="col-sm-10">
-                            <div class="form-group">
-                                <label class="md-check form-control-label">
-                                    <input type="checkbox" name="bausstr" id="bausstr">
-                                    <i class="red"></i>
-                                    Baustrasse
-                                </label>
-                                <label class="md-check form-control-label">
-                                    <input type="checkbox" name="fahrbahn" id="fahrbahn">
-                                    <i class="green"></i>
-                                    Fahrbahn
-                                </label>
-                                <label class="md-check form-control-label">
-                                    <input type="checkbox" name="fussweg" id="fussweg">
-                                    <i class="yellow"></i>
-                                    Fussweg
-                                </label>
-                                <label class="md-check form-control-label">
-                                    <input type="checkbox" name="bitu" id="bitu">
-                                    <i class="blue"></i>
-                                    Bitu
-                                </label>
-                                <label class="md-check form-control-label">
-                                    <input type="checkbox" name="pflaster" id="pflaster">
-                                    <i class="orange"></i>
-                                    Pflaster
-                                </label>
-                                <label class="md-check form-control-label">
-                                    <input type="checkbox" name="beton" id="beton">
-                                    <i class="grey"></i>
-                                    Beton
+                        <div class="form-group row" style="margin-top:3%">
+                            <label class="col-sm-2 form-control-label">OFW Type</label>
+                            <div class="col-sm-10">
+                                <div class="form-group">
+                                    <label class="md-check form-control-label">
+                                        <input type="checkbox" name="bausstr" id="bausstr">
+                                        <i class="red"></i>
+                                        Baustrasse
+                                    </label>
+                                    <label class="md-check form-control-label">
+                                        <input type="checkbox" name="fahrbahn" id="fahrbahn">
+                                        <i class="green"></i>
+                                        Fahrbahn
+                                    </label>
+                                    <label class="md-check form-control-label">
+                                        <input type="checkbox" name="fussweg" id="fussweg">
+                                        <i class="yellow"></i>
+                                        Fussweg
+                                    </label>
+                                    <label class="md-check form-control-label">
+                                        <input type="checkbox" name="bitu" id="bitu">
+                                        <i class="blue"></i>
+                                        Bitu
+                                    </label>
+                                    <label class="md-check form-control-label">
+                                        <input type="checkbox" name="pflaster" id="pflaster">
+                                        <i class="orange"></i>
+                                        Pflaster
+                                    </label>
+                                    <label class="md-check form-control-label">
+                                        <input type="checkbox" name="beton" id="beton">
+                                        <i class="grey"></i>
+                                        Beton
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 form-control-label">Ueberdicken</label>
+                            <div class="col-md-2">
+                                <input type='number' class="form-control" name="ueberdicken" id="ofw_ueberdicken" >
+                            </div>
+                            <label class="col-sm-8 form-control-label">CM</label>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 form-control-label">Clean</label>
+                            <div class="col-sm-10">
+                                <label class="ui-switch primary m-t-xs m-r">
+                                    <input type="checkbox" name="clean" id="clean">
+                                    <i></i>
                                 </label>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="form-group row">
-                        <label class="col-sm-2 form-control-label">Ueberdicken</label>
-                        <div class="col-md-2">
-                            <input type='number' class="form-control" name="ueberdicken" id="ofw_ueberdicken" >
+                        <div class="form-group row stw">
+                            <label class="col-sm-2 form-control-label">acceptance</label>
+                            <div class="col-sm-10">
+                                <label class="ui-switch primary m-t-xs m-r">
+                                    <input type="checkbox" id="is_acceptance_activ" name="is_acceptance_activ" >
+                                    <i></i>
+                                </label>
+                            </div>
                         </div>
-                        <label class="col-sm-8 form-control-label">CM</label>
-                    </div>
-
-                    <div class="form-group row">
-                        <label class="col-sm-2 form-control-label">Clean</label>
-                        <div class="col-sm-10">
-                            <label class="ui-switch primary m-t-xs m-r">
-                                <input type="checkbox" name="clean" id="clean">
-                                <i></i>
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="form-group row stw">
-                        <label class="col-sm-2 form-control-label">acceptance</label>
-                        <div class="col-sm-10">
-                            <label class="ui-switch primary m-t-xs m-r">
-                                <input type="checkbox" id="is_acceptance_activ" name="is_acceptance_activ" >
-                                <i></i>
-                            </label>
-                        </div>
-                    </div>
-                    <div id="add_acceptance" class="form-group row stw">
-                                <label class="col-sm-2 form-control-label">Applied</label>
-                                <div class='input-group date col-sm-4' ui-jp="datetimepicker" ui-options="{
+                        <div id="add_acceptance" class="form-group row stw">
+                            <label class="col-sm-2 form-control-label">Applied</label>
+                            <div class='input-group date col-sm-4' ui-jp="datetimepicker" ui-options="{
                                     format: 'DD-MM-YYYY',
                                     icons: {
                                       time: 'fa fa-clock-o',
@@ -155,13 +153,13 @@
                                       close: 'fa fa-remove'
                                     }
                                   }">
-                                    <input type='text' class="form-control" id="ofw_applied" name="applied">
-                                    <span class="input-group-addon">
+                                <input type='text' class="form-control" id="ofw_applied" name="applied">
+                                <span class="input-group-addon">
                                         <span class="fa fa-calendar"></span>
                                     </span>
-                                </div>
-                                <label class="col-sm-2 form-control-label">Granted</label>
-                                <div class='input-group date col-sm-4' ui-jp="datetimepicker" ui-options="{
+                            </div>
+                            <label class="col-sm-2 form-control-label">Granted</label>
+                            <div class='input-group date col-sm-4' ui-jp="datetimepicker" ui-options="{
                                     format: 'DD-MM-YYYY',
                                     icons: {
                                       time: 'fa fa-clock-o',
@@ -175,17 +173,18 @@
                                       close: 'fa fa-remove'
                                     }
                                   }">
-                                    <input type='text' class="form-control" id="ofw_granted" name="granted">
-                                    <span class="input-group-addon">
+                                <input type='text' class="form-control" id="ofw_granted" name="granted">
+                                <span class="input-group-addon">
                                         <span class="fa fa-calendar"></span>
                                     </span>
-                                </div>
-                    </div>
+                            </div>
+                        </div>
 
-                    <div class="form-group row">
-                        <label class="col-sm-2 form-control-label">OFW Status</label>
-                        <div class="col-sm-10">
-                            <input type='text' class="form-control" id="ofw_status" name="ofw_status" readonly>
+                        <div class="form-group row">
+                            <label class="col-sm-2 form-control-label">OFW Status</label>
+                            <div class="col-sm-10">
+                                <input type='text' class="form-control" id="ofw_status" name="ofw_status" readonly>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -37,8 +37,6 @@ function updateContractBasic(request, callback) {
         estimated_value: request.estimated_value,      // schaetzwert (Euro)
         manager_name: request.manager_name,   // bauleiter_name
         rot_b: request.rot_b,         // Auftrageber Telekom
-        is_building_permission_activ: request.is_building_permission_activ,
-        is_ofw_activ: request.is_ofw_activ,
         comment: request.comment,
         doc_location: {
             person: request.person,
@@ -156,34 +154,45 @@ function updateContractPermission(request, callback) {
 
 function updateContractOFW(request, callback) {
 
-    let acceptance;
-    if (request.is_acceptance_activ) {
-        acceptance = {
-            applied: common.getDate(request.applied),
-            granted: common.getDate(request.granted)
+    let acceptance, contract;
+
+
+    if (request.is_ofw_activ) {
+        if (request.is_acceptance_activ) {
+            acceptance = {
+                applied: common.getDate(request.applied),
+                granted: common.getDate(request.granted)
+            };
+        }
+
+        contract = {
+            is_ofw_activ: request.is_ofw_activ,
+            ofw:{
+                permission_nr: request.permission_nr,
+                worker_name: request.worker_name,
+                delivery: common.getDate(request.delivery),
+                completion_at: common.getDate(request.completion_at),
+                clean: request.clean,
+                is_acceptance_activ: request.is_acceptance_activ,
+                acceptance :acceptance,
+                typ:{
+                    bausstr: request.bausstr,
+                    fahrbahn: request.fahrbahn,
+                    fussweg: request.fussweg,
+                    bitu: request.bitu,
+                    pflaster: request.pflaster,
+                    beton: request.beton
+                },
+                ueberdicken: common.getNumValue(request.ueberdicken),
+                ofw_status: request.ofw_status
+            }
+        };
+
+    } else {
+        contract = {
+            is_ofw_activ: request.is_ofw_activ
         };
     }
-    let contract = {
-        ofw:{
-            permission_nr: request.permission_nr,
-            worker_name: request.worker_name,
-            delivery: common.getDate(request.delivery),
-            completion_at: common.getDate(request.completion_at),
-            clean: request.clean,
-            is_acceptance_activ: request.is_acceptance_activ,
-            acceptance :acceptance,
-            typ:{
-                bausstr: request.bausstr,
-                fahrbahn: request.fahrbahn,
-                fussweg: request.fussweg,
-                bitu: request.bitu,
-                pflaster: request.pflaster,
-                beton: request.beton
-            },
-            ueberdicken: common.getNumValue(request.ueberdicken),
-            ofw_status: request.ofw_status
-        }
-    };
     db.editContract({id: request.contract_id},contract,function (err) {
         if(err){
             callback(err);
