@@ -150,13 +150,13 @@ $(document).ready(function(){
             $('#permission-detail').hide();
             $('#building_permission_not_activ').hide();
             $('#building_permission_activ').show();
-            $('#add-permission').prop('disabled', false);
+            $("#is_building_permission_activ").prop( "checked", true );
         } else {
             $('#permissions-overview').show();
             $('#permission-detail').hide();
             $('#building_permission_not_activ').show();
             $('#building_permission_activ').hide();
-            $('#add-permission').prop('disabled', true);
+            $("#is_building_permission_activ").prop( "checked", false );
         }
     });
 
@@ -173,6 +173,7 @@ $(document).ready(function(){
             $('#ofw_activ').show();
             $('#ofw_not_activ').hide();
             $("#add_acceptance").hide();
+            $("#is_ofw_activ").prop( "checked", true );
             //set content
             if (contract.ofw) {
                 $("#ofw_worker_name").val(contract.ofw.worker_name);
@@ -247,6 +248,7 @@ $(document).ready(function(){
             $('#ofw_activ').hide();
             $('#ofw_not_activ').show();
             $("#add_acceptance").hide();
+            $("#is_ofw_activ").prop( "checked", false );
         }
     });
 
