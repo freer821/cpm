@@ -269,6 +269,12 @@ function contractDetail(contract) {
         '</div>'+
         '</div>'+
         '</div>'+
+        '<div class="row">'+
+        '<div class="col-md-12" style="margin-top:15px">'+
+        '<label style="margin-left:10px;">Comment</label>'+
+        '<textarea style="margin-left:10px;width:98.4%" class="contractSchema.comment" style="width:100%;">'+contract.comment+'</textarea>'+
+        '</div>'+
+        '</div>'+
         '</div>'+
         '<div class="col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-5 col-sm-offset-0"  style="margin-left:7%">'+
         '<div class="row">'+
@@ -384,12 +390,6 @@ function contractDetail(contract) {
         '<div class="row" style="padding-top:10px;padding-left:30px;"><i class="material-icons Material_userform" style="font-size:29px;">local_grocery_store</i></div>'+
         '<div class="row" style="padding-left:34px;padding-top:10px;"><i class="fa fa-calculator Aufmass_userform" style="font-size:25px;"></i></div>'+
         '<div class="row" style="padding-left:34px;padding-top:14px;"><i class="fa fa-line-chart ContractReport_userform" style="font-size:25px;"></i></div>'+
-        '</div>'+
-        '</div>'+
-        '<div class="container row" style="padding-left:75px;padding-top:15px;margin-top:8px;">'+
-        '<div class="col-lg-7 col-md-7 col-sm-7" style="padding-left:0px;">'+
-        '<label>Comment</label>'+
-        '<textarea class="contractSchema.comment" style="width:90%;">'+contract.comment+'</textarea>'+
         '</div>'+
         '</div>';
 

@@ -4,13 +4,19 @@
 <div class="padding">
   <div class="box">
     <div class="box-header">
-      <h3>{{subtitle}}</h3>
+      <div class="row">
+        <div class="col-md-2">
+          <h3 style="margin-top: 5px">{{subtitle}}</h3>
+        </div>
+        <div class="col-md-2" style="margin-left: -70px">
+          <a href="#" data-toggle="modal" data-target="#project-modal" data-backdrop="static">
+            <i class="fa fa-fw fa-plus text-muted"></i>
+            <span>New</span>
+          </a>
+        </div>
     </div>
     <div class="box-body">
       <div class="row p-a">
-        <div class="col-sm-5">
-          <a href="#" data-toggle="modal" data-target="#project-modal" class="btn btn-outline b-primary text-primary" data-backdrop="static">Add New Project</a>
-        </div>
       </div>
       <div class="table-responsive">
         <table id="projects-overview" class="table">
