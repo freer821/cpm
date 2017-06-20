@@ -131,6 +131,8 @@ $(document).ready(function(){
             }));
         }
 
+        $('#building_permission_form').hide();
+
         if (contract.is_building_permission_activ) {
             var building_permission = contract.building_permission;
             $('#permissions > tbody:last-child').empty();
@@ -146,14 +148,11 @@ $(document).ready(function(){
                     '</tr>';
                 $('#permissions > tbody:last-child').append(table_content);
             });
-            $('#permissions-overview').show();
-            $('#permission-detail').hide();
             $('#building_permission_not_activ').hide();
             $('#building_permission_activ').show();
             $("#is_building_permission_activ").prop( "checked", true );
+            $('#change_permission').val('');
         } else {
-            $('#permissions-overview').show();
-            $('#permission-detail').hide();
             $('#building_permission_not_activ').show();
             $('#building_permission_activ').hide();
             $("#is_building_permission_activ").prop( "checked", false );
@@ -304,16 +303,21 @@ $(document).ready(function(){
     });
 
 
-    $('#contract-permissions-modal input, select').change(function() {
-        console.log('calStatusOfPermission');
+    $('#is_building_permission_activ').change(function () {
+        $('#change_permission').val('');
         if ($('#is_building_permission_activ').is(':checked')){
             $("#building_permission_activ").show();
             $("#building_permission_not_activ").hide();
-            calStatusOfPermission();
+            $('#building_permission_form').hide();
         } else {
             $("#building_permission_activ").hide();
+            $('#building_permission_form').hide();
             $("#building_permission_not_activ").show();
         }
+    });
+    $('#building_permission_form input, select').change(function() {
+        console.log('calStatusOfPermission');
+        calStatusOfPermission();
     });
 
     $('#contract-building-modal input').change(function() {
@@ -391,7 +395,7 @@ function delInvoice(element){
 }
 
 function editPermission(element){
-    $('#building_permission_form')[0].reset();
+    $('#contract-permissions-modal form')[0].reset();
 
     if (element) {
         var permission = element.dataset.permission;
@@ -406,9 +410,13 @@ function editPermission(element){
     } else {
         $('#permission_id').val('');
     }
+    $('#change_permission').val('on');
 
-    $('#permission-detail').show();
-    $('#permissions-overview').hide();
+    $('#building_permission_form').show();
+    $('#building_permission_activ').hide();
+
+    $("#is_building_permission_activ").prop( "checked", true );
+
 }
 
 function delPermission(element){

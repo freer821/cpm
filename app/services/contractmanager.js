@@ -115,41 +115,51 @@ function updateContractBuilding(request, callback) {
 
 function updateContractPermission(request, callback) {
 
-    if (request.permission_id) {
-        let permission = {
-            "building_permission.$.type": request.type,
-            "building_permission.$.doc_delivery": common.getDate(request.doc_delivery),
-            "building_permission.$.begin": common.getDate(request.begin),
-            "building_permission.$.end": common.getDate(request.end),
-            "building_permission.$.cost": request.cost,
-            "building_permission.$.permission_status": request.permission_status
-        };
+    if ( request.is_building_permission_activ && request.change_permission) {
+        if (request.permission_id) {
+            let permission = {
+                "building_permission.$.type": request.type,
+                "building_permission.$.doc_delivery": common.getDate(request.doc_delivery),
+                "building_permission.$.begin": common.getDate(request.begin),
+                "building_permission.$.end": common.getDate(request.end),
+                "building_permission.$.cost": request.cost,
+                "building_permission.$.permission_status": request.permission_status
+            };
 
-        db.editContract({id: request.contract_id, building_permission: {$elemMatch: {_id : request.permission_id}}},permission,function (err) {
-            if(err){
-                callback(err);
-            } else {
-                callback(undefined, request.project_id);
-            }
-        });
-    } else {
-        let permission = {
-            type: request.type,
-            doc_delivery: common.getDate(request.doc_delivery),
-            begin: common.getDate(request.begin),
-            end: common.getDate(request.end),
-            cost: request.cost,
-            permission_status: request.permission_status
-        };
+            db.editContract({id: request.contract_id, building_permission: {$elemMatch: {_id : request.permission_id}}},permission,function (err) {
+                if(err){
+                    logger.error(err);
+                }
+            });
+        } else {
+            let permission = {
+                type: request.type,
+                doc_delivery: common.getDate(request.doc_delivery),
+                begin: common.getDate(request.begin),
+                end: common.getDate(request.end),
+                cost: request.cost,
+                permission_status: request.permission_status
+            };
 
-        db.editContractAddIntoArray({id: request.contract_id},{building_permission: permission},function (err) {
-            if(err){
-                callback(err);
-            } else {
-                callback(undefined, request.project_id);
-            }
-        });    
+            db.editContractAddIntoArray({id: request.contract_id},{building_permission: permission},function (err) {
+                if(err){
+                    logger.error(err);
+                }
+            });
+        }
     }
+
+    let contract = {
+        is_building_permission_activ: request.is_building_permission_activ
+    };
+
+    db.editContract({id: request.contract_id},contract,function (err) {
+        if(err){
+            callback(err);
+        } else {
+            callback(undefined, request.project_id);
+        }
+    });
 }
 
 function updateContractOFW(request, callback) {
