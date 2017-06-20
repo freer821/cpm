@@ -84,7 +84,7 @@ function contractOverview (contract) {
                                         '</thead>'+
                                         '<tbody style="height:42px;">'+ 
                                             '<tr style="height:15%;">'+
-                                                '<td rowspan="0" style="width:40%;padding-top:10%;padding-left:10%;padding-bottom:10%;padding-right:0%;height:42px;">'+
+                                                '<td rowspan="0" style="width:40%;padding-top:13%;padding-left:10%;padding-bottom:10%;padding-right:0%;height:42px;">'+
                                                     formatContractLockandUnlock(contract)+
                                                 '</td>'+
                                                 formatContractType(contract)+
