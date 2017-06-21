@@ -74,7 +74,7 @@ function contractOverview (contract) {
                         '<td class="contractSchema.cost_code" style="min-width:80px;">'+contract.cost_code+' </td>'+
                         '<td class="contractSchema.customer" style="min-width:70px;">'+contract.customer+' </td>'+
                         '<td class="contractSchema.contract_id" style="min-width:110px;">'+contract.contract_id+' </td>'+
-                        '<td class="contract_edit" style="min-width:45px;max-width:45px;"><a href="#" data-toggle="modal" data-target="#contract-basic-modal" data-contract=\''+JSON.stringify(contract)+'\' data-backdrop="static"><i class="fa fa-pencil-square-o" style="font-size:22px;margin-left:4px;min-width:22px;"></i></a></td>'+
+                        '<td class="contract_edit" style="min-width:45px;max-width:45px;"><a class="hint--left" data-hint="Info. des Auftrag bearbeiten" href="#" data-toggle="modal" data-target="#contract-basic-modal" data-contract=\''+JSON.stringify(contract)+'\' data-backdrop="static"><i class="fa fa-pencil-square-o" style="font-size:22px;margin-left:4px;min-width:22px;"></i></a></td>'+
                         '<td class="contract_types&amp;lock" style="height:42px;padding:0px;min-width:92px;width:92px;max-width:92px;">'+
                             '<div style="padding:0px;height:40px;">'+
                                 '<div style="height:42px;min-height:0px;font-size:0px;">'+
@@ -99,9 +99,9 @@ function contractOverview (contract) {
 
 function formatContractLockandUnlock(contract) {
     if (contract.is_contract_ative) {
-        return '<i onclick="deactivAndActivContract(\''+contract.id+'\',\''+contract.project_id+'\',\''+ contract.cost_code+'\',\'true\')" class="fa fa-unlock-alt" style="font-size:22px;margin-left:4px;min-width:22px;"></i>';
+        return '<a class="hint--left" data-hint="Auftrag aktivieren / deaktivieren"><i onclick="deactivAndActivContract(\''+contract.id+'\',\''+contract.project_id+'\',\''+ contract.cost_code+'\',\'true\')" class="fa fa-unlock-alt" style="font-size:22px;margin-left:4px;min-width:22px;"></i></a>';
     } else {
-        return '<i onclick="deactivAndActivContract(\''+contract.id+'\',\''+contract.project_id+'\',\''+ contract.cost_code+'\')" class="fa fa-lock" style="font-size:22px;margin-left:4px;min-width:22px;"></i>';
+        return '<a class="hint--left" data-hint="Auftrag aktivieren / deaktivieren"><i onclick="deactivAndActivContract(\''+contract.id+'\',\''+contract.project_id+'\',\''+ contract.cost_code+'\')" class="fa fa-lock" style="font-size:22px;margin-left:4px;min-width:22px;"></i></a>';
     }
 }
 
@@ -381,15 +381,17 @@ function contractDetail(contract) {
         '</div>'+
         '</div>'+
         '</div>'+
+
+
         '</div>'+
         '<div class="col-lg-1 col-lg-offset-0 col-md-1 col-md-offset-0 col-sm-1 col-sm-offset-0">'+
         '<div class="row">'+
-        '<div class="col-md-12" style="padding-top:8px;padding-left:30px;padding-right:0px;"><a href="#" data-toggle="modal" data-target="#contract-print-modal" data-contract=\''+JSON.stringify(contract)+'\' data-backdrop="static"><i class="fa fa-print print_userform" style="font-size:25px;"></i></a></div>'+
+        '<div class="col-md-12" style="padding-top:8px;padding-left:30px;padding-right:0px;"><a class="hint--left" data-hint="Vorlage ausdrucken" href="#" data-toggle="modal" data-target="#contract-print-modal" data-contract=\''+JSON.stringify(contract)+'\' data-backdrop="static"><i class="fa fa-print print_userform" style="font-size:25px;"></i></a></div>'+
         '</div>'+
-        '<div class="row" style="padding-top:12px;padding-left:30px;"><i class="fa fa-folder-open-o openfolde_userform" style="font-size:25px;"></i></div>'+
-        '<div class="row" style="padding-top:10px;padding-left:30px;"><i class="material-icons Material_userform" style="font-size:29px;">local_grocery_store</i></div>'+
-        '<div class="row" style="padding-left:34px;padding-top:10px;"><i class="fa fa-calculator Aufmass_userform" style="font-size:25px;"></i></div>'+
-        '<div class="row" style="padding-left:34px;padding-top:14px;"><i class="fa fa-line-chart ContractReport_userform" style="font-size:25px;"></i></div>'+
+        '<div class="row" style="padding-top:12px;padding-left:30px;"><a class="hint--left" data-hint="Ordner öffnen"><i class="fa fa-folder-open-o openfolde_userform" style="font-size:25px;"></i></a></div>'+
+        '<div class="row" style="padding-top:10px;padding-left:30px;"><a class="hint--left" data-hint="Material"><i class="material-icons Material_userform" style="font-size:29px;">local_grocery_store</i></a></div>'+
+        '<div class="row" style="padding-left:34px;padding-top:10px;"><a class="hint--left" data-hint="Aufmaß"><i class="fa fa-calculator Aufmass_userform" style="font-size:25px;"></i></a></div>'+
+        '<div class="row" style="padding-left:34px;padding-top:14px;"><a class="hint--left" data-hint="Report"><i class="fa fa-line-chart ContractReport_userform" style="font-size:25px;"></i></a></div>'+
         '</div>'+
         '</div>';
 
