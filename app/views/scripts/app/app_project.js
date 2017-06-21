@@ -338,7 +338,7 @@ function contractDetail(contract) {
         '</div>'+
         '<div class="row">'+
         '<div class="col-md-12" style="height:25px;">'+
-        '<label class="contractSchema.manager_name">'+contract.sum_value+'</label>'+
+        '<label class="contractSchema.manager_name">'+contract.estimated_value+'</label>'+
         '</div>'+
         '</div>'+
         '</div>'+

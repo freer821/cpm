@@ -77,20 +77,17 @@ const getContractByProjectID = function (req, res, next) {
 };
 
 function filterContractsByUser(user_cost_code, constracts) {
-    return constracts;
-    /*
+
     let cons = [];
     constracts.forEach((contract) => {
         let con = contract;
-        con._doc.permissions_status =  common.calTotalStatusOfPermissions(contract);
-        let invoices_status = common.calInvoicesStatus(contract);
-        con._doc.status_finished = invoices_status.is_finished? 'finished' : 'unfinished';
-        con._doc.invoices_status= invoices_status.descrip;
+        con._doc.current_value =  calCurrentValue(contract);
         cons.push(con);
     });
 
     return cons;
 
+    /*
      if (user_cost_code) {
      if (Array.isArray(user_cost_code)){
      return constracts.filter(function (constract) {
@@ -107,7 +104,19 @@ function filterContractsByUser(user_cost_code, constracts) {
      */
 }
 
-
+function calCurrentValue(contract) {
+    let current_value = 0;
+    if (contract.invoice && contract.invoice.length > 0) {
+        contract.invoice.forEach((invo) =>{
+            current_value += invo.sum? invo.sum:0;
+        });
+    } else {
+        if (contract.estimated_value && contract.building_work && contract.building_work.procent_completion) {
+            current_value = contract.building_work.procent_completion/100*parseInt(contract.estimated_value);
+        }
+    }
+    return current_value;
+}
 
 module.exports = {
     getAllProjects: getAllProjects,
