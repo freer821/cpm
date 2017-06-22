@@ -26,14 +26,14 @@
           <thead>
           <tr>
             <th style="width:52px;"> </th>
-            <th style="min-width:100px;" data-toggle="true">Project Nr.</th>
-            <th style="width:140px;">Community </th>
-            <th style="min-width:190px;">Street </th>
-            <th style="min-width:60px;">HsNr. </th>
-            <th style="min-width:80px;max-width:80px;">finisched /All </th>
-            <th style="max-width:185px;min-width:185px;width:185px;">Project Type </th>
+            <th style="width:130px;" data-toggle="true">Project Nr.</th>
+            <th style="width:200px;">Community </th>
+            <th style="width:230px;">Street </th>
+            <th style="width:60px;">HsNr. </th>
+            <th style="width:130px;">finisched /All </th>
+            <th style="width:200px;">Project Type </th>
             <th style="width:60px;"> </th>
-            <th style="width:85px;"> </th>
+            <th style="width:50px;"> </th>
           </tr>
           </thead>
         </table>
@@ -42,17 +42,17 @@
             <tbody>
             {% for project in projects %}
             <tr id="{{project.id}}">
-              <td class="details-control" style="width:52px;height:43px;min-width:52px;max-height:40px;max-width:52px;">
+              <td class="details-control" style="height:43px;width:52px;">
                 <i class="glyphicon glyphicon-expand" style="font-size:19px;color:rgb(89,89,89);" onclick="showContracts('{{project.id}}')"></i>
                 <i class="glyphicon glyphicon-collapse-down" style="font-size:19px;color:rgb(89,89,89);" onclick="hideContracts('{{project.id}}')"></i>
               </td>
-              <td class="projectSchema.id" style="height:43px;min-width:100px;">{{project.id}} </td>
-              <td class="projectSchema.community" style="min-width:140px;height:43px;">{{project.community}} </td>
-              <td class="projectSchema.street" style="min-width:190px;height:43px;">{{project.street}} </td>
-              <td class="projectSchema.housenr" style="min-width:60px;height:43px;padding-left:14px;">{{project.housenr}} </td>
-              <td class="finished_overview" style="min-width:80px;padding-left:2%;max-width:80px;">{{project.contracts_status}}</td>
-              <td class="projectSchema.contract_types" style="max-height:43px;background-position:top;background-size:contain;background-repeat:no-repeat;max-width:185px;min-width:185px;width:185px;">
-                <div style="max-width:185px;min-width:185px;">
+              <td class="projectSchema.id" style="height:43px;width:130px;">{{project.id}} </td>
+              <td class="projectSchema.community" style="width:200px;height:43px;padding-left:1.8%">{{project.community}} </td>
+              <td class="projectSchema.street" style="width:230px;height:43px;padding-left:2.3%">{{project.street}} </td>
+              <td class="projectSchema.housenr" style="width:60px;height:43px;padding-left:14px;padding-left:3%;">{{project.housenr}} </td>
+              <td class="finished_overview" style="width:130px;padding-left:2%;padding-left:4%;">{{project.contracts_status}}</td>
+              <td class="projectSchema.contract_types" style="width:200px;max-height:43px;background-position:top;background-size:contain;background-repeat:no-repeat;padding-left:4%">
+                <div style="min-width:185px;">
                   {% if project.contract_types.electric %}
                   <a class="hint--top" data-hint="Elt"><i class="fa fa-square projectSchema.contract_types.electric_true" style="width:21px;height:21px;font-size:21px;margin-right:6px;color:#b53f45;"></i></a>
                   {% else %}
@@ -85,10 +85,10 @@
                   {% endif %}
                 </div>
               </td>
-              <td class="edit_project" style="min-width:30px;max-width:30px;padding-left:35px;">
+              <td class="edit_project" style="padding-left:35px;width:60px;padding-left:3.5%;">
                 <a class="hint--bottom-left hint--medium" data-hint="Info. der Baustelle bearbeiten" href="#" data-toggle="modal" data-target="#project-modal" data-project="{{project|json}}"><i class="fa fa-pencil-square-o" style="font-size:22px;margin-left:4px;color:rgb(89,89,89);min-width:22px;"></i></a>
               </td>
-              <td class="add_new_contract" style="min-width:30px;max-width:30px;">
+              <td class="add_new_contract" style="width:50px;padding-right:40px;">
                 <a class="hint--bottom-left hint--medium" aria-label="erstellen einen
                  neue Auftrag" href="#" data-toggle="modal" data-target="#contract-basic-modal" data-project="{{project|json}}"><i class="fa fa-plus-square" style="font-size:21px;margin-left:6px;color:rgb(89,89,89);"></i></a>
               </td>
