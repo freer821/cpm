@@ -349,10 +349,6 @@ $(document).ready(function(){
 });
 
 
-function formatDate(time) {
-    return moment(time).format("DD-MM-YYYY");
-}
-
 
 function editInvoice(element){
     $('#invoice_form')[0].reset();

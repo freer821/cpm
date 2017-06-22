@@ -80,8 +80,16 @@ function getNumValue(value){
     return parseFloat(value);
 }
 
+function formatDate(time) {
+    if (isDateValid(time)) {
+        return moment(time).format("DD-MM-YYYY");
+    } else {
+        return "";
+    }
+}
+
 function isDateValid(time) {
-    return moment(time, "DD-MM-YYYY", true).isValid();
+    return moment(time, "DD-MM-YYYY", true).isValid() || moment(time).isValid();
 }
 
 function getMonthDate(time) {
@@ -101,9 +109,9 @@ function getMonthDate(time) {
 // 5 : before end
 // 6 : after end
 function calStatusOfTime(t_begin, t_end) {
-    var now = moment();
+    var now = moment().utc().startOf('day');
     if ( isDateValid(t_begin)  &&  isDateValid(t_end) ) {
-        if (now.isAfter(moment(t_begin,"DD-MM-YYYY")) && moment(t_end,"DD-MM-YYYY").isAfter(now)) {
+        if ((now.isSame(moment(t_begin,"DD-MM-YYYY")) || now.isAfter(moment(t_begin,"DD-MM-YYYY"))) && (now.isBefore(moment(t_end,"DD-MM-YYYY") || now.isSame(moment(t_end,"DD-MM-YYYY"))))) {
             return 1;
         } else if (now.isBefore(moment(t_begin,"DD-MM-YYYY"))) {
             return 0;
@@ -130,7 +138,6 @@ function calStatusOfTime(t_begin, t_end) {
 
 // cal the status of Building
 function calStatusOfBuilding() {
-
     if ($("#building_status").val() !== '04') {
         switch (calStatusOfTime($("#plan_begin").val(), $("#plan_end").val())) {
             case 1:
@@ -161,6 +168,7 @@ function setBuildingPercent(status_value) {
             break;
         case '01':
             $("#procent_completion").slider("enable");
+            $("#procent_completion").slider('setValue', 10);
             break;
         case '02':
             $("#procent_completion").slider("enable");
