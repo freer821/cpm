@@ -20,7 +20,8 @@ $(document).ready(function(){
             $("#street").val(project.street);
             $("#housenr").val(project.housenr);
             $("#files_path").val(project.files_path);
-            $("#linesplan_files_path").val(project.linesplan_files_path);
+            $("#linesplan_files_path").val(project.files_path+'/00_fremdleitungsplan');
+            $("#permission_files_path").val(project.files_path+'/00_genehmigung');
             $("#zipcode").val(project.zipcode);
             $("#comment").val(project.comment);
             if (project.is_linesplan_files_exist) {

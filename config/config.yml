@@ -23,3 +23,5 @@ default:
     icon: './app/upload/icon'
   files:
     root_path: '/root/work/doc/'
+    fremdleitungsplan_path: '/00_fremdleitungsplan'
+    genehmigung_path: '/00_genehmigung'

@@ -309,6 +309,16 @@ function uploadUserFile(file,file_path, callback){
     });
 }
 
+function createFolder(folder_path) {
+    mkdirp(folder_path, function(err) {
+        if (err) {
+            logger.error('error to create path: '+folder_path, err.message);
+        } else {
+            logger.trace('success to create path: '+folder_path);
+        }
+    });
+}
+
 const getSessionUser= function (user) {
     let session_user = {email:user.email, name: user.firstname + ' ' + user.secondname, role: user.role, icon: user.icon, cost_code: user.cost_code};
     return session_user;
@@ -325,5 +335,6 @@ module.exports = {
     filterContractsForDashboard:filterContractsForDashboard,
     isUserPermitted:isUserPermitted,
     uploadUserFile:uploadUserFile,
-    getSessionUser:getSessionUser
+    getSessionUser:getSessionUser,
+    createFolder:createFolder
 };

@@ -3,6 +3,7 @@
  */
 'use strict';
 const moment = require('moment');
+const config = require('../common/config');
 const logger = require('../common/logger');
 const db = require('../common/database');
 const common = require('../common/common');
@@ -68,6 +69,7 @@ function updateContractBasic(request, callback) {
                 }
             });
 
+            common.createFolder(config.files.root_path+contract.project_id+'/'+contract.id);
         });
     }
 

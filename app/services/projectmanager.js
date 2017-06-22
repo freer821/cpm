@@ -3,7 +3,6 @@
  */
 'use strict';
 const moment = require('moment');
-const mkdirp = require('mkdirp');
 const logger = require('../common/logger');
 const config = require('../common/config');
 const db = require('../common/database');
@@ -31,27 +30,9 @@ const addProject = function (req, res, next) {
             project.files_path = config.files.root_path+project.id;
             db.editProject({id: project.id}, project);
 
-            mkdirp(project.files_path, function(err) {
-
-                if (err) {
-                    logger.error('error to create root path: '+project.files_path, err.message);
-                } else {
-                    logger.trace('success to create root path: '+project.files_path);
-                }
-                // path exists unless there was an error
-
-            });
-
-            mkdirp(project.files_path+'/fremdleitungplan', function(err) {
-
-                if (err) {
-                    logger.error('error to create fremdleitungplan path: '+project.files_path+'/fremdleitungplan', err.message);
-                } else {
-                    logger.trace('success to create fremdleitungplan path: '+project.files_path+'/fremdleitungplan');
-                }
-                // path exists unless there was an error
-
-            });
+            common.createFolder(project.files_path);
+            common.createFolder(project.files_path+config.files.fremdleitungsplan_path);
+            common.createFolder(project.files_path+config.files.genehmigung_path);
 
             common.doJSONRespond(res,{'action':'add_con','project':project},next);
         }
