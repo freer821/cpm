@@ -75,7 +75,7 @@ $(document).ready(function(){
                 $("#person").val(contract.doc_location.person);
                 $("#reason").val(contract.doc_location.reason);
             }
-            $("#comment").val(contract.comment);
+            $("#contract_basic_comment").html(contract.comment);
             $("#basic_contract_id").val(contract.id);
             $("#basic_project_id").val(contract.project_id);
             $("#contract_street").val(contract.contract_street);
