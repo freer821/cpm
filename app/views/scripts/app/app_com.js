@@ -51,6 +51,9 @@ function doAction(response) {
                 $('#contract-basic-modal').modal('show');
                 $("#basic_project_id").val(response.project.id);
                 $("#contract_street").val(response.project.street+' '+response.project.housenr);
+                $('#contract-basic-modal').on('hidden.bs.modal', function () {
+                    location.reload();
+                })
                 break;
             default:
                 break;
