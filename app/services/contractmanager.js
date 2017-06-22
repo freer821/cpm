@@ -99,24 +99,13 @@ function updateContractBuilding(request, callback) {
         }
     });
 
-    // create invoice
-    /**
+
     if (request.status === '03') {
-        if (!request.invoice) {
-            let invoice = {
-                contract_id: request.contract_id,
-                invoice_status: '00'
-            };
-            updateContractFinancial(invoice, function (err) {
-                if (err) {
-                    logger.error('error to add invoice from building', err);
-                } else {
-                    logger.trace('success to add invoice from building');
-                }
-            });
-        }
+        let invoice = {
+            invoice_status: '00'
+        };
+        db.checkAndauoUpdateContractFinancial(request.contract_id, invoice);
     }
-     */
 }
 
 function updateContractPermission(request, callback) {

@@ -349,6 +349,24 @@ const editContractAddIntoArray = function (condition, arrayItem, callback) {
     );
 };
 
+const checkAndauoUpdateContractFinancial = function (contract_id, invoice) {
+    Contract.findOne({id:contract_id }, function (err, contract) {
+        if (err) {
+            logger.error('Failed to find Contract', contract_id ,err);
+
+        } else {
+            if (contract.invoice.length === 0) {
+                contract.invoice.push(invoice);
+                contract.save(function (err) {
+                    if (err) {
+                        logger.error('Failed to update Contract Financial', err);
+                    }
+                });
+            }
+        }
+    });
+};
+
 const editContractRemoveFromArray = function (condition, arrayItem, callback) {
     Contract.update(condition, // Query
         { // Updates
@@ -477,5 +495,6 @@ module.exports = {
     editContractRemoveFromArray:editContractRemoveFromArray,
     countContract:countContract,
     updateProjectAfterContractUpdate:updateProjectAfterContractUpdate,
-    findProject:findProject
+    findProject:findProject,
+    checkAndauoUpdateContractFinancial:checkAndauoUpdateContractFinancial
 };
