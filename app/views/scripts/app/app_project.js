@@ -65,6 +65,56 @@ function hideContracts(project_id) {
     $('#'+project_id).css("font-weight", "");
 }
 
+function updateProject(project_id) {
+    $.get( '/projects/'+project_id, function( data ) {
+        if (data.project) {
+            $('#'+project_id+' td.finished_overview').val(data.project.contracts_status);
+            $('#'+project_id+' td.contracts_types').empty();
+            $('#'+project_id+' td.contracts_types').html(buildProjectTypesHTML(data.project));
+        }
+    });
+}
+
+function buildProjectTypesHTML(project) {
+    var project_types = '<div style="max-width:185px;min-width:185px;">';
+    if (project.contract_types.electric)  {
+        project_types+= '<a class="hint--top" data-hint="Elt"><i class="fa fa-square projectSchema.contract_types.electric_true" style="width:21px;height:21px;font-size:21px;margin-right:6px;color:#b53f45;"></i></a>';
+    } else {
+        project_types+='<a class="hint--top" data-hint="Elt"><i class="fa fa-square-o projectSchema.contract_types.electric_false" style="width:21px;height:21px;font-size:21px;margin-right:6px;color:#b53f45;"></i></a>';
+    }
+
+    if (project.contract_types.gas ) {
+        project_types+='<a class="hint--top" data-hint="Gas"><i class="fa fa-square projectSchema.contract_types.gas_true" style="width:21px;height:21px;font-size:21px;margin-right:4px;color:#ffd000;"></i></a>';
+    } else {
+        project_types+='<a class="hint--top" data-hint="Gas"><i class="fa fa-square-o projectSchema.contract_types.gas_false" style="width:21px;height:21px;font-size:21px;margin-right:4px;color:#ffd000;"></i></a>';
+    }
+    if ( project.contract_types.water ) {
+        project_types+= '<a class="hint--top" data-hint="Wasser"><i class="fa fa-square projectSchema.contract_types.water_true" style="width:21px;height:21px;font-size:21px;margin-right:6px;color:#3e6b7e;"></i></a>';
+    } else {
+        project_types+='<a class="hint--top" data-hint="Wasser"><i class="fa fa-square-o projectSchema.contract_types.water_false" style="width:21px;height:21px;font-size:21px;margin-right:6px;color:#3e6b7e;"></i></a>';
+    }
+    if ( project.contract_types.light ) {
+        project_types+= '<a class="hint--top" data-hint="Beleuchtung"><i class="fa fa-square projectSchema.contract_types.light_true" style="width:21px;height:21px;font-size:21px;margin-right:6px;color:#91c0ab;"></i></a>';
+    } else {
+        project_types+='<a class="hint--top" data-hint="Beleuchtung"><i class="fa fa-square-o projectSchema.contract_types.light_false" style="width:21px;height:21px;font-size:21px;margin-right:6px;color:#91c0ab;"></i></a>';
+    }
+    if ( project.contract_types.telecom ) {
+        project_types+= '<a class="hint--top" data-hint="Telekom"><i class="fa fa-square projectSchema.contract_types.telecom_true" style="width:21px;height:21px;font-size:21px;margin-right:4px;color:rgb(248,126,123);"></i></a>';
+    } else {
+        project_types+= '<a class="hint--top" data-hint="Telekom"><i class="fa fa-square-o projectSchema.contract_types.telecom_false" style="width:21px;height:21px;font-size:21px;margin-right:4px;color:rgb(248,126,123);"></i></a>';
+    }
+    if ( project.contract_types.others ) {
+        project_types+= '<a class="hint--top" data-hint="Sonstige"><i class="fa fa-square projectSchema.contract_types.others_true" style="width:21px;height:21px;font-size:21px;margin-right:0px;"></i></a>';
+    } else {
+        project_types+= '<a class="hint--top" data-hint="Sonstige"><i class="fa fa-square-o projectSchema.contract_types.others_false" style="width:21px;height:21px;font-size:21px;margin-right:0px;"></i></a>';
+    }
+
+    project_types+='</div>';
+
+    return project_types;
+}
+
+
 function contractOverview (contract) {
     // generate contract overview
      return formatContractStatus(contract) +

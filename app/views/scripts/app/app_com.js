@@ -45,6 +45,7 @@ function doAction(response) {
             case 'reload':
                 hideContracts(response.project_id);
                 showContracts(response.project_id);
+                updateProject(response.project_id);
                 break;
             case 'add_con':
                 $('#contract-basic-modal').modal('show');

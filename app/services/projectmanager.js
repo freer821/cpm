@@ -58,6 +58,17 @@ const addProject = function (req, res, next) {
     });
 };
 
+const getProject = function (req, res, next) {
+    db.findProject(req.params.id, function (err, project) {
+        if(err) {
+            logger.error('error to find project in db:', req.params.id);
+            common.doJSONRespond(res,{'err':'error to find project in db: '+req.params.id}, next);
+        } else {
+            common.doJSONRespond(res,{'project':project}, next);
+        }
+    });
+};
+
 const updateProject = function (req, res, next) {
     let project = req.body;
     let project_id = req.params.id;
@@ -122,5 +133,6 @@ module.exports = {
     getAllProjects: getAllProjects,
     addProject:addProject,
     getContractByProjectID:getContractByProjectID,
-    updateProject:updateProject
+    updateProject:updateProject,
+    getProject:getProject
 };

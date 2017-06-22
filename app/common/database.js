@@ -280,6 +280,17 @@ const getProjects = function (condition, callback) {
     });
 };
 
+const findProject = function (project_id, callback) {
+    Project.findOne({id: project_id}, function (err, project) {
+        if (err) {
+            logger.error('error to find project', err.message);
+            callback(err);
+        } else {
+            callback(undefined, project);
+        }
+    });
+};
+
 const delProject = function (id){
     delByID('project', id, function(err){
         callback(err);
@@ -465,5 +476,6 @@ module.exports = {
     editContractAddIntoArray: editContractAddIntoArray,
     editContractRemoveFromArray:editContractRemoveFromArray,
     countContract:countContract,
-    updateProjectAfterContractUpdate:updateProjectAfterContractUpdate
+    updateProjectAfterContractUpdate:updateProjectAfterContractUpdate,
+    findProject:findProject
 };
