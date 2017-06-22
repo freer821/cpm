@@ -10,6 +10,10 @@ const common = require('../common/common');
 var ObjectId = require('mongoose').Types.ObjectId;
 const uuidV4 = require('uuid/v4');
 
+function getContractIDPrifix(contract) {
+    return moment().format('YY')+'-'+contract.cost_code.substring(contract.cost_code.length-2)+'-'+contract.project_id+'-';
+}
+
 function updateContractBasic(request, callback) {
 
     let contract = {
@@ -60,7 +64,7 @@ function updateContractBasic(request, callback) {
                 count = 0;
             }
 
-            contract.id = getContractID(count);
+            contract.id = getContractIDPrifix(contract)+(count+1).toString();
             db.editContract({id: contract.id},contract,function (err) {
                 if(err){
                     callback(err);
@@ -274,11 +278,6 @@ function updateContractFibu(request, callback) {
             callback(undefined, request.project_id);
         }
     });
-}
-
-function getContractID(count) {
-    // TODO
-    return '17-44-0001-' + (count+1).toString();
 }
 
 const editContract = function (req, res, next) {

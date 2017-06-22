@@ -5,7 +5,7 @@
 
 const moment = require('moment');
 const mkdirp = require('mkdirp');
-
+const logger = require('./logger');
 
 const zeroPad = function(num, places) {
     var zero = places - num.toString().length + 1;
@@ -162,12 +162,12 @@ const calInvoicesStatus = function(contract) {
             if (current_paid_value === sum_value) {
                 status.is_finished = true;
             }
-        }
 
-        if (invoices.length === 1) {
-            status.descrip = invoices[0].invoice_status;
-        } else {
-            status.descrip =current_paid_value + ' / ' + sum_value;
+            if (invoices.length === 1) {
+                status.descrip = invoices[0].invoice_status;
+            } else {
+                status.descrip =current_paid_value + ' / ' + sum_value;
+            }
         }
     }
 
