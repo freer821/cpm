@@ -109,9 +109,9 @@ function getMonthDate(time) {
 // 5 : before end
 // 6 : after end
 function calStatusOfTime(t_begin, t_end) {
-    var now = moment().utc().startOf('day');
+    var now = moment();
     if ( isDateValid(t_begin)  &&  isDateValid(t_end) ) {
-        if ((now.isSame(moment(t_begin,"DD-MM-YYYY")) || now.isAfter(moment(t_begin,"DD-MM-YYYY"))) && (now.isBefore(moment(t_end,"DD-MM-YYYY") || now.isSame(moment(t_end,"DD-MM-YYYY"))))) {
+        if ((now.isSame(moment(t_begin,"DD-MM-YYYY"),'d') || now.isAfter(moment(t_begin,"DD-MM-YYYY"))) && (now.isBefore(moment(t_end,"DD-MM-YYYY")) || now.isSame(moment(t_end,"DD-MM-YYYY"),'d'))) {
             return 1;
         } else if (now.isBefore(moment(t_begin,"DD-MM-YYYY"))) {
             return 0;
@@ -172,6 +172,9 @@ function setBuildingPercent(status_value) {
             break;
         case '02':
             $("#procent_completion").slider("enable");
+            if ($('#procent_completion').slider("getValue") === 0) {
+                $("#procent_completion").slider('setValue', 10);
+            }
             break;
         case '03':
             $("#procent_completion").slider('setValue', 100);
