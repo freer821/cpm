@@ -452,5 +452,5 @@ function formatData(obj, key){
     if(obj)
         return obj[key];
     else
-        return 'no value';
+        return '';
 }

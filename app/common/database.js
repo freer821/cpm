@@ -367,7 +367,7 @@ const checkAndauoUpdateContractFinancial = function (contract_id, invoice) {
     });
 };
 
-const updateContractManagerByCostCode = function (contract_id) {
+const updateContractManagerByCostCode = function (contract_id, callback) {
     Contract.findOne({id:contract_id }, function (err, contract) {
         if (err) {
             logger.error('Failed to find Contract', contract_id ,err);
@@ -381,6 +381,10 @@ const updateContractManagerByCostCode = function (contract_id) {
                     contract.save(function (err) {
                         if (err) {
                             logger.error('Failed to update Contract Manager', err);
+                        }
+
+                        if (typeof callback === "function" ) {
+                            callback();
                         }
                     });
                 }

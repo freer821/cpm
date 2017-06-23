@@ -54,8 +54,9 @@ function updateContractBasic(request, callback) {
             if(err){
                 callback(err);
             } else {
-                callback(undefined, request.project_id);
-                db.updateContractManagerByCostCode(request.contract_id);
+                db.updateContractManagerByCostCode(request.contract_id, function () {
+                    callback(undefined, request.project_id);
+                });
             }
         });
     } else {
@@ -66,12 +67,17 @@ function updateContractBasic(request, callback) {
             }
 
             contract.id = getContractIDPrifix(contract)+(count+1).toString();
+            contract.is_ofw_activ = false;
+            contract.ofw= {
+                ofw_status: 'OFW nicht ben\u00f6tigt'
+            };
             db.editContract({id: contract.id},contract,function (err) {
                 if(err){
                     callback(err);
                 } else {
-                    callback(undefined, request.project_id);
-                    db.updateContractManagerByCostCode(contract.id);
+                    db.updateContractManagerByCostCode(contract.id, function () {
+                        callback(undefined, request.project_id);
+                    });
                 }
             });
 

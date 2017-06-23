@@ -202,7 +202,7 @@ function getInvoiceStatus(code) {
         case '06':
             return 'Ueberzubearbeiten';
         default:
-            return code;
+            return '';
     }
 }
 
@@ -219,7 +219,7 @@ function getBuildingStatus(status_code) {
         case '04':
             return 'Tiefbau &amp; Montage erledigt';
         default:
-            return 'no building status';
+            return '';
     }
 }
 
