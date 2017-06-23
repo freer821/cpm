@@ -89,7 +89,11 @@ function formatDate(time) {
 }
 
 function isDateValid(time) {
-    return moment(time, "DD-MM-YYYY", true).isValid() || moment(time).isValid();
+    if (time) {
+        return moment(time, "DD-MM-YYYY", true).isValid() || moment(time).isValid();
+    } else {
+        return false;
+    }
 }
 
 function getMonthDate(time) {
@@ -315,13 +319,13 @@ function calInvoiceStatus() {
         $('#invoice_status').val('06').change();
     } else if (getNumValue($('#sum').val())> 0) {
         if ( !isDateValid($('#aufmass_am').val()) && !isDateValid($('#bewert_aufmass').val()) && isFieldEmpty('rechnung_nr') && !isDateValid('guts_datum')) {
-            $('#invoice_status').val('03').change();
+            $('#invoice_status').val('02').change();
         } else if (isDateValid($('#aufmass_am').val()) && !isDateValid($('#bewert_aufmass').val()) && isFieldEmpty('rechnung_nr') && !isDateValid('guts_datum')) {
+            $('#invoice_status').val('03').change();
+        } else if (isDateValid($('#aufmass_am').val()) && isDateValid($('#bewert_aufmass').val()) && isFieldEmpty('rechnung_nr') && !isDateValid($('#guts_datum').val())) {
             $('#invoice_status').val('04').change();
-        } else if (isDateValid($('#aufmass_am').val()) && isDateValid($('#bewert_aufmass').val()) && isFieldEmpty('rechnung_nr') && !isDateValid('guts_datum')) {
+        } else if (isDateValid($('#aufmass_am').val()) && isDateValid($('#bewert_aufmass').val()) && !isFieldEmpty('rechnung_nr') && isDateValid($('#guts_datum').val())) {
             $('#invoice_status').val('05').change();
-        } else if (!isFieldEmpty('rechnung_nr') && isDateValid('guts_datum')) {
-            $('#invoice_status').val('06').change();
         }
     }
 
