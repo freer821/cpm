@@ -326,10 +326,17 @@ $(document).ready(function(){
             $("#building_permission_not_activ").show();
         }
     });
-    $('#building_permission_form input, select').change(function() {
-        console.log('calStatusOfPermission');
+
+    $('#building_permission_form input').change(function() {
+        console.log('calStatusOfPermission input');
         calStatusOfPermission();
     });
+
+    $('#building_permission_form select').change(function() {
+        console.log('calStatusOfPermission select');
+        calStatusOfPermission();
+    });
+
 
     $('#contract-building-modal input').change(function() {
         console.log('calStatusOfBuilding');
