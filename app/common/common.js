@@ -131,7 +131,7 @@ function calTotalStatusOfPermissions(contract) {
         }
 
     } else {
-        return 'nicht benoetigt';
+        return 'nicht ben\u00f6tigt';
     }
 }
 

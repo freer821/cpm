@@ -206,9 +206,8 @@ function getInvoiceStatus(code) {
     }
 }
 
-function getBuildingStatus(code) {
-
-    switch (code){
+function getBuildingStatus(status_code) {
+    switch (status_code) {
         case '00':
             return 'in der Vorbereitung';
         case '01':
@@ -216,9 +215,11 @@ function getBuildingStatus(code) {
         case '02':
             return 'geplant in Bau';
         case '03':
+            return 'fertig gebaut, Mappe abzug';
+        case '04':
             return 'Tiefbau &amp; Montage erledigt';
         default:
-            return 'unknown building status';
+            return 'no building status';
     }
 }
 

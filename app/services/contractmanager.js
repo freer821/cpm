@@ -197,7 +197,10 @@ function updateContractOFW(request, callback) {
 
     } else {
         contract = {
-            is_ofw_activ: request.is_ofw_activ
+            is_ofw_activ: request.is_ofw_activ,
+            ofw:{
+                ofw_status: 'OFW nicht ben\u00f6tigt'
+            }
         };
     }
     db.editContract({id: request.contract_id},contract,function (err) {
