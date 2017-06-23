@@ -266,39 +266,38 @@ function calStatusOfPermission() {
 function calStatusOfOFW() {
     var ofw_var1, ofw_var2;
     switch (calStatusOfTime($("#ofw_delivery").val(), $("#ofw_completion_at").val())) {
-        case 0:
+        case -1:
             ofw_var1 = 'OFW nicht gebaut';
             break;
-        case 1:
+        case 3:
+        case 4:
             ofw_var1 = 'OFW im Bau';
             break;
-        case 2:
-            ofw_var1 = 'OFW fertig';
-            break;
         default:
+            ofw_var1 = 'OFW fertig';
             break;
     }
 
     if ($('#ofw_contract_customer').val() === 'STW') {
-        if($('#permission_nr').val().trim().length > 0) {
-            ofw_var2 = $('#permission_nr').val();
+        if($('#ofw_permission_nr').val().trim().length > 0) {
+            ofw_var2 = $('#ofw_permission_nr').val();
         } else {
             ofw_var2 = 'Meld.Nr. nicht vorhand';
         }
     }
     else {
         if ($('#is_acceptance_activ').is(':checked')) {
+            $('#add_acceptance').show();
             switch (calStatusOfTime($("#ofw_applied").val(), $("#ofw_granted").val())) {
-                case 0:
+                case -1:
                     ofw_var2 = 'Abn. Noetig (zu beantragen)';
                     break;
-                case 1:
+                case 3:
+                case 4:
                     ofw_var2 = 'Abn. beantragt';
                     break;
-                case 2:
-                    ofw_var2 = 'Abn. vorhanden';
-                    break;
                 default:
+                    ofw_var2 = 'Abn. vorhanden';
                     break;
             }
         } else {

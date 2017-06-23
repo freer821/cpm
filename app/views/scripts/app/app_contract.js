@@ -166,83 +166,94 @@ $(document).ready(function(){
         $("#ofw_contract_id").val(contract.id);
         $("#ofw_project_id").val(contract.project_id);
         $("#ofw_cost_code").val(contract.cost_code);
-        $("#ofw_contract_customer").val(contract.contract_customers);
+        $("#ofw_contract_customer").val(contract.customer);
+
+        //set content
+        if (contract.ofw) {
+            $("#ofw_worker_name").val(contract.ofw.worker_name);
+            $("#ofw_permission_nr").val(contract.ofw.permission_nr);
+            if (contract.ofw.delivery) {
+                $("#ofw_delivery").val(formatDate(contract.ofw.delivery));
+            }
+            if (contract.ofw.completion_at) {
+                $("#ofw_completion_at").val(formatDate(contract.ofw.completion_at));
+            }
+
+            $("#ofw_ueberdicken").val(contract.ofw.ueberdicken);
+            $("#ofw_estimated_value").val(contract.ofw.estimated_value);
+
+            if (contract.ofw.acceptance) {
+                $("#ofw_applied").val(formatDate(contract.ofw.acceptance.applied));
+                $("#ofw_granted").val(formatDate(contract.ofw.acceptance.granted));
+            }
+
+            $("#ofw_status").val(contract.ofw.ofw_status);
+            if (contract.ofw.typ && contract.ofw.typ.bausstr) {
+                $("#bausstr").prop( "checked", true );
+            } else {
+                $("#bausstr").prop( "checked", false );
+            }
+
+            if (contract.ofw.typ && contract.ofw.typ.fahrbahn){
+                $("#fahrbahn").prop( "checked", true );
+            } else {
+                $("#fahrbahn").prop( "checked", false );
+            }
+
+            if (contract.ofw.typ && contract.ofw.typ.fussweg){
+                $("#fussweg").prop( "checked", true );
+            } else {
+                $("#fussweg").prop( "checked", false );
+            }
+
+            if (contract.ofw.typ && contract.ofw.typ.bitu){
+                $("#bitu").prop( "checked", true );
+            } else {
+                $("#bitu").prop( "checked", false );
+            }
+
+            if (contract.ofw.typ && contract.ofw.typ.pflaster){
+                $("#pflaster").prop( "checked", true );
+            } else {
+                $("#pflaster").prop( "checked", false );
+            }
+
+            if (contract.ofw.typ && contract.ofw.typ.beton){
+                $("#beton").prop( "checked", true );
+            } else {
+                $("#beton").prop( "checked", false );
+            }
+            if (contract.ofw.typ && contract.ofw.clean){
+                $("#clean").prop( "checked", true );
+            } else {
+                $("#clean").prop( "checked", false );
+            }
+
+            if (contract.ofw.is_acceptance_activ){
+                $("#is_acceptance_activ").prop( "checked", true );
+            } else {
+                $("#is_acceptance_activ").prop( "checked", false );
+            }
+        }
+
+        if (contract.customer === 'STW') {
+            $(".stw").show();
+            $(".notstw").hide();
+        } else {
+            $(".stw").hide();
+            $(".notstw").show();
+            if (contract.ofw && contract.ofw.is_acceptance_activ){
+                $('#add_acceptance').show();
+            } else {
+                $('#add_acceptance').hide();
+            }
+
+        }
 
         if (contract.is_ofw_activ){
             $('#ofw_activ').show();
             $('#ofw_not_activ').hide();
-            $("#add_acceptance").hide();
             $("#is_ofw_activ").prop( "checked", true );
-            //set content
-            if (contract.ofw) {
-                $("#ofw_worker_name").val(contract.ofw.worker_name);
-                $("#ofw_permission_nr").val(contract.ofw.permission_nr);
-                if (contract.ofw.delivery) {
-                    $("#ofw_delivery").val(formatDate(contract.ofw.delivery));
-                }
-                if (contract.ofw.completion_at) {
-                    $("#ofw_completion_at").val(formatDate(contract.ofw.completion_at));
-                }
-
-                $("#ofw_ueberdicken").val(contract.ofw.ueberdicken);
-                $("#ofw_estimated_value").val(contract.ofw.estimated_value);
-
-                if (contract.ofw.applied) {
-                    $("#ofw_applied").val(formatDate(contract.ofw.applied));
-                }
-                if (contract.ofw.granted) {
-                    $("#ofw_granted").val(formatDate(contract.ofw.granted));
-                }
-
-                $("#ofw_status").val(contract.ofw.ofw_status);
-                if (contract.ofw.typ.bausstr) {
-                    $("#bausstr").prop( "checked", true );
-                } else {
-                    $("#bausstr").prop( "checked", false );
-                }
-
-                if (contract.ofw.typ.fahrbahn){
-                    $("#fahrbahn").prop( "checked", true );
-                } else {
-                    $("#fahrbahn").prop( "checked", false );
-                }
-
-                if (contract.ofw.typ.fussweg){
-                    $("#fussweg").prop( "checked", true );
-                } else {
-                    $("#fussweg").prop( "checked", false );
-                }
-
-                if (contract.ofw.typ.bitu){
-                    $("#bitu").prop( "checked", true );
-                } else {
-                    $("#bitu").prop( "checked", false );
-                }
-
-                if (contract.ofw.typ.pflaster){
-                    $("#pflaster").prop( "checked", true );
-                } else {
-                    $("#pflaster").prop( "checked", false );
-                }
-
-                if (contract.ofw.typ.beton){
-                    $("#beton").prop( "checked", true );
-                } else {
-                    $("#beton").prop( "checked", false );
-                }
-                if (contract.ofw.clean){
-                    $("#clean").prop( "checked", true );
-                } else {
-                    $("#clean").prop( "checked", false );
-                }
-
-                if (contract.ofw.is_acceptance_activ){
-                    $("#is_acceptance_activ").prop( "checked", true );
-                    $("#add_acceptance").show();
-                } else {
-                    $("#is_acceptance_activ").prop( "checked", false );
-                }
-            }
         } else {
             $('#ofw_activ').hide();
             $('#ofw_not_activ').show();
