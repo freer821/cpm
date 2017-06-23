@@ -442,6 +442,8 @@ const updateProjectAfterContractUpdate = function(project_id) {
                     if (invoices_status.is_finished) {
                         finished_contracts_num++;
                         contract.total_status = 'FINISHED'
+                    } else {
+                        contract.total_status = 'UNFINISHED'
                     }
 
                     contract.invoices_status = invoices_status.descrip;
