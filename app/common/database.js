@@ -367,6 +367,29 @@ const checkAndauoUpdateContractFinancial = function (contract_id, invoice) {
     });
 };
 
+const updateContractManagerByCostCode = function (contract_id) {
+    Contract.findOne({id:contract_id }, function (err, contract) {
+        if (err) {
+            logger.error('Failed to find Contract', contract_id ,err);
+        } else {
+            findUser({ cost_code: { "$in" : [contract.cost_code]}}, function (err, user) {
+                if (err) {
+                    logger.error('error to find bauleiter');
+                    callback(err)
+                } else {
+                    contract.manager_name = user.shortname;
+                    contract.save(function (err) {
+                        if (err) {
+                            logger.error('Failed to update Contract Manager', err);
+                        }
+                    });
+                }
+            });
+        }
+    });
+}
+
+
 const editContractRemoveFromArray = function (condition, arrayItem, callback) {
     Contract.update(condition, // Query
         { // Updates
@@ -496,5 +519,6 @@ module.exports = {
     countContract:countContract,
     updateProjectAfterContractUpdate:updateProjectAfterContractUpdate,
     findProject:findProject,
-    checkAndauoUpdateContractFinancial:checkAndauoUpdateContractFinancial
+    checkAndauoUpdateContractFinancial:checkAndauoUpdateContractFinancial,
+    updateContractManagerByCostCode:updateContractManagerByCostCode
 };

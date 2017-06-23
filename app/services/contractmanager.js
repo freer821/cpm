@@ -55,6 +55,7 @@ function updateContractBasic(request, callback) {
                 callback(err);
             } else {
                 callback(undefined, request.project_id);
+                db.updateContractManagerByCostCode(request.contract_id);
             }
         });
     } else {
@@ -70,14 +71,15 @@ function updateContractBasic(request, callback) {
                     callback(err);
                 } else {
                     callback(undefined, request.project_id);
+                    db.updateContractManagerByCostCode(contract.id);
                 }
             });
 
             common.createFolder(config.files.root_path+contract.project_id+'/'+contract.id);
         });
     }
-
 }
+
 
 function updateContractBuilding(request, callback) {
 
