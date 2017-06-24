@@ -97,6 +97,7 @@
             </tbody>
           </table>
         </div>
+      </div>
     </div>
   </div>
 </div>
@@ -141,36 +142,36 @@
         console.log('laod app_contract');
     });
 
-function postContractEditPartial (id, data, callback){
-  url = '/contracts/edit/partial/'+id;
-  var posting = $.post( url, data );
-  posting.done(function( data ) {
-    if(data!='ok') {
-      let err = 'err';
-      callback(err);
+    function postContractEditPartial (id, data, callback){
+        url = '/contracts/edit/partial/'+id;
+        var posting = $.post( url, data );
+        posting.done(function( data ) {
+            if(data!='ok') {
+                let err = 'err';
+                callback(err);
+            }
+            else
+                callback(undefined);
+        });
     }
-    else
-      callback(undefined);
-  });
-}
 
-function printTemplate(id){
-  url = '/contracts/print/'+id;
-  var posting = $.post( url, {} );
-  posting.done(function( data ) { 
-    $('#file_tobe_printed').attr('src', data);
-    //var iframe = document.getElementById('file_tobe_printed');
-    //iframe.contentWindow.print();
-    //alert(data);
-    return;
-    if(data!='ok') {
-      let err = 'err';
-      callback(err);
+    function printTemplate(id){
+        url = '/contracts/print/'+id;
+        var posting = $.post( url, {} );
+        posting.done(function( data ) {
+            $('#file_tobe_printed').attr('src', data);
+            //var iframe = document.getElementById('file_tobe_printed');
+            //iframe.contentWindow.print();
+            //alert(data);
+            return;
+            if(data!='ok') {
+                let err = 'err';
+                callback(err);
+            }
+            else
+                callback(undefined);
+        });
     }
-    else
-      callback(undefined);
-  });  
-}
 </script>
 <!-- ############ PAGE END-->
-{% endblock %} 
+{% endblock %}
