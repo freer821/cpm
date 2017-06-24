@@ -387,6 +387,17 @@ const delContract = function (req, res, next) {
     }
 };
 
+const loadContracts = function (req, res, next) {
+
+    db.getContracts({}, function (err, contracts) {
+        if (err) {
+            logger.error('error to find contracts in db', err.message);
+        } else {
+            res.render('contracts', {title:'Contracts Management', subtitle: 'Overview Contracts', user: req.user, contracts:contracts});
+        }
+    })
+};
+
 const editContractPartial = function(req, res, next){
     let set = req.body;
     let contract_id = req.params.id;
@@ -452,6 +463,7 @@ function callPythonShellScript(path, scriptFile, argsFile, res){
 
 module.exports = {
     editContract:editContract,
+    loadContracts:loadContracts,
     delContract:delContract,
     editContractPartial:editContractPartial,
     printContract:printContract

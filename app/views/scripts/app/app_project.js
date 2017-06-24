@@ -124,7 +124,7 @@ function contractOverview (contract) {
                         '<td class="contractSchema.work_content" style="min-width:150px;">'+contract.work_content+'</td>'+
                         '<td class="contractSchema.cost_code" style="min-width:80px;">'+contract.cost_code+' </td>'+
                         '<td class="contractSchema.customer" style="min-width:70px;">'+contract.customer+' </td>'+
-                        '<td class="contractSchema.contract_id" style="min-width:110px;">'+contract.contract_id+' </td>'+
+                        '<td class="contractSchema.contract_id" style="min-width:110px;">'+contract.contract_extern_id+' </td>'+
                         '<td class="contract_edit" style="min-width:45px;max-width:45px;"><a class="hint--left" data-hint="Info. des Auftrag bearbeiten" href="#" data-toggle="modal" data-target="#contract-basic-modal" data-contract=\''+JSON.stringify(contract)+'\' data-backdrop="static"><i class="fa fa-pencil-square-o" style="font-size:22px;margin-left:4px;min-width:22px;"></i></a></td>'+
                         '<td class="contract_types&amp;lock" style="height:42px;padding:0px;min-width:92px;width:92px;max-width:92px;">'+
                             '<div style="padding:0px;height:40px;">'+
