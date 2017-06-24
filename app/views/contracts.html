@@ -14,82 +14,7 @@
         </div>
     </div>
     <div class="box-body">
-        <div style="padding:10px">
-            <table id="contracts-filter" class="table">
-                <thead>
-                <tr>
-                    <th style="width:40px;"> </th>
-                    <th style="width:32px;"> </th>
-                    <th style="width:150px;" data-toggle="true">Contract ID</th>
-                    <th style="width:150px;">Street </th>
-                    <th style="width:150px;">Work Content </th>
-                    <th style="width:80px;">Cost Code </th>
-                    <th style="width:70px;">Customer </th>
-                    <th style="width:110px;">Contract Nr. </th>
-                    <th style="width:200px;">Contract Type </th>
-                    <th style="width:40px;"> </th>
-                    <th style="width:40px;"> </th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for contract in contracts %}
-                <tr id="{{contract.id}}">
-                    <td class="2nd_unfold" style="margin-left:0px;width:40px;min-width:40px;max-width:40px;">
-                        <i class="fa fa-chevron-circle-right" style="font-size:18px;"></i>
-                    </td>
-                    <td class="2nd_unfold" style="margin-left:0px;min-width:32px;max-width:32px;width:32px;">
-                        <i class="fa fa-check-square-o" style="font-size:20px;color:rgb(131,175,155);"></i>
-                    </td>
-                    <td class="projectSchema.id" style="height:43px;width:150px;">{{contract.id}} </td>
-                    <td class="projectSchema.community" style="height:43px;width:150px;">{{contract.contract_street}} </td>
-                    <td class="projectSchema.street" style="height:43px;width:150px;">{{contract.work_content}} </td>
-                    <td class="projectSchema.housenr" style="height:43px;width:80px;">{{contract.cost_code}} </td>
-                    <td class="finished_overview" style="height:43px;width:70px;">{{contract.customer}}</td>
-                    <td class="finished_overview" style="height:43px;width:110px;">{{contract.contract_extern_id}}</td>
-                    <td class="contracts_types" style="width:200px;max-height:43px;background-position:top;background-size:contain;background-repeat:no-repeat;padding-left:4%">
-                        <div style="max-width:185px;min-width:185px;">
-                            {% if contract.contract_typ.electric %}
-                            <a class="hint--bottom-left" data-hint="Elt"><i class="fa fa-square projectSchema.contract_types.electric_true" style="width:21px;height:21px;font-size:21px;margin-right:6px;color:#b53f45;"></i></a>
-                            {% else %}
-                            <a class="hint--bottom-left" data-hint="Elt"><i class="fa fa-square-o projectSchema.contract_types.electric_false" style="width:21px;height:21px;font-size:21px;margin-right:6px;color:#b53f45;"></i></a>
-                            {% endif %}
-                            {% if contract.contract_typ.gas %}
-                            <a class="hint--bottom-left" data-hint="Gas"><i class="fa fa-square projectSchema.contract_types.gas_true" style="width:21px;height:21px;font-size:21px;margin-right:4px;color:#ffd000;"></i></a>
-                            {% else %}
-                            <a class="hint--bottom-left" data-hint="Gas"><i class="fa fa-square-o projectSchema.contract_types.gas_false" style="width:21px;height:21px;font-size:21px;margin-right:4px;color:#ffd000;"></i></a>
-                            {% endif %}
-                            {% if contract.contract_typ.water %}
-                            <a class="hint--bottom-left" data-hint="Wasser"><i class="fa fa-square projectSchema.contract_types.water_true" style="width:21px;height:21px;font-size:21px;margin-right:6px;color:#3e6b7e;"></i></a>
-                            {% else %}
-                            <a class="hint--bottom-left" data-hint="Wasser"><i class="fa fa-square-o projectSchema.contract_types.water_false" style="width:21px;height:21px;font-size:21px;margin-right:6px;color:#3e6b7e;"></i></a>
-                            {% endif %}
-                            {% if contract.contract_typ.light %}
-                            <a class="hint--bottom-left" data-hint="Beleuchtung"><i class="fa fa-square projectSchema.contract_types.light_true" style="width:21px;height:21px;font-size:21px;margin-right:6px;color:#91c0ab;"></i></a>
-                            {% else %}
-                            <a class="hint--bottom-left" data-hint="Beleuchtung"><i class="fa fa-square-o projectSchema.contract_types.light_false" style="width:21px;height:21px;font-size:21px;margin-right:6px;color:#91c0ab;"></i></a>
-                            {% endif %}
-                            {% if contract.contract_typ.telecom %}
-                            <a class="hint--bottom-left" data-hint="Telekom"><i class="fa fa-square projectSchema.contract_types.telecom_true" style="width:21px;height:21px;font-size:21px;margin-right:4px;color:rgb(248,126,123);"></i></a>
-                            {% else %}
-                            <a class="hint--bottom-left" data-hint="Telekom"><i class="fa fa-square-o projectSchema.contract_types.telecom_false" style="width:21px;height:21px;font-size:21px;margin-right:4px;color:rgb(248,126,123);"></i></a>
-                            {% endif %}
-                            {% if contract.contract_typ.others %}
-                            <a class="hint--bottom-left" data-hint="Sonstige"><i class="fa fa-square projectSchema.contract_types.others_true" style="width:21px;height:21px;font-size:21px;margin-right:0px;"></i></a>
-                            {% else %}
-                            <a class="hint--bottom-left" data-hint="Sonstige"><i class="fa fa-square-o projectSchema.contract_types.others_false" style="width:21px;height:21px;font-size:21px;margin-right:0px;"></i></a>
-                            {% endif %}
-                        </div>
-                    </td>
-                    <td class="edit_contract" style="width:60px;padding-left:3.5%;">
-                        <a class="hint--left" data-hint="Info. des Auftrag bearbeiten" href="#" data-toggle="modal" data-target="#contract-basic-modal" data-contract='JSON.stringify(contract)' data-backdrop="static"><i class="fa fa-pencil-square-o" style="font-size:22px;margin-left:4px;min-width:22px;"></i></a>
-                    </td>
-                    <td class="add_new_contract" style="width:50px;padding-right:40px;">
-                        <a class="hint--left" data-hint="Auftrag aktivieren / deaktivieren"><i class="fa fa-unlock-alt" style="font-size:22px;margin-left:4px;min-width:22px;"></i></a>
-                    </td>
-                </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+        <div id="contracts-filter" style="padding:10px">
         </div>
     </div>
 </div>
@@ -119,12 +44,17 @@
 
 <script type="text/javascript">
 
+    $.getScript(  '/scripts/app/app_project.js', function() {
+        console.log('laod app_project');
+    });
+
     $.getScript(  '/scripts/app/app_com.js', function() {
         console.log('laod app_com');
     });
 
     $.getScript(  '/scripts/app/app_contract.js', function() {
         console.log('laod app_contract');
+        loadContractsTable('{{contracts | json}}');
     });
 
     function postContractEditPartial (id, data, callback){
