@@ -10,6 +10,7 @@
     $("form").submit(function( event ) {
         // Stop form from submitting normally
         event.preventDefault();
+        calAllStatus();
 
         ajaxPost($(this).attr( "action" ), $(this).serialize());
 
@@ -100,6 +101,7 @@ function isDateValid(time) {
     }
 }
 
+
 function getMonthDate(time) {
     return moment(time, "DD-MM-YYYY").format("MM-YYYY");
 }
@@ -143,9 +145,19 @@ function calStatusOfTime(t_begin, t_end) {
     }
 }
 
+// call all calstatus before submit
+function calAllStatus() {
+    calStatusOfPermission();
+    calInvoiceStatus();
+    if ($("#is_ofw_activ").is(':checked')){
+        calStatusOfOFW();
+    }
+}
 
 // cal the status of Building
 function calStatusOfBuilding() {
+    console.log('calStatusOfBuilding');
+    
     if ($("#building_status").val() !== '04') {
         switch (calStatusOfTime($("#plan_begin").val(), $("#plan_end").val())) {
             case 1:
@@ -237,6 +249,8 @@ function getBuildingStatus(status_code) {
 
 // cal the status of Permission
 function calStatusOfPermission() {
+    console.log('calStatusOfPermission');
+
     var permission_license = '';
     var permission_license_1 = '';
     var permission_license_2 = '';
@@ -272,6 +286,7 @@ function calStatusOfPermission() {
 }
 
 function calStatusOfOFW() {
+    console.log('calStatusOfOFW');
     var ofw_var1, ofw_var2;
     switch (calStatusOfTime($("#ofw_delivery").val(), $("#ofw_completion_at").val())) {
         case -1:
@@ -319,6 +334,8 @@ function calStatusOfOFW() {
 
 
 function calInvoiceStatus() {
+    console.log('calInvoiceStatus');
+
     if ($('#correction_needed').is(":checked")) {
         $('#invoice_status').val('06').change();
     } else if (getNumValue($('#sum').val())> 0) {

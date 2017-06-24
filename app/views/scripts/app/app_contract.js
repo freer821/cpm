@@ -327,6 +327,25 @@ $(document).ready(function(){
         }
     });
 
+    $('#contract-ofw-modal input').change(function() {
+        if ($("#is_ofw_activ").is(':checked')){
+            $("#ofw_activ").show();
+            $("#ofw_not_activ").hide();
+        } else {
+            $("#ofw_activ").hide();
+            $("#ofw_not_activ").show();
+        }
+    });
+
+    $('#contract-building-modal input').change(function() {
+
+        if ($(this).attr("id") === 'plan_begin' || $(this).attr("id") === 'plan_end') {
+            calStatusOfBuilding();
+        }
+    });
+
+
+    /**
     $('#building_permission_form input').change(function() {
         console.log('calStatusOfPermission input');
         calStatusOfPermission();
@@ -337,31 +356,11 @@ $(document).ready(function(){
         calStatusOfPermission();
     });
 
-
-    $('#contract-building-modal input').change(function() {
-        console.log('calStatusOfBuilding');
-
-        if ($(this).attr("id") === 'plan_begin' || $(this).attr("id") === 'plan_end') {
-            calStatusOfBuilding();
-        }
-    });
-
-    $('#contract-ofw-modal input').change(function() {
-        console.log('calStatusOfOFW');
-        if ($("#is_ofw_activ").is(':checked')){
-            $("#ofw_activ").show();
-            $("#ofw_not_activ").hide();
-            calStatusOfOFW();
-        } else {
-            $("#ofw_activ").hide();
-            $("#ofw_not_activ").show();
-        }
-    });
-
     $('#invoice_form input').change(function() {
         console.log('invoice_form');
         calInvoiceStatus();
     });
+     */
 
 
 });
