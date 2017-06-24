@@ -292,8 +292,9 @@ const editContract = function (req, res, next) {
             if(err){
                 res.send('update operation failed!!');
             } else {
-                db.updateProjectAfterContractUpdate(project_id);
-                common.doJSONRespond(res,{'action':'reload','project_id':project_id},next)
+                db.updateProjectAfterContractUpdate(project_id, function () {
+                    common.doJSONRespond(res,{'action':'reload','project_id':project_id},next);
+                });
             }
         });
     } else if(req.params.action === 'building') {
@@ -301,7 +302,7 @@ const editContract = function (req, res, next) {
             if(err){
                 res.send('update operation failed!!');
             } else {
-                common.doJSONRespond(res,{'action':'reload','project_id':project_id},next)
+                common.doJSONRespond(res,{'action':'reload','project_id':project_id},next);
             }
         });
     } else if(req.params.action === 'permission') {
@@ -309,8 +310,9 @@ const editContract = function (req, res, next) {
             if (err) {
                 res.send('update operation failed!!');
             } else {
-                db.updateProjectAfterContractUpdate(project_id);
-                common.doJSONRespond(res,{'action':'reload','project_id':project_id},next)
+                db.updateProjectAfterContractUpdate(project_id, function () {
+                    common.doJSONRespond(res,{'action':'reload','project_id':project_id},next);
+                });
             }
         });
     } else if(req.params.action === 'ofw') {
@@ -318,7 +320,7 @@ const editContract = function (req, res, next) {
             if (err) {
                 res.send('update operation failed!!');
             } else {
-                common.doJSONRespond(res,{'action':'reload','project_id':project_id},next)
+                common.doJSONRespond(res,{'action':'reload','project_id':project_id},next);
             }
         });
     } else if(req.params.action === 'invoice') {
@@ -326,8 +328,9 @@ const editContract = function (req, res, next) {
             if (err) {
                 res.send('update operation failed!!');
             } else {
-                db.updateProjectAfterContractUpdate(project_id);
-                common.doJSONRespond(res,{'action':'reload','project_id':project_id},next)
+                db.updateProjectAfterContractUpdate(project_id, function () {
+                    common.doJSONRespond(res,{'action':'reload','project_id':project_id},next);
+                });
             }
         });
     } else if(req.params.action === 'fibu') {
@@ -335,7 +338,7 @@ const editContract = function (req, res, next) {
             if (err) {
                 res.send('update operation failed!!');
             } else {
-                common.doJSONRespond(res,{'action':'reload','project_id':project_id},next)
+                common.doJSONRespond(res,{'action':'reload','project_id':project_id},next);
             }
         });
     } else if(req.params.action === 'unlockAndlock') {
@@ -343,7 +346,7 @@ const editContract = function (req, res, next) {
             if (err) {
                 res.send('unlockAndlock operation failed!!');
             } else {
-                common.doJSONRespond(res,{'action':'reload','project_id':project_id},next)
+                common.doJSONRespond(res,{'action':'reload','project_id':project_id},next);
             }
         });
     }

@@ -422,7 +422,7 @@ const countContract = function (callback) {
     });
 };
 
-const updateProjectAfterContractUpdate = function(project_id) {
+const updateProjectAfterContractUpdate = function(project_id, callback) {
 
     getContracts({'project_id':project_id}, function (err, contracts) {
         if (err) {
@@ -487,7 +487,9 @@ const updateProjectAfterContractUpdate = function(project_id) {
                 project.contracts_status = finished_contracts_num +' / '+ contracts.length;
 
                 editProject({id: project_id}, project, function () {
-                    // TODO
+                    if (typeof callback === 'function') {
+                        callback();
+                    }
                 });
             }
         }
