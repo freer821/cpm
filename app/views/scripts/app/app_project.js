@@ -69,7 +69,8 @@ function hideContracts(project_id) {
 function updateProject(project_id) {
     $.get( '/projects/'+project_id, function( data ) {
         if (data.project) {
-            $('#'+project_id+' td.finished_overview').val(data.project.contracts_status);
+            $('#'+project_id+' td.finished_overview').empty();
+            $('#'+project_id+' td.finished_overview').html(data.project.contracts_status);
             $('#'+project_id+' td.contracts_types').empty();
             $('#'+project_id+' td.contracts_types').html(buildProjectTypesHTML(data.project));
         }

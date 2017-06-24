@@ -429,6 +429,7 @@ const updateProjectAfterContractUpdate = function(project_id, callback) {
             logger.error('error to update the project types ', project_id);
         } else {
             let finished_contracts_num = 0;
+            let ative_contracts = 0;
             let project = {
                 contract_types: {
                     electric: false,     // elektro
@@ -444,10 +445,14 @@ const updateProjectAfterContractUpdate = function(project_id, callback) {
                 contracts.forEach((contract) => {
                     let invoices_status = com.calInvoicesStatus(contract);
                     if (invoices_status.is_finished) {
+                        contract.total_status = 'FINISHED';
                         finished_contracts_num++;
-                        contract.total_status = 'FINISHED'
                     } else {
                         contract.total_status = 'UNFINISHED'
+                    }
+
+                    if (contract.is_contract_ative) {
+                        ative_contracts++;
                     }
 
                     contract.invoices_status = invoices_status.descrip;
@@ -484,11 +489,11 @@ const updateProjectAfterContractUpdate = function(project_id, callback) {
 
                 });
 
-                project.contracts_status = finished_contracts_num +' / '+ contracts.length;
+                project.contracts_status = finished_contracts_num +' / '+ ative_contracts;
 
-                editProject({id: project_id}, project, function () {
+                editProject({id: project_id}, project, function (err) {
                     if (typeof callback === 'function') {
-                        callback();
+                        callback(err);
                     }
                 });
             }

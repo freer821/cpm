@@ -292,7 +292,10 @@ const editContract = function (req, res, next) {
             if(err){
                 res.send('update operation failed!!');
             } else {
-                db.updateProjectAfterContractUpdate(project_id, function () {
+                db.updateProjectAfterContractUpdate(project_id, function (err) {
+                    if (err) {
+                        logger.error('error to update project according the new contract', err.message);
+                    }
                     common.doJSONRespond(res,{'action':'reload','project_id':project_id},next);
                 });
             }
@@ -310,7 +313,10 @@ const editContract = function (req, res, next) {
             if (err) {
                 res.send('update operation failed!!');
             } else {
-                db.updateProjectAfterContractUpdate(project_id, function () {
+                db.updateProjectAfterContractUpdate(project_id, function (err) {
+                    if (err) {
+                        logger.error('error to update project according the new contract', err.message);
+                    }
                     common.doJSONRespond(res,{'action':'reload','project_id':project_id},next);
                 });
             }
@@ -328,7 +334,11 @@ const editContract = function (req, res, next) {
             if (err) {
                 res.send('update operation failed!!');
             } else {
-                db.updateProjectAfterContractUpdate(project_id, function () {
+                db.updateProjectAfterContractUpdate(project_id, function (err) {
+                    if (err) {
+                        logger.error('error to update project according the new contract', err.message);
+                    }
+
                     common.doJSONRespond(res,{'action':'reload','project_id':project_id},next);
                 });
             }
@@ -346,7 +356,12 @@ const editContract = function (req, res, next) {
             if (err) {
                 res.send('unlockAndlock operation failed!!');
             } else {
-                common.doJSONRespond(res,{'action':'reload','project_id':project_id},next);
+                db.updateProjectAfterContractUpdate(project_id, function (err) {
+                    if (err) {
+                        logger.error('error to update project according the new contract', err.message);
+                    }
+                    common.doJSONRespond(res,{'action':'reload','project_id':project_id},next);
+                });
             }
         });
     }
