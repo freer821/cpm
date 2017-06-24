@@ -105,7 +105,7 @@ function calTotalStatusOfPermissions(contract) {
                     return 'zu bestaetigen';
                 }
 
-                if (permission.type === 'VBA') {
+                if (permission.type !== 'VBA') {
                     isVBAExisted = true;
                 }
 
