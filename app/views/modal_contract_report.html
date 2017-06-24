@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content light">
             <div class="modal-header dker _600">
-                <h5 class="modal-title">Contract Print</h5>
+                <h5 class="modal-title">Kosten vs Leistung - Aufragsversion</h5>
                 <a class="pull-right text-muted text-lg p-a-sm m-r-sm" data-dismiss="modal">×</a>
             </div>
             <div class="modal-body">
@@ -14,7 +14,7 @@
                     }
                 },
                 legend: {
-                    data: ['检修一班', '检修二班','检修三班','检修四班','检修五班']
+                    data: ['Personal', 'Material', 'Sont.Gerate', 'Fremdleist', 'sonstige', 'total']
                 },
                 grid: {
                     left: '3%',
@@ -27,11 +27,11 @@
                 },
                 xAxis: {
                     type: 'category',
-                    data: ['2017/06','2017/07','2017/08','2017/09','2017/10','2017/11','2017/12']
+                    data: ['Kosten','Rechnungswert','Schatzwert']
                 },
                 series: [
                     {
-                        name: '检修一班',
+                        name: 'Personal',
                         type: 'bar',
                         stack: '总量',
                         label: {
@@ -40,10 +40,10 @@
                                 position: 'insideRight'
                             }
                         },
-                        data: [320, 302, 301, 334, 390, 330, 320]
+                        data: [50000, 0, 0]
                     },
                     {
-                        name: '检修二班',
+                        name: 'Material',
                         type: 'bar',
                         stack: '总量',
                         label: {
@@ -52,10 +52,10 @@
                                 position: 'insideRight'
                             }
                         },
-                        data: [120, 132, 101, 134, 90, 230, 210]
+                        data: [10000, 0, 0]
                     },
                     {
-                        name: '检修三班',
+                        name: 'Sont.Gerate',
                         type: 'bar',
                         stack: '总量',
                         label: {
@@ -64,10 +64,10 @@
                                 position: 'insideRight'
                             }
                         },
-                        data: [220, 182, 191, 234, 290, 330, 310]
+                        data: [20000, 0, 0]
                     },
                     {
-                        name: '检修四班',
+                        name: 'Fremdleist',
                         type: 'bar',
                         stack: '总量',
                         label: {
@@ -76,10 +76,10 @@
                                 position: 'insideRight'
                             }
                         },
-                        data: [150, 212, 201, 154, 190, 330, 410]
+                        data: [8000, 0, 0]
                     },
                     {
-                        name: '检修五班',
+                        name: 'sonstige',
                         type: 'bar',
                         stack: '总量',
                         label: {
@@ -88,8 +88,20 @@
                                 position: 'insideRight'
                             }
                         },
-                        data: [820, 832, 901, 934, 1290, 1330, 1320]
-                    }
+                        data: [12000, 0, 0]
+                    },
+                    {
+                        name: 'total',
+                        type: 'bar',
+                        stack: '总量',
+                        label: {
+                            normal: {
+                                show: true,
+                                position: 'insideRight'
+                            }
+                        },
+                        data: [0, 200000, 150000]
+                    }                                             
                 ]
               }" style="height:300px" >
               </div>
