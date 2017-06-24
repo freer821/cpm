@@ -43,9 +43,13 @@ function doAction(response) {
                 location.reload();
                 break;
             case 'reload':
-                hideContracts(response.project_id);
-                showContracts(response.project_id);
-                updateProject(response.project_id);
+                if (location.pathname.toString().includes('/contracts/load/')) {
+                    location.reload();
+                } else {
+                    hideContracts(response.project_id);
+                    showContracts(response.project_id);
+                    updateProject(response.project_id);
+                }
                 break;
             case 'add_con':
                 $('#contract-basic-modal').modal('show');
