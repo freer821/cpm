@@ -419,6 +419,21 @@ const loadContracts = function (req, res, next) {
             subtitle+='zum Verlaengen VBA';
             condition= {'permissions_status': 'bitte VBA verlaengen'};
             break;
+        case 'bauplan':
+            subtitle+='zum Bauplan';
+            break;
+        case 'geplant_4_bau':
+            subtitle+='geplant innerhalb 4 Wochen in Bau';
+            break;
+        case 'baustatus':
+            subtitle+='Baustatus aktualisieren';
+            break;
+        case 'ofw_bestimmen':
+            subtitle+='OFW Notwendigkeit bestimmen';
+            break;
+        case 'ofw_aktu':
+            subtitle+='OFW Fertigungsstatus aktu';
+            break;
         default:
             subtitle+='All of Them';
             break;
