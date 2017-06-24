@@ -442,7 +442,7 @@ function contractDetail(contract) {
         '<div class="row" style="padding-top:12px;padding-left:30px;"><a class="hint--left" data-hint="Ordner öffnen"><i class="fa fa-folder-open-o openfolde_userform" style="font-size:25px;"></i></a></div>'+
         '<div class="row" style="padding-top:10px;padding-left:30px;"><a class="hint--left" data-hint="Material"><i class="material-icons Material_userform" style="font-size:29px;">local_grocery_store</i></a></div>'+
         '<div class="row" style="padding-left:34px;padding-top:10px;"><a class="hint--left" data-hint="Aufmaß"><i class="fa fa-calculator Aufmass_userform" style="font-size:25px;"></i></a></div>'+
-        '<div class="row" style="padding-left:34px;padding-top:14px;"><a class="hint--left" data-hint="Report"><i class="fa fa-line-chart ContractReport_userform" style="font-size:25px;"></i></a></div>'+
+        '<div class="row" style="padding-left:34px;padding-top:14px;"><a class="hint--left" data-hint="Report" data-toggle="modal" data-target="#contract-report-modal" data-contract=\''+JSON.stringify(contract)+'\' data-backdrop="static"><i class="fa fa-line-chart ContractReport_userform" style="font-size:25px;"></i></a></div>'+
         '</div>'+
         '</div>';
 
