@@ -6,6 +6,14 @@
 (function ($) {
     "use strict";
 
+    $('form').on('keyup keypress', function(e) {
+        var keyCode = e.keyCode || e.which;
+        if (keyCode === 13) {
+            e.preventDefault();
+            return false;
+        }
+    });
+
 // Attach a submit handler to the form
     $("form").submit(function( event ) {
         // Stop form from submitting normally
