@@ -389,11 +389,28 @@ const delContract = function (req, res, next) {
 
 const loadContracts = function (req, res, next) {
 
-    db.getContracts({}, function (err, contracts) {
+    let condition = {};
+    let subtitle = 'Overview Contracts ';
+
+    switch (req.params.condition) {
+        case 'last_10_days':
+            subtitle+='in last 10 Days';
+            condition= {'created': {$gte: moment().subtract(10, 'days')}};
+            break;
+        case 'vba_verlaengen':
+            subtitle+='zum Verlaengen VBA';
+            condition= {'permissions_status': 'bitte VBA verlaengen'};
+            break;
+        default:
+            subtitle+='All of Them';
+            break;
+    }
+
+    db.getContracts(condition, function (err, contracts) {
         if (err) {
             logger.error('error to find contracts in db', err.message);
         } else {
-            res.render('contracts', {title:'Contracts Management', subtitle: 'Overview Contracts', user: req.user, contracts:contracts});
+            res.render('contracts', {title:'Contracts Management', subtitle: subtitle, user: req.user, contracts:contracts});
         }
     })
 };

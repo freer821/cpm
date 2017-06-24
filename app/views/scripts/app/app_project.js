@@ -459,10 +459,14 @@ function formatData(obj, key){
 function loadContractsTable(contrs) {
     var contracts = JSON.parse(contrs.replace(/&quot;/g,'"'));
     var table_html = '<table class="table"><tbody>';
-    contracts.forEach((contract) => {
-        table_html+=contractOverview(contract);
-        table_html+='<tr id="'+contract.id+'_details" style="display:none"><td colspan="10">'+contractDetail(contract)+'</td></tr>';
-    });
+    if (contracts.length > 0 ) {
+        contracts.forEach((contract) => {
+            table_html+=contractOverview(contract);
+            table_html+='<tr id="'+contract.id+'_details" style="display:none"><td colspan="10">'+contractDetail(contract)+'</td></tr>';
+        });
+    } else {
+        table_html+='<tr ><td colspan="10" style="background-color: rgba(0, 0, 0, 0.025)">no contract data</td></tr>';
+    }
     table_html +='</tbody></table>';
     $('#contracts-filter').append(table_html);
 }
