@@ -66,7 +66,9 @@ function updateContractBasic(request, callback) {
                 count = 0;
             }
 
-            contract.id = getContractIDPrifix(contract)+ count > 9 ? "" +count : "0" + count;;
+            let count_nr = count > 9 ? "" +count : "0" + count;
+
+            contract.id = getContractIDPrifix(contract)+ count_nr;
             contract.is_ofw_activ = false;
             contract.ofw= {
                 ofw_status: 'OFW nicht ben\u00f6tigt'
