@@ -4,7 +4,7 @@
 <div class="p-a white lt box-shadow">
 	<div class="row">
 		<div class="col-sm-6">
-			<h4 class="mb-0 _300">Welcome to Kuhlman</h4>
+			<h4 class="mb-0 _300">herzlich willkommen zu Kuhlmann 4.1</h4>
 		</div>
 	</div>
 </div>
@@ -18,8 +18,8 @@
 	            </span>
 	          </div>
 	          <div class="clear">
-	            <h4 class="m-0 text-lg _300"><a href>56 <span class="text-sm">Projects</span></a></h4>
-	            <small class="text-muted">38 mine.</small>
+	            <h4 class="m-0 text-lg _300"><a href>56 <span class="text-sm">Aufgaben</span></a></h4>
+	            <small class="text-muted">38 meine.</small>
 	          </div>
 	        </div>
 	    </div>
@@ -31,8 +31,8 @@
 	            </span>
 	          </div>
 	          <div class="clear">
-	            <h4 class="m-0 text-lg _300"><a href>{{items_num}} <span class="text-sm">todos</span></a></h4>
-	            <small class="text-muted">{{items_emergencies_num}} emergencies</small>
+	            <h4 class="m-0 text-lg _300"><a href>{{items_num}} <span class="text-sm">Todos</span></a></h4>
+	            <small class="text-muted">{{items_emergencies_num}} Sofort</small>
 	          </div>
 	        </div>
 	    </div>
@@ -41,8 +41,8 @@
 	    <div class="col-sm-12 col-md-6">
 	    	<div class="box">
 	    		<div class="box-header">
-	    			<h3>Unfinished Contract <span class="label warning">33</span></h3>
-	    			<small>Overview Contracts</small>
+	    			<h3>Aufgaben Erinnerung <span class="label warning">33</span></h3>
+	    			<small></small>
 	    		</div>
 				<div class="box-tool">
 					<ul class="nav">
@@ -105,24 +105,24 @@
 	    <div class="col-sm-12 col-md-6">
 	    	<div class="box">
 		      <div class="box-header">
-		        <h3>TODO Lists</h3>
-		        <small>blabla</small>
+		        <h3>Todo List</h3>
+		        <small></small>
 		      </div>
 		      <div class="box-tool">
 		        <ul class="nav">
 		          <li class="nav-item inline" style="padding-right: 5px">
       		        <select id="item_edit_status_value" class="input-sm form-control-sm inline v-middle">
-						<option value="Open">Open</option>
+						<option value="Open">offen</option>
 						<option value="Pause">Pause</option>
-						<option value="Closed">Closed</option>
+						<option value="Closed">erledigt</option>
 					</select>
 		          </li>
 		          <li class="nav-item inline" style="padding-right: 20px">
-		          	<button class="btn btn-sm white" onclick="onChangeItemsStatus()">Apply</button>
+		          	<button class="btn btn-sm white" onclick="onChangeItemsStatus()">Anwenden</button>
 	          	  </li>
 		          <li class="nav-item inline">
 		            <div class="input-group input-group-sm">
-				        <input type="text" id="filter" class="form-control" placeholder="Search">
+				        <input type="text" id="filter" class="form-control" placeholder="Suche">
 			        </div>
 		          </li>
 		          <li class="nav-item inline dropdown">
@@ -130,7 +130,7 @@
 		              <i class="material-icons md-18">&#xe5d4;</i>
 		            </a>
 		            <div class="dropdown-menu dropdown-menu-scale pull-right">
-		              <a href="#" data-toggle="modal" data-target="#add-item" class="dropdown-item">Add new Item</a>
+		              <a href="#" data-toggle="modal" data-target="#add-item" class="dropdown-item">neue Todo</a>
 		            </div>
 		          </li>
 		        </ul>
@@ -143,8 +143,8 @@
 						<i></i>
 						</label>
 					  </th>
-		              <th>Title</th>
-		              <th>Priority</th>
+		              <th>Titel</th>
+		              <th>Priorit&auml;t</th>
 		              <th>Status</th>
 		              <th style="width:20px;" data-sort-ignore="true"></th>
 		              <th style="width:20px;" data-sort-ignore="true"></th>
@@ -161,7 +161,12 @@
 						<i></i>
 						</label></td>
 			            <td>{{item.title}}</td>
-			            <td>{{item.priority}}</td>
+			            <td>
+							{% if item.priority === '01' %}Sofort{% endif %}
+							{% if item.priority === '02' %}sp&auml;ter{% endif %}
+							{% if item.priority === '03' %}Delegieren{% endif %}
+							{% if item.priority === '04' %}Ablage{% endif %}
+						</td>
 			            <td><a onclick="changeStatusNext(this)"  data-id="{{itemid}}" data-status="{{item.status}}"><i class="material-icons md-24">{% if item.status === 'Open' %}&#xe1af;{% endif %}{% if item.status === 'Pause' %}&#xe035;{% endif %}{% if item.status === 'Closed' %}&#xe86c;{% endif %}</i></a></td>
 		                <td>
 		                  <a href="#" data-toggle="modal" data-target="#edit-item" data-item="{{item|json}}"><i class="material-icons md-24">&#xe3c9;</i></a>
