@@ -2,11 +2,7 @@ default:
   server:
     port: 3000
   mongodb:
-<<<<<<< HEAD
-    connection: 'mongodb://datatalents.net:27017/cpm'
-=======
     connection: 'mongodb://192.168.99.100:27017/cpm'
->>>>>>> 3daaf087122c37751feeb84cc96bf88513523740
     collection_user: 'user'
     collection_department: 'department'
     collection_item: 'item'
