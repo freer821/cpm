@@ -347,6 +347,11 @@ $(document).ready(function(){
         if ($(this).attr("id") === 'plan_begin' || $(this).attr("id") === 'plan_end') {
             calStatusOfBuilding();
         }
+
+        if (isDateValid($("#messing_doc_delivery").val())) {
+            $("#building_status").val('04');
+            setBuildingPercent('04');
+        }
     });
 
 
