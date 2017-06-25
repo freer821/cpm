@@ -213,7 +213,7 @@ const editItem = function (condition, item) {
 
 const delItem = function (id, callback) {
     delByID('item', id, function(err){
-        allback(err);
+        callback(err);
     });
 };
 
