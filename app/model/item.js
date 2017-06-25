@@ -11,7 +11,7 @@ const itemSchema = new Schema({
         content: String,
         ts: Date
     }],
-    priority: {type: String, enum: ['Emergency', 'Urgent', 'Standard', 'Normal']},
+    priority: {type: String, enum: ['01', '02', '03', '04']},
     status: {type: String, enum: ['Open', 'Pause', 'Closed']},
     ts: Date
 },{ versionKey: false });
