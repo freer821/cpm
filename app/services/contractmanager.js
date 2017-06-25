@@ -115,6 +115,11 @@ function updateContractBuilding(request, callback) {
             invoice_status: '00'
         };
         db.checkAndauoUpdateContractFinancial(request.contract_id, invoice);
+    } else if (request.status === '04') {
+        let invoice = {
+            invoice_status: '01'
+        };
+        db.checkAndauoUpdateContractFinancial(request.contract_id, invoice);
     }
 }
 
@@ -307,7 +312,12 @@ const editContract = function (req, res, next) {
             if(err){
                 res.send('update operation failed!!');
             } else {
-                common.doJSONRespond(res,{'action':'reload','project_id':project_id},next);
+                db.updateProjectAfterContractUpdate(project_id, function (err) {
+                    if (err) {
+                        logger.error('error to update project according the new contract', err.message);
+                    }
+                    common.doJSONRespond(res,{'action':'reload','project_id':project_id},next);
+                });
             }
         });
     } else if(req.params.action === 'permission') {
