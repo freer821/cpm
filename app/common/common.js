@@ -141,12 +141,12 @@ const calInvoicesStatus = function(contract) {
     let current_paid_value = 0, sum_value = 0;
     let status = {
         is_finished: false,
-        descrip: 'no invoices'
+        descrip: ''
     };
 
-    if (invoices) {
+    if (invoices && invoices.length > 0) {
 
-        if (invoices.length > 0) {
+        if (invoices.length > 1) {
             for (var i = 0; i < invoices.length; i++) {
                 let invoice = invoices[i];
                 if (invoice.guts_datum) {
@@ -162,18 +162,37 @@ const calInvoicesStatus = function(contract) {
             if (sum_value > 0 && (current_paid_value === sum_value)) {
                 status.is_finished = true;
             }
-        }
-
-        if (invoices.length === 1) {
-            status.descrip = invoices[0].invoice_status;
-        } else {
             status.descrip =current_paid_value + ' / ' + sum_value;
+        } else {
+            status.descrip = getInvoiceStatus(invoices[0].invoice_status);
         }
     }
 
     return status;
 
 };
+
+function getInvoiceStatus(code) {
+
+    switch (code){
+        case '00':
+            return 'Warten auf Unterlagen';
+        case '01':
+            return 'bereit abzurechnen';
+        case '02':
+            return 'abgerechnet';
+        case '03':
+            return 'WaG, gesendet';
+        case '04':
+            return 'WaG, genehmigt';
+        case '05':
+            return 'Gutschrift vorhanden';
+        case '06':
+            return 'Ueberzubearbeiten';
+        default:
+            return '';
+    }
+}
 
 const filterContractsForDashboard = function (contracts) {
     let overview_status = {

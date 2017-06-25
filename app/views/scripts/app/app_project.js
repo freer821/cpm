@@ -378,7 +378,7 @@ function contractDetail(contract) {
         '</div>'+
         '<div class="row">'+
         '<div class="col-md-12">'+
-        '<input type="text" class="contractSchema.invoice.invoice_status" style="padding-top:0;margin-top:0px;font-size:14px;width:100%;" value="'+getInvoiceStatus(contract.invoice.length > 0?contract.invoice[0].invoice_status:'' ) +'" readonly>'+
+        '<input type="text" class="contractSchema.invoice.invoice_status" style="padding-top:0;margin-top:0px;font-size:14px;width:100%;" value="'+contract.invoices_status +'" readonly>'+
         '</div>'+
         '</div>'+
         '</div>'+
