@@ -404,11 +404,22 @@ const unlockAndlockContract = function (request, callback) {
 const delContract = function (req, res, next) {
     if(req.params.action === 'permission') {
         db.editContractRemoveFromArray({'id':req.params.id},{building_permission: {_id: new ObjectId(req.query.id)}}, function (err) {
-            common.doJSONRespond(res,{'action':'reload','project_id':req.body.project_id},next);         
+            db.updateProjectAfterContractUpdate(req.body.project_id, function (err) {
+                if (err) {
+                    logger.error('error to update project according the new contract', err.message);
+                }
+                common.doJSONRespond(res,{'action':'reload','project_id':req.body.project_id},next);
+            });
         })
     } else if(req.params.action === 'invoice') {
         db.editContractRemoveFromArray({'id':req.params.id},{invoice: {_id: new ObjectId(req.query.id)}}, function (err) {
-            common.doJSONRespond(res,{'action':'reload','project_id':req.body.project_id},next);
+            db.updateProjectAfterContractUpdate(req.body.project_id, function (err) {
+                if (err) {
+                    logger.error('error to update project according the new contract', err.message);
+                }
+                common.doJSONRespond(res,{'action':'reload','project_id':req.body.project_id},next);
+            });
+
         })
     } else {
         db.delContract(req.params.id, function(err){

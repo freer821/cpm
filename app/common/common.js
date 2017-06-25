@@ -127,7 +127,7 @@ function calTotalStatusOfPermissions(contract) {
             }
 
         } else {
-            return 'no permissions'
+            return '';
         }
 
     } else {
