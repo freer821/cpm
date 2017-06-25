@@ -1,103 +1,97 @@
 {% extends 'layout.html' %}
 {% block content %}
 <!-- ############ PAGE START-->
-<div class="padding">
-  <div class="box">
-    <div class="box-header">
-      <div class="row">
-        <div class="col-lg-4 col-md-5 col-sm-6">
-          <div class="row">
-            <div class="col-lg-5 col-md-6 col-sm-6" style="min-width: 160px">
-              <h3 style="margin-top: 2px">{{subtitle}}</h3>
-            </div>
-            <div class="col-lg-7 col-md-6 col-sm-6" style="min-width: 140px">
-              <a href="#" data-toggle="modal" data-target="#project-modal" data-backdrop="static">
-                <i class="fa fa-fw fa-plus text-muted"></i>
-                <span>Neue Baustelle</span>
-              </a>
-            </div>
+<div class="box">
+  <div class="box-header">
+    <div class="row">
+      <div class="col-lg-4 col-md-5 col-sm-6">
+        <div class="row">
+          <div class="col-lg-5 col-md-6 col-sm-6" style="min-width: 160px">
+            <h3 style="margin-top: 2px">{{subtitle}}</h3>
+          </div>
+          <div class="col-lg-7 col-md-6 col-sm-6" style="min-width: 140px">
+            <a href="#" data-toggle="modal" data-target="#project-modal" data-backdrop="static">
+              <i class="fa fa-fw fa-plus text-muted"></i>
+              <span>Neue Baustelle</span>
+            </a>
           </div>
         </div>
       </div>
     </div>
-    <div class="box-body">
-      <div style="padding:10px">
-        <table id="projects-overview" class="table">
-          <thead>
-          <tr>
-            <th style="width:52px;"> </th>
-            <th style="width:130px;" data-toggle="true">Project Nr.</th>
-            <th style="width:200px;">Community </th>
-            <th style="width:200px;">Street </th>
-            <th style="width:100px;">HsNr. </th>
-            <th style="width:150px;">finisched /All </th>
-            <th style="width:200px;">Project Type </th>
-            <th style="width:40px;"> </th>
-            <th style="width:50px;"> </th>
-          </tr>
-          </thead>
-        </table>
-        <div style="overflow-x:hidden;overflow-y:auto;height:500px">
-          <table class="table">
-            <tbody>
-            {% for project in projects %}
-            <tr id="{{project.id}}">
-              <td class="details-control" style="height:43px;width:52px;">
-                <i class="glyphicon glyphicon-expand" style="font-size:19px;color:rgb(89,89,89);" onclick="showContracts('{{project.id}}')"></i>
-                <i class="glyphicon glyphicon-collapse-down" style="font-size:19px;color:rgb(89,89,89);" onclick="hideContracts('{{project.id}}')"></i>
-              </td>
-              <td class="projectSchema.id" style="height:43px;width:130px;">{{project.id}} </td>
-              <td class="projectSchema.community" style="width:200px;height:43px;padding-left:1.8%">{{project.community}} </td>
-              <td class="projectSchema.street" style="width:230px;height:43px;padding-left:2.3%">{{project.street}} </td>
-              <td class="projectSchema.housenr" style="width:60px;height:43px;padding-left:0.5%;">{{project.housenr}} </td>
-              <td class="finished_overview" style="width:130px;padding-left:2%;padding-left:4%;">{{project.contracts_status}}</td>
-              <td class="contracts_types" style="width:200px;max-height:43px;background-position:top;background-size:contain;background-repeat:no-repeat;padding-left:4%">
-                <div style="max-width:185px;min-width:185px;">
-                  {% if project.contract_types.electric %}
-                  <a class="hint--bottom-left" data-hint="Elt"><i class="fa fa-square projectSchema.contract_types.electric_true" style="width:21px;height:21px;font-size:21px;margin-right:6px;color:#b53f45;"></i></a>
-                  {% else %}
-                  <a class="hint--bottom-left" data-hint="Elt"><i class="fa fa-square-o projectSchema.contract_types.electric_false" style="width:21px;height:21px;font-size:21px;margin-right:6px;color:#b53f45;"></i></a>
-                  {% endif %}
-                  {% if project.contract_types.gas %}
-                  <a class="hint--bottom-left" data-hint="Gas"><i class="fa fa-square projectSchema.contract_types.gas_true" style="width:21px;height:21px;font-size:21px;margin-right:4px;color:#ffd000;"></i></a>
-                  {% else %}
-                  <a class="hint--bottom-left" data-hint="Gas"><i class="fa fa-square-o projectSchema.contract_types.gas_false" style="width:21px;height:21px;font-size:21px;margin-right:4px;color:#ffd000;"></i></a>
-                  {% endif %}
-                  {% if project.contract_types.water %}
-                  <a class="hint--bottom-left" data-hint="Wasser"><i class="fa fa-square projectSchema.contract_types.water_true" style="width:21px;height:21px;font-size:21px;margin-right:6px;color:#3e6b7e;"></i></a>
-                  {% else %}
-                  <a class="hint--bottom-left" data-hint="Wasser"><i class="fa fa-square-o projectSchema.contract_types.water_false" style="width:21px;height:21px;font-size:21px;margin-right:6px;color:#3e6b7e;"></i></a>
-                  {% endif %}
-                  {% if project.contract_types.light %}
-                  <a class="hint--bottom-left" data-hint="Beleuchtung"><i class="fa fa-square projectSchema.contract_types.light_true" style="width:21px;height:21px;font-size:21px;margin-right:6px;color:#91c0ab;"></i></a>
-                  {% else %}
-                  <a class="hint--bottom-left" data-hint="Beleuchtung"><i class="fa fa-square-o projectSchema.contract_types.light_false" style="width:21px;height:21px;font-size:21px;margin-right:6px;color:#91c0ab;"></i></a>
-                  {% endif %}
-                  {% if project.contract_types.telecom %}
-                  <a class="hint--bottom-left" data-hint="Telekom"><i class="fa fa-square projectSchema.contract_types.telecom_true" style="width:21px;height:21px;font-size:21px;margin-right:4px;color:rgb(248,126,123);"></i></a>
-                  {% else %}
-                  <a class="hint--bottom-left" data-hint="Telekom"><i class="fa fa-square-o projectSchema.contract_types.telecom_false" style="width:21px;height:21px;font-size:21px;margin-right:4px;color:rgb(248,126,123);"></i></a>
-                  {% endif %}
-                  {% if project.contract_types.others %}
-                  <a class="hint--bottom-left" data-hint="Sonstige"><i class="fa fa-square projectSchema.contract_types.others_true" style="width:21px;height:21px;font-size:21px;margin-right:0px;"></i></a>
-                  {% else %}
-                  <a class="hint--bottom-left" data-hint="Sonstige"><i class="fa fa-square-o projectSchema.contract_types.others_false" style="width:21px;height:21px;font-size:21px;margin-right:0px;"></i></a>
-                  {% endif %}
-                </div>
-              </td>
-              <td class="edit_project" style="width:60px;padding-left:3.5%;">
-                <a class="hint--bottom-left hint--medium" data-hint="Info. der Baustelle bearbeiten" href="#" data-toggle="modal" data-target="#project-modal" data-project="{{project|json}}" data-backdrop="static"><i class="fa fa-pencil-square-o" style="font-size:22px;margin-left:4px;color:rgb(89,89,89);min-width:22px;"></i></a>
-              </td>
-              <td class="add_new_contract" style="width:50px;padding-right:40px;">
-                <a class="hint--bottom-left hint--medium" aria-label="erstellen einen
+  </div>
+  <div class="box-body">
+    <div style="padding:10px">
+      <table id="projects-overview" class="table">
+        <thead>
+        <tr>
+          <th style="width:52px;"> </th>
+          <th style="width:130px;" data-toggle="true">Project Nr.</th>
+          <th style="width:200px;">Community </th>
+          <th style="width:230px;">Street </th>
+          <th style="width:60px;">HsNr. </th>
+          <th style="width:130px;">finisched /All </th>
+          <th style="width:200px;">Project Type </th>
+          <th style="width:40px;"> </th>
+          <th style="width:50px;"> </th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for project in projects %}
+        <tr id="{{project.id}}">
+          <td class="details-control" style="height:43px;width:52px;">
+            <i class="glyphicon glyphicon-expand" style="font-size:19px;color:rgb(89,89,89);" onclick="showContracts('{{project.id}}')"></i>
+            <i class="glyphicon glyphicon-collapse-down" style="font-size:19px;color:rgb(89,89,89);" onclick="hideContracts('{{project.id}}')"></i>
+          </td>
+          <td class="projectSchema.id" style="height:43px;width:130px;">{{project.id}} </td>
+          <td class="projectSchema.community" style="width:200px;height:43px;">{{project.community}} </td>
+          <td class="projectSchema.street" style="width:230px;height:43px;">{{project.street}} </td>
+          <td class="projectSchema.housenr" style="width:60px;height:43px;">{{project.housenr}} </td>
+          <td class="finished_overview" style="width:130px;">{{project.contracts_status}}</td>
+          <td class="contracts_types" style="width:200px;max-height:43px;background-position:top;background-size:contain;background-repeat:no-repeat;">
+            <div style="max-width:185px;min-width:185px;">
+              {% if project.contract_types.electric %}
+              <a class="hint--bottom-left" data-hint="Elt"><i class="fa fa-square projectSchema.contract_types.electric_true" style="width:21px;height:21px;font-size:21px;margin-right:6px;color:#b53f45;"></i></a>
+              {% else %}
+              <a class="hint--bottom-left" data-hint="Elt"><i class="fa fa-square-o projectSchema.contract_types.electric_false" style="width:21px;height:21px;font-size:21px;margin-right:6px;color:#b53f45;"></i></a>
+              {% endif %}
+              {% if project.contract_types.gas %}
+              <a class="hint--bottom-left" data-hint="Gas"><i class="fa fa-square projectSchema.contract_types.gas_true" style="width:21px;height:21px;font-size:21px;margin-right:4px;color:#ffd000;"></i></a>
+              {% else %}
+              <a class="hint--bottom-left" data-hint="Gas"><i class="fa fa-square-o projectSchema.contract_types.gas_false" style="width:21px;height:21px;font-size:21px;margin-right:4px;color:#ffd000;"></i></a>
+              {% endif %}
+              {% if project.contract_types.water %}
+              <a class="hint--bottom-left" data-hint="Wasser"><i class="fa fa-square projectSchema.contract_types.water_true" style="width:21px;height:21px;font-size:21px;margin-right:6px;color:#3e6b7e;"></i></a>
+              {% else %}
+              <a class="hint--bottom-left" data-hint="Wasser"><i class="fa fa-square-o projectSchema.contract_types.water_false" style="width:21px;height:21px;font-size:21px;margin-right:6px;color:#3e6b7e;"></i></a>
+              {% endif %}
+              {% if project.contract_types.light %}
+              <a class="hint--bottom-left" data-hint="Beleuchtung"><i class="fa fa-square projectSchema.contract_types.light_true" style="width:21px;height:21px;font-size:21px;margin-right:6px;color:#91c0ab;"></i></a>
+              {% else %}
+              <a class="hint--bottom-left" data-hint="Beleuchtung"><i class="fa fa-square-o projectSchema.contract_types.light_false" style="width:21px;height:21px;font-size:21px;margin-right:6px;color:#91c0ab;"></i></a>
+              {% endif %}
+              {% if project.contract_types.telecom %}
+              <a class="hint--bottom-left" data-hint="Telekom"><i class="fa fa-square projectSchema.contract_types.telecom_true" style="width:21px;height:21px;font-size:21px;margin-right:4px;color:rgb(248,126,123);"></i></a>
+              {% else %}
+              <a class="hint--bottom-left" data-hint="Telekom"><i class="fa fa-square-o projectSchema.contract_types.telecom_false" style="width:21px;height:21px;font-size:21px;margin-right:4px;color:rgb(248,126,123);"></i></a>
+              {% endif %}
+              {% if project.contract_types.others %}
+              <a class="hint--bottom-left" data-hint="Sonstige"><i class="fa fa-square projectSchema.contract_types.others_true" style="width:21px;height:21px;font-size:21px;margin-right:0px;"></i></a>
+              {% else %}
+              <a class="hint--bottom-left" data-hint="Sonstige"><i class="fa fa-square-o projectSchema.contract_types.others_false" style="width:21px;height:21px;font-size:21px;margin-right:0px;"></i></a>
+              {% endif %}
+            </div>
+          </td>
+          <td class="edit_project" style="width:60px;">
+            <a class="hint--bottom-left hint--medium" data-hint="Info. der Baustelle bearbeiten" href="#" data-toggle="modal" data-target="#project-modal" data-project="{{project|json}}" data-backdrop="static"><i class="fa fa-pencil-square-o" style="font-size:22px;margin-left:4px;color:rgb(89,89,89);min-width:22px;"></i></a>
+          </td>
+          <td class="add_new_contract" style="width:50px;padding-right:40px;">
+            <a class="hint--bottom-left hint--medium" aria-label="erstellen einen
                  neue Auftrag" href="#" data-toggle="modal" data-target="#contract-basic-modal" data-project="{{project|json}}" data-backdrop="static"><i class="fa fa-plus-square" style="font-size:21px;margin-left:6px;color:rgb(89,89,89);"></i></a>
-              </td>
-            </tr>
-            {% endfor %}
-            </tbody>
-          </table>
-        </div>
-      </div>
+          </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
