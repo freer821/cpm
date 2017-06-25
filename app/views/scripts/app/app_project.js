@@ -39,7 +39,6 @@ $(document).ready(function(){
         }
     });
 
-
     //init echart
     var myChart = echarts.init(document.getElementById('report'));
 
