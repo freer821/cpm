@@ -8,9 +8,6 @@ $(document).ready(function(){
         $(this).find('form')[0].reset();
         var project = $(e.relatedTarget).data('project');
         if (project) {
-            //set title
-            $('#project-modal-title').text('Update Project');
-
             //set form action
             $('#project-modal-form').attr('action', '/projects/update/' + project.id);
 
@@ -30,9 +27,6 @@ $(document).ready(function(){
                 $("#is_linesplan_files_exist").prop( "checked", false );
             }
         } else {
-            //set title
-            $('#project-modal-title').text('Add Project');
-
             //set form action
             $('#project-modal-form').attr('action', '/projects/add');
 
