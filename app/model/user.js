@@ -30,7 +30,16 @@ const userSchema = new Schema({
             status: {type: String, enum: ['open', 'pause', 'closed']},
         }
     ],
-    cost_code:[String]
+    cost_code:[String],
+    ui_settings:{
+        in_letzten_10: Boolean,
+        zum_bauplan: Boolean,
+        geplant: Boolean,
+        baust: Boolean,
+        ofw_n: Boolean,
+        ofw_f: Boolean,
+        vba_zu: Boolean,
+    }
 },{ versionKey: false });
 
 module.exports = userSchema;

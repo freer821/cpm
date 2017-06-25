@@ -1,12 +1,66 @@
 <div id="list-setting" class="modal" data-backdrop="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <form id="form" action="/users/task-list-setting" method="post" >
+            <form id="form" action="/user/settings" method="post" >
                 <div class="modal-header">
                     <h5 class="modal-title">Setting</h5>
                 </div>
                 <div class="modal-body">
-                    TODO
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <p>
+                              <label class="md-check">
+                                in letzten 10 Tage eingekomenen Aufträge
+                                <input type="checkbox" name="in_letzten_10" {% if ui_settings.in_letzten_10 %} checked {% endif %}>
+                                <i class="indigo"></i>
+                              </label>
+                            </p>
+                            <p>
+                              <label class="md-check">
+                                zum Bauplan
+                                <input type="checkbox" name="zum_bauplan" {% if ui_settings.zum_bauplan %} checked {% endif %}>
+                                <i class="indigo"></i>
+                              </label>
+                            </p>
+                            <p>
+                              <label class="md-check">
+                                geplant innerhalb 4 Wochen in Bau
+                                <input type="checkbox" name="geplant" {% if ui_settings.geplant %} checked {% endif %}>
+                                <i class="indigo"></i>
+                              </label>
+                            </p>
+                            <p>
+                              <label class="md-check">
+                               Baustatus aktualisieren
+                                <input type="checkbox" name="baust" {% if ui_settings.baust %} checked {% endif %}>
+                                <i class="indigo"></i>
+                              </label>
+                            </p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p>
+                              <label class="md-check">
+                                OFW Notwendigkeit bestimmen
+                                <input type="checkbox" name="ofw_n" {% if ui_settings.ofw_n %} checked {% endif %}>
+                                <i class="indigo"></i>
+                              </label>
+                            </p>
+                            <p>
+                              <label class="md-check">
+                                OFW Fertigungsstatus aktu
+                                <input type="checkbox" name="ofw_f" {% if ui_settings.ofw_f %} checked {% endif %}>
+                                <i class="indigo"></i>
+                              </label>
+                            </p>
+                            <p>
+                              <label class="md-check">
+                                VBA zu verlängen
+                                <input type="checkbox" name="vba_zu" {% if ui_settings.vba_zu %} checked {% endif %}>
+                                <i class="indigo"></i>
+                              </label>
+                            </p>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn dark-white p-x-md" data-dismiss="modal">Cancel</button>

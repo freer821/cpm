@@ -140,6 +140,7 @@ function initRoutes() {
 
     router.get('/users/edit',usermanager.editUser);
     router.post('/users/edit',usermanager.editUser);
+    router.post('/user/settings',usermanager.editUserSettings);
 
     router.post('/items/add',itemmanager.addItem);
     router.post('/items/edit',itemmanager.editItem);

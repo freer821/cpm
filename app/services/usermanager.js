@@ -28,6 +28,16 @@ const adduser = function (req, res, next) {
             } else if (user) {
                 req.flash('message', 'email is aready used, pls try other email!');
             } else {
+                let ui_settings = {
+                   in_letzten_10 : true,
+                   zum_bauplan : true, 
+                   geplant : true, 
+                   baust : true, 
+                   ofw_n : true, 
+                   ofw_f : true, 
+                   vba_zu : true, 
+                };
+                new_user.ui_settings = ui_settings;
                 saveUser(new_user);
             }
             res.redirect('/users');
@@ -76,6 +86,21 @@ const editUser = function(req, res, next) {
         saveUser(user);
         res.redirect('/users');
     }
+};
+
+const editUserSettings= function(req, res, next) {
+    let ui_settings = req.body;
+    let user = {
+        email : req.user.email,
+        ui_settings : ui_settings
+    }
+    db.saveUser(user, function (err, saved_user) {
+        if (err) {
+            res.render('404');
+        } else {
+            res.redirect('/dashboard');
+        }
+    });    
 };
 
 const getCurrentUser = function(req, res, next) {
@@ -137,6 +162,7 @@ const getDashInfo = function (req, res, next) {
         if(err) {
             logger.error('error to find user in db', err.message);
         } else {
+            let ui_settings = user.ui_settings;
             db.getItems({user_email:req.user.email}, function (err, items) {
                 if(err) {
                     logger.error('error to find user in db', err.message);
@@ -150,7 +176,7 @@ const getDashInfo = function (req, res, next) {
                             }
                         });
                     }
-                    res.render('dashboard',{title:'Main', user:common.getSessionUser(user) ,items_num:items.length, items_emergencies_num:items_emergencies_num, items: items});
+                    res.render('dashboard',{title:'Main', user:common.getSessionUser(user) ,items_num:items.length, items_emergencies_num:items_emergencies_num, items: items, ui_settings:ui_settings});
                 }
             });            
         }
@@ -176,12 +202,13 @@ function saveUser(user, res) {
 }
 
 module.exports = {
-    adduser:adduser,
-    getAllUser:getAllUser,
-    delUser:delUser,
-    editUser:editUser,
+    adduser: adduser,
+    getAllUser: getAllUser,
+    delUser: delUser,
+    editUser: editUser,
     getCurrentUser: getCurrentUser,
     updateCurrentUserProfile: updateCurrentUserProfile,
-    updateCurrentUserPassw:updateCurrentUserPassw,
-    getDashInfo: getDashInfo
+    updateCurrentUserPassw: updateCurrentUserPassw,
+    getDashInfo: getDashInfo,
+    editUserSettings: editUserSettings
 };
