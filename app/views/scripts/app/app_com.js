@@ -318,7 +318,6 @@ function calStatusOfOFW() {
     }
     else {
         if ($('#is_acceptance_activ').is(':checked')) {
-            $('#add_acceptance').show();
             switch (calStatusOfTime($("#ofw_applied").val(), $("#ofw_granted").val())) {
                 case -1:
                     ofw_var2 = 'Abn. Noetig (zu beantragen)';

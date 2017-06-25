@@ -331,6 +331,11 @@ $(document).ready(function(){
         if ($("#is_ofw_activ").is(':checked')){
             $("#ofw_activ").show();
             $("#ofw_not_activ").hide();
+            if ($('#is_acceptance_activ').is(':checked')) {
+                $('#add_acceptance').show();
+            } else {
+                $('#add_acceptance').hide();
+            }
         } else {
             $("#ofw_activ").hide();
             $("#ofw_not_activ").show();
@@ -424,6 +429,7 @@ function editPermission(element){
         $('#permission_id').val('');
     }
     $('#change_permission').val('on');
+    $('#permission-title').html('Informationen der Genehmigung');
 
     $('#building_permission_form').show();
     $('#building_permission_activ').hide();

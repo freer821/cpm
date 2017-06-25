@@ -385,7 +385,7 @@ function contractDetail(contract) {
         '</div>'+
         '<div class="row">'+
         '<div class="col-md-12" style="margin-top:15px">'+
-        '<label style="margin-left:10px;">Comment</label>'+
+        '<label style="margin-left:10px;">Kommentar des Auftrags </label>'+
         '<textarea style="margin-left:10px;width:98.4%" class="contractSchema.comment" style="width:100%;">'+contract.comment+'</textarea>'+
         '</div>'+
         '</div>'+

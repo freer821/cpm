@@ -3,7 +3,7 @@
         <div class="modal-content light">
             <form action="/contracts/edit/permission" method="post" >
                 <div class="modal-header dker _600">
-                    <h5 class="modal-title">Information der Genehmigung</h5>
+                    <h5 id="permission-title" class="modal-title">Genehmigungen f&uuml;r die Baustelle</h5>
                     <label class="ui-switch primary m-t-xs m-r">
                         <input type="checkbox" name="is_building_permission_activ" id="is_building_permission_activ">
                         <i></i>
@@ -11,19 +11,19 @@
                 </div>
                 <div class="modal-body">
                     <div id="building_permission_not_activ" class="form-group">
-                        <label>No Need Building Permission</label>
+                        <label>Diese Baustelle braucht keine</label>
                     </div>
                     <div id="building_permission_activ">
                         <button id="add-permission" type="button" onclick="editPermission()" class="btn white">
-                            <i class="fa fa-plus"></i> Add new Permission
+                            <i class="fa fa-plus"></i> neue Genehmigung
                         </button>
                         <table id="permissions" class="table m-b-none b-t" ui-jp="footable" data-filter="#filter" data-page-size="5">
                             <thead>
                             <tr>
-                                <th>Type</th>
-                                <th>Begin</th>
-                                <th>End</th>
-                                <th>Cost</th>
+                                <th>Typ</th>
+                                <th>Beginn</th>
+                                <th>Ende</th>
+                                <th>Kosten</th>
                                 <th>Status</th>
                                 <th></th>
                                 <th></th>
@@ -44,7 +44,7 @@
                     <input type="hidden" name="cost_code" id="permission_cost_code">
                     <input type="hidden" name="change_permission" id="change_permission">
                     <button type="button" class="btn dark-white m-t" data-dismiss="modal">Abbrechen</button>
-                    <button type="submit" class="btn btn-info m-t">Weiter</button>
+                    <button type="submit" class="btn btn-info m-t">Speichern</button>
                 </div>
             </form>
         </div>

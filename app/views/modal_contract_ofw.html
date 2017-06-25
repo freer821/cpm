@@ -3,7 +3,7 @@
         <div class="modal-content light">
             <form role="form" action="/contracts/edit/ofw" method="post">
                 <div class="modal-header dker _600">
-                    <h5 class="modal-title">Update OFW</h5>
+                    <h5 class="modal-title">Oberfl&auml;cher Wiederherstellung</h5>
                     <label class="ui-switch primary m-t-xs m-r">
                         <input type="checkbox" name="is_ofw_activ" id="is_ofw_activ">
                         <i></i>
@@ -12,63 +12,75 @@
                 <div id="ofw_not_activ">
                     <div class="modal-body">
                         <div class="form-group">
-                            <label>No Need OFW</label>
+                            <label>Es gibt keine OFW</label>
                         </div>
                     </div>
                 </div>
                 <div id="ofw_activ">
                     <div class="modal-body">
                         <div class="row stw">
-                            <label class="col-sm-2 form-control-label">Worker Name</label>
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control" name="worker_name" id="ofw_worker_name">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Kolonne der OFW</label>
+                                    <input type="text" class="form-control" name="worker_name" id="ofw_worker_name">
+                                </div>
                             </div>
-                            <label class="col-sm-2 form-control-label">Permission Number</label>
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control" id="ofw_permission_nr" name="permission_nr">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">MeldungsNr. der OFW</label>
+                                    <input type="text" class="form-control" id="ofw_permission_nr" name="permission_nr">
+                                </div>
                             </div>
                         </div>
 
                         <div class="row">
-                            <label class="col-sm-2 form-control-label">Delivery at</label>
-                            <div class='input-group date col-sm-4' ui-jp="datetimepicker" ui-options="{
-                                    format: 'DD-MM-YYYY',
-                                    icons: {
-                                      time: 'fa fa-clock-o',
-                                      date: 'fa fa-calendar',
-                                      up: 'fa fa-chevron-up',
-                                      down: 'fa fa-chevron-down',
-                                      previous: 'fa fa-chevron-left',
-                                      next: 'fa fa-chevron-right',
-                                      today: 'fa fa-screenshot',
-                                      clear: 'fa fa-trash',
-                                      close: 'fa fa-remove'
-                                    }
-                                  }">
-                                <input type='text' class="form-control" id="ofw_delivery" name="delivery">
-                                <span class="input-group-addon">
-                                        <span class="fa fa-calendar"></span>
-                                    </span>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Datum des Weiterleiten</label>
+                                    <div class='input-group date' ui-jp="datetimepicker" ui-options="{
+                                        format: 'DD-MM-YYYY',
+                                        icons: {
+                                          time: 'fa fa-clock-o',
+                                          date: 'fa fa-calendar',
+                                          up: 'fa fa-chevron-up',
+                                          down: 'fa fa-chevron-down',
+                                          previous: 'fa fa-chevron-left',
+                                          next: 'fa fa-chevron-right',
+                                          today: 'fa fa-screenshot',
+                                          clear: 'fa fa-trash',
+                                          close: 'fa fa-remove'
+                                        }
+                                      }">
+                                        <input type='text' class="form-control" id="ofw_delivery" name="delivery">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-calendar"></span>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
-                            <label class="col-sm-2 form-control-label">Finished at</label>
-                            <div class='input-group date col-sm-4' ui-jp="datetimepicker" ui-options="{
-                            format: 'DD-MM-YYYY',
-                            icons: {
-                              time: 'fa fa-clock-o',
-                              date: 'fa fa-calendar',
-                              up: 'fa fa-chevron-up',
-                              down: 'fa fa-chevron-down',
-                              previous: 'fa fa-chevron-left',
-                              next: 'fa fa-chevron-right',
-                              today: 'fa fa-screenshot',
-                              clear: 'fa fa-trash',
-                              close: 'fa fa-remove'
-                            }
-                          }">
-                                <input type='text' class="form-control" id="ofw_completion_at" name="completion_at">
-                                <span class="input-group-addon">
-                                        <span class="fa fa-calendar"></span>
-                                     </span>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">fertig am</label>
+                                    <div class='input-group date' ui-jp="datetimepicker" ui-options="{
+                                            format: 'DD-MM-YYYY',
+                                            icons: {
+                                              time: 'fa fa-clock-o',
+                                              date: 'fa fa-calendar',
+                                              up: 'fa fa-chevron-up',
+                                              down: 'fa fa-chevron-down',
+                                              previous: 'fa fa-chevron-left',
+                                              next: 'fa fa-chevron-right',
+                                              today: 'fa fa-screenshot',
+                                              clear: 'fa fa-trash',
+                                              close: 'fa fa-remove'
+                                            }
+                                          }">
+                                        <input type='text' class="form-control" id="ofw_completion_at" name="completion_at">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-calendar"></span>
+                                         </span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -111,7 +123,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Ueberdicken</label>
+                            <label class="col-sm-2 form-control-label">&Uuml;berdicken</label>
                             <div class="col-md-2">
                                 <input type='number' class="form-control" name="ueberdicken" id="ofw_ueberdicken" >
                             </div>
@@ -119,8 +131,8 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Clean</label>
-                            <div class="col-sm-10">
+                            <label class="col-sm-3 form-control-label">ger&auml;mt</label>
+                            <div class="col-sm-9">
                                 <label class="ui-switch primary m-t-xs m-r">
                                     <input type="checkbox" name="clean" id="clean">
                                     <i></i>
@@ -129,17 +141,19 @@
                         </div>
 
                         <div class="form-group row notstw">
-                            <label class="col-sm-2 form-control-label">acceptance</label>
-                            <div class="col-sm-10">
+                            <label class="col-sm-3 form-control-label">Abname notwendig</label>
+                            <div class="col-sm-9">
                                 <label class="ui-switch primary m-t-xs m-r">
                                     <input type="checkbox" id="is_acceptance_activ" name="is_acceptance_activ" >
                                     <i></i>
                                 </label>
                             </div>
                         </div>
-                        <div id="add_acceptance" class="form-group row notstw">
-                            <label class="col-sm-2 form-control-label">Applied</label>
-                            <div class='input-group date col-sm-4' ui-jp="datetimepicker" ui-options="{
+                        <div id="add_acceptance" class="row notstw">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Abnahme gesendet am</label>
+                                    <div class='input-group date' ui-jp="datetimepicker" ui-options="{
                                     format: 'DD-MM-YYYY',
                                     icons: {
                                       time: 'fa fa-clock-o',
@@ -153,13 +167,17 @@
                                       close: 'fa fa-remove'
                                     }
                                   }">
-                                <input type='text' class="form-control" id="ofw_applied" name="applied">
-                                <span class="input-group-addon">
+                                        <input type='text' class="form-control" id="ofw_applied" name="applied">
+                                        <span class="input-group-addon">
                                         <span class="fa fa-calendar"></span>
                                     </span>
+                                    </div>
+                                </div>
                             </div>
-                            <label class="col-sm-2 form-control-label">Granted</label>
-                            <div class='input-group date col-sm-4' ui-jp="datetimepicker" ui-options="{
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Abnahme bekommen am</label>
+                                    <div class='input-group date' ui-jp="datetimepicker" ui-options="{
                                     format: 'DD-MM-YYYY',
                                     icons: {
                                       time: 'fa fa-clock-o',
@@ -173,10 +191,12 @@
                                       close: 'fa fa-remove'
                                     }
                                   }">
-                                <input type='text' class="form-control" id="ofw_granted" name="granted">
-                                <span class="input-group-addon">
+                                        <input type='text' class="form-control" id="ofw_granted" name="granted">
+                                        <span class="input-group-addon">
                                         <span class="fa fa-calendar"></span>
                                     </span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -194,7 +214,7 @@
                     <input type="hidden" name="project_id" id="ofw_project_id">
                     <input type="hidden" name="cost_code" id="ofw_cost_code">
                     <button type="button" class="btn dark-white m-t" data-dismiss="modal">Abbrechen</button>
-                    <button type="submit" class="btn btn-info m-t">Weiter</button>
+                    <button type="submit" class="btn btn-info m-t">Speichern</button>
                 </div>
             </form>
         </div>

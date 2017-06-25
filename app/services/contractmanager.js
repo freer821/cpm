@@ -11,7 +11,7 @@ var ObjectId = require('mongoose').Types.ObjectId;
 const uuidV4 = require('uuid/v4');
 
 function getContractIDPrifix(contract) {
-    return moment().format('YY')+'-'+contract.cost_code.substring(contract.cost_code.length-2)+'-'+contract.project_id+'-';
+    return contract.project_id+'-'+moment().format('YY')+'-'+contract.cost_code.substring(contract.cost_code.length-2)+'-';
 }
 
 function updateContractBasic(request, callback) {
@@ -66,7 +66,7 @@ function updateContractBasic(request, callback) {
                 count = 0;
             }
 
-            contract.id = getContractIDPrifix(contract)+(count+1).toString();
+            contract.id = getContractIDPrifix(contract)+ count > 9 ? "" +count : "0" + count;;
             contract.is_ofw_activ = false;
             contract.ofw= {
                 ofw_status: 'OFW nicht ben\u00f6tigt'

@@ -14,7 +14,7 @@ const getAllProjects = function(req, res, next) {
         if(err) {
             logger.error('error to find deps in db', err.message);
         } else {
-            res.render('project', {title:'Project Management', subtitle: 'Overview Projects', user: req.user, projects:pros});
+            res.render('project', {title:'Project Management', user: req.user, projects:pros});
         }
     });
 };
