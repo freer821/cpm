@@ -412,7 +412,7 @@ const loadContracts = function (req, res, next) {
 
     switch (req.params.condition) {
         case 'last_10_days':
-            subtitle+='in last 10 Days';
+            subtitle+='in letzten 10 Tage eingekomenen Auftr\u00e4ge';
             condition= {'created': {$gte: moment().subtract(10, 'days')}};
             break;
         case 'vba_verlaengen':
