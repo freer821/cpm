@@ -1,0 +1,92 @@
+{% extends 'layout.html' %}
+{% block content %}
+<!-- ############ PAGE START-->
+<div class="box">
+    <div class="box-header">
+        <div class="row">
+            <div class="col-lg-4 col-md-5 col-sm-6">
+                <div class="row">
+                    <div class="col-lg-5 col-md-6 col-sm-6" style="min-width: 800px">
+                        <h3 style="margin-top: 2px">{{subtitle}}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="box-body">
+        <div id="contracts-filter" style="padding:10px">
+        </div>
+    </div>
+</div>
+
+<!-- add and edit contract basic modal -->
+{% include 'modal_contract_basic.html' %}
+
+<!-- add and edit contract basic modal -->
+{% include 'modal_contract_building_permissions.html' %}
+
+<!-- add and edit contract basic modal -->
+{% include 'modal_contract_building.html' %}
+
+<!-- add and edit contract basic modal -->
+{% include 'modal_contract_ofw.html' %}
+
+<!-- add and edit contract basic modal -->
+{% include 'modal_contract_invoices.html' %}
+
+<!-- contract print modal -->
+{% include 'modal_contract_print.html' %}
+
+<iframe id="file_tobe_printed" src="" hidden></iframe>
+
+<!-- / .modal -->
+<!-- ############ PAGE END-->
+
+<script type="text/javascript">
+
+    $.getScript(  '/scripts/app/app_project.js', function() {
+        console.log('laod app_project');
+    });
+
+    $.getScript(  '/scripts/app/app_com.js', function() {
+        console.log('laod app_com');
+        $.getScript(  '/scripts/app/app_contract.js', function() {
+            console.log('laod app_contract');
+            loadContractsTable('{{contracts | json}}');
+        });
+    });
+
+
+    function postContractEditPartial (id, data, callback){
+        url = '/contracts/edit/partial/'+id;
+        var posting = $.post( url, data );
+        posting.done(function( data ) {
+            if(data!='ok') {
+                let err = 'err';
+                callback(err);
+            }
+            else
+                callback(undefined);
+        });
+    }
+
+    function printTemplate(id){
+        url = '/contracts/print/'+id;
+        var posting = $.post( url, {} );
+        posting.done(function( data ) {
+            $('#file_tobe_printed').attr('src', data);
+            //var iframe = document.getElementById('file_tobe_printed');
+            //iframe.contentWindow.print();
+            //alert(data);
+            return;
+            if(data!='ok') {
+                let err = 'err';
+                callback(err);
+            }
+            else
+                callback(undefined);
+        });
+    }
+</script>
+<!-- ############ PAGE END-->
+{% endblock %}

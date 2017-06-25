@@ -1,0 +1,191 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+<!-- ############ PAGE START-->
+<div class="padding">
+  
+  <div class="box">
+    <div class="box-header b-b">
+      <h3>{{subtitle}}</h3>
+    </div>
+    <div class="box-body">
+      <form ui-jp="parsley" id="form" action="{{action}}" method="post" encType="multipart/form-data">
+        {% if currentUser %}
+          <div class="row m-b">
+            <div class="col-sm-5">
+              <label>First name</label>
+              <input type="text" class="form-control" name="firstname" value="{{currentUser.firstname}}">   
+            </div>
+            <div class="col-sm-5">
+              <label>Second Name</label>
+              <input type="text" class="form-control" name="secondname" value="{{currentUser.secondname}}">   
+            </div>
+            <div class="col-sm-2">
+              <label>Short Name</label>
+              <input type="text" class="form-control" name="shortname" value="{{currentUser.shortname}}">   
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" class="form-control" name="email" value="{{currentUser.email}}" readonly>                        
+          </div>
+          <div class="row m-b">
+            <div class="col-sm-6">
+              <label>Telefon</label>
+              <input type="text" class="form-control" name="tel" value="{{currentUser.tel}}">
+            </div>
+            <div class="col-sm-6">
+              <label>Mobil</label>
+              <input type="text" class="form-control" name="mobil" value="{{currentUser.mobil}}">
+            </div>   
+          </div>
+          <div class="row m-b">
+            <div class="col-sm-6">
+              <label>Strasse</label>
+              <input type="text" class="form-control" name="addr" value="{{currentUser.addr}}">
+            </div>
+            <div class="col-sm-2">
+              <label>PLZ</label>
+              <input type="number" class="form-control" name="plz" value="{{currentUser.plz}}">
+            </div>   
+            <div class="col-sm-4">
+              <label>Stadt</label>
+              <input type="text" class="form-control" name="city" value="{{currentUser.city}}">
+            </div>  
+          </div>
+          <div class="row m-b">
+            <div class="col-sm-4">
+              <label>Position</label>
+              <input type="text" class="form-control" name="position" value="{{currentUser.position}}">
+            </div>
+            <div class="col-sm-4">
+              <label for="department">Department</label>
+              <select id="department" name="department" class="form-control select2" ui-jp="select2" ui-options="{theme: 'bootstrap'}">
+                {% for dep in deps %}
+                <option value="{{dep.name}}"{% if dep.name==currentUser.department %}selected="selected"{% endif %}>{{dep.name}}</option>
+                {% endfor %}
+                </select>
+            </div>
+            <div class="col-sm-4">
+              <label for="company">Company</label>
+              <select id="company" name="company" class="form-control select2" ui-jp="select2" ui-options="{theme: 'bootstrap'}">
+                <option value="Kuhmann">Kuhmann</option>
+              </select>
+            </div>
+          </div>
+          <div class="row m-b">
+            <div class="col-sm-6">
+              <label>Role</label>
+              <select class="form-control" name="role">
+                <option value="user" >User</option>
+                <option value="admin">Admin</option>
+              </select>
+            </div>
+            <div class="col-sm-6">
+              <label for="icon">Icon</label>
+              <input type="file" name="icon" class="form-control">
+            </div>   
+          </div>
+          <div class="form-group">
+            <label>Cost Code</label>
+            <input type="text" class="form-control" name="cost_code" placeholder="XXXXXXX,XXXXXX,XXXXXX,XXXXXX", value="{{currentUser.cost_code}}">                        
+          </div>
+        {% else %}
+          <div class="row m-b">
+            <div class="col-sm-6">
+              <label>First name</label>
+              <input type="text" class="form-control" required name="firstname">   
+            </div>
+            <div class="col-sm-6">
+              <label>Second Name</label>
+              <input type="text" class="form-control" required name="secondname">   
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" class="form-control" name="email" required>                        
+          </div>
+          <div class="row m-b">
+            <div class="col-sm-6">
+              <label>Enter password</label>
+              <input type="password" class="form-control" required id="pwd" name="password">   
+            </div>
+            <div class="col-sm-6">
+              <label>Confirm password</label>
+              <input type="password" class="form-control" data-parsley-equalto="#pwd" required>      
+            </div>   
+          </div>
+          <div class="row m-b">
+            <div class="col-sm-6">
+              <label>Telefon</label>
+              <input type="text" class="form-control" placeholder="XXX XXXX XXX" name="tel">
+            </div>
+            <div class="col-sm-6">
+              <label>Mobil</label>
+              <input type="text" class="form-control" placeholder="XXX XXXX XXX" name="mobil">
+            </div>   
+          </div>
+          <div class="row m-b">
+            <div class="col-sm-6">
+              <label>Street</label>
+              <input type="text" class="form-control" name="addr">
+            </div>
+            <div class="col-sm-2">
+              <label>Postcode</label>
+              <input type="number" class="form-control" placeholder="XXXXX" name="plz">
+            </div>   
+            <div class="col-sm-4">
+              <label>City</label>
+              <input type="text" class="form-control" name="city">
+            </div>  
+          </div>
+          <div class="row m-b">
+            <div class="col-sm-4">
+              <label>Position</label>
+              <input type="text" class="form-control" name="position">
+            </div>
+            <div class="col-sm-4">
+              <label for="company">Company</label>
+              <select id="company" name="company" class="form-control select2" ui-jp="select2" ui-options="{theme: 'bootstrap'}">
+                <option value="Kuhmann">Kuhmann</option>
+              </select>
+            </div>                     
+            <div class="col-sm-4">
+              <label for="department">Department</label>
+              <select id="department" name="department" class="form-control select2" ui-jp="select2" ui-options="{theme: 'bootstrap'}">
+                {% for dep in deps %}
+                <option value="{{dep.name}}">{{dep.name}}</option>
+                {% endfor %}
+                </select>
+            </div>
+          </div>
+          <div class="row m-b">
+            <div class="col-sm-6">
+              <label>Role</label>
+              <select required class="form-control" name="role">
+                <option value="user">User</option>
+                <option value="admin">Admin</option>
+              </select>
+            </div>
+            <div class="col-sm-6">
+              <label for="icon">Icon</label>
+              <input type="file" name="icon" class="form-control">
+            </div>   
+          </div>
+          <div class="form-group">
+            <label>Cost Code</label>
+            <input type="text" class="form-control" name="cost_code" placeholder="XXXXXXX,XXXXXX,XXXXXX,XXXXXX">                        
+          </div>
+        {% endif %}
+        <div class="dker p-a text-right">
+          <a href="/users" type="button" class="btn white">Cancel</a>
+          <button type="submit" class="btn info">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>
+
+<!-- ############ PAGE END-->
+{% endblock %}

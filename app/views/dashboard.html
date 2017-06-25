@@ -1,0 +1,192 @@
+{% extends 'layout.html' %}
+{% block content %}
+<!-- ############ PAGE START-->
+<div class="p-a white lt box-shadow">
+	<div class="row">
+		<div class="col-sm-6">
+			<h4 class="mb-0 _300">Welcome to Kuhlman</h4>
+		</div>
+	</div>
+</div>
+<div class="padding">
+	<div class="row">
+	    <div class="col-xs-9 col-sm-6">
+	        <div class="box p-a">
+	          <div class="pull-left m-r">
+	            <span class="w-48 rounded primary">
+	              <i class="material-icons">&#xe54f;</i>
+	            </span>
+	          </div>
+	          <div class="clear">
+	            <h4 class="m-0 text-lg _300"><a href>56 <span class="text-sm">Projects</span></a></h4>
+	            <small class="text-muted">38 mine.</small>
+	          </div>
+	        </div>
+	    </div>
+	    <div class="col-xs-9 col-sm-6">
+	        <div class="box p-a">
+	          <div class="pull-left m-r">
+	            <span class="w-48 rounded warn">
+	              <i class="material-icons">&#xe8f9;</i>
+	            </span>
+	          </div>
+	          <div class="clear">
+	            <h4 class="m-0 text-lg _300"><a href>{{items_num}} <span class="text-sm">todos</span></a></h4>
+	            <small class="text-muted">{{items_emergencies_num}} emergencies</small>
+	          </div>
+	        </div>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="col-sm-12 col-md-6">
+	    	<div class="box">
+	    		<div class="box-header">
+	    			<h3>Unfinished Contract <span class="label warning">33</span></h3>
+	    			<small>Overview Contracts</small>
+	    		</div>
+				<div class="box-tool">
+					<ul class="nav">
+						<li class="nav-item inline dropdown">
+							<a class="nav-link" data-toggle="dropdown">
+								<i class="material-icons md-18">&#xe5d4;</i>
+							</a>
+							<div class="dropdown-menu dropdown-menu-scale pull-right">
+								<a href="#" data-toggle="modal" data-target="#list-setting" class="dropdown-item">Setting</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="list-group m-b">
+					<a href="/contracts/load/last_10_days" class="list-group-item justify-content-between b-l-primary">
+						in letzten 10 Tage eingekomenen Aufträge
+						<span class="label primary">4</span>
+					</a>
+					<a href="/contracts/load/bauplan" class="list-group-item justify-content-between b-l-warning">
+						zum Bauplan
+						<span class="label warning">4</span>
+					</a>
+					<a href="/contracts/load/geplant_4_bau" class="list-group-item justify-content-between b-l-success">
+						geplant innerhalb 4 Wochen in Bau
+						<span class="label success">4</span>
+					</a>
+					<a href="/contracts/load/baustatus" class="list-group-item justify-content-between b-l-danger">
+						Baustatus aktualisieren
+						<span class="label danger">4</span>
+					</a>
+					<a href="/contracts/load/ofw_bestimmen" class="list-group-item justify-content-between b-l-info">
+						OFW Notwendigkeit bestimmen
+						<span class="label info">4</span>
+					</a>
+					<a href="/contracts/load/ofw_aktu" class="list-group-item justify-content-between b-l-info">
+						OFW Fertigungsstatus aktu
+						<span class="label info">4</span>
+					</a>
+					<a href="/contracts/load/vba_verlaengen" class="list-group-item justify-content-between b-l-info">
+						VBA zu verlängen
+						<span class="label info">4</span>
+					</a>
+				</div>
+		    </div>
+	    </div>
+	    <div class="col-sm-12 col-md-6">
+	    	<div class="box">
+		      <div class="box-header">
+		        <h3>TODO Lists</h3>
+		        <small>blabla</small>
+		      </div>
+		      <div class="box-tool">
+		        <ul class="nav">
+		          <li class="nav-item inline" style="padding-right: 5px">
+      		        <select id="item_edit_status_value" class="input-sm form-control-sm inline v-middle">
+						<option value="Open">Open</option>
+						<option value="Pause">Pause</option>
+						<option value="Closed">Closed</option>
+					</select>
+		          </li>
+		          <li class="nav-item inline" style="padding-right: 20px">
+		          	<button class="btn btn-sm white" onclick="onChangeItemsStatus()">Apply</button>
+	          	  </li>
+		          <li class="nav-item inline">
+		            <div class="input-group input-group-sm">
+				        <input type="text" id="filter" class="form-control" placeholder="Search">
+			        </div>
+		          </li>
+		          <li class="nav-item inline dropdown">
+					<a class="nav-link" data-toggle="dropdown">
+		              <i class="material-icons md-18">&#xe5d4;</i>
+		            </a>
+		            <div class="dropdown-menu dropdown-menu-scale pull-right">
+		              <a href="#" data-toggle="modal" data-target="#add-item" class="dropdown-item">Add new Item</a>
+		            </div>
+		          </li>
+		        </ul>
+		      </div>
+		      <table class="table m-b-none b-t" id="items-table" data-filter="#filter" data-paging-limit="5" data-show-toggle="false">
+		        <thead>
+		            <tr>
+	            	  <th style="width:20px;" data-sort-ignore="true"><label class="ui-check m-0">
+						<input class="has-value" type="checkbox" onclick="checkAll(this.checked)">
+						<i></i>
+						</label>
+					  </th>
+		              <th>Title</th>
+		              <th>Priority</th>
+		              <th>Status</th>
+		              <th style="width:20px;" data-sort-ignore="true"></th>
+		              <th style="width:20px;" data-sort-ignore="true"></th>
+                        <th data-breakpoints="all" data-title="TODOs">Content Of Todos</th>
+		            </tr>
+		          </thead>
+		          <tbody>
+		            {% for item in items %}
+		              {% set delurl = '/items/del/'+item._id %}
+		              {% set itemid = ''+item._id %}
+		              <tr {% if item.status === 'Pause' %}class="pause"{% endif %}{% if item.status === 'Closed' %}class="del"{% endif %}>
+		              	<td><label class="ui-check m-0">
+						<input name="check_row" class="has-value" type="checkbox" data-id="{{itemid}}">
+						<i></i>
+						</label></td>
+			            <td>{{item.title}}</td>
+			            <td>{{item.priority}}</td>
+			            <td><a onclick="changeStatusNext(this)"  data-id="{{itemid}}" data-status="{{item.status}}"><i class="material-icons md-24">{% if item.status === 'Open' %}&#xe1af;{% endif %}{% if item.status === 'Pause' %}&#xe035;{% endif %}{% if item.status === 'Closed' %}&#xe86c;{% endif %}</i></a></td>
+		                <td>
+		                  <a href="#" data-toggle="modal" data-target="#edit-item" data-item="{{item|json}}"><i class="material-icons md-24">&#xe3c9;</i></a>
+		                </td>
+		                <td>
+		                  <a href="#" data-href="{{delurl}}" data-toggle="modal" data-target="#del-item" data-item-tilte="{{item.title}}"><i class="material-icons md-24">&#xe872;</i></a>
+		                </td>
+                        <td class="pause">
+                            {% for note in item.note %}
+                            <p>{{note.content}}</p>
+                            {% endfor %}
+                        </td>
+		              </tr>
+		            {% endfor %}           
+		          </tbody>
+		          <tfoot class="hide-if-no-paging">
+		          <tr>
+		              <td colspan="5" class="text-center">
+		                  <ul class="pagination"></ul>
+		              </td>
+		          </tr>
+		        </tfoot>
+		      </table>
+		    </div>
+	    </div>
+	</div>
+
+	<!-- item modal -->
+	{% include 'modal_dashboard_item.html' %}
+
+	<!-- item modal -->
+	{% include 'modal_dashboard_list_setting.html' %}
+
+	<script type="text/javascript">
+    $.getScript(  '/scripts/app/app_dashboard.js', function() {
+        console.log('laod app_dashboard');
+    });
+
+</script>
+
+<!-- ############ PAGE END-->
+{% endblock %}

@@ -1,0 +1,260 @@
+{% extends 'layout.html' %}
+{% block content %}
+<!-- ############ PAGE START-->
+<div class="padding">
+  <div class="box">
+    <div class="box-header">
+      <h3>{{subtitle}}</h3>
+    </div>
+    <div class="box-body">
+      <div class="row p-a">
+        <div class="col-sm-5">
+           <a href="/users/add" type="button" class="btn btn-outline b-primary text-primary">Add New User</a> 
+        </div> 
+        <div class="col-sm-4">
+        </div>
+        <div class="col-sm-3">
+          <div class="input-group input-group-sm">
+            <input type="text" id="filter" class="form-control" placeholder="Search">
+          </div>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="table m-b-none b-t" ui-jp="footable" data-filter="#filter" data-page-size="5">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Position</th>
+              <th>Company</th>
+              <th>Tel</th>
+              <th>Role</th>
+              <th>created</th>
+              <th style="width:20px;" data-sort-ignore="true"></th>
+              <th style="width:20px;" data-sort-ignore="true"></th>
+              <th style="width:20px;" data-sort-ignore="true"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for user in users %}
+            {% set editurl = '/users/edit?email='+user.email %}
+            {% set delurl = '/users/del/'+user._id %}
+
+              <tr>
+                <td>{{user.firstname}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.position}}</td>
+                <td>{{user.company}}</td>
+                <td>{{user.tel}}</td>
+                <td>{{user.role}}</td>
+                <td>{{user.created | date('Y-m-d H:m:s')}}</td>
+                <td>
+                  <a href="#" data-toggle="modal" data-target="#show-user" data-user="{{user|json}}"><i class="material-icons md-24">&#xe88e;</i></a>
+                </td>
+                <td>
+                  <a href="{{editurl}}"><i class="material-icons md-24">&#xe3c9;</i></a>
+                </td>
+                <td>
+                  <a href="#" data-href="{{delurl}}" data-toggle="modal" data-target="#del-user" data-user_name="{{user.firstname}}""><i class="material-icons md-24">&#xe872;</i></a>
+                </td>
+              </tr>
+            {% endfor %}           
+          </tbody>
+          <tfoot class="hide-if-no-paging">
+          <tr>
+              <td colspan="5" class="text-center">
+                  <ul class="pagination"></ul>
+              </td>
+          </tr>
+        </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- large modal -->
+<div id="show-user" class="modal" data-backdrop="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">User Detail</h5>
+      </div>
+      <div class="modal-body">
+          <div class="row">
+            <div class="col-xs-7 col-md-5">
+              <div class="form-group row">
+                <label for="firstname" class="col-sm-4 form-control-label">Firstname</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" id="firstname" placeholder="First Name" readonly>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-7 col-md-5">
+              <div class="form-group row">
+                <label for="secondname" class="col-sm-4 form-control-label">Secondname</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" id="secondname" placeholder="second Name" readonly>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-4 col-md-2">
+              <div class="form-group row">
+                <label for="shortname" class="col-sm-4 form-control-label">SN</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" id="shortname" placeholder="Short Name" readonly>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-6 col-md-4">
+              <div class="form-group row">
+                <label for="position" class="col-sm-4 form-control-label">Position</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" id="position" placeholder="Position" readonly>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-6 col-md-4">
+              <div class="form-group row">
+                <label for="department" class="col-sm-4 form-control-label">Department</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" id="department" placeholder="department" readonly>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-6 col-md-4">
+              <div class="form-group row">
+                <label for="company" class="col-sm-4 form-control-label">Company</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" id="company" placeholder="company" readonly>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-7 col-md-5">
+              <div class="form-group row">
+                <label for="addr" class="col-sm-4 form-control-label">Adresse</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" id="addr" placeholder="addr" readonly>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-4 col-md-2">
+              <div class="form-group row">
+                <label for="plz" class="col-sm-4 form-control-label">PLZ</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" id="plz" placeholder="plz" readonly>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-7 col-md-5">
+              <div class="form-group row">
+                <label for="city" class="col-sm-2 form-control-label">City</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="city" placeholder="city" readonly>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-md-8">
+              <div class="form-group row">
+                <label for="email" class="col-sm-3 form-control-label">Email</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" id="email" placeholder="email" readonly>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-6 col-md-4">
+              <div class="form-group row">
+                <label for="role" class="col-sm-3 form-control-label">Role</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" id="role" placeholder="Role" readonly>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-9 col-md-6">
+              <div class="form-group row">
+                <label for="tel" class="col-sm-3 form-control-label">Tel</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" id="tel" placeholder="Tel" readonly>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-9 col-md-6">
+              <div class="form-group row">
+                <label for="mobil" class="col-sm-3 form-control-label">Mobil</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" id="mobil" placeholder="Mobil" readonly>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-18 col-md-12">
+              <div class="form-group row">
+                <label for="tel" class="col-sm-3 form-control-label">Cost Code</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" id="cost_code" placeholder="Cost Code" readonly>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn danger p-x-md" data-dismiss="modal">OK</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div>
+</div>
+
+<div id="del-user" class="modal" data-backdrop="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete User</h5>
+      </div>
+      <div class="modal-body text-center p-lg">
+        <p>Are you sure to delete this user: <span id="delusername" style="font-weight:bold"></span>?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn dark-white p-x-md" data-dismiss="modal">No</button>
+        <a type="button" class="btn danger p-x-md">Yes</a>
+      </div>
+    </div><!-- /.modal-content -->
+  </div>
+</div>
+
+<!-- / .modal -->
+<!-- ############ PAGE END-->
+<script type="text/javascript">
+  //triggered when modal is about to be shown
+  $('#show-user').on('show.bs.modal', function(e) {
+    var user = $(e.relatedTarget).data('user');
+    $("#firstname").val(user.firstname);
+    $("#secondname").val(user.secondname);
+    $("#shortname").val(user.shortname);
+    $("#position").val(user.position);
+    $("#department").val(user.department);
+    $("#company").val(user.company);
+    $("#addr").val(user.addr);
+    $("#plz").val(user.plz);
+    $("#city").val(user.city);
+    $("#email").val(user.email);
+    $("#tel").val(user.tel);
+    $("#mobil").val(user.mobil);
+    $("#role").val(user.role);
+    $("#cost_code").val(user.cost_code);
+  });
+
+  $('#del-user').on('show.bs.modal', function(e) {
+      $("#delusername").html($(e.relatedTarget).data('user_name'));
+      $(this).find('.danger').attr('href', $(e.relatedTarget).data('href'));
+  });
+</script>
+{% endblock %}

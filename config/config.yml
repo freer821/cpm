@@ -1,0 +1,27 @@
+default:
+  server:
+    port: 3000
+  mongodb:
+    connection: 'mongodb://datatalents.net:27017/cpm'
+    collection_user: 'user'
+    collection_department: 'department'
+    collection_item: 'item'
+    collection_project: 'project'
+    collection_contract: 'contract'
+  session:
+    secret: 'cpmsecret'
+  logging:
+    trace:
+      enabled: true
+      level: 'trace'
+      file: './log/cpm-trace.log'
+    error:
+      enabled: true
+      level: 'error'
+      file: './log/cpm-error.log'
+  upload:
+    icon: './app/upload/icon'
+  files:
+    root_path: '/root/work/doc/'
+    fremdleitungsplan_path: '/00_fremdleitungsplan'
+    genehmigung_path: '/00_genehmigung'
