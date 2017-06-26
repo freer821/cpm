@@ -1,7 +1,7 @@
 <div id="project-modal" class="modal" data-backdrop="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content light">
-            <form id="project-modal-form" action="" method="post" >
+            <form id="project-modal-form" action="" method="post" data-parsley-validate="">
                 <div class="modal-header dker _600">
                     <h5 id="project-modal-title" class="modal-title">Information der Baustelle</h5>
                 </div>
@@ -16,7 +16,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <input type="text" id="street" name="street" placeholder="Mustermann Str.*" autocomplete="on" style="font-size:16px;height:35px;padding-left:3px;width:100%;">
+                                        <input type="text" id="street" name="street" placeholder="Mustermann Str.*" autocomplete="on" style="font-size:16px;height:35px;padding-left:3px;width:100%;" required="">
                                     </div>
                                 </div>
                             </div>
@@ -28,7 +28,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <input type="text" id="housenr" name="housenr" placeholder="HsNr.*" style="font-size:16px;height:35px;padding-left:3px;width:100%;">
+                                        <input type="text" id="housenr" name="housenr" placeholder="HsNr.*" style="font-size:16px;height:35px;padding-left:3px;width:100%;" data-parsley-type="digits" required="">
                                     </div>
                                 </div>
                             </div>
@@ -40,7 +40,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <input type="text" id="zipcode" name="zipcode" placeholder="XXXXX" autocomplete="on" style="font-size:16px;height:35px;padding-left:3px;width:100%;">
+                                        <input type="text" id="zipcode" name="zipcode" placeholder="XXXXX" autocomplete="on" style="font-size:16px;height:35px;padding-left:3px;width:100%;" data-parsley-minlength="5" data-parsley-maxlength="5">
                                     </div>
                                 </div>
                             </div>
@@ -52,7 +52,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <input type="text" id="community" name="community" placeholder="Muster Ort*" autocomplete="on" style="font-size:16px;height:35px;padding-left:3px;width:100%;">
+                                        <input type="text" id="community" name="community" placeholder="Muster Ort*" autocomplete="on" style="font-size:16px;height:35px;padding-left:3px;width:100%;" required="">
                                     </div>
                                 </div>
                             </div>

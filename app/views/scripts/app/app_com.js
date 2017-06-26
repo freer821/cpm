@@ -16,6 +16,8 @@
 
 // Attach a submit handler to the form
     $("form").submit(function( event ) {
+        $(this).parsley().on('field:validated', function() {
+        });
         // Stop form from submitting normally
         event.preventDefault();
         calAllStatus();
