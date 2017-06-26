@@ -260,10 +260,14 @@ const editProject = function (condition, project, callback) {
         function (err) {
             if (err) {
                 logger.error('Failed to Update Project in MongoDB', project,err);
-                callback(err);
+                if (typeof callback === 'function') {
+                    callback(err);
+                }
             } else {
                 logger.trace('add Project in MongoDB', project);
-                callback(undefined);
+                if (typeof callback === 'function') {
+                    callback(undefined);
+                }
             }
         }
     );
