@@ -466,7 +466,9 @@ const updateProjectAfterContractUpdate = function(project_id, callback) {
                     contract.permissions_status = com.calTotalStatusOfPermissions(contract);
 
                     contract.save(function (err) {
-                        logger.error('error to update the contract status', contract);
+                        if (err) {
+                            logger.error('error to update the contract status', err.message);
+                        }
                     });
 
                     if (contract.contract_typ.electric) {
