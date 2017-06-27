@@ -40,7 +40,6 @@ function updateContractBasic(request, callback) {
         },
         isBombExisted: request.isBombExisted,    // bomb, weapon kampfmittell
         estimated_value: request.estimated_value,      // schaetzwert (Euro)
-        manager_name: request.manager_name,   // bauleiter_name
         rot_b: request.rot_b,         // Auftrageber Telekom
         comment: request.comment,
         doc_location: {

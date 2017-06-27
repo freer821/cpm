@@ -377,9 +377,11 @@ const updateContractManagerByCostCode = function (contract_id, callback) {
             logger.error('Failed to find Contract', contract_id ,err);
         } else {
             findUser({ cost_code: { "$in" : [contract.cost_code]}}, function (err, user) {
-                if (err) {
-                    logger.error('error to find bauleiter');
-                    callback(err)
+                if (err || !user) {
+                    logger.error('error to find bauleiter',err, user);
+                    if (typeof callback === "function" ) {
+                        callback(err);
+                    }
                 } else {
                     contract.manager_name = user.shortname;
                     contract.save(function (err) {
