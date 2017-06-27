@@ -454,3 +454,30 @@ function delPermission(element){
         $('.modal').modal('hide');
     }    
 }
+
+function checkInvoiceInputSequence(){
+    //check input, aufmass_am/bewert_aufmass/rechnung_nr/guts_datum/booking_month
+    $('#aufmass_am').removeAttr('required');
+    $('#bewert_aufmass').removeAttr('required');
+    $('#rechnung_nr').removeAttr('required');
+    $('#guts_datum').removeAttr('required');
+
+    if($('#bewert_aufmass').val() !== '') {
+        $('#aufmass_am').attr('required','');
+    }
+    if($('#rechnung_nr').val() !== '') {
+        $('#aufmass_am').attr('required','');
+        $('#bewert_aufmass').attr('required','');        
+    }
+    if($('#guts_datum').val() !== '') {
+        $('#aufmass_am').attr('required','');
+        $('#bewert_aufmass').attr('required','');
+        $('#rechnung_nr').attr('required','');
+    }
+    if($('#booking_month').val() !== '') {
+        $('#aufmass_am').attr('required','');
+        $('#bewert_aufmass').attr('required','');
+        $('#rechnung_nr').attr('required','');
+        $('#guts_datum').attr('required','');
+    }        
+}

@@ -1,4 +1,4 @@
-<form id="invoice_form" action="/contracts/edit/invoice" method="post" >
+<form id="invoice_form" action="/contracts/edit/invoice" method="post" data-parsley-validate="">
     <div class="modal-header">
         <h5 class="modal-title">Abrechnung & Gutschrift</h5>
     </div>
@@ -7,7 +7,7 @@
         <div class="form-group row">
             <label class="col-md-3 form-control-label">Rechnungssumme</label>
             <div class="col-md-9">
-                <input type="text" class="form-control" id="sum" name="sum">
+                <input type="text" class="form-control" id="sum" name="sum" required data-parsley-type="integer">
             </div>
         </div>
 
@@ -128,6 +128,6 @@
         <input type="hidden" id="invoice_project_id" name="project_id" value="">
         <input type="hidden" name="cost_code" id="invoice_cost_code">
         <button type="button" class="btn dark-white m-t" data-dismiss="modal">Abbrechen</button>
-        <button type="submit" class="btn btn-info m-t">Speichern</button>
+        <button type="submit" class="btn btn-info m-t" onclick="checkInvoiceInputSequence()">Speichern</button>
     </div>
 </form>
