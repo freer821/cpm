@@ -13,20 +13,7 @@
             return false;
         }
     });
-
-// Attach a submit handler to the form
-    $("form").submit(function( event ) {
-        $(this).parsley().on('field:validated', function() {
-        });
-        // Stop form from submitting normally
-        event.preventDefault();
-        calAllStatus();
-
-        ajaxPost($(this).attr( "action" ), $(this).serialize());
-
-        $('.modal').modal('hide');
-    });
-
+    
     // date change events
     // check the status when the date is changed
     $(".date").on('dp.change', function (ev) {

@@ -139,6 +139,24 @@
         console.log('laod app_contract');
     });
 
+    $.getScript(  '/libs/js/validate/parsley.min.js', function() {
+        // Attach a submit handler to the form
+        console.log('laod parsley.min.js');
+        $("form").submit(function( event ) {
+            console.log('validated');
+            $(this).parsley().on('field:validated', function() {
+                console.log('field:validated');
+            });
+            // Stop form from submitting normally
+            event.preventDefault();
+            calAllStatus();
+
+            ajaxPost($(this).attr( "action" ), $(this).serialize());
+
+            $('.modal').modal('hide');
+        });
+    });
+
     function postContractEditPartial (id, data, callback){
         url = '/contracts/edit/partial/'+id;
         var posting = $.post( url, data );
