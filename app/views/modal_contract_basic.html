@@ -1,9 +1,9 @@
 <div id="contract-basic-modal" class="modal" data-backdrop="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content light">
-            <form id="contract-basic-modal-form" role="form" action="/contracts/edit/basic" method="post">
+            <form id="contract-basic-modal-form" role="form" action="/contracts/edit/basic" method="post" data-parsley-validate="">
                 <div class="modal-header dker _600">
-                    <h5 id="contract-modal-title" class="modal-title">Information des Auftrags</h5>
+                    <h5 id="contract-modal-title" class="modal-title">New Contract</h5>
                 </div>
                 <div class="modal-body">
                     <div class="row" style="padding-top:7px;">
@@ -41,7 +41,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-2 col-md-2 col-sm-3 col-xs-5" style="margin-top:7px;" >
+                        <div class="col-lg-2 col-md-2 col-sm-3 col-xs-5" style="margin-top:7px;">
                             <div class="row">
                                 <div class="col-md-12">
                                     <label style="padding-left:0px;margin-bottom:0px;color:rgb(95,95,95);">Kostenstelle: </label>
@@ -49,7 +49,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <input type="text" name="cost_code" id="cost_code" required="" placeholder="xx-xx-xx*" autocomplete="on" data-parsley-length="[6, 6]" data-parsley-type="digits" style="font-size:16px;height:35px;padding-left:3px;width:100%;">
+                                    <input type="text" name="cost_code" id="cost_code" required="" placeholder="xx-xx-xx*" autocomplete="on" inputmode="numeric" style="font-size:16px;height:35px;padding-left:3px;width:100%;">
                                 </div>
                             </div>
                         </div>
@@ -73,7 +73,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <input type="text" name="estimated_value" id="estimated_value" placeholder="nur positive Zahlen*" autocomplete="on" data-parsley-type="digits" style="font-size:16px;height:35px;padding-left:3px;width:100%;">
+                                    <input type="text" name="estimated_value" id="estimated_value" placeholder="nur positive Zahlen*" autocomplete="on" inputmode="numeric" style="font-size:16px;height:35px;padding-left:3px;width:100%;">
                                 </div>
                             </div>
                         </div>
@@ -215,7 +215,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-7 col-lg-offset-1 col-md-7 col-md-offset-1 col-sm-7 col-sm-offset-1 col-xs-12" style="margin-left:16px;margin-top:20px;">
+                        <div class="col-lg-7 col-lg-offset-1 col-md-7 col-md-offset-1 col-sm-7 col-sm-offset-1 col-xs-12" style="margin-top:20px;">
                             <div class="row">
                                 <div class="col-md-12">
                                     <label style="padding-left:0px;margin-bottom:0px;color:rgb(95,95,95);">Auftragstypen: </label>
@@ -347,8 +347,8 @@
                 <div class="modal-footer dker _600">
                     <input type="hidden" name="contract_id" id="basic_contract_id">
                     <input type="hidden" name="project_id" id="basic_project_id">
-                    <button type="button" class="btn dark-white m-t" data-dismiss="modal">Abbrechen</button>
-                    <button type="submit" class="btn btn-info m-t">Speichern</button>
+                    <button type="button" class="btn dark-white m-t" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-info m-t" >Update</button>
                 </div>
             </form>
         </div>
