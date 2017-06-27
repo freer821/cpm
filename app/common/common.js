@@ -150,11 +150,11 @@ const calInvoicesStatus = function(contract) {
             for (var i = 0; i < invoices.length; i++) {
                 let invoice = invoices[i];
                 if (invoice.guts_datum) {
-                    current_paid_value += invoice.sum;
+                    current_paid_value += convertEuroStringToNum(invoice.sum);
                 }
 
                 if (invoice.sum) {
-                    sum_value += invoice.sum;
+                    sum_value += convertEuroStringToNum(invoice.sum);
                 }
             }
 
@@ -162,7 +162,7 @@ const calInvoicesStatus = function(contract) {
             if (sum_value > 0 && (current_paid_value === sum_value)) {
                 status.is_finished = true;
             }
-            status.descrip =current_paid_value + ' / ' + sum_value;
+            status.descrip =convertNumStrongTOEuroString(current_paid_value) + ' \u20AC / ' + convertNumStrongTOEuroString(sum_value) + ' \u20AC';
         } else {
             status.descrip = getInvoiceStatus(invoices[0].invoice_status);
         }
@@ -341,6 +341,19 @@ function createFolder(folder_path) {
 const getSessionUser= function (user) {
     let session_user = {email:user.email, name: user.firstname + ' ' + user.secondname, role: user.role, icon: user.icon, cost_code: user.cost_code};
     return session_user;
+}
+
+function convertEuroStringToNum(euro_string) {
+    let euro = euro_string;
+    if (euro_string.includes(',')) {
+        euro = euro_string.replace(',','.');
+    }
+
+    return parseFloat(euro);
+}
+
+function convertNumStrongTOEuroString(num) {
+    return num.toString().replace('.',',');
 }
 
 module.exports = {

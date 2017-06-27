@@ -5,9 +5,9 @@
     <div class="modal-body">
 
         <div class="form-group row">
-            <label class="col-md-3 form-control-label">Rechnungssumme</label>
+            <label class="col-md-3 form-control-label">Rechnungssumme (€)</label>
             <div class="col-md-9">
-                <input type="text" class="form-control" id="sum" name="sum" required data-parsley-type="digits">
+                <input type="text" class="form-control" id="sum" name="sum" required data-parsley-pattern="\d+([\.\,]\d{2})?">
             </div>
         </div>
 

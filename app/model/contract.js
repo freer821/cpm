@@ -81,7 +81,7 @@ const contractSchema = new Schema({
     invoice: [         // abrechnung
         {
             rechnung_nr: String,   // number
-            sum: Number,  // summe, EURO
+            sum: String,  // summe, EURO
             aufmass_am: Date, // time to send invoice
             bewert_aufmass: Date, // time to permit invoice
             guts_datum: Date, // time to get money
