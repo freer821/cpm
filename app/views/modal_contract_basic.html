@@ -49,8 +49,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <input type="text" name="cost_code" id="cost_code" required="" placeholder="xx-xx-xx*" autocomplete="on" inputmode="numeric" style="font-size:16px;height:35px;padding-left:3px;width:100%;">
-                                </div>
+                                    <input type="text" name="cost_code" id="cost_code" required="" placeholder="xx-xx-xx*" autocomplete="on" data-parsley-length="[6, 6]" data-parsley-type="digits" style="font-size:16px;height:35px;padding-left:3px;width:100%;">                                </div>
                             </div>
                         </div>
                         <div class="col-lg-5 col-md-5 col-sm-5 col-xs-7" style="margin-top:7px;">
@@ -73,7 +72,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <input type="text" name="estimated_value" id="estimated_value" placeholder="nur positive Zahlen*" autocomplete="on" inputmode="numeric" style="font-size:16px;height:35px;padding-left:3px;width:100%;">
+                                    <input type="text" name="estimated_value" id="estimated_value" placeholder="nur positive Zahlen*" autocomplete="on" data-parsley-type="digits" style="font-size:16px;height:35px;padding-left:3px;width:100%;">
                                 </div>
                             </div>
                         </div>
@@ -347,8 +346,8 @@
                 <div class="modal-footer dker _600">
                     <input type="hidden" name="contract_id" id="basic_contract_id">
                     <input type="hidden" name="project_id" id="basic_project_id">
-                    <button type="button" class="btn dark-white m-t" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-info m-t" >Update</button>
+                    <button type="button" class="btn dark-white m-t" data-dismiss="modal">Abbrechen</button>
+                    <button type="submit" class="btn btn-info m-t">Speichern</button>
                 </div>
             </form>
         </div>
