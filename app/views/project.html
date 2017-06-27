@@ -137,10 +137,9 @@
 
     $.getScript(  '/scripts/app/app_contract.js', function() {
         console.log('laod app_contract');
-    });
-
-    $.getScript(  '/libs/js/validate/parsley.min.js', function() {
-        console.log('laod validate');
+        $.getScript(  '/libs/js/validate/parsley.min.js', function() {
+            console.log('laod validate');
+        });
     });
 
     function postContractEditPartial (id, data, callback){
