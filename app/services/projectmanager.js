@@ -100,14 +100,14 @@ function calCurrentValue(contract) {
     let current_value = 0;
     if (contract.invoice && contract.invoice.length > 0) {
         contract.invoice.forEach((invo) =>{
-            current_value += invo.sum? invo.sum:0;
+            current_value += invo.sum? common.convertEuroStringToNum(invo.sum):0;
         });
     } else {
         if (contract.estimated_value && contract.building_work && contract.building_work.procent_completion) {
-            current_value = contract.building_work.procent_completion/100*parseInt(contract.estimated_value);
+            current_value = contract.building_work.procent_completion/100*common.convertEuroStringToNum(contract.estimated_value);
         }
     }
-    return current_value;
+    return common.convertNumTOEuroString(current_value);
 }
 
 module.exports = {

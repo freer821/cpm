@@ -162,7 +162,7 @@ const calInvoicesStatus = function(contract) {
             if (sum_value > 0 && (current_paid_value === sum_value)) {
                 status.is_finished = true;
             }
-            status.descrip =convertNumStrongTOEuroString(current_paid_value) + ' \u20AC / ' + convertNumStrongTOEuroString(sum_value) + ' \u20AC';
+            status.descrip =convertNumTOEuroString(current_paid_value) + ' \u20AC / ' + convertNumTOEuroString(sum_value) + ' \u20AC';
         } else {
             status.descrip = getInvoiceStatus(invoices[0].invoice_status);
         }
@@ -352,7 +352,7 @@ function convertEuroStringToNum(euro_string) {
     return parseFloat(euro);
 }
 
-function convertNumStrongTOEuroString(num) {
+function convertNumTOEuroString(num) {
     return num.toString().replace('.',',');
 }
 
@@ -368,5 +368,7 @@ module.exports = {
     isUserPermitted:isUserPermitted,
     uploadUserFile:uploadUserFile,
     getSessionUser:getSessionUser,
-    createFolder:createFolder
+    createFolder:createFolder,
+    convertNumTOEuroString:convertNumTOEuroString,
+    convertEuroStringToNum:convertEuroStringToNum
 };
