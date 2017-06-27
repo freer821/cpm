@@ -13,7 +13,7 @@
             return false;
         }
     });
-    
+
     // date change events
     // check the status when the date is changed
     $(".date").on('dp.change', function (ev) {
