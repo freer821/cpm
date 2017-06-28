@@ -74,6 +74,7 @@ function filterContractsByUser(user_cost_code, constracts) {
     constracts.forEach((contract) => {
         let con = contract;
         con._doc.current_value =  calCurrentValue(contract);
+        con._doc.user_cost_code = user_cost_code;
         cons.push(con);
     });
 
