@@ -1,0 +1,22 @@
+
+<div id="contract-file-upload-modal" class="modal" data-backdrop="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content light">
+            <div class="modal-header dker _600">
+                <h5 class="modal-title">File Upload</h5>
+            </div>
+            <div class="modal-body">
+              <form action="/api/test" class="dropzone white">
+                <div class="dz-message" ui-jp="dropzone" ui-options="{ url: '/api/test' }">
+                    <h4 class="m-t-lg m-b-md">Drop files here or click to upload.</h4>
+                    <span class="text-muted block m-b-lg">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer dker _600">
+              <button type="button" class="btn dark-white m-t" data-dismiss="modal">Abbrechen</button>
+              <button type="button" dismiss="modal" class="btn btn-info m-t" data-dismiss="modal">Speichern</button>
+            </div>
+        </div>
+    </div>
+</div>
