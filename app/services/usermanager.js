@@ -183,6 +183,10 @@ const getDashInfo = function (req, res, next) {
     });     
 };
 
+const test = function(req, res, next) {
+    res.sendStatus(200);
+};
+
 function saveUser(user, res) {
     user.ts = new Date();
     if (user.cost_code) {
@@ -210,5 +214,7 @@ module.exports = {
     updateCurrentUserProfile: updateCurrentUserProfile,
     updateCurrentUserPassw: updateCurrentUserPassw,
     getDashInfo: getDashInfo,
-    editUserSettings: editUserSettings
+    editUserSettings: editUserSettings,
+    test: test
+
 };

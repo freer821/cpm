@@ -494,14 +494,6 @@ function contractDetail(contract) {
         '</div>'+
         '</div>'+
         '</div>'+
-        '<div class="row">'+
-        '<div class="col-md-12" style="margin-top:15px">'+
-        '<label style="margin-left:10px;">Hochladen einer Datei </label>'+
-        '<div style="margin-left:10px;width:98.4%" class="contractSchema.upload" style="width:100%;">'+
-        '<input type="file"/>'+
-        '</div>'+
-        '</div>'+
-        '</div>'+
         '</div>'+
 
 
@@ -514,6 +506,7 @@ function contractDetail(contract) {
         '<div class="row" style="padding-top:10px;padding-left:30px;"><a class="hint--left" data-hint="Material"><i class="material-icons Material_userform" style="font-size:29px;">local_grocery_store</i></a></div>'+
         '<div class="row" style="padding-left:34px;padding-top:10px;"><a class="hint--left" data-hint="Aufmaß"><i class="fa fa-calculator Aufmass_userform" style="font-size:25px;"></i></a></div>'+
         '<div class="row" style="padding-left:34px;padding-top:14px;"><a class="hint--left" data-hint="Report" data-toggle="modal" data-target="#contract-report-modal" data-contract=\''+JSON.stringify(contract)+'\' data-backdrop="static"><i class="fa fa-line-chart ContractReport_userform" style="font-size:25px;"></i></a></div>'+
+        '<div class="row" style="padding-left:34px;padding-top:14px;"><a class="hint--left" data-hint="file upload" data-toggle="modal" data-target="#contract-file-upload-modal" data-contract=\''+JSON.stringify(contract)+'\' data-backdrop="static"><i class="fa fa-upload" style="font-size:29px;"></i></a></div>'+
         '</div>'+
         '</div>';
 

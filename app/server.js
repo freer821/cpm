@@ -165,7 +165,7 @@ function initRoutes() {
 
     router.post('/contracts/:id/del/:action',contractmanager.delContract);
 
-
+    router.post('/api/test',usermanager.test);
 
 
     router.get('/logout', function (req, res){
