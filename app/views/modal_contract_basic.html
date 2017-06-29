@@ -224,7 +224,7 @@
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                     <div class="checkbox" style="margin-top:7px;width:100%;">
                                         <label class="md-check col-sm-2 form-control-label" style="font-size:16px;width:100%;">
-                                            <input type="checkbox" name="is_electric" id="is_electric">
+                                            <input type="checkbox" name="is_electric" id="is_electric" onclick="onContractBasicInputChecked(this)">
                                             <i class="red"></i>Elt
                                         </label>
                                     </div>
@@ -232,7 +232,7 @@
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                     <div class="checkbox" style="margin-top:7px;width:100%;">
                                         <label class="md-check col-sm-2 form-control-label" style="font-size:16px;width:100%;">
-                                            <input type="checkbox" name="is_gas" id="is_gas">
+                                            <input type="checkbox" name="is_gas" id="is_gas" onclick="onContractBasicInputChecked(this)">
                                             <i class="yellow"></i>Gas
                                         </label>
                                     </div>
@@ -240,7 +240,7 @@
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                     <div class="checkbox" style="margin-top:7px;">
                                         <label class="md-check col-sm-2 form-control-label" style="font-size:16px;width:100%;">
-                                            <input class="md-check col-sm-2 form-control-label" type="checkbox" name="is_water" id="is_water">
+                                            <input class="md-check col-sm-2 form-control-label" type="checkbox" name="is_water" id="is_water" onclick="onContractBasicInputChecked(this)">
                                             <i class="green"></i>Wasser
                                         </label>
                                     </div>
@@ -250,7 +250,7 @@
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                     <div class="checkbox" style="margin-top:7px;">
                                         <label class="md-check col-sm-2 form-control-label" style="font-size:16px;width:100%;">
-                                            <input type="checkbox" name="is_light" id="is_light">
+                                            <input type="checkbox" name="is_light" id="is_light" onclick="onContractBasicInputChecked(this)">
                                             <i class="orange"></i>Beleuchtung
                                         </label>
                                     </div>
@@ -258,7 +258,7 @@
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                     <div class="checkbox" style="margin-top:7px;">
                                         <label class="md-check col-sm-2 form-control-label" style="font-size:16px;width:100%;">
-                                            <input type="checkbox" name="is_telecom" id="is_telecom">
+                                            <input type="checkbox" name="is_telecom" id="is_telecom" onclick="onContractBasicInputChecked(this)">
                                             <i class="blue"></i>Telekom
                                         </label>
                                     </div>
@@ -266,11 +266,14 @@
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                     <div class="checkbox" style="margin-top:7px;">
                                         <label class="md-check col-sm-2 form-control-label" style="font-size:16px;width:100%;">
-                                            <input type="checkbox" name="is_others" id="is_others">
+                                            <input type="checkbox" name="is_others" id="is_others" onclick="onContractBasicInputChecked(this)">
                                             <i class="grey"></i>Sonstige
                                         </label>
                                     </div>
                                 </div>
+                            </div>
+                            <div style="background-color: #F2DEDE">
+                                    <input id="errInput" style="display: none" type="text" data-parsley-required-message="please choose at least one type"/>
                             </div>
                         </div>
                     </div>
@@ -347,7 +350,7 @@
                     <input type="hidden" name="contract_id" id="basic_contract_id">
                     <input type="hidden" name="project_id" id="basic_project_id">
                     <button type="button" class="btn dark-white m-t" data-dismiss="modal">Abbrechen</button>
-                    <button type="submit" class="btn btn-info m-t">Speichern</button>
+                    <button type="submit" onclick="checkContractBasicInput()" class="btn btn-info m-t">Speichern</button>
                 </div>
             </form>
         </div>

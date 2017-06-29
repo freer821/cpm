@@ -498,10 +498,7 @@ function contractDetail(contract) {
         '<div class="col-md-12" style="margin-top:15px">'+
         '<label style="margin-left:10px;">Hochladen einer Datei </label>'+
         '<div style="margin-left:10px;width:98.4%" class="contractSchema.upload" style="width:100%;">'+
-        '<form action="api/dropzone" class="dropzone white">'+
-        '<div class="dz-message" ui-jp="dropzone" ui-options="{ url: "api/dropzone" }">'+
-        '</div>'+
-        '</form>'+
+        '<input type="file"/>'+
         '</div>'+
         '</div>'+
         '</div>'+

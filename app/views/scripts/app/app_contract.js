@@ -455,7 +455,7 @@ function delPermission(element){
     }    
 }
 
-function checkInvoiceInputSequence(){
+function checkInvoiceInputSequence() {
     //check input, aufmass_am/bewert_aufmass/rechnung_nr/guts_datum/booking_month
     $('#aufmass_am').removeAttr('required');
     $('#bewert_aufmass').removeAttr('required');
@@ -480,4 +480,20 @@ function checkInvoiceInputSequence(){
         $('#rechnung_nr').attr('required','');
         $('#guts_datum').attr('required','');
     }        
+}
+
+function checkContractBasicInput() {
+    $('#contract-basic-modal-form input[type=\'checkbox\']').removeAttr('required');
+    if( $('#contract-basic-modal-form input:checked').length <= 0 ) {
+        $('#errInput').attr('required','');
+        $('#errInput').val('');
+    }
+}
+
+function onContractBasicInputChecked(t) {
+    if(t.checked) {
+        $('#errInput').removeAttr('required');
+        $('#errInput').val('some text');
+    }
+    checkContractBasicInput();
 }
