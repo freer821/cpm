@@ -42,7 +42,7 @@ function doAction(response) {
                 break;
             case 'reload':
                 if (location.pathname.toString().includes('/contracts/load/')) {
-                    location.reload();
+                    setTimeout(function(){ location.reload(); }, 1000);
                 } else {
                     hideContracts(response.project_id);
                     showContracts(response.project_id);
