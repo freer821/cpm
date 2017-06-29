@@ -12,7 +12,13 @@ $(document).ready(function(){
             $("#contract_extern_id").val(contract.contract_extern_id);
             $("#partner_name").val(contract.partner_name);
             $("#sap_nr").val(contract.sap_nr);
+            if (!isUserPermitted(contract.cost_code)) {
+                $("#cost_code_div").empty();
+                $("#cost_code_div").append('<input type="text" name="cost_code" id="cost_code" placeholder="xx-xx-xx*" autocomplete="on" data-parsley-length="[6, 6]" data-parsley-type="digits" style="font-size:16px;height:35px;padding-left:3px;width:100%;" disabled>');
+            }
             $("#cost_code").val(contract.cost_code);
+
+
             $("#manager_name").val(contract.manager_name);
             $("#estimated_value").val(contract.estimated_value);
             $("#work_content").val(contract.work_content);
@@ -371,6 +377,17 @@ $(document).ready(function(){
 
 
 });
+
+function isUserPermitted(cost_code) {
+    var codeOpts = document.getElementById('cost_code').options;
+    for(var i= 0; i < codeOpts.length; i++) {
+        if (cost_code === codeOpts[i].value) {
+            return true;
+        }
+    }
+    return false;
+
+}
 
 function editInvoice(element){
     $('#invoice_form')[0].reset();
