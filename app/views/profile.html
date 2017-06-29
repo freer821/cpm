@@ -34,7 +34,7 @@
         <div class="p-y-md clearfix nav-active-primary">
           <ul class="nav nav-pills nav-sm">
             <li class="nav-item active">
-              <a class="nav-link" href data-toggle="tab" data-target="#tab_1">Profile</a>
+              <a class="nav-link" href data-toggle="tab" data-target="#tab_1">Profil</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href data-toggle="tab" data-target="#tab_2">Password</a>
@@ -52,7 +52,7 @@
             <form id="form" action="/profile/edit/profile" method="post" encType="multipart/form-data">
               <div class="box">
                 <div class="box-header">
-                  <h2>Update Profile</h2>
+                  <h2>Profil aktualisieren</h2>
                 </div>
                 <div class="box-body">
                   <p class="text-muted"></p>
@@ -108,11 +108,11 @@
                   </div>
                   <div class="row m-b">
                     <div id="iconDiv"  class="col-sm-6">
-                      <small class="text-muted">Icon</small>
+                      <small class="text-muted">Profilfoto</small>
                       <input  type="file" name="icon" class="form-control"></input>
                     </div>
                     <div class="col-sm-6">
-                      <small class="text-muted">Cost Code</small>
+                      <small class="text-muted">Kostenstelle</small>
                       <input  type="text" class="form-control" name="cost_code" value="{{currentUser.cost_code}}" readonly="true">
                     </div>
                   </div>
@@ -129,31 +129,31 @@
             <form action="/profile/edit/passw" method="post" >
               <div class="box">
                 <div class="box-header">
-                  <h2>Update Password</h2>
+                  <h2>Passwort erneuern</h2>
                 </div>
                 <div class="box-body">
                   <p class="text-muted"></p>
                   <div class="form-group">
                     <div class="col-sm-6">
-                      <label>Enter old password</label>
+                      <label>altes Passwort eingeben</label>
                       <input type="password" class="form-control" name="old_passw" required>
                     </div>
                   </div>
                   <div class="form-group">
                     <div class="col-sm-6">
-                      <label>Enter password</label>
+                      <label>neues Passwort eingeben</label>
                       <input type="password" class="form-control" name="new_passw" required id="pwd">
                     </div>
                   </div>
                   <div class="form-group">
                     <div class="col-sm-6">
-                      <label>Confirm password</label>
+                      <label>neues Passwort bestätigen</label>
                       <input type="password" class="form-control" data-parsley-equalto="#pwd" required>
                     </div>
                   </div>
                 </div>
                 <div class="dker p-a text-right">
-                  <button type="submit" class="btn info">Submit</button>
+                  <button type="submit" class="btn info">Speichern</button>
                 </div>
               </div>
             </form>

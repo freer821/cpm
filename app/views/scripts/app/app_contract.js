@@ -7,9 +7,6 @@ $(document).ready(function(){
         $(this).find('form')[0].reset();
         var contract = $(e.relatedTarget).data('contract');
         if(contract){
-            //set title
-            $('#contract-modal-title').text('Update Contract Basic');
-
             //set content
             $("#customer").val(contract.customer);
             $("#contract_extern_id").val(contract.contract_extern_id);
@@ -87,7 +84,9 @@ $(document).ready(function(){
                 $("#basic_contract_id").val('');
                 $("#basic_project_id").val(project.id);
                 $("#contract_street").val(project.street+' '+project.housenr);
-
+                $("#cost_code_field").empty();
+                console.log('hallo'+$.session.get('user'));
+                //$("#cost_code_field").append(buildCostCodeHTML())
             }
 
         }
@@ -377,6 +376,20 @@ $(document).ready(function(){
 });
 
 
+function buildCostCodeHTML(is_select, cost_codes) {
+    var html ='';
+    if (is_select) {
+        html = '<select class="input-sm" name="cost_code" id="cost_code" required style="font-size:16px;height:35px;padding-left:3px;width:100%;">';
+        cost_codes.forEach((code) => {
+            html+='<option value="'+code+'">'+code'</option>';
+        });
+        html+='</select>';
+    } else {
+        html = '<input type="text" name="cost_code" id="cost_code" placeholder="xx-xx-xx*" autocomplete="on" data-parsley-length="[6, 6]" data-parsley-type="digits" style="font-size:16px;height:35px;padding-left:3px;width:100%;" required>';
+    }
+
+    return html;
+}
 
 function editInvoice(element){
     $('#invoice_form')[0].reset();

@@ -373,7 +373,7 @@ function contractDetail(contract) {
         '<div class="col-lg-10 col-md-10 col-sm-10">'+
         '<div class="row">'+
         '<div class="col-md-12">'+
-        '<label style="color:rgb(123,120,120);font-size:10px;">Abrechnungszusatnd</label>'+
+        '<label style="color:rgb(123,120,120);font-size:10px;">Abrechnungssumme</label>'+
         '</div>'+
         '</div>'+
         '<div class="row">'+
@@ -447,7 +447,7 @@ function contractDetail(contract) {
         '<div class="col-lg-6 col-md-6 col-sm-6">'+
         '<div class="row">'+
         '<div class="col-md-12">'+
-        '<label style="color:rgb(123,120,120);font-size:10px;">Sch&auml;tzwert</label>'+
+        '<label style="color:rgb(123,120,120);font-size:10px;">Sch&auml;tzwert / Auftragswert</label>'+
         '</div>'+
         '</div>'+
         '<div class="row">'+
@@ -459,7 +459,7 @@ function contractDetail(contract) {
         '<div class="col-lg-6 col-md-6 col-sm-6">'+
         '<div class="row">'+
         '<div class="col-md-12">'+
-        '<label style="color:rgb(123,120,120);font-size:10px;">Zeitwert</label>'+
+        '<label style="color:rgb(123,120,120);font-size:10px;">Abrechnungswert / Zeitwert </label>'+
         '</div>'+
         '</div>'+
         '<div class="row">'+

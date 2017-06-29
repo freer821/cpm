@@ -4,7 +4,7 @@
 <div class="p-a white lt box-shadow">
 	<div class="row">
 		<div class="col-sm-6">
-			<h4 class="mb-0 _300">herzlich willkommen zu Kuhlmann 4.1</h4>
+			<h4 class="mb-0 _300">Herzlich Willkommen bei Kuhlmann 4.1</h4>
 		</div>
 	</div>
 </div>
@@ -31,7 +31,7 @@
 	            </span>
 	          </div>
 	          <div class="clear">
-	            <h4 class="m-0 text-lg _300"><a href>{{items_num}} <span class="text-sm">Todos</span></a></h4>
+	            <h4 class="m-0 text-lg _300"><a href>{{items_num}} <span class="text-sm">ToDo´s</span></a></h4>
 	            <small class="text-muted">{{items_emergencies_num}} Sofort</small>
 	          </div>
 	        </div>
@@ -59,37 +59,37 @@
 				<div class="list-group m-b">
 					{% if ui_settings.in_letzten_10 %}
 					<a href="/contracts/load/last_10_days" class="list-group-item justify-content-between b-l-primary">
-						in letzten 10 Tage eingekomenen Aufträge
+						in letzten 10 Tage eingegangene Aufträge
 						<span class="label primary">4</span>
 					</a>
 					{% endif %}
 					{% if ui_settings.zum_bauplan %}
 					<a href="/contracts/load/bauplan" class="list-group-item justify-content-between b-l-warning">
-						zum Bauplan
+						Baubeginn unbekannt
 						<span class="label warning">4</span>
 					</a>
 					{% endif %}
 					{% if ui_settings.geplant %}
 					<a href="/contracts/load/geplant_4_bau" class="list-group-item justify-content-between b-l-success">
-						geplant innerhalb 4 Wochen in Bau
+						Baubeginn innerhalb 4 Woche
 						<span class="label success">4</span>
 					</a>
 					{% endif %}
 					{% if ui_settings.baust %}
 					<a href="/contracts/load/baustatus" class="list-group-item justify-content-between b-l-danger">
-						Baustatus aktualisieren
+						Bauzustand prüfen
 						<span class="label danger">4</span>
 					</a>
 					{% endif %}
 					{% if ui_settings.ofw_n %}
 					<a href="/contracts/load/ofw_bestimmen" class="list-group-item justify-content-between b-l-info">
-						OFW Notwendigkeit bestimmen
+						OFW Notwendigkeit prüfen
 						<span class="label info">4</span>
 					</a>
 					{% endif %}
 					{% if ui_settings.ofw_f %}
 					<a href="/contracts/load/ofw_aktu" class="list-group-item justify-content-between b-l-info">
-						OFW Fertigungsstatus aktu
+						OFW Bauzustandprüfen
 						<span class="label info">4</span>
 					</a>
 					{% endif %}

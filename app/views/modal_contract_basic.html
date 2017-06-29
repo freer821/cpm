@@ -3,7 +3,7 @@
         <div class="modal-content light">
             <form id="contract-basic-modal-form" role="form" action="/contracts/edit/basic" method="post" data-parsley-validate="">
                 <div class="modal-header dker _600">
-                    <h5 id="contract-modal-title" class="modal-title">New Contract</h5>
+                    <h5 id="contract-modal-title" class="modal-title">Auftragsinformation</h5>
                 </div>
                 <div class="modal-body">
                     <div class="row" style="padding-top:7px;">
@@ -48,8 +48,8 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-12">
-                                    <input type="text" name="cost_code" id="cost_code" placeholder="xx-xx-xx*" autocomplete="on" data-parsley-length="[6, 6]" data-parsley-type="digits" style="font-size:16px;height:35px;padding-left:3px;width:100%;" required>                                </div>
+                                <div id="cost_code_field" class="col-md-12">
+                                </div>
                             </div>
                         </div>
                         <div class="col-lg-5 col-md-5 col-sm-5 col-xs-7" style="margin-top:7px;">
@@ -98,7 +98,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <input type="text" name="contract_extern_id" id="contract_extern_id" placeholder="Auftr. Nr. / SM Nr. (nach AG anpassen)" autocomplete="on" style="font-size:16px;height:35px;padding-left:3px;width:100%;">
+                                    <input type="text" name="contract_extern_id" id="contract_extern_id" placeholder="Auftr. Nr. / SM Nr. (Auf AG achten)" autocomplete="on" style="font-size:16px;height:35px;padding-left:3px;width:100%;">
                                 </div>
                             </div>
                         </div>
@@ -110,7 +110,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <input type="text" name="sap_nr" id="sap_nr" placeholder="(nach AG anpassen)" autocomplete="on" style="font-size:16px;height:35px;padding-left:3px;width:100%;">
+                                    <input type="text" name="sap_nr" id="sap_nr" placeholder="(Auf AG achten)" autocomplete="on" style="font-size:16px;height:35px;padding-left:3px;width:100%;">
                                 </div>
                             </div>
                         </div>
@@ -159,7 +159,7 @@
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-6">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <label style="padding-left:0px;margin-bottom:0px;color:rgb(95,95,95);">Datum des Auftr. Eingang: </label>
+                                            <label style="padding-left:0px;margin-bottom:0px;color:rgb(95,95,95);">Datum des Auftr. Eingangs: </label>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -187,7 +187,7 @@
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-6">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <label style="padding-left:0px;margin-bottom:0px;color:rgb(95,95,95);">Datum des Doku. Eingang: </label>
+                                            <label style="padding-left:0px;margin-bottom:0px;color:rgb(95,95,95);">Datum des Doku. Eingangs: </label>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -217,7 +217,7 @@
                         <div class="col-lg-7 col-lg-offset-1 col-md-7 col-md-offset-1 col-sm-7 col-sm-offset-1 col-xs-12" style="margin-top:20px;margin-left:15px;">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <label style="padding-left:0px;margin-bottom:0px;color:rgb(95,95,95);">Auftragstypen: </label>
+                                    <label style="padding-left:0px;margin-bottom:0px;color:rgb(95,95,95);">Anschlussart: </label>
                                 </div>
                             </div>
                             <div class="row" style="height:35px;">
@@ -281,7 +281,7 @@
                         <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12" style="margin-top:30px;">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <label style="padding-left:0px;margin-bottom:0px;color:rgb(95,95,95);">Mappe Zustand (Wo - Grund): </label>
+                                    <label style="padding-left:0px;margin-bottom:0px;color:rgb(95,95,95);">Bauaktenausgabe (Wo - Grund): </label>
                                 </div>
                             </div>
                             <div class="row">
@@ -311,7 +311,7 @@
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-6">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <label style="padding-left:0px;margin-bottom:0px;color:rgb(95,95,95);">Rote Berichtigung: </label>
+                                            <label style="padding-left:0px;margin-bottom:0px;color:rgb(95,95,95);">Rotberichtigung: </label>
                                         </div>
                                     </div>
                                     <div class="row" style="height:35px;padding-left:15px;">
@@ -328,7 +328,7 @@
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-6">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <label style="padding-left:0px;margin-bottom:0px;color:rgb(95,95,95);width:100%;">Kampfsmittel: </label>
+                                            <label style="padding-left:0px;margin-bottom:0px;color:rgb(95,95,95);width:100%;">Kampfmittel: </label>
                                         </div>
                                     </div>
                                     <div class="row" style="height:35px;padding-left:15px;">
