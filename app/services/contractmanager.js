@@ -59,7 +59,7 @@ function updateContractBasic(request, callback) {
             }
         });
     } else {
-        db.countContract(function (err, count) {
+        db.countContract(request.project_id,function (err, count) {
             if (err) {
                 logger.error('error to count contract');
                 count = 0;

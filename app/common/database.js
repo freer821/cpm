@@ -417,8 +417,8 @@ const editContractRemoveFromArray = function (condition, arrayItem, callback) {
     );
 };
 
-const countContract = function (callback) {
-    Contract.count({}, function (err, count) {
+const countContract = function (project_id, callback) {
+    Contract.count({project_id:project_id}, function (err, count) {
         if (err) {
             logger.error('error to count projects', err.message);
             callback(err);

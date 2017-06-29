@@ -84,6 +84,7 @@ $(document).ready(function(){
             var project = $(e.relatedTarget).data('project');
 
             if (project) {
+                $("#basic_contract_id").val('');
                 $("#basic_project_id").val(project.id);
                 $("#contract_street").val(project.street+' '+project.housenr);
 
