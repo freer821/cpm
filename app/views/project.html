@@ -142,15 +142,7 @@
 
     $.getScript(  '/scripts/app/app_contract.js', function() {
         $("#show_load_js").append('<p>laod app_contract</p>');
-    });
-
-    $.getScript(  '/libs/js/validate/parsley.min.js', function() {
-        $.getScript(  '/libs/js/validate/de.js', function() {
-            $("#show_load_js").append('<p>laod validate_de</p>');
-        });
-
         // Attach a submit handler to the form
-        console.log('laod parsley.min.js');
         $("form").submit(function( event ) {
             console.log('validated');
             $(this).parsley().on('field:validated', function() {
