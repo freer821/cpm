@@ -53,6 +53,7 @@ function doAction(response) {
                 $('#contract-basic-modal').modal('show');
                 $("#basic_project_id").val(response.project.id);
                 $("#contract_street").val(response.project.street+' '+response.project.housenr);
+                $("#basic_contract_id").val('');
                 $("#cancel_button").click(function () {
                     location.reload();
                 });
