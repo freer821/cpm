@@ -158,6 +158,13 @@
         });
     });
 
+    $.getScript(  '/libs/js/validate/parsley.min.js', function() {
+        $.getScript(  '/libs/js/validate/de.js', function() {
+            console.log('laod parsley.min.js');
+        });
+
+    });
+
     function postContractEditPartial (id, data, callback){
         url = '/contracts/edit/partial/'+id;
         var posting = $.post( url, data );
