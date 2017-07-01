@@ -39,7 +39,7 @@ function updateContractBasic(request, callback) {
             others: request.is_others        // others
         },
         isBombExisted: request.isBombExisted,    // bomb, weapon kampfmittell
-        estimated_value: request.estimated_value,      // schaetzwert (Euro)
+        estimated_value: common.convertEuroStringToNum(request.estimated_value),      // schaetzwert (Euro)
         rot_b: request.rot_b,         // Auftrageber Telekom
         comment: request.comment,
         doc_location: {
@@ -229,7 +229,7 @@ function updateContractFinancial(request, callback) {
     if (request.invoice_id) {
         let invoice = {
             "invoice.$.rechnung_nr": request.rechnung_nr,
-            "invoice.$.sum": request.sum,
+            "invoice.$.sum": common.convertEuroStringToNum(request.sum),
             "invoice.$.aufmass_am": common.getDate(request.aufmass_am),
             "invoice.$.bewert_aufmass": common.getDate(request.bewert_aufmass),
             "invoice.$.guts_datum": common.getDate(request.guts_datum),
@@ -249,7 +249,7 @@ function updateContractFinancial(request, callback) {
         let invoice = {
             rechnung_nr: request.rechnung_nr,
             current_value: request.current_value,
-            sum: request.sum,
+            sum: common.convertEuroStringToNum(request.sum),
             aufmass_am: common.getDate(request.aufmass_am),
             bewert_aufmass: common.getDate(request.bewert_aufmass),
             guts_datum: common.getDate(request.guts_datum),

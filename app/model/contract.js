@@ -32,7 +32,7 @@ const contractSchema = new Schema({
         others: Boolean        // others
     },
     isBombExisted: Boolean,    // bomb, weapon kampfmittell
-    estimated_value: String,      // schaetzwert (Euro)
+    estimated_value: Number,      // schaetzwert (Euro)
     files_path: String,
     manager_name: String,   // bauleiter_name
     rot_b: Boolean,         // Auftrageber Telekom
@@ -81,7 +81,7 @@ const contractSchema = new Schema({
     invoice: [         // abrechnung
         {
             rechnung_nr: String,   // number
-            sum: String,  // summe, EURO
+            sum: Number,  // summe, EURO
             aufmass_am: Date, // time to send invoice
             bewert_aufmass: Date, // time to permit invoice
             guts_datum: Date, // time to get money

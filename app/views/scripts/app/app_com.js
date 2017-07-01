@@ -348,3 +348,10 @@ function calInvoiceStatus() {
 }
 
 
+// Create money formatter.
+var moneyFormatter = new Intl.NumberFormat('de-DE', {
+    minimumFractionDigits: 2
+});
+
+
+

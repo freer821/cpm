@@ -148,11 +148,11 @@ const calInvoicesStatus = function(contract) {
         for (var i = 0; i < invoices.length; i++) {
             let invoice = invoices[i];
             if (invoice.guts_datum) {
-                current_paid_value += convertEuroStringToNum(invoice.sum);
+                current_paid_value += invoice.sum;
             }
 
             if (invoice.sum) {
-                sum_value += convertEuroStringToNum(invoice.sum);
+                sum_value += invoice.sum;
             }
         }
 
@@ -344,15 +344,20 @@ const getSessionUser= function (user) {
 
 function convertEuroStringToNum(euro_string) {
     let euro = euro_string;
+    if (euro_string.includes('.')) {
+        euro = euro.split('.').join("");
+    }
     if (euro_string.includes(',')) {
-        euro = euro_string.replace(',','.');
+        euro = euro.replace(',','.');
     }
 
-    return parseFloat(euro);
+    return parseFloat(euro.trim());
 }
 
 function convertNumTOEuroString(num) {
-    return num.toString().replace('.',',');
+    return num.toFixed(2).replace(/./g, function(c, i, a) {
+        return i && c !== "." && ((a.length - i) % 3 === 0) ? '.' + c : c;
+    }).replace('.',',');
 }
 
 module.exports = {

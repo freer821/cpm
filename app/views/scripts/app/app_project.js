@@ -447,24 +447,24 @@ function contractDetail(contract) {
         '<div class="col-lg-6 col-md-6 col-sm-6">'+
         '<div class="row">'+
         '<div class="col-md-12">'+
-        '<label style="color:rgb(123,120,120);font-size:10px;">Sch&auml;tzwert / Auftragswert</label>'+
+        '<label style="color:rgb(123,120,120);font-size:10px;">Sch&auml;tzwert / Auftragswert (\u20AC)</label>'+
         '</div>'+
         '</div>'+
         '<div class="row">'+
         '<div class="col-md-12" style="height:25px;">'+
-        '<label class="contractSchema.manager_name">'+contract.estimated_value+'</label>'+
+        '<label class="contractSchema.manager_name">'+moneyFormatter.format(contract.estimated_value)+'</label>'+
         '</div>'+
         '</div>'+
         '</div>'+
         '<div class="col-lg-6 col-md-6 col-sm-6">'+
         '<div class="row">'+
         '<div class="col-md-12">'+
-        '<label style="color:rgb(123,120,120);font-size:10px;">Abrechnungswert / Zeitwert </label>'+
+        '<label style="color:rgb(123,120,120);font-size:10px;">Abrechnungswert / Zeitwert (\u20AC)</label>'+
         '</div>'+
         '</div>'+
         '<div class="row">'+
         '<div class="col-md-12" style="height:25px;">'+
-        '<label class="contractSchema.manager_name">'+contract.current_value+'</label>'+
+        '<label class="contractSchema.manager_name">'+moneyFormatter.format(contract.current_value)+'</label>'+
         '</div>'+
         '</div>'+
         '</div>'+

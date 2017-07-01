@@ -20,7 +20,7 @@ $(document).ready(function(){
 
 
             $("#manager_name").val(contract.manager_name);
-            $("#estimated_value").val(contract.estimated_value);
+            $("#estimated_value").val(moneyFormatter.format(contract.estimated_value));
             $("#work_content").val(contract.work_content);
             $("#contract_delivery").val(formatDate(contract.contract_delivery));
             $("#doc_delivery").val(formatDate(contract.doc_delivery));
@@ -404,7 +404,7 @@ function editInvoice(element){
         var invoice = element.dataset.invoice;
         invoice = eval('(' + invoice + ')');
         $('#invoice_id').val(invoice._id);
-        $('#sum').val(invoice.sum);
+        $('#sum').val(moneyFormatter.format(invoice.sum));
         $('#aufmass_am').val(formatDate(invoice.aufmass_am));
         $('#bewert_aufmass').val(formatDate(invoice.bewert_aufmass));
         $('#rechnung_nr').val(invoice.rechnung_nr);
