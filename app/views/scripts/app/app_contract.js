@@ -129,8 +129,8 @@ $(document).ready(function(){
             }));
         } else {
             $('#permission_tpye').append($('<option>', {
-                value: 'BAZ',
-                text: 'BAZ'
+                value: 'VBA',
+                text: 'VBA'
             }));
         }
 

@@ -42,7 +42,7 @@ function doAction(response) {
                 break;
             case 'reload':
                 if (location.pathname.toString().includes('/contracts/load/')) {
-                    setTimeout(function(){ location.reload(); }, 1000);
+                    location.reload();
                 } else {
                     hideContracts(response.project_id);
                     showContracts(response.project_id);
@@ -53,9 +53,10 @@ function doAction(response) {
                 $('#contract-basic-modal').modal('show');
                 $("#basic_project_id").val(response.project.id);
                 $("#contract_street").val(response.project.street+' '+response.project.housenr);
-                $('#contract-basic-modal').on('hidden.bs.modal', function () {
+                $('#contract-basic-modal').on('hidden.bs.modal');
+                $(":button").click(function () {
                     location.reload();
-                })
+                });
                 break;
             default:
                 break;
