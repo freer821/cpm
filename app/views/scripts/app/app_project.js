@@ -324,7 +324,7 @@ function contractDetail(contract) {
     return '<div class="row" style="padding-left:50px;padding-right:0px;">'+
         '<div class="col-lg-6 col-md-6 col-sm-6">'+
         '<div class="row">'+
-        '<div class="col-lg-2 col-md-2 col-sm-2" style="padding-left:26px;margin-top:15px;"><a href="#" data-toggle="modal" data-target="#contract-permissions-modal" data-contract=\''+JSON.stringify(contract)+'\' data-backdrop="static" class="list-left"><i class="fa fa-thumbs-o-up" style="font-size:30px;"></i></a></div>'+
+        '<div class="col-lg-2 col-md-2 col-sm-2" style="padding-left:26px;margin-top:15px;"><a href="#" data-toggle="modal" data-target="#contract-permissions-modal" data-contract=\''+JSON.stringify(contract)+'\' data-backdrop="static" data-keyboard="false" class="list-left"><i class="fa fa-thumbs-o-up" style="font-size:30px;"></i></a></div>'+
         '<div class="col-lg-10 col-md-10 col-sm-10">'+
         '<div class="row">'+
         '<div class="col-md-12">'+
@@ -339,7 +339,7 @@ function contractDetail(contract) {
         '</div>'+
         '</div>'+
         '<div class="row">'+
-        '<div class="col-lg-2 col-md-2 col-sm-2" style="padding:0px;padding-top:0;padding-left:25px;margin-top:15px;"><a href="#" data-toggle="modal" data-target="#contract-building-modal" data-contract=\''+JSON.stringify(contract)+'\' data-backdrop="static" class="list-left"><i class="fa fa-calendar" style="font-size:30px;"></i></a></div>'+
+        '<div class="col-lg-2 col-md-2 col-sm-2" style="padding:0px;padding-top:0;padding-left:25px;margin-top:15px;"><a href="#" data-toggle="modal" data-target="#contract-building-modal" data-contract=\''+JSON.stringify(contract)+'\' data-backdrop="static" data-keyboard="false" class="list-left"><i class="fa fa-calendar" style="font-size:30px;"></i></a></div>'+
         '<div class="col-lg-10 col-md-10 col-sm-10">'+
         '<div class="row">'+
         '<div class="col-md-12">'+
@@ -354,7 +354,7 @@ function contractDetail(contract) {
         '</div>'+
         '</div>'+
         '<div class="row">'+
-        '<div class="col-lg-2 col-md-2 col-sm-2" style="padding-left:24px;margin-top:14px;"><a href="#" data-toggle="modal" data-target="#contract-ofw-modal" data-contract=\''+JSON.stringify(contract)+'\' data-backdrop="static" class="list-left"><i class="fa fa-road" style="font-size:30px;"></i></a></div>'+
+        '<div class="col-lg-2 col-md-2 col-sm-2" style="padding-left:24px;margin-top:14px;"><a href="#" data-toggle="modal" data-target="#contract-ofw-modal" data-contract=\''+JSON.stringify(contract)+'\' data-backdrop="static" data-keyboard="false" class="list-left"><i class="fa fa-road" style="font-size:30px;"></i></a></div>'+
         '<div class="col-lg-10 col-md-10 col-sm-10">'+
         '<div class="row">'+
         '<div class="col-md-12">'+
@@ -369,7 +369,7 @@ function contractDetail(contract) {
         '</div>'+
         '</div>'+
         '<div class="row">'+
-        '<div class="col-lg-2 col-md-2 col-sm-2" style="padding-left:24px;margin-top:14px;"><a href="#" data-toggle="modal" data-target="#contract-invoices-modal" data-contract=\''+JSON.stringify(contract)+'\' data-backdrop="static" class="list-left"><i class="fa fa-credit-card" style="font-size:30px;"></i></a></div>'+
+        '<div class="col-lg-2 col-md-2 col-sm-2" style="padding-left:24px;margin-top:14px;"><a href="#" data-toggle="modal" data-target="#contract-invoices-modal" data-contract=\''+JSON.stringify(contract)+'\' data-backdrop="static" data-keyboard="false" class="list-left"><i class="fa fa-credit-card" style="font-size:30px;"></i></a></div>'+
         '<div class="col-lg-10 col-md-10 col-sm-10">'+
         '<div class="row">'+
         '<div class="col-md-12">'+
