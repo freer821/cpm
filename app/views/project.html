@@ -133,34 +133,34 @@
 <script type="text/javascript">
 
     $.getScript(  '/scripts/app/app_project.js', function() {
-        $("#show_load_js").append('<p>laod app_project</p>');
+        console.log('laod app_project');
     });
 
     $.getScript(  '/scripts/app/app_com.js', function() {
-        $("#show_load_js").append('<p>laod app_com</p>');
+        console.log('laod app_com');
     });
 
     $.getScript(  '/scripts/app/app_contract.js', function() {
-        $("#show_load_js").append('<p>laod app_contract</p>');
-        // Attach a submit handler to the form
-        $("form").submit(function( event ) {
-            console.log('validated');
-            $(this).parsley().on('field:validated', function() {
-                console.log('field:validated');
-            });
-            // Stop form from submitting normally
-            event.preventDefault();
-            calAllStatus();
-
-            ajaxPost($(this).attr( "action" ), $(this).serialize());
-
-            $('.modal').modal('hide');
-        });
+        console.log('laod app_contract');
     });
 
     $.getScript(  '/libs/js/validate/parsley.min.js', function() {
         $.getScript(  '/libs/js/validate/de.js', function() {
             console.log('laod parsley.min.js');
+            // Attach a submit handler to the form
+            $("form").submit(function( event ) {
+                console.log('validated');
+                $(this).parsley().on('field:validated', function() {
+                    console.log('field:validated');
+                });
+                // Stop form from submitting normally
+                event.preventDefault();
+                calAllStatus();
+
+                ajaxPost($(this).attr( "action" ), $(this).serialize());
+
+                $('.modal').modal('hide');
+            });
         });
 
     });
