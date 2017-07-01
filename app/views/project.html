@@ -95,6 +95,7 @@
     </div>
   </div>
 </div>
+<div id="show_load_js"></div>
 
 <!-- add and edit project modal -->
 {% include 'modal_project.html' %}
@@ -132,20 +133,20 @@
 <script type="text/javascript">
 
     $.getScript(  '/scripts/app/app_project.js', function() {
-        console.log('laod app_project');
+        $("#show_load_js").append('<p>laod app_project</p>');
     });
 
     $.getScript(  '/scripts/app/app_com.js', function() {
-        console.log('laod app_com');
+        $("#show_load_js").append('<p>laod app_com</p>');
     });
 
     $.getScript(  '/scripts/app/app_contract.js', function() {
-        console.log('laod app_contract');
+        $("#show_load_js").append('<p>laod app_contract</p>');
     });
 
     $.getScript(  '/libs/js/validate/parsley.min.js', function() {
         $.getScript(  '/libs/js/validate/de.js', function() {
-            console.log('laod validate_de');
+            $("#show_load_js").append('<p>laod validate_de</p>');
         });
 
         // Attach a submit handler to the form
