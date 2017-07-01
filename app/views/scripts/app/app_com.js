@@ -345,11 +345,6 @@ function calInvoiceStatus() {
             $('#invoice_status').val('05').change();
         }
     }
-
-    // auto set Booking month
-    if (isDateValid($("#guts_datum").val()) && isEmpty($("#booking_month").val())) {
-        $("#booking_month").val(getMonthDate($("#guts_datum").val()));
-    }
 }
 
 

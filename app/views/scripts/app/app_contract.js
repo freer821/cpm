@@ -375,6 +375,13 @@ $(document).ready(function(){
     });
      */
 
+    $('#guts_datum').change(function() {
+        // auto set Booking month
+        if (isDateValid($("#guts_datum").val()) && isEmpty($("#booking_month").val())) {
+            $("#booking_month").val(getMonthDate($("#guts_datum").val()));
+        }
+    });
+
 
 });
 
