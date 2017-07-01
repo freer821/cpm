@@ -145,23 +145,22 @@ const calInvoicesStatus = function(contract) {
     };
 
     if (invoices && invoices.length > 0) {
+        for (var i = 0; i < invoices.length; i++) {
+            let invoice = invoices[i];
+            if (invoice.guts_datum) {
+                current_paid_value += convertEuroStringToNum(invoice.sum);
+            }
+
+            if (invoice.sum) {
+                sum_value += convertEuroStringToNum(invoice.sum);
+            }
+        }
+
+        if (sum_value > 0 && (current_paid_value === sum_value)) {
+            status.is_finished = true;
+        }
 
         if (invoices.length > 1) {
-            for (var i = 0; i < invoices.length; i++) {
-                let invoice = invoices[i];
-                if (invoice.guts_datum) {
-                    current_paid_value += convertEuroStringToNum(invoice.sum);
-                }
-
-                if (invoice.sum) {
-                    sum_value += convertEuroStringToNum(invoice.sum);
-                }
-            }
-
-
-            if (sum_value > 0 && (current_paid_value === sum_value)) {
-                status.is_finished = true;
-            }
             status.descrip =convertNumTOEuroString(current_paid_value) + ' \u20AC / ' + convertNumTOEuroString(sum_value) + ' \u20AC';
         } else {
             status.descrip = getInvoiceStatus(invoices[0].invoice_status);
