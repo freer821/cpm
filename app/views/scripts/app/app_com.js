@@ -41,20 +41,19 @@ function doAction(response) {
                 location.reload();
                 break;
             case 'reload':
-                if (location.pathname.toString().includes('/contracts/load/')) {
-                    location.reload();
-                } else {
+                if ($('#'+response.project_id).length) {
                     hideContracts(response.project_id);
                     showContracts(response.project_id);
                     updateProject(response.project_id);
+                } else {
+                    location.reload();
                 }
                 break;
             case 'add_con':
                 $('#contract-basic-modal').modal('show');
                 $("#basic_project_id").val(response.project.id);
                 $("#contract_street").val(response.project.street+' '+response.project.housenr);
-                $('#contract-basic-modal').on('hidden.bs.modal');
-                $(":button").click(function () {
+                $("#cancel_button").click(function () {
                     location.reload();
                 });
                 break;
