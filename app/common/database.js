@@ -234,7 +234,7 @@ const countProject = function (callback) {
             logger.error('error to count projects', err.message);
             callback(err);
         } else {
-            callback(undefined, count);
+            callback(undefined, count+1);
         }
     });
 };
@@ -423,7 +423,7 @@ const countContract = function (project_id, callback) {
             logger.error('error to count projects', err.message);
             callback(err);
         } else {
-            callback(undefined, count);
+            callback(undefined, count+1);
         }
     });
 };
