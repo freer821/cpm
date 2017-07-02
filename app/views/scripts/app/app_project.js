@@ -236,12 +236,18 @@ function deactivAndActivContract(contract_id, project_id,cost_code,is_contract_a
     }
 }
 
+var gOpenedContractID='';
 
 function openContractDetail(contract_id) {
+    if(gOpenedContractID)
+        closeContractDetail(gOpenedContractID);
+
     $('#'+contract_id+'_details').show();
     $('#'+contract_id+' i.fa-chevron-circle-right').hide();
     $('#'+contract_id+' i.fa-chevron-circle-down').show();
     $('#'+contract_id).css("font-weight", "600");
+
+    gOpenedContractID = contract_id;
 }
 
 function closeContractDetail(contract_id) {
