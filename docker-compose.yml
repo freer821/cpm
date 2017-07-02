@@ -1,0 +1,10 @@
+db:
+  image: mongo:latest
+  ports:
+    - "27017:27017"
+cpm:
+  image: cpm
+  ports:
+    - "3000:3000"
+  links:
+    - db
