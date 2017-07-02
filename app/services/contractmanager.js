@@ -105,24 +105,27 @@ function updateContractBuilding(request, callback) {
         if(err){
             callback(err);
         } else {
-            callback(undefined, request.project_id);
+            if (request.status === '03') {
+                let invoice = {
+                    invoice_status: '00',
+                    sum:0
+                };
+                db.checkAndauoUpdateContractFinancial(request.contract_id, invoice, function () {
+                    callback(undefined, request.project_id);
+                });
+            } else if (request.status === '04') {
+                let invoice = {
+                    invoice_status: '01',
+                    sum:0
+                };
+                db.checkAndauoUpdateContractFinancial(request.contract_id, invoice, function () {
+                    callback(undefined, request.project_id);
+                });
+            } else {
+                callback(undefined, request.project_id);
+            }
         }
     });
-
-
-    if (request.status === '03') {
-        let invoice = {
-            invoice_status: '00',
-            sum:0
-        };
-        db.checkAndauoUpdateContractFinancial(request.contract_id, invoice);
-    } else if (request.status === '04') {
-        let invoice = {
-            invoice_status: '01',
-            sum:0
-        };
-        db.checkAndauoUpdateContractFinancial(request.contract_id, invoice);
-    }
 }
 
 function updateContractPermission(request, callback) {

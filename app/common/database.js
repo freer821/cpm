@@ -353,11 +353,13 @@ const editContractAddIntoArray = function (condition, arrayItem, callback) {
     );
 };
 
-const checkAndauoUpdateContractFinancial = function (contract_id, invoice) {
+const checkAndauoUpdateContractFinancial = function (contract_id, invoice, callback) {
     Contract.findOne({id:contract_id }, function (err, contract) {
         if (err) {
             logger.error('Failed to find Contract', contract_id ,err);
-
+            if (typeof callback === "function" ) {
+                callback();
+            }
         } else {
             if (contract.invoice.length === 0) {
                 contract.invoice.push(invoice);
@@ -365,7 +367,14 @@ const checkAndauoUpdateContractFinancial = function (contract_id, invoice) {
                     if (err) {
                         logger.error('Failed to update Contract Financial', err);
                     }
+                    if (typeof callback === "function" ) {
+                        callback();
+                    }
                 });
+            } else {
+                if (typeof callback === "function" ) {
+                    callback();
+                }
             }
         }
     });
