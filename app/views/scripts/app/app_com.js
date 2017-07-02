@@ -43,7 +43,7 @@ function doAction(response) {
             case 'reload':
                 if ($('#'+response.project_id).length) {
                     hideContracts(response.project_id);
-                    showContracts(response.project_id);
+                    showContracts(response.project_id, gOpenedContractID);
                     updateProject(response.project_id);
                 } else {
                     location.reload();

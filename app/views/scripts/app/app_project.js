@@ -103,7 +103,7 @@ $(document).ready(function(){
     myChart.setOption(option);
 });
 
-function showContracts(project_id) {
+function showContracts(project_id,contract_id) {
     $('#'+project_id).addClass("shown");
     $('#'+project_id).css("font-weight", "800");
     $.get( '/projects/'+project_id+'/contracts', function( data ) {
@@ -116,6 +116,7 @@ function showContracts(project_id) {
             });
             contacts_html +='</tbody></table>';
             $('#'+project_id+'_contracts').append(contacts_html);
+            if(contract_id) openContractDetail(contract_id);
         } else {
             $('#'+project_id).after("<tr><td id=\'"+project_id+"_contracts\' colspan='9'><table class='table'><tbody><tr><td style='background-color: rgba(0, 0, 0, 0.025)'>no contract data</td></tr></tbody><table></td></tr>");
         }
@@ -142,30 +143,30 @@ function updateProject(project_id) {
 function buildProjectTypesHTML(project) {
     var project_types = '<div style="max-width:185px;min-width:185px;">';
     if (project.contract_types.electric)  {
-        project_types+= '<a class="hint--bottom-left" data-hint="Elt"><i class="fa fa-square projectSchema.contract_types.electric_true" style="width:21px;height:21px;font-size:21px;margin-right:6px;color:#b53f45;"></i></a>';
+        project_types+= '<a class="hint--bottom-left" data-hint="Elt"><i class="fa fa-square projectSchema.contract_types.electric_true" style="width:21px;height:21px;font-size:21px;margin-right:9px;color:#b53f45;"></i></a>';
     } else {
-        project_types+='<a class="hint--bottom-left" data-hint="Elt"><i class="fa fa-square-o projectSchema.contract_types.electric_false" style="width:21px;height:21px;font-size:21px;margin-right:6px;color:#b53f45;"></i></a>';
+        project_types+='<a class="hint--bottom-left" data-hint="Elt"><i class="fa fa-square-o projectSchema.contract_types.electric_false" style="width:21px;height:21px;font-size:21px;margin-right:9px;color:#b53f45;"></i></a>';
     }
 
     if (project.contract_types.gas ) {
-        project_types+='<a class="hint--bottom-left" data-hint="Gas"><i class="fa fa-square projectSchema.contract_types.gas_true" style="width:21px;height:21px;font-size:21px;margin-right:4px;color:#ffd000;"></i></a>';
+        project_types+='<a class="hint--bottom-left" data-hint="Gas"><i class="fa fa-square projectSchema.contract_types.gas_true" style="width:21px;height:21px;font-size:21px;margin-right:8px;color:#ffd000;"></i></a>';
     } else {
-        project_types+='<a class="hint--bottom-left" data-hint="Gas"><i class="fa fa-square-o projectSchema.contract_types.gas_false" style="width:21px;height:21px;font-size:21px;margin-right:4px;color:#ffd000;"></i></a>';
+        project_types+='<a class="hint--bottom-left" data-hint="Gas"><i class="fa fa-square-o projectSchema.contract_types.gas_false" style="width:21px;height:21px;font-size:21px;margin-right:8px;color:#ffd000;"></i></a>';
     }
     if ( project.contract_types.water ) {
-        project_types+= '<a class="hint--bottom-left" data-hint="Wasser"><i class="fa fa-square projectSchema.contract_types.water_true" style="width:21px;height:21px;font-size:21px;margin-right:6px;color:#3e6b7e;"></i></a>';
+        project_types+= '<a class="hint--bottom-left" data-hint="Wasser"><i class="fa fa-square projectSchema.contract_types.water_true" style="width:21px;height:21px;font-size:21px;margin-right:10px;color:#3e6b7e;"></i></a>';
     } else {
-        project_types+='<a class="hint--bottom-left" data-hint="Wasser"><i class="fa fa-square-o projectSchema.contract_types.water_false" style="width:21px;height:21px;font-size:21px;margin-right:6px;color:#3e6b7e;"></i></a>';
+        project_types+='<a class="hint--bottom-left" data-hint="Wasser"><i class="fa fa-square-o projectSchema.contract_types.water_false" style="width:21px;height:21px;font-size:21px;margin-right:10px;color:#3e6b7e;"></i></a>';
     }
     if ( project.contract_types.light ) {
-        project_types+= '<a class="hint--bottom-left" data-hint="Beleuchtung"><i class="fa fa-square projectSchema.contract_types.light_true" style="width:21px;height:21px;font-size:21px;margin-right:6px;color:#91c0ab;"></i></a>';
+        project_types+= '<a class="hint--bottom-left" data-hint="Beleuchtung"><i class="fa fa-square projectSchema.contract_types.light_true" style="width:21px;height:21px;font-size:21px;margin-right:9px;color:#91c0ab;"></i></a>';
     } else {
-        project_types+='<a class="hint--bottom-left" data-hint="Beleuchtung"><i class="fa fa-square-o projectSchema.contract_types.light_false" style="width:21px;height:21px;font-size:21px;margin-right:6px;color:#91c0ab;"></i></a>';
+        project_types+='<a class="hint--bottom-left" data-hint="Beleuchtung"><i class="fa fa-square-o projectSchema.contract_types.light_false" style="width:21px;height:21px;font-size:21px;margin-right:9px;color:#91c0ab;"></i></a>';
     }
     if ( project.contract_types.telecom ) {
-        project_types+= '<a class="hint--bottom-left" data-hint="Telekom"><i class="fa fa-square projectSchema.contract_types.telecom_true" style="width:21px;height:21px;font-size:21px;margin-right:4px;color:rgb(248,126,123);"></i></a>';
+        project_types+= '<a class="hint--bottom-left" data-hint="Telekom"><i class="fa fa-square projectSchema.contract_types.telecom_true" style="width:21px;height:21px;font-size:21px;margin-right:7px;color:rgb(248,126,123);"></i></a>';
     } else {
-        project_types+= '<a class="hint--bottom-left" data-hint="Telekom"><i class="fa fa-square-o projectSchema.contract_types.telecom_false" style="width:21px;height:21px;font-size:21px;margin-right:4px;color:rgb(248,126,123);"></i></a>';
+        project_types+= '<a class="hint--bottom-left" data-hint="Telekom"><i class="fa fa-square-o projectSchema.contract_types.telecom_false" style="width:21px;height:21px;font-size:21px;margin-right:7px;color:rgb(248,126,123);"></i></a>';
     }
     if ( project.contract_types.others ) {
         project_types+= '<a class="hint--bottom-left" data-hint="Sonstige"><i class="fa fa-square projectSchema.contract_types.others_true" style="width:21px;height:21px;font-size:21px;margin-right:0px;"></i></a>';
