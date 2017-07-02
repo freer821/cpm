@@ -187,7 +187,7 @@ function getInvoiceStatus(code) {
         case '05':
             return 'Gutschrift vorhanden';
         case '06':
-            return 'Ueberzubearbeiten';
+            return '&Uuml;berzubearbeiten';
         default:
             return '';
     }
