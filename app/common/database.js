@@ -360,8 +360,9 @@ const checkAndauoUpdateContractFinancial = function (contract_id, invoice) {
 
         } else {
             if (contract.invoice.length === 0) {
-                invoice.sum = contract.building_work.procent_completion/100*contract.estimated_value;
-                contract.invoice.push(invoice);
+                let inv = invoice;
+                inv.sum = contract.building_work.procent_completion/100*contract.estimated_value;
+                contract.invoice.push(inv);
                 contract.save(function (err) {
                     if (err) {
                         logger.error('Failed to update Contract Financial', err);
