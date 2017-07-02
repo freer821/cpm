@@ -360,6 +360,7 @@ const checkAndauoUpdateContractFinancial = function (contract_id, invoice) {
 
         } else {
             if (contract.invoice.length === 0) {
+                invoice.sum = contract.building_work.procent_completion/100*contract.estimated_value;
                 contract.invoice.push(invoice);
                 contract.save(function (err) {
                     if (err) {
