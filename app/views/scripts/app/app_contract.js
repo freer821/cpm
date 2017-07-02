@@ -306,6 +306,7 @@ $(document).ready(function(){
             $("#building_worker_name").val(contract.building_work.worker_name);
             $("#building_working_months").val(contract.building_work.working_months);
             $("#building_status").val(contract.building_work.status);
+            $("#messing_doc_delivery").val(formatDate(contract.building_work.messing_doc_delivery));
 
             setBuildingPercent(contract.building_work.status);
             $('#procent_completion').slider('setValue',contract.building_work.procent_completion);

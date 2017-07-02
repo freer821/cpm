@@ -100,9 +100,15 @@ function filterContractsByUser(user_cost_code, constracts) {
 function calCurrentValue(contract) {
     let current_value = 0;
     if (contract.invoice && contract.invoice.length > 0) {
-        contract.invoice.forEach((invo) =>{
-            current_value += invo.sum;
-        });
+        if (contract.invoice.length === 1 && contract.invoice[0].sum === 0) {
+            if (contract.estimated_value && contract.building_work && contract.building_work.procent_completion) {
+                current_value = contract.building_work.procent_completion/100*contract.estimated_value;
+            }
+        } else {
+            contract.invoice.forEach((invo) =>{
+                current_value += invo.sum;
+            });
+        }
     } else {
         if (contract.estimated_value && contract.building_work && contract.building_work.procent_completion) {
             current_value = contract.building_work.procent_completion/100*contract.estimated_value;
