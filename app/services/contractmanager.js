@@ -97,7 +97,8 @@ function updateContractBuilding(request, callback) {
             worker_name: request.worker_name,
             working_months: request.working_months,
             status: request.status,
-            procent_completion: request.procent_completion
+            procent_completion: request.procent_completion,
+            messing_doc_delivery: request.messing_doc_delivery
         }
     };
     db.editContract({id: request.contract_id},contract,function (err) {
