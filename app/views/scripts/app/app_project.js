@@ -334,7 +334,7 @@ function contractDetail(contract) {
         '<div class="col-lg-10 col-md-10 col-sm-10">'+
         '<div class="row">'+
         '<div class="col-md-12">'+
-        '<label style="color:rgb(123,120,120);font-size:10px;">Genehmigungen</label>'+
+        '<label style="color:rgb(123,120,120);font-size:10px;font-weight:700">Genehmigungen</label>'+
         '</div>'+
         '</div>'+
         '<div class="row">'+
@@ -349,7 +349,7 @@ function contractDetail(contract) {
         '<div class="col-lg-10 col-md-10 col-sm-10">'+
         '<div class="row">'+
         '<div class="col-md-12">'+
-        '<label style="color:rgb(123,120,120);font-size:10px;">Tiefbau &amp; Montage Zustand</label>'+
+        '<label style="color:rgb(123,120,120);font-size:10px;font-weight:700">Tiefbau &amp; Montage Zustand</label>'+
         '</div>'+
         '</div>'+
         '<div class="row">'+
@@ -364,7 +364,7 @@ function contractDetail(contract) {
         '<div class="col-lg-10 col-md-10 col-sm-10">'+
         '<div class="row">'+
         '<div class="col-md-12">'+
-        '<label style="color:rgb(123,120,120);font-size:10px;">OFW Zustand</label>'+
+        '<label style="color:rgb(123,120,120);font-size:10px;font-weight:700">OFW Zustand</label>'+
         '</div>'+
         '</div>'+
         '<div class="row">'+
@@ -379,7 +379,7 @@ function contractDetail(contract) {
         '<div class="col-lg-10 col-md-10 col-sm-10">'+
         '<div class="row">'+
         '<div class="col-md-12">'+
-        '<label style="color:rgb(123,120,120);font-size:10px;">Abrechnungssumme</label>'+
+        '<label style="color:rgb(123,120,120);font-size:10px;font-weight:700">Abrechnungssumme</label>'+
         '</div>'+
         '</div>'+
         '<div class="row">'+
@@ -391,7 +391,7 @@ function contractDetail(contract) {
         '</div>'+
         '<div class="row">'+
         '<div class="col-md-12" style="margin-top:15px">'+
-        '<label style="margin-left:10px;">Kommentar des Auftrags </label>'+
+        '<label style="margin-left:10px;font-weight:700">Kommentar des Auftrags </label>'+
         '<textarea style="margin-left:10px;width:98.4%" class="contractSchema.comment" style="width:100%;">'+contract.comment+'</textarea>'+
         '</div>'+
         '</div>'+
@@ -401,7 +401,7 @@ function contractDetail(contract) {
         '<div class="col-lg-6 col-md-6 col-sm-6">'+
         '<div class="row">'+
         '<div class="col-md-12">'+
-        '<label style="color:rgb(123,120,120);font-size:10px;">Bauleiter</label>'+
+        '<label style="color:rgb(123,120,120);font-size:10px;font-weight:700">Bauleiter</label>'+
         '</div>'+
         '</div>'+
         '<div class="row">'+
@@ -413,7 +413,7 @@ function contractDetail(contract) {
         '<div class="col-lg-6 col-md-6 col-sm-6">'+
         '<div class="row">'+
         '<div class="col-md-12">'+
-        '<label style="color:rgb(123,120,120);font-size:10px;">Kolonne</label>'+
+        '<label style="color:rgb(123,120,120);font-size:10px;font-weight:700">Kolonne</label>'+
         '</div>'+
         '</div>'+
         '<div class="row">'+
@@ -427,7 +427,7 @@ function contractDetail(contract) {
         '<div class="col-lg-6 col-md-6 col-sm-6">'+
         '<div class="row">'+
         '<div class="col-md-12">'+
-        '<label style="color:rgb(123,120,120);font-size:10px;">geplanter Baubeginn</label>'+
+        '<label style="color:rgb(123,120,120);font-size:10px;font-weight:700">geplanter Baubeginn</label>'+
         '</div>'+
         '</div>'+
         '<div class="row">'+
@@ -439,7 +439,7 @@ function contractDetail(contract) {
         '<div class="col-lg-6 col-md-6 col-sm-6">'+
         '<div class="row">'+
         '<div class="col-md-12">'+
-        '<label style="color:rgb(123,120,120);font-size:10px;">geplantes Bauende</label>'+
+        '<label style="color:rgb(123,120,120);font-size:10px;font-weight:700">geplantes Bauende</label>'+
         '</div>'+
         '</div>'+
         '<div class="row">'+
@@ -453,7 +453,7 @@ function contractDetail(contract) {
         '<div class="col-lg-6 col-md-6 col-sm-6">'+
         '<div class="row">'+
         '<div class="col-md-12">'+
-        '<label style="color:rgb(123,120,120);font-size:10px;">Sch&auml;tzwert / Auftragswert (\u20AC)</label>'+
+        '<label style="color:rgb(123,120,120);font-size:10px;font-weight:700">Sch&auml;tzwert / Auftragswert (\u20AC)</label>'+
         '</div>'+
         '</div>'+
         '<div class="row">'+
@@ -465,7 +465,7 @@ function contractDetail(contract) {
         '<div class="col-lg-6 col-md-6 col-sm-6">'+
         '<div class="row">'+
         '<div class="col-md-12">'+
-        '<label style="color:rgb(123,120,120);font-size:10px;">Abrechnungswert / Zeitwert (\u20AC)</label>'+
+        '<label style="color:rgb(123,120,120);font-size:10px;font-weight:700">Abrechnungswert / Zeitwert (\u20AC)</label>'+
         '</div>'+
         '</div>'+
         '<div class="row">'+
@@ -479,7 +479,7 @@ function contractDetail(contract) {
         '<div class="col-lg-6 col-md-6 col-sm-6">'+
         '<div class="row">'+
         '<div class="col-md-12">'+
-        '<label style="color:rgb(123,120,120);font-size:10px;">Unterlagen bei</label>'+
+        '<label style="color:rgb(123,120,120);font-size:10px;font-weight:700">Unterlagen bei</label>'+
         '</div>'+
         '</div>'+
         '<div class="row">'+
@@ -491,7 +491,7 @@ function contractDetail(contract) {
         '<div class="col-lg-6 col-md-6 col-sm-6">'+
         '<div class="row">'+
         '<div class="col-md-12">'+
-        '<label style="color:rgb(123,120,120);font-size:10px;">Unterlagen Zustand</label>'+
+        '<label style="color:rgb(123,120,120);font-size:10px;font-weight:700">Unterlagen Zustand</label>'+
         '</div>'+
         '</div>'+
         '<div class="row">'+
